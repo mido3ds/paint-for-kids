@@ -5,8 +5,8 @@ This file was last modified on 05.16.1999
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "jpeg\jinclude.h"
-#include "jpeg\jpeglib.h"
+#include "jpeg/jinclude.h"
+#include "jpeg/jpeglib.h"
 #include "jpegload.h"
 
 int jpegload(const char *cpFileName, unsigned short *uspWidth, unsigned short *uspHeight, unsigned char **ucpImageData) {

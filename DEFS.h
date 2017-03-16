@@ -1,7 +1,7 @@
 #ifndef DEFS_H
 #define DEFS_H
 
-#include "CMUgraphicsLib\CMUgraphics.h"
+#include "CMUgraphicsLib/CMUgraphics.h"
 
 // This file contais some global constants and definitions to be used in the
 // project.
@@ -16,15 +16,22 @@ enum ActionType // The actions supported (you can add more if needed)
     CHNG_BK_CLR, // Change background color
     DEL, // Delete a figure(s)
     MOVE, // Move a figure(s)
+    SELECT,
     RESIZE, // Resize a figure(s)
     ROTATE, // Rotate a figure(s)
     SEND_BACK, // Send a figure to the back of all figures
     BRNG_FRNT, // Bring a figure to the front of all figures
     SAVE, // Save the whole graph to a file
     LOAD, // Load a graph from a file
+    ZOOM_IN,
+    ZOOM_OUT,
+    CUT,
+    COPY,
+    PASTE,
     EXIT, // Exit the application
 
     DRAWING_AREA, // A click on the drawing area
+    COLOR_BAR, // A Click On The Color Bar
     STATUS, // A click on the status bar
     EMPTY, // A click on empty place in the toolbar
 
