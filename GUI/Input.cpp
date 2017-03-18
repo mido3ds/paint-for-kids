@@ -3,12 +3,12 @@
 
 Input::Input(window* pW)
 {
-    pWind = pW; // point to the passed window
+    wind_p = pW; // point to the passed window
 }
 
 void Input::GetPointClicked(int& x, int& y) const
 {
-    pWind->WaitMouseClick(x, y); // Wait for mouse click
+    wind_p->WaitMouseClick(x, y); // Wait for mouse click
 }
 
 string Input::GetSrting(Output* pO) const
@@ -16,7 +16,7 @@ string Input::GetSrting(Output* pO) const
     string Label;
     char Key;
     while (1) {
-        pWind->WaitKeyPress(Key);
+        wind_p->WaitKeyPress(Key);
         if (Key == 27) // ESCAPE key is pressed
             return ""; // returns nothing as user has cancelled label
         if (Key == 13) // ENTER key is pressed
@@ -34,7 +34,7 @@ string Input::GetSrting(Output* pO) const
 ActionType Input::GetUserAction() const
 {
     int x, y;
-    pWind->WaitMouseClick(x, y); // Get the coordinates of the user click
+    wind_p->WaitMouseClick(x, y); // Get the coordinates of the user click
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
     {

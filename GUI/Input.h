@@ -18,7 +18,7 @@ public:
     ActionType GetUserAction() const; // Read the user click and map to an action
 
 private:
-    window* pWind; // Pointer to the Graphics Window
+    window* wind_p; // Pointer to the Graphics Window
 };
 
 #endif

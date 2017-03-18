@@ -30,9 +30,9 @@ Output::Output()
     // Also
 
     // Create the output window
-    pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
+    wind_p = CreateWindow(UI.width, UI.height, UI.wx, UI.wy);
     // Change the title
-    pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+    wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
     CreateDrawToolBar();
     CreateColorBar();
@@ -41,7 +41,7 @@ Output::Output()
 
 Input* Output::CreateInput() const
 {
-    Input* pIn = new Input(pWind);
+    Input* pIn = new Input(wind_p);
     return pIn;
 }
 
@@ -50,7 +50,7 @@ Input* Output::CreateInput() const
 ////
 //======================================================================================//
 
-window* Output::CreateWind(int w, int h, int x, int y) const
+window* Output::CreateWindow(int w, int h, int x, int y) const
 {
     window* pW = new window(w, h, x, y);
     pW->SetBrush(UI.BkGrndColor);
@@ -61,17 +61,17 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
-    pWind->SetPen(UI.StatusBarColor, 1);
-    pWind->SetBrush(UI.StatusBarColor);
-    pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+    wind_p->SetPen(UI.StatusBarColor, 1);
+    wind_p->SetBrush(UI.StatusBarColor);
+    wind_p->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
 {
     // Clear Status bar by drawing a filled white rectangle
-    pWind->SetPen(UI.StatusBarColor, 1);
-    pWind->SetBrush(UI.StatusBarColor);
-    pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+    wind_p->SetPen(UI.StatusBarColor, 1);
+    wind_p->SetBrush(UI.StatusBarColor);
+    wind_p->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -112,17 +112,17 @@ void Output::CreateDrawToolBar() const
 
     // Draw menu item one image at a time
     for (int i = 0; i < DRAW_ITM_COUNT; i++)
-        pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
+        wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
             UI.MenuItemWidth, UI.ToolBarHeight);
 
     // Draw a line under the toolbar
-    pWind->SetPen(RED, 3);
-    pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+    wind_p->SetPen(RED, 3);
+    wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
 void Output::CreateColorBar() const
 {
-    pWind->DrawImage("images\\MenuItems\\coloring.jpg", 0, UI.ToolBarHeight,
+    wind_p->DrawImage("images\\MenuItems\\coloring.jpg", 0, UI.ToolBarHeight,
         UI.colorBarWidth, UI.colorBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -136,9 +136,9 @@ void Output::CreatePlayToolBar() const
 
 void Output::ClearDrawArea() const
 {
-    pWind->SetPen(UI.BkGrndColor, 1);
-    pWind->SetBrush(UI.BkGrndColor);
-    pWind->DrawRectangle(UI.colorBarWidth, UI.ToolBarHeight, UI.width,
+    wind_p->SetPen(UI.BkGrndColor, 1);
+    wind_p->SetBrush(UI.BkGrndColor);
+    wind_p->DrawRectangle(UI.colorBarWidth, UI.ToolBarHeight, UI.width,
         UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -147,25 +147,25 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 {
     ClearStatusBar(); // First clear the status bar
 
-    pWind->SetPen(UI.MsgColor, 50);
-    pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-    pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
+    wind_p->SetPen(UI.MsgColor, 50);
+    wind_p->SetFont(20, BOLD, BY_NAME, "Arial");
+    wind_p->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntDrawColor() const // get current drwawing color
+color Output::GetCrntDrawColor() const // get current drwawing color
 {
     return UI.DrawColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntFillColor() const // get current filling color
+color Output::GetCrntFillColor() const // get current filling color
 {
     return UI.FillColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-int Output::getCrntPenWidth() const // get current pen width
+int Output::GetCrntPenWidth() const // get current pen width
 {
     return UI.PenWidth;
 }
@@ -184,18 +184,18 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo,
     else
         DrawingClr = RectGfxInfo.DrawClr;
 
-    pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, RectGfxInfo.BorderWdth); // Set Drawing color &
     // width
 
     drawstyle style;
     if (RectGfxInfo.isFilled) {
         style = FILLED;
-        pWind->SetBrush(RectGfxInfo.FillClr);
+        wind_p->SetBrush(RectGfxInfo.FillClr);
     } else
         style = FRAME;
 
-    pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+    wind_p->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-Output::~Output() { delete pWind; }
+Output::~Output() { delete wind_p; }
