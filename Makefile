@@ -16,7 +16,10 @@ COMPILER_FLAGS += -I GUI -I CMUgraphicsLib -I CMUgraphicsLib/jpeg
 COMPILER_FLAGS += -g
 COMPILER_FLAGS += $(SRC_DIR)/*.cpp CMUgraphicsLib/jpeg/*.c CMUgraphicsLib/*.c -c 
 
-main: 
+syntax:
+	i586-mingw32-g++ -fsyntax-only {GUI,.}/*.{cpp,h}
+
+compile: 
 	$(COMPILER) $(COMPILER_FLAGS) && $(COMPILER) *.o
 	make clean
 
@@ -24,7 +27,7 @@ duty:
 	egrep -H -n '(BUG|TODO):' $(SRC_DIR) -A 1 -B 1 2> /dev/null
 
 format:
-	clang-format -sort-includes -style=WebKit -i {**,.}/*.{cpp,h}
+	clang-format -sort-includes -style=WebKit -i {GUI,.}/*.{cpp,h}
 
 update:
 	git add .; git commit && git push || echo aborted
