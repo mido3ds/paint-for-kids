@@ -1,9 +1,12 @@
+/*
+    some global constants and definitions to be used in the project.
+*/
 #ifndef DEFS_H
 #define DEFS_H
 
-#include "CMUgraphicsLib/CMUgraphics.h"
+#include "CMUgraphicsLib/CMUgraphics.h" // color
+#include <limits> // numeric_limits
 
-//This file contais some global constants and definitions to be used in the project.
 enum ActionType //The actions supported (you can add more if needed)
 {
     DRAW_LINE, //Draw Line
@@ -45,15 +48,19 @@ enum ActionType //The actions supported (you can add more if needed)
 
 struct Point // To be used for figures points
 {
-    int x, y;
+    int x = 0, 
+        y = 0;
 };
 
-struct GfxInfo // Graphical info of each figure (you may add more members)
+class GfxInfo // Graphical info of each figure (you may add more members)
 {
-    color DrawClr; // Draw color of the figure
-    color FillClr; // Fill color of the figure
-    bool isFilled; // Figure Filled or not
-    int BorderWdth; // Width of figure borders
+public:
+    color draw_clr = BLACK; // Draw color of the figure
+    color fill_clr = WHITE; // Fill color of the figure
+    bool is_filled = false; // Figure Filled or not
+    int border_width = 1; // Width of figure borders
+
+    int z_index = std::numeric_limits<int>::max(); // level of object on window, default to max size of int
 };
 
 #endif

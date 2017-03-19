@@ -23,16 +23,16 @@ public:
     void ClearDrawArea() const;
 
     // -- Figures Drawing functions
-    void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo,
+    void DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected = false) const; // Draw a rectangle
 
-    void DrewCir(Point P1, Point P2, GfxInfo RectGfxInfo,
+    void DrewCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a circle
 
-    void DrewLin(Point p1, Point p2, GfxInfo RectGfxInfo,
+    void DrewLine(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a line
 
-    void DrewTrig(Point p1, Point p2, Point p3, GfxInfo RectGfxInfo,
+    void DrewTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a  tringle
 
     /// TODO: Make similar functions for drawing all other figures.

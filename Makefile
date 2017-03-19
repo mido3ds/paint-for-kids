@@ -17,7 +17,7 @@ COMPILER_FLAGS += -g
 COMPILER_FLAGS += $(SRC_DIR)/*.cpp CMUgraphicsLib/jpeg/*.c CMUgraphicsLib/*.c -c 
 
 syntax:
-	$(COMPILER) -fsyntax-only {GUI,.}/*.{cpp,h}
+	$(COMPILER) -fsyntax-only {GUI,Figures,.}/*.{cpp,h}
 
 compile: 
 	$(COMPILER) $(COMPILER_FLAGS) && $(COMPILER) *.o
@@ -27,7 +27,7 @@ duty:
 	egrep -H -n '(BUG|TODO):' $(SRC_DIR) -A 1 -B 1 2> /dev/null
 
 format:
-	clang-format -sort-includes -style=WebKit -i {GUI,.}/*.{cpp,h}
+	clang-format -sort-includes -style=WebKit -i {GUI,Figures,Actions,.}/*.{cpp,h}
 
 update:
 	git add .; git commit && git push || echo aborted

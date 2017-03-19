@@ -991,19 +991,19 @@
 			Name="Figures Classes"
 			>
 			<File
-				RelativePath=".\Figures\CFigure.cpp"
+				RelativePath=".\Figures\Figure.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Figures\CFigure.h"
+				RelativePath=".\Figures\Figure.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Figures\CRectangle.cpp"
+				RelativePath=".\Figures\Rectangle.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Figures\CRectangle.h"
+				RelativePath=".\Figures\Rectangle.h"
 				>
 			</File>
 		</Filter>
