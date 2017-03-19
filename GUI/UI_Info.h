@@ -38,13 +38,13 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
     ITM_CUT,
     ITM_COPY,
     ITM_PASTE,
+    ITM_PLAY,
 
     // TODO: Add more items names here
 
     ITM_EXIT, // Exit item
 
-    DRAW_ITM_COUNT // no. of menu items ==> This should be the last line in this
-    // enum
+    DRAW_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
 
 };
 
@@ -52,11 +52,12 @@ enum PlayMenuItem // The items of the Play menu (you should add more items)
 {
     // Note: Items are ordered here as they appear in menu
     // If you want to change the menu items order, change the order here
+    ITM_PICK_HIDE,
+    ITM_SCR_FIND,
+    ITM_DRAW,
+    ITM_EXIT_PLAY,
 
-    // TODO: Add more items names here
-
-    PLAY_ITM_COUNT // no. of menu items ==> This should be the last line in this
-    // enum
+    PLAY_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
 
 };
 

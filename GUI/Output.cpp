@@ -106,9 +106,8 @@ void Output::CreateDrawToolBar() const
     MenuItemImages[ITM_CUT] = "images\\MenuItems\\cut.jpg";
     MenuItemImages[ITM_COPY] = "images\\MenuItems\\copy.jpg";
     MenuItemImages[ITM_PASTE] = "images\\MenuItems\\paste.jpg";
+    MenuItemImages[ITM_PLAY] = "images\\MenuItems\\play.jpg";
     MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
-
-    // TODO: Prepare images for each menu item and add it to the list
 
     // Draw menu item one image at a time
     for (int i = 0; i < DRAW_ITM_COUNT; i++)
@@ -130,7 +129,21 @@ void Output::CreateColorBar() const
 void Output::CreatePlayToolBar() const
 {
     UI.InterfaceMode = MODE_PLAY;
-    /// TODO: write code to create Play mode menu
+
+    string MenuItemImages[PLAY_ITM_COUNT];
+    MenuItemImages[ITM_PICK_HIDE] = "images\\MenuItems\\find.jpg";
+    MenuItemImages[ITM_SCR_FIND] = "images\\MenuItems\\scramble.jpg";
+    MenuItemImages[ITM_DRAW] = "images\\MenuItems\\draw.jpg";
+    MenuItemImages[ITM_EXIT_PLAY] = "images\\MenuItems\\exit.jpg";
+
+    // Draw menu item one image at a time
+    for (int i = 0; i < DRAW_ITM_COUNT; i++)
+        wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
+            UI.MenuItemWidth, UI.ToolBarHeight);
+
+    // Draw a line under the toolbar
+    wind_p->SetPen(RED, 3);
+    wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -195,6 +208,68 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo,
         style = FRAME;
 
     wind_p->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+}
+
+void Output::DrewCir(Point p1, Point p2, GfxInfo RectGfxInfo,
+    bool selected) const
+{
+    int radius = sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2));
+    color DrawingClr;
+    if (selected)
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+    else
+        DrawingClr = RectGfxInfo.DrawClr;
+
+    wind_p->SetPen(DrawingClr, RectGfxInfo.BorderWdth); // Set Drawing color &
+    // width
+
+    drawstyle style;
+    if (RectGfxInfo.isFilled) {
+        style = FILLED;
+        wind_p->SetBrush(RectGfxInfo.FillClr);
+    } else
+        style = FRAME;
+
+    wind_p->DrawCircle(p1.x, p1.y, radius, style);
+}
+
+void Output::DrewLin(Point p1, Point p2, GfxInfo RectGfxInfo,
+    bool selected) const
+{
+    color DrawingClr;
+    if (selected)
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+    else
+        DrawingClr = RectGfxInfo.DrawClr;
+
+    wind_p->SetPen(DrawingClr, RectGfxInfo.BorderWdth); // Set Drawing color &
+    // width
+
+    drawstyle style = FRAME;
+
+    wind_p->DrawLine(p1.x, p1.y, p2.x, p2.y, style);
+}
+
+void Output::DrewTrig(Point p1, Point p2, Point p3, GfxInfo RectGfxInfo,
+    bool selected) const
+{
+    color DrawingClr;
+    if (selected)
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+    else
+        DrawingClr = RectGfxInfo.DrawClr;
+
+    wind_p->SetPen(DrawingClr, RectGfxInfo.BorderWdth); // Set Drawing color &
+    // width
+
+    drawstyle style;
+    if (RectGfxInfo.isFilled) {
+        style = FILLED;
+        wind_p->SetBrush(RectGfxInfo.FillClr);
+    } else
+        style = FRAME;
+
+    wind_p->DrawTriangle(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

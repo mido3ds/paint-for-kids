@@ -3,42 +3,44 @@
 
 #include "CMUgraphicsLib/CMUgraphics.h"
 
-// This file contais some global constants and definitions to be used in the
-// project.
-enum ActionType // The actions supported (you can add more if needed)
+//This file contais some global constants and definitions to be used in the project.
+enum ActionType //The actions supported (you can add more if needed)
 {
-    DRAW_LINE, // Draw Line
-    DRAW_RECT, // Draw Rectangle
-    DRAW_TRI, // Draw Triangle
-    DRAW_CIRC, // Draw Circle
-    CHNG_DRAW_CLR, // Change the drawing color
-    CHNG_FILL_CLR, // Change the filling color
-    CHNG_BK_CLR, // Change background color
-    DEL, // Delete a figure(s)
-    MOVE, // Move a figure(s)
+    DRAW_LINE, //Draw Line
+    DRAW_RECT, //Draw Rectangle
+    DRAW_TRI, //Draw Triangle
+    DRAW_CIRC, //Draw Circle
+    CHNG_DRAW_CLR, //Change the drawing color
+    CHNG_FILL_CLR, //Change the filling color
+    CHNG_BK_CLR, //Change background color
+    DEL, //Delete a figure(s)
+    MOVE, //Move a figure(s)
     SELECT,
-    RESIZE, // Resize a figure(s)
-    ROTATE, // Rotate a figure(s)
-    SEND_BACK, // Send a figure to the back of all figures
-    BRNG_FRNT, // Bring a figure to the front of all figures
-    SAVE, // Save the whole graph to a file
-    LOAD, // Load a graph from a file
+    RESIZE, //Resize a figure(s)
+    ROTATE, //Rotate a figure(s)
+    SEND_BACK, //Send a figure to the back of all figures
+    BRNG_FRNT, //Bring a figure to the front of all figures
+    SAVE, //Save the whole graph to a file
+    LOAD, //Load a graph from a file
     ZOOM_IN,
     ZOOM_OUT,
     CUT,
     COPY,
     PASTE,
-    EXIT, // Exit the application
+    PLAY,
+    HIDE,
+    SCRAMBLE,
+    EXIT, //Exit the application
 
-    DRAWING_AREA, // A click on the drawing area
-    COLOR_BAR, // A Click On The Color Bar
-    STATUS, // A click on the status bar
-    EMPTY, // A click on empty place in the toolbar
+    DRAWING_AREA, //A click on the drawing area
+    COLOR_BAR, //A Click On The Color Bar
+    STATUS, //A click on the status bar
+    EMPTY, //A click on empty place in the toolbar
 
-    TO_DRAW, // Switch interface to Draw mode
-    TO_PLAY // Switch interface to Play mode
+    TO_DRAW, //Switch interface to Draw mode
+    TO_PLAY //Switch interface to Play mode
 
-    /// TODO: Add more action types (if needed)
+    ///TODO: Add more action types (if needed)
 };
 
 struct Point // To be used for figures points

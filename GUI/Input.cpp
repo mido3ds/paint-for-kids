@@ -93,6 +93,8 @@ ActionType Input::GetUserAction() const
                 return COPY;
             case ITM_PASTE:
                 return PASTE;
+            case ITM_PLAY:
+                return PLAY;
 
             default:
                 return EMPTY; // A click on empty place in desgin toolbar
@@ -111,10 +113,37 @@ ActionType Input::GetUserAction() const
         return STATUS;
     } else // GUI is in PLAY mode
     {
-        /// TODO:
-        // perform checks similar to Draw mode checks above
-        // and return the correspoding action
-        return TO_PLAY; // just for now. This should be updated
+        //[1] If user clicks on the Toolbar
+        if (y >= 0 && y < UI.ToolBarHeight) {
+            // Check whick Menu item was clicked
+            //==> This assumes that menu items are lined up horizontally <==
+            int ClickedItemOrder = (x / UI.MenuItemWidth);
+            // Divide x coord of the point clicked by the menu item width (int
+            // division)
+            // if division result is 0 ==> first item is clicked, if 1 ==> 2nd item
+            // and so on
+
+            switch (ClickedItemOrder) {
+            case ITM_PICK_HIDE:
+                return HIDE;
+            case ITM_SCR_FIND:
+                return SCRAMBLE;
+            case ITM_DRAW:
+                return TO_DRAW;
+            case ITM_EXIT_PLAY:
+                return EXIT;
+            default:
+                return EMPTY; // A click on empty place in desgin toolbar
+            }
+        }
+
+        //[2] User clicks on the drawing area
+        if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight && x >= 0) {
+            return DRAWING_AREA;
+        }
+
+        //[3] User clicks on the status bar
+        return STATUS;
     }
 }
 /////////////////////////////////

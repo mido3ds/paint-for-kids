@@ -17,7 +17,7 @@ COMPILER_FLAGS += -g
 COMPILER_FLAGS += $(SRC_DIR)/*.cpp CMUgraphicsLib/jpeg/*.c CMUgraphicsLib/*.c -c 
 
 syntax:
-	i586-mingw32-g++ -fsyntax-only {GUI,.}/*.{cpp,h}
+	$(COMPILER) -fsyntax-only {GUI,.}/*.{cpp,h}
 
 compile: 
 	$(COMPILER) $(COMPILER_FLAGS) && $(COMPILER) *.o
