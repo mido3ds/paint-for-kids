@@ -19,6 +19,15 @@ public:
     void ChngDrawClr(color draw_clr); // changes the figure's drawing color
     void ChngFillClr(color filling_clr); // changes the figure's filling color
 
+    void ChngZIndex(int ind);
+    void ChngBorderWidth(int width);
+
+    bool IsFilled();
+    color GetDrawClr();
+    color GetFillClr();
+    int GetBorderWidth();
+    int GetZIndex();
+
     /// The following functions should be supported by the figure class
     /// It should be overridden by each inherited figure
 
@@ -33,16 +42,16 @@ public:
 
     virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 
+protected:
+    int id; // Each figure has an id
+    bool selected = false; // true if the figure is selected.
+
     color draw_clr = BLACK; // Draw color of the figure
     color fill_clr = WHITE; // Fill color of the figure
     bool is_filled = false; // Figure Filled or not
     int border_width = 1; // Width of figure borders
 
     int z_index = std::numeric_limits<int>::max(); // level of object on window, default to max size of int
-
-protected:
-    int id; // Each figure has an id
-    bool selected = false; // true if the figure is selected.
 };
 
 #endif

@@ -51,11 +51,4 @@ struct Point // To be used for figures points
     int x = 0, 
         y = 0;
 };
-
-class Figure // Graphical info of each figure (you may add more members)
-{
-public:
-    
-};
-
 #endif

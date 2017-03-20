@@ -195,15 +195,15 @@ void Output::DrawRect(Point p1, Point p2, Figure rect,
     if (selected)
         DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = rect.draw_clr;
+        DrawingClr = rect.GetDrawClr(;
 
-    wind_p->SetPen(DrawingClr, rect.border_width); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, rect.GetBorderWidth()); // Set Drawing color &
     // width
 
     drawstyle style;
-    if (rect.is_filled) {
+    if (rect.IsFilled()) {
         style = FILLED;
-        wind_p->SetBrush(rect.fill_clr);
+        wind_p->SetBrush(rect.GetFillClr());
     } else
         style = FRAME;
 
@@ -218,15 +218,15 @@ void Output::DrawCircle(Point p1, Point p2, Figure circ,
     if (selected)
         DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = circ.draw_clr;
+        DrawingClr = circ.GetDrawClr();
 
-    wind_p->SetPen(DrawingClr, circ.border_width); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, circ.GetBorderWidth()); // Set Drawing color &
     // width
 
     drawstyle style;
-    if (circ.is_filled) {
+    if (circ.IsFilled()) {
         style = FILLED;
-        wind_p->SetBrush(circ.fill_clr);
+        wind_p->SetBrush(circ.GetFillClr());
     } else
         style = FRAME;
 
@@ -240,9 +240,9 @@ void Output::DrawLine(Point p1, Point p2, Figure line,
     if (selected)
         DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = line.draw_clr;
+        DrawingClr = line.GetDrawClr();
 
-    wind_p->SetPen(DrawingClr, line.border_width); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, line.GetBorderWidth()); // Set Drawing color &
     // width
 
     drawstyle style = FRAME;
@@ -257,15 +257,15 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, Figure trngl,
     if (selected)
         DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = trngl.draw_clr;
+        DrawingClr = trngl.GetDrawClr();
 
-    wind_p->SetPen(DrawingClr, trngl.border_width); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, trngl.GetBorderWidth()); // Set Drawing color &
     // width
 
     drawstyle style;
-    if (trngl.is_filled) {
+    if (trngl.IsFilled()) {
         style = FILLED;
-        wind_p->SetBrush(trngl.fill_clr);
+        wind_p->SetBrush(trngl.GetFillClr());
     } else
         style = FRAME;
 

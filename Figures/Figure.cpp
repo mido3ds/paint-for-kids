@@ -42,3 +42,38 @@ void Figure::ChngFillClr(color filling_clr)
     is_filled = true;
     fill_clr = filling_clr;
 }
+
+void Figure::ChngZIndex(int ind)
+{
+    z_index = abs(ind);
+}
+
+void Figure::ChngBorderWidth(int width)
+{
+    border_width = abs(width);
+}
+
+bool Figure::IsFilled()
+{
+    return is_filled;
+}
+
+color GetDrawClr()
+{
+    return draw_clr;
+}
+
+color GetFillClr()
+{
+    return fill_clr;
+}
+
+int GetBorderWidth()
+{
+    return border_width;
+}
+
+int GetZIndex()
+{
+    return z_index;
+}

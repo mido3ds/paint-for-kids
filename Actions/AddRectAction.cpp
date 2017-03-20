@@ -7,7 +7,7 @@
 #include "../GUI/Output.h"
 
 AddRectAction::AddRectAction(ApplicationManager* app_p)
-    : Action(app_p)
+    :Action(app_p)
 {}
 
 void AddRectAction::ReadActionParameters()
@@ -28,11 +28,10 @@ void AddRectAction::ReadActionParameters()
     //Read 2nd corner and store in point p2
     in_p->GetPointClicked(rect.corner2.x, rect.corner2.y);
 
-    rect.is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
-    rect.draw_clr = out_p->GetCrntDrawColor();
-    rect.fill_clr = out_p->GetCrntFillColor();
-    rect.border_width = out_p->GetCrntPenWidth();
+    rect.ChngDrawClr(out_p->GetCrntDrawColor());
+    rect.ChngFillClr(out_p->GetCrntFillColor());
+    rect.ChngBorderWidth(out_p->GetCrntPenWidth());
 
     out_p->ClearStatusBar();
 }
