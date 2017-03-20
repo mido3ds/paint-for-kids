@@ -52,15 +52,10 @@ struct Point // To be used for figures points
         y = 0;
 };
 
-class GfxInfo // Graphical info of each figure (you may add more members)
+class Figure // Graphical info of each figure (you may add more members)
 {
 public:
-    color draw_clr = BLACK; // Draw color of the figure
-    color fill_clr = WHITE; // Fill color of the figure
-    bool is_filled = false; // Figure Filled or not
-    int border_width = 1; // Width of figure borders
-
-    int z_index = std::numeric_limits<int>::max(); // level of object on window, default to max size of int
+    
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "Figure.h"
 
-Figure::Figure(const GfxInfo& figure_gfx_info)
+Figure::Figure(const Figure& figure_gfx_info)
 {
     draw_clr = figure_gfx_info.draw_clr;
     fill_clr = figure_gfx_info.fill_clr;

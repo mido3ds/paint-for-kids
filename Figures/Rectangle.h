@@ -6,7 +6,7 @@
 class Rectangle : public Figure {
 public:
     Rectangel();
-    Rectangle(Point, Point, GfxInfo figure_gfx_info);
+    Rectangle(Point, Point, Figure figure_gfx_info);
     
     virtual void Draw(Output* out_p) const;
 

@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(Point p1, Point p2, GfxInfo figure_gfx_info)
+Rectangle::Rectangle(Point p1, Point p2, Figure figure_gfx_info)
     :Figure(figure_gfx_info)
 {
     corner1 = p1;
