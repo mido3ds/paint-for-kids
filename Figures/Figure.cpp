@@ -9,6 +9,9 @@ Figure::Figure(const GfxInfo& figure_gfx_info)
     z_index = figure_gfx_info.z_index;
 }
 
+Figure::Figure()
+{}
+
 Figure(color draw_clr, color fill_clr, bool is_filled, int border_width,
     int z_index)
 {

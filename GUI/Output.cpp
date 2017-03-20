@@ -210,7 +210,7 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
     wind_p->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrewCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
+void Output::DrawCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
     bool selected) const
 {
     int radius = sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2));
@@ -233,7 +233,7 @@ void Output::DrewCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
     wind_p->DrawCircle(p1.x, p1.y, radius, style);
 }
 
-void Output::DrewLine(Point p1, Point p2, GfxInfo rect_gfx_info,
+void Output::DrawLine(Point p1, Point p2, GfxInfo rect_gfx_info,
     bool selected) const
 {
     color DrawingClr;
@@ -250,7 +250,7 @@ void Output::DrewLine(Point p1, Point p2, GfxInfo rect_gfx_info,
     wind_p->DrawLine(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrewTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
+void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
     bool selected) const
 {
     color DrawingClr;

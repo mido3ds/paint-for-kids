@@ -16,8 +16,7 @@ public:
     virtual void Execute();
     
 private:
-    Point p1, p2; //Rectangle Corners
-    GfxInfo rect_gfx_info;
+    Rectangle* rect;
 };
 
 #endif

@@ -1,11 +1,14 @@
 #include "Rectangle.h"
 
 Rectangle::Rectangle(Point p1, Point p2, GfxInfo figure_gfx_info)
-    : Figure(figure_gfx_info)
+    :Figure(figure_gfx_info)
 {
     corner1 = p1;
     corner2 = p2;
 }
+
+Rectangel()
+{}
 
 void Rectangle::Draw(Output* out_p) const
 {

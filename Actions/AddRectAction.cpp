@@ -18,19 +18,21 @@ void AddRectAction::ReadActionParameters()
 
     out_p->PrintMessage("New Rectangle: Click at first corner");
 
+    rect = new Rectangle();
+
     //Read 1st corner and store in point p1
-    in_p->GetPointClicked(p1.x, p1.y);
+    in_p->GetPointClicked(rect.corner1.x, rect.corner1.y);
 
     out_p->PrintMessage("New Rectangle: Click at second corner");
 
     //Read 2nd corner and store in point p2
-    in_p->GetPointClicked(p2.x, p2.y);
+    in_p->GetPointClicked(rect.corner2.x, rect.corner2.y);
 
-    rect_gfx_info.is_filled = false; //default is not filled
+    rect.is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
-    rect_gfx_info.draw_clr = out_p->getCrntDrawColor();
-    rect_gfx_info.fill_clr = out_p->getCrntFillColor();
-    rect_gfx_info.border_width = out_p->getCrntPenWidth();
+    rect.draw_clr = out_p->GetCrntDrawColor();
+    rect.fill_clr = out_p->GetCrntFillColor();
+    rect.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
 }
@@ -40,9 +42,6 @@ void AddRectAction::Execute()
 {
     //This action needs to read some parameters first
     ReadActionParameters();
-
-    //Create a rectangle with the parameters read from the user
-    Rectangle* R = new Rectangle(p1, p2, rect_gfx_info);
 
     //Add the rectangle to the list of figures
     manager_p->AddFigure(R);

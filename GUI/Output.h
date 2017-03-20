@@ -26,13 +26,13 @@ public:
     void DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected = false) const; // Draw a rectangle
 
-    void DrewCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
+    void DrawCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a circle
 
-    void DrewLine(Point p1, Point p2, GfxInfo rect_gfx_info,
+    void DrawLine(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a line
 
-    void DrewTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
+    void DrawTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a  tringle
 
     /// TODO: Make similar functions for drawing all other figures.
