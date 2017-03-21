@@ -30,7 +30,7 @@ Output::Output()
     // Also
 
     // Create the output window
-    wind_p = CreateWindow(UI.width, UI.height, UI.wx, UI.wy);
+    wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
     // Change the title
     wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
@@ -50,7 +50,7 @@ Input* Output::CreateInput() const
 ////
 //======================================================================================//
 
-window* Output::CreateWindow(int w, int h, int x, int y) const
+window* Output::CreateWind(int w, int h, int x, int y) const
 {
     window* pW = new window(w, h, x, y);
     pW->SetBrush(UI.BkGrndColor);
@@ -188,14 +188,14 @@ int Output::GetCrntPenWidth() const // get current pen width
 ////
 //======================================================================================//
 
-void Output::DrawRect(Point p1, Point p2, Figure rect,
+void Output::DrawRect(Point p1, Point p2, CFigure rect,
     bool selected) const
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
-        DrawingClr = rect.GetDrawClr(;
+        DrawingClr = rect.GetDrawClr();
 
     wind_p->SetPen(DrawingClr, rect.GetBorderWidth()); // Set Drawing color &
     // width
@@ -210,13 +210,13 @@ void Output::DrawRect(Point p1, Point p2, Figure rect,
     wind_p->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrawCircle(Point p1, Point p2, Figure circ,
+void Output::DrawCircle(Point p1, Point p2, CFigure circ,
     bool selected) const
 {
     int radius = sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2));
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = circ.GetDrawClr();
 
@@ -233,12 +233,12 @@ void Output::DrawCircle(Point p1, Point p2, Figure circ,
     wind_p->DrawCircle(p1.x, p1.y, radius, style);
 }
 
-void Output::DrawLine(Point p1, Point p2, Figure line,
+void Output::DrawLine(Point p1, Point p2, CFigure line,
     bool selected) const
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = line.GetDrawClr();
 
@@ -250,12 +250,12 @@ void Output::DrawLine(Point p1, Point p2, Figure line,
     wind_p->DrawLine(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrawTriangle(Point p1, Point p2, Point p3, Figure trngl,
+void Output::DrawTriangle(Point p1, Point p2, Point p3, CFigure trngl,
     bool selected) const
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = trngl.GetDrawClr();
 

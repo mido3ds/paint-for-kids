@@ -1,68 +1,71 @@
-﻿  TestCode.cpp
-  Output.cpp
-  Input.cpp
-  windowinput.cpp
-  mousequeue.cpp
-  keyqueue.cpp
-  image.cpp
-c:\paint4kids\cmugraphicslib\image.cpp(115): warning C4018: '<': signed/unsigned mismatch
-  CMUgraphics.cpp
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(257): warning C4101: 'iX': unreferenced local variable
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(257): warning C4101: 'iY': unreferenced local variable
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(751): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(1164): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(1171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(1202): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(1210): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\paint4kids\cmugraphicslib\cmugraphics.cpp(1357): warning C4018: '>': signed/unsigned mismatch
-  auxil.cpp
+﻿  Output.cpp
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(198): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(198): error C2228: left of '.GetDrawClr' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(200): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(200): error C2228: left of '.GetBorderWidth' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(204): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(204): error C2228: left of '.IsFilled' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(206): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(206): error C2228: left of '.GetFillClr' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(216): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(221): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(221): error C2228: left of '.GetDrawClr' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(223): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(223): error C2228: left of '.GetBorderWidth' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(227): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(227): error C2228: left of '.IsFilled' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(229): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(229): error C2228: left of '.GetFillClr' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(243): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(243): error C2228: left of '.GetDrawClr' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(245): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(245): error C2228: left of '.GetBorderWidth' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(260): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(260): error C2228: left of '.GetDrawClr' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(262): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(262): error C2228: left of '.GetBorderWidth' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(266): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(266): error C2228: left of '.IsFilled' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(268): error C2027: use of undefined type 'CFigure'
+  c:\users\mahmoud adas\paint4kids\gui\output.h(6): note: see declaration of 'CFigure'
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(268): error C2228: left of '.GetFillClr' must have class/struct/union
+  ApplicationManager.cpp
+c:\users\mahmoud adas\paint4kids\applicationmanager.cpp(79): warning C4018: '<': signed/unsigned mismatch
+c:\users\mahmoud adas\paint4kids\applicationmanager.cpp(97): error C2065: 'FigCount': undeclared identifier
+  AddRectAction.cpp
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(24): error C2228: left of '.corner1' must have class/struct/union
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(24): note: type is 'CRectangle *'
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(24): note: did you intend to use '->' instead?
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(24): error C2228: left of '.x' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(24): error C2228: left of '.y' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(24): error C2660: 'Input::GetPointClicked': function does not take 1 arguments
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(29): error C2228: left of '.corner2' must have class/struct/union
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(29): note: type is 'CRectangle *'
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(29): note: did you intend to use '->' instead?
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(29): error C2228: left of '.x' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(29): error C2228: left of '.y' must have class/struct/union
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(29): error C2660: 'Input::GetPointClicked': function does not take 1 arguments
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(32): error C2228: left of '.ChngDrawClr' must have class/struct/union
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(32): note: type is 'CRectangle *'
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(32): note: did you intend to use '->' instead?
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(33): error C2228: left of '.ChngFillClr' must have class/struct/union
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(33): note: type is 'CRectangle *'
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(33): note: did you intend to use '->' instead?
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(34): error C2228: left of '.ChngBorderWidth' must have class/struct/union
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(34): note: type is 'CRectangle *'
+  c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(34): note: did you intend to use '->' instead?
+c:\users\mahmoud adas\paint4kids\actions\addrectaction.cpp(46): error C2065: 'R': undeclared identifier
   Generating Code...
-  jutils.c
-  jquant2.c
-  jquant1.c
-  jmemnobs.c
-  jmemmgr.c
-c:\paint4kids\cmugraphicslib\jpeg\jmemmgr.c(1103): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(1183): note: see declaration of 'getenv'
-c:\paint4kids\cmugraphicslib\jpeg\jmemmgr.c(1106): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
-  jidctred.c
-  jidctint.c
-  jidctfst.c
-  jidctflt.c
-  jerror.c
-c:\paint4kids\cmugraphicslib\jpeg\jerror.c(169): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\paint4kids\cmugraphicslib\jpeg\jerror.c(171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-  jdtrans.c
-  jdsample.c
-  jdpostct.c
-  jdphuff.c
-  jdmerge.c
-  jdmaster.c
-  jdmarker.c
-  jdmainct.c
-  jdinput.c
-  jdhuff.c
-  Generating Code...
-  Compiling...
-  jddctmgr.c
-  jdcolor.c
-  jdcoefct.c
-  jdatasrc.c
-  jdapistd.c
-  jdapimin.c
-  jcparam.c
-  jcomapi.c
-  jpegload.c
-c:\paint4kids\cmugraphicslib\jpegload.c(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
-  Generating Code...
-auxil.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  PT-Project.vcxproj -> C:\Paint4Kids\.\Debug\PT Project.exe

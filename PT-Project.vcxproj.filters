@@ -10,6 +10,12 @@
     <Filter Include="GUI Classes">
       <UniqueIdentifier>{03fd4e0d-92e0-4271-bb9b-d6e9f21ec35f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actions">
+      <UniqueIdentifier>{7ea1bd19-b2b5-4a87-82f2-6335901128cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Figures">
+      <UniqueIdentifier>{75f083cf-67d8-4032-b2f4-38d8d9677d7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -124,6 +130,17 @@
       <Filter>GUI Classes</Filter>
     </ClCompile>
     <ClCompile Include="TestCode.cpp" />
+    <ClCompile Include="Actions\AddRectAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\Figure.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\Rectangle.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationManager.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -196,5 +213,18 @@
       <Filter>GUI Classes</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="Actions\Action.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddRectAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\Figure.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\Rectangle.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationManager.h" />
   </ItemGroup>
 </Project>

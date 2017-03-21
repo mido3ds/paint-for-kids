@@ -16,14 +16,14 @@ void AddRectAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-    out_p->PrintMessage("New Rectangle: Click at first corner");
+    out_p->PrintMessage("New CRectangle: Click at first corner");
 
-    rect = new Rectangle();
+    rect = new CRectangle();
 
     //Read 1st corner and store in point p1
     in_p->GetPointClicked(rect.corner1.x, rect.corner1.y);
 
-    out_p->PrintMessage("New Rectangle: Click at second corner");
+    out_p->PrintMessage("New CRectangle: Click at second corner");
 
     //Read 2nd corner and store in point p2
     in_p->GetPointClicked(rect.corner2.x, rect.corner2.y);

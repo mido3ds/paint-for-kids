@@ -6,6 +6,7 @@
 
 #include "GUI/Input.h"
 #include "GUI/Output.h"
+#include "Figures/Figure.h"
 
 #ifdef PHASE1
 
@@ -44,19 +45,18 @@ int main()
                         "figure in any state, Click anywhere to continue");
     in_p->GetPointClicked(x, y); // Wait for any click
 
-    Figure figure; // to be used with draw function of the class Ouput
-    Point p1, p2;
+    CFigure figure; // to be used with draw function of the class Ouput
 
-    /// 2.1- Rectangle Test ///
+    /// 2.1- CRectangle Test ///
     /// ===================
-    out_p->PrintMessage("Drawing a Rectangle, filled/non-filled and Highlighted "
+    out_p->PrintMessage("Drawing a CRectangle, filled/non-filled and Highlighted "
                         "filled/non-filled,  Click to continue");
     Point p1, p2, p3;
     figure.ChngBorderWidth(3);
     figure.ChngDrawClr(BLACK); // any color for border
-    out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+    out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere else -_-");
+    out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else -_-");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawRect(p1, p2, figure, false);
     out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
@@ -78,7 +78,7 @@ int main()
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawRect(p1, p2, figure, true);
     out_p->PrintMessage(
-        "Drawing a Rectangle Test ==> OK,  Click anywhere to continue");
+        "Drawing a CRectangle Test ==> OK,  Click anywhere to continue");
     in_p->GetPointClicked(x, y); // Wait for any click
     out_p->ClearDrawArea();
     /// 2.2- Line Test ///
@@ -208,10 +208,10 @@ int main()
         Point p1, p2, p3;
         switch (ActType) {
         case DRAW_RECT:
-            out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+            out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere");
             // Phase_2
             /*in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere else -_-");
+			out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else -_-");
 			in_p->GetPointClicked(p2.x , p2.y);
 			out_p->DrawRect(p1 , p2 , figure , false);
 			out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");

@@ -5,16 +5,16 @@
 #include "../GUI/Output.h"
 
 // Base class for all figures
-class Figure
+class CFigure
 {
 public:
-    Figure();
-    Figure(const Figure& figure_gfx_info);
+    CFigure();
+    CFigure(const CFigure& figure_gfx_info);
     
     void SetSelected(bool s); 
     bool IsSelected() const; 
 
-    virtual void Draw(Output* out_p) const = 0; 
+    virtual void Draw(Output* out_p) const; 
 
     void ChngDrawClr(color draw_clr); // changes the figure's drawing color
     void ChngFillClr(color filling_clr); // changes the figure's filling color
@@ -33,14 +33,14 @@ public:
 
     /// Decide the parameters that you should pass to each function
 
-    virtual void Rotate() = 0;
-    virtual void Resize() = 0;
-    virtual void Move() = 0;	
+    virtual void Rotate();
+    virtual void Resize();
+    virtual void Move();	
 
-    virtual void Save(ofstream &out_file) = 0;	
-    virtual void Load(ifstream &in_file) = 0;	
+    virtual void Save(ofstream &out_file);	
+    virtual void Load(ifstream &in_file);	
 
-    virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
+    virtual void PrintInfo(Output* out_p);	// on the status bar
 
 protected:
     int id; // Each figure has an id
@@ -48,10 +48,10 @@ protected:
 
     color draw_clr = BLACK; // Draw color of the figure
     color fill_clr = WHITE; // Fill color of the figure
-    bool is_filled = false; // Figure Filled or not
+    bool is_filled = false; // CFigure Filled or not
     int border_width = 1; // Width of figure borders
 
-    int z_index = std::numeric_limits<int>::max(); // level of object on window, default to max size of int
+    int z_index = INT32_MAX; // level of object on window, default to max size of int
 };
 
 #endif
