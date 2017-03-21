@@ -28,8 +28,8 @@ public:
     virtual void Resize() = 0;
     virtual void Move() = 0;	
 
-    virtual void Save(ofstream &out_file) = 0;	
-    virtual void Load(ifstream &in_file) = 0;	
+    //virtual void Save(ofstream &out_file) = 0;	
+    //virtual void Load(ifstream &in_file) = 0;	
 
     virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 
