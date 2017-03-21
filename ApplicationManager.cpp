@@ -55,12 +55,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //==================================================================================//
 
 //Add a figure to the list of figures
-void ApplicationManager::AddFigure(CFigure* fig_p)
+void ApplicationManager::AddFigure(Figure* fig_p)
 {
     fig_list.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) const
+Figure* ApplicationManager::GetFigure(int x, int y) const
 {
     //If a figure is found return a pointer to it.
     //if this point (x,y) does not belong to any figure return NULL

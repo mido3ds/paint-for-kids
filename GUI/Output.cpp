@@ -30,7 +30,7 @@ Output::Output()
     // Also
 
     // Create the output window
-    wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
+    wind_p = CreateWindow(UI.width, UI.height, UI.wx, UI.wy);
     // Change the title
     wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
@@ -50,7 +50,7 @@ Input* Output::CreateInput() const
 ////
 //======================================================================================//
 
-window* Output::CreateWind(int w, int h, int x, int y) const
+window* Output::CreateWindow(int w, int h, int x, int y) const
 {
     window* pW = new window(w, h, x, y);
     pW->SetBrush(UI.BkGrndColor);
@@ -188,61 +188,61 @@ int Output::GetCrntPenWidth() const // get current pen width
 ////
 //======================================================================================//
 
-void Output::DrawRect(Point p1, Point p2, CFigure rect,
+void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
     bool selected) const
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = rect.GetDrawClr();
+        DrawingClr = rect_gfx_info.draw_clr;
 
-    wind_p->SetPen(DrawingClr, rect.GetBorderWidth()); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, rect_gfx_info.border_width); // Set Drawing color &
     // width
 
     drawstyle style;
-    if (rect.IsFilled()) {
+    if (rect_gfx_info.is_filled) {
         style = FILLED;
-        wind_p->SetBrush(rect.GetFillClr());
+        wind_p->SetBrush(rect_gfx_info.fill_clr);
     } else
         style = FRAME;
 
     wind_p->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrawCircle(Point p1, Point p2, CFigure circ,
+void Output::DrawCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
     bool selected) const
 {
     int radius = sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2));
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = circ.GetDrawClr();
+        DrawingClr = rect_gfx_info.draw_clr;
 
-    wind_p->SetPen(DrawingClr, circ.GetBorderWidth()); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, rect_gfx_info.border_width); // Set Drawing color &
     // width
 
     drawstyle style;
-    if (circ.IsFilled()) {
+    if (rect_gfx_info.is_filled) {
         style = FILLED;
-        wind_p->SetBrush(circ.GetFillClr());
+        wind_p->SetBrush(rect_gfx_info.fill_clr);
     } else
         style = FRAME;
 
     wind_p->DrawCircle(p1.x, p1.y, radius, style);
 }
 
-void Output::DrawLine(Point p1, Point p2, CFigure line,
+void Output::DrawLine(Point p1, Point p2, GfxInfo rect_gfx_info,
     bool selected) const
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = line.GetDrawClr();
+        DrawingClr = rect_gfx_info.draw_clr;
 
-    wind_p->SetPen(DrawingClr, line.GetBorderWidth()); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, rect_gfx_info.border_width); // Set Drawing color &
     // width
 
     drawstyle style = FRAME;
@@ -250,22 +250,22 @@ void Output::DrawLine(Point p1, Point p2, CFigure line,
     wind_p->DrawLine(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrawTriangle(Point p1, Point p2, Point p3, CFigure trngl,
+void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
     bool selected) const
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
     else
-        DrawingClr = trngl.GetDrawClr();
+        DrawingClr = rect_gfx_info.draw_clr;
 
-    wind_p->SetPen(DrawingClr, trngl.GetBorderWidth()); // Set Drawing color &
+    wind_p->SetPen(DrawingClr, rect_gfx_info.border_width); // Set Drawing color &
     // width
 
     drawstyle style;
-    if (trngl.IsFilled()) {
+    if (rect_gfx_info.is_filled) {
         style = FILLED;
-        wind_p->SetBrush(trngl.GetFillClr());
+        wind_p->SetBrush(rect_gfx_info.fill_clr);
     } else
         style = FRAME;
 

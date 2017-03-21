@@ -3,10 +3,10 @@
 
 #include "Figure.h"
 
-class CRectangle : public CFigure {
+class Rectangle : public Figure {
 public:
-    CRectangle();
-    CRectangle(Point, Point, CFigure figure_gfx_info);
+    Rectangel();
+    Rectangle(Point, Point, GfxInfo figure_gfx_info);
     
     virtual void Draw(Output* out_p) const;
 

@@ -3,14 +3,13 @@
 
 #include "Input.h"
 
-class CFigure;
 class Output // The application manager should have a pointer to this class
 {
 public:
     Output();
     ~Output();
 
-    window* CreateWind(int, int, int, int) const; // main window
+    window* CreateWindow(int, int, int, int) const; // main window
 
     void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
@@ -24,16 +23,16 @@ public:
     void ClearDrawArea() const;
 
     // -- Figures Drawing functions
-    void DrawRect(Point p1, Point p2, CFigure rect,
+    void DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected = false) const; // Draw a rectangle
 
-    void DrawCircle(Point p1, Point p2, CFigure circ,
+    void DrawCircle(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a circle
 
-    void DrawLine(Point p1, Point p2, CFigure line,
+    void DrawLine(Point p1, Point p2, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a line
 
-    void DrawTriangle(Point p1, Point p2, Point p3, CFigure trngl,
+    void DrawTriangle(Point p1, Point p2, Point p3, GfxInfo rect_gfx_info,
         bool selected) const; // Draw a  tringle
 
     /// TODO: Make similar functions for drawing all other figures.

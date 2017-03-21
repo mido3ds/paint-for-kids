@@ -3,8 +3,7 @@
 
 #include "Action.h"
 
-class CRectangle;
-//Add CRectangle Action class
+//Add Rectangle Action class
 class AddRectAction : public Action 
 {
 public:
@@ -17,7 +16,7 @@ public:
     virtual void Execute();
     
 private:
-    CRectangle* rect;
+    Rectangle* rect;
 };
 
 #endif

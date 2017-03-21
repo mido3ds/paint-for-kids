@@ -10,7 +10,7 @@
 enum ActionType //The actions supported (you can add more if needed)
 {
     DRAW_LINE, //Draw Line
-    DRAW_RECT, //Draw CRectangle
+    DRAW_RECT, //Draw Rectangle
     DRAW_TRI, //Draw Triangle
     DRAW_CIRC, //Draw Circle
     CHNG_DRAW_CLR, //Change the drawing color
@@ -51,4 +51,16 @@ struct Point // To be used for figures points
     int x = 0, 
         y = 0;
 };
+
+class GfxInfo // Graphical info of each figure (you may add more members)
+{
+public:
+    color draw_clr = BLACK; // Draw color of the figure
+    color fill_clr = WHITE; // Fill color of the figure
+    bool is_filled = false; // Figure Filled or not
+    int border_width = 1; // Width of figure borders
+
+    int z_index = std::numeric_limits<int>::max(); // level of object on window, default to max size of int
+};
+
 #endif

@@ -1,6 +1,6 @@
 #include "Figure.h"
 
-CFigure::CFigure(const CFigure& figure_gfx_info)
+Figure::Figure(const GfxInfo& figure_gfx_info)
 {
     draw_clr = figure_gfx_info.draw_clr;
     fill_clr = figure_gfx_info.fill_clr;
@@ -9,88 +9,36 @@ CFigure::CFigure(const CFigure& figure_gfx_info)
     z_index = figure_gfx_info.z_index;
 }
 
-CFigure::CFigure()
+Figure::Figure()
 {}
 
-void CFigure::SetSelected(bool s)
+Figure(color draw_clr, color fill_clr, bool is_filled, int border_width,
+    int z_index)
+{
+    this->draw_clr = draw_clr;
+    this->fill_clr = fill_clr;
+    this->is_filled = is_filled;
+    this->border_width = border_width;
+    this->z_index = z_index;
+}
+
+void Figure::SetSelected(bool s)
 {
     selected = s;
 }
 
-bool CFigure::IsSelected() const
+bool Figure::IsSelected() const
 {
     return selected;
 }
 
-void CFigure::Draw(Output * out_p) const
-{}
-
-void CFigure::ChngDrawClr(color draw_clr)
+void Figure::ChngDrawClr(color draw_clr)
 {
     draw_clr = draw_clr;
 }
 
-void CFigure::ChngFillClr(color filling_clr)
+void Figure::ChngFillClr(color filling_clr)
 {
     is_filled = true;
     fill_clr = filling_clr;
 }
-
-void CFigure::ChngZIndex(int ind)
-{
-    z_index = abs(ind);
-}
-
-void CFigure::ChngBorderWidth(int width)
-{
-    border_width = abs(width);
-}
-
-bool CFigure::IsFilled()
-{
-    return is_filled;
-}
-
-color CFigure::GetDrawClr()
-{
-    return draw_clr;
-}
-
-color CFigure::GetFillClr()
-{
-    return fill_clr;
-}
-
-int CFigure::GetBorderWidth()
-{
-    return border_width;
-}
-
-int CFigure::GetZIndex()
-{
-    return z_index;
-}
-
-void CFigure::Rotate()
-	{
-	}
-
-void CFigure::Resize()
-	{
-	}
-
-void CFigure::Move()
-	{
-	}
-
-void CFigure::Save(ofstream & out_file)
-	{
-	}
-
-void CFigure::Load(ifstream & in_file)
-	{
-	}
-
-void CFigure::PrintInfo(Output * out_p)
-	{
-	}
