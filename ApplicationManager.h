@@ -2,7 +2,7 @@
 #define APPLICATION_MANAGER_H
 
 #include "DEFS.h"
-#include "Figures/Figure.h"
+#include "Figures/CFigure.h"
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 #include <vector>
@@ -19,8 +19,8 @@ public:
     void ExecuteAction(ActionType); //Creates an action and executes it
 
     // -- Figures Management Functions
-    void AddFigure(Figure* fig_p); //Adds a new figure to the fig_list
-    Figure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+    void AddFigure(CFigure* fig_p); //Adds a new figure to the fig_list
+    CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 
     // -- Interface Management Functions
     Input* GetInput() const; //Return pointer to the input
@@ -28,7 +28,7 @@ public:
     void UpdateInterface() const; //Redraws all the drawing window
 
 private:
-    vector<Figure*> fig_list;
+    vector<CFigure*> fig_list;
 
     //Pointers to Input and Output classes
     Input* in_p;

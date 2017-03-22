@@ -5,12 +5,11 @@
 #define DEFS_H
 
 #include "CMUgraphicsLib/CMUgraphics.h" // color
-#include <limits> // numeric_limits
 
 enum ActionType //The actions supported (you can add more if needed)
 {
     DRAW_LINE, //Draw Line
-    DRAW_RECT, //Draw Rectangle
+    DRAW_RECT, //Draw CRectangle
     DRAW_TRI, //Draw Triangle
     DRAW_CIRC, //Draw Circle
     CHNG_DRAW_CLR, //Change the drawing color
@@ -57,10 +56,10 @@ class GfxInfo // Graphical info of each figure (you may add more members)
 public:
     color draw_clr = BLACK; // Draw color of the figure
     color fill_clr = WHITE; // Fill color of the figure
-    bool is_filled = false; // Figure Filled or not
+    bool is_filled = false; // CFigure Filled or not
     int border_width = 1; // Width of figure borders
 
-    int z_index = std::numeric_limits<int>::max(); // level of object on window, default to max size of int
+    int z_index = MAXINT32; // level of object on window, default to max size of int
 };
 
 #endif

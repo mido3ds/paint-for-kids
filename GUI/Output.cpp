@@ -11,10 +11,10 @@ Output::Output()
     UI.wy = 5;
 
     UI.StatusBarHeight = 50;
-    UI.ToolBarHeight = 60;
+    UI.ToolBarHeight = 50;
     UI.colorBarWidth = 100;
     UI.colorBarHeight = 600;
-    UI.MenuItemWidth = 60;
+    UI.MenuItemWidth = 50;
 
     UI.DrawColor = BLUE; // Drawing color						///
     // this Is Not Used
@@ -30,7 +30,7 @@ Output::Output()
     // Also
 
     // Create the output window
-    wind_p = CreateWindow(UI.width, UI.height, UI.wx, UI.wy);
+    wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
     // Change the title
     wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
@@ -50,7 +50,7 @@ Input* Output::CreateInput() const
 ////
 //======================================================================================//
 
-window* Output::CreateWindow(int w, int h, int x, int y) const
+window* Output::CreateWind(int w, int h, int x, int y) const
 {
     window* pW = new window(w, h, x, y);
     pW->SetBrush(UI.BkGrndColor);
@@ -193,7 +193,7 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = rect_gfx_info.draw_clr;
 
@@ -216,7 +216,7 @@ void Output::DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
     int radius = sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2));
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = circ_gfx_info.draw_clr;
 
@@ -238,7 +238,7 @@ void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = line_gfx_info.draw_clr;
 
@@ -255,7 +255,7 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 {
     color DrawingClr;
     if (selected)
-        DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+        DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
     else
         DrawingClr = trngl_gfx_info.draw_clr;
 

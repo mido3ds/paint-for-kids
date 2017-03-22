@@ -2,8 +2,13 @@
 #define ADD_RECT_ACTION_H
 
 #include "Action.h"
+#include "../Figures/CRectangle.h"
+#include "../ApplicationManager.h"
 
-//Add Rectangle Action class
+#include "../GUI/Input.h"
+#include "../GUI/Output.h"
+
+//Add CRectangle Action class
 class AddRectAction : public Action 
 {
 public:
@@ -16,7 +21,7 @@ public:
     virtual void Execute();
     
 private:
-    Rectangle* rect;
+    CRectangle* rect;
 };
 
 #endif

@@ -9,7 +9,7 @@ public:
     Output();
     ~Output();
 
-    window* CreateWindow(int, int, int, int) const; // main window
+    window* CreateWind(int, int, int, int) const; // main window
 
     void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
@@ -23,8 +23,8 @@ public:
     void ClearDrawArea() const;
 
     // -- Figures Drawing functions
-    void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
-        bool selected) const
+	void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
+		bool selected) const;
 
     void DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
         bool selected) const; // Draw a circle

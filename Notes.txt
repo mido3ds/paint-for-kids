@@ -7,7 +7,7 @@
         => void DrawPixel(const int iX, const int iY);
     
     
-    3- We Can Draw A Sharp Edge Rectangle Or Smooth Edge Rectangle With This Function By Using The Last Two Parameter Or Not 
+    3- We Can Draw A Sharp Edge CRectangle Or Smooth Edge CRectangle With This Function By Using The Last Two Parameter Or Not 
         => void DrawRectangle(const int iX1, const int iY1, const int iX2, const int iY2, const drawstyle dsStyle = FILLED, const int iWidth = 0, const int iHeight = 0);
     
     

@@ -45,19 +45,18 @@ int main()
     in_p->GetPointClicked(x, y); // Wait for any click
 
     GfxInfo gfxInfo; // to be used with draw function of the class Ouput
-    Point p1, p2;
 
-    /// 2.1- Rectangle Test ///
+    /// 2.1- CRectangle Test ///
     /// ===================
-    out_p->PrintMessage("Drawing a Rectangle, filled/non-filled and Highlighted "
+    out_p->PrintMessage("Drawing a CRectangle, filled/non-filled and Highlighted "
                         "filled/non-filled,  Click to continue");
     Point p1, p2, p3;
     gfxInfo.border_width = 3;
     gfxInfo.draw_clr = BLACK; // any color for border
-    gfxInfo.is_filled = false; // Figure is NOT filled
-    out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+    gfxInfo.is_filled = false; // CFigure is NOT filled
+    out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere else -_-");
+    out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else -_-");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawRect(p1, p2, gfxInfo, false);
     out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
@@ -72,7 +71,7 @@ int main()
     gfxInfo.border_width = 4;
     gfxInfo.draw_clr = BLUE; // any color for border
     gfxInfo.fill_clr = GREEN; // any color for filling
-    gfxInfo.is_filled = true; // Figure is filled
+    gfxInfo.is_filled = true; // CFigure is filled
     out_p->DrawRect(p1, p2, gfxInfo, false);
     out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_-");
     in_p->GetPointClicked(p1.x, p1.y);
@@ -81,7 +80,7 @@ int main()
     out_p->DrawRect(p1, p2, gfxInfo, true);
     gfxInfo.is_filled = false;
     out_p->PrintMessage(
-        "Drawing a Rectangle Test ==> OK,  Click anywhere to continue");
+        "Drawing a CRectangle Test ==> OK,  Click anywhere to continue");
     in_p->GetPointClicked(x, y); // Wait for any click
     out_p->ClearDrawArea();
     /// 2.2- Line Test ///
@@ -217,10 +216,10 @@ int main()
         gfxInfo.is_filled = false;
         switch (ActType) {
         case DRAW_RECT:
-            out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+            out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere");
             // Phase_2
             /*in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: Draw a Rectangle , Click anywhere else -_-");
+			out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else -_-");
 			in_p->GetPointClicked(p2.x , p2.y);
 			out_p->DrawRect(p1 , p2 , gfxInfo , false);
 			out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
@@ -326,11 +325,11 @@ int main()
             break;
 
         case DEL:
-            out_p->PrintMessage("Action: Delete Figure , Click anywhere");
+            out_p->PrintMessage("Action: Delete CFigure , Click anywhere");
             break;
 
         case MOVE:
-            out_p->PrintMessage("Action: Move Figure , Click anywhere");
+            out_p->PrintMessage("Action: Move CFigure , Click anywhere");
             break;
         case SELECT:
             out_p->PrintMessage("Action: Select Figures , Click anywhere");
@@ -345,19 +344,19 @@ int main()
             break;
 
         case SEND_BACK:
-            out_p->PrintMessage("Action: Send The Figure Back , Click anywhere");
+            out_p->PrintMessage("Action: Send The CFigure Back , Click anywhere");
             break;
 
         case BRNG_FRNT:
-            out_p->PrintMessage("Action: Bring The Figure Front , Click anywhere");
+            out_p->PrintMessage("Action: Bring The CFigure Front , Click anywhere");
             break;
 
         case SAVE:
-            out_p->PrintMessage("Action: Save The Figure , Click anywhere");
+            out_p->PrintMessage("Action: Save The CFigure , Click anywhere");
             break;
 
         case LOAD:
-            out_p->PrintMessage("Action: Load Figure , Click anywhere");
+            out_p->PrintMessage("Action: Load CFigure , Click anywhere");
             break;
 
         case ZOOM_IN:
@@ -368,14 +367,14 @@ int main()
             break;
 
         case CUT:
-            out_p->PrintMessage("Action: Cut Figure , Click anywhere");
+            out_p->PrintMessage("Action: Cut CFigure , Click anywhere");
             break;
 
         case COPY:
-            out_p->PrintMessage("Action: Copy Figure , Click anywhere");
+            out_p->PrintMessage("Action: Copy CFigure , Click anywhere");
             break;
         case PASTE:
-            out_p->PrintMessage("Action: Paste The Figure , Click anywhere");
+            out_p->PrintMessage("Action: Paste The CFigure , Click anywhere");
             break;
 
         case STATUS:

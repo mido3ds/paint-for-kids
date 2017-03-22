@@ -3,6 +3,7 @@
 */
 #include "ApplicationManager.h"
 
+#define PHASE1
 #ifndef PHASE1
 
 int main()
