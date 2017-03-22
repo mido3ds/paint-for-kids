@@ -16,6 +16,10 @@ Output::Output()
     UI.colorBarHeight = 600;
     UI.MenuItemWidth = 50;
 
+	UI.playAreaWidthone = UI.width / 2;
+	UI.playAreaWidthtwo = UI.playAreaWidthone;
+	UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
+
     UI.DrawColor = BLUE; // Drawing color						///
     // this Is Not Used
     UI.FillColor = GREEN; // Filling color
@@ -78,6 +82,8 @@ void Output::CreateDrawToolBar() const
 {
     UI.InterfaceMode = MODE_DRAW;
 
+	ClearToolBar();
+
     // You can draw the tool bar icons in any way you want.
     // Below is one possible way
 
@@ -130,6 +136,8 @@ void Output::CreatePlayToolBar() const
 {
     UI.InterfaceMode = MODE_PLAY;
 
+	ClearToolBar();
+
     string MenuItemImages[PLAY_ITM_COUNT];
     MenuItemImages[ITM_PICK_HIDE] = "images\\MenuItems\\find.jpg";
     MenuItemImages[ITM_SCR_FIND] = "images\\MenuItems\\scramble.jpg";
@@ -137,7 +145,7 @@ void Output::CreatePlayToolBar() const
     MenuItemImages[ITM_EXIT_PLAY] = "images\\MenuItems\\exit.jpg";
 
     // Draw menu item one image at a time
-    for (int i = 0; i < DRAW_ITM_COUNT; i++)
+    for (int i = 0; i < PLAY_ITM_COUNT; i++)
         wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
             UI.MenuItemWidth, UI.ToolBarHeight);
 
@@ -153,6 +161,14 @@ void Output::ClearDrawArea() const
     wind_p->SetBrush(UI.BkGrndColor);
     wind_p->DrawRectangle(UI.colorBarWidth, UI.ToolBarHeight, UI.width,
         UI.height - UI.StatusBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::ClearToolBar() const
+{
+	wind_p->SetBrush(WHITE);
+	wind_p->SetPen(BLACK);
+	wind_p->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -270,6 +286,20 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
         style = FRAME;
 
     wind_p->DrawTriangle(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, style);
+}
+
+void Output::CreateDrawArea() const
+{
+	CreatePlayArea();
+	CreateColorBar();
+}
+
+void Output::CreatePlayArea() const
+{
+	wind_p->SetBrush(WHITE);
+	wind_p->SetPen(BLACK);
+
+	wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -17,10 +17,14 @@ public:
     void CreateStatusBar() const;
     void CreateColorBar() const;
 
+	void CreateDrawArea() const;
+	void CreatePlayArea() const;
+
     Input* CreateInput() const; // creates a pointer to the Input object
 
     void ClearStatusBar() const;
     void ClearDrawArea() const;
+	void ClearToolBar() const;
 
     // -- Figures Drawing functions
 	void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,

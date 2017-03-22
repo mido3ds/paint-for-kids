@@ -3,6 +3,7 @@
     to move to phase2, comment next define
 */
 #define PHASE1
+#define DEBUG
 
 #include "GUI/Input.h"
 #include "GUI/Output.h"
@@ -16,6 +17,9 @@ int main()
     // Create Input and Output objects to test
     Output* out_p = new Output();
     Input* in_p = out_p->CreateInput();
+	GfxInfo gfxInfo; // to be used with draw function of the class Ouput
+
+#ifndef DEBUG
 
     // Starting the test
     out_p->PrintMessage("This demo is to test input and output classes, Click "
@@ -44,7 +48,6 @@ int main()
                         "figure in any state, Click anywhere to continue");
     in_p->GetPointClicked(x, y); // Wait for any click
 
-    GfxInfo gfxInfo; // to be used with draw function of the class Ouput
 
     /// 2.1- CRectangle Test ///
     /// ===================
@@ -197,6 +200,7 @@ int main()
 
     in_p->GetPointClicked(x, y); // Wait for any click
     out_p->ClearDrawArea();
+#endif
 
     ///////////////////////////////////////////////////////////////////////////////////
     // TEST 4:
@@ -394,12 +398,14 @@ int main()
             out_p->PrintMessage(
                 "Action: Switch to Draw Mode, creating simualtion tool bar");
             out_p->CreateDrawToolBar();
+			out_p->CreateDrawArea();
             break;
 
         case TO_PLAY:
             out_p->PrintMessage(
                 "Action: Switch to Play Mode, creating Design tool bar");
             out_p->CreatePlayToolBar();
+			out_p->CreatePlayArea();
             break;
         case COLOR_BAR:
             out_p->PrintMessage("Action: a click on the Color Bar, Click anywhere");
@@ -407,6 +413,14 @@ int main()
 
         case EXIT:
             break;
+
+		case SCRAMBLE:
+			out_p->PrintMessage("Action: a click on Scramble icon");
+			break;
+
+		case HIDE:
+			out_p->PrintMessage("Action: a click on Hide icon");
+			break;
         }
     } while (ActType != EXIT);
 

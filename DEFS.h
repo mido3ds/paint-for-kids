@@ -29,7 +29,6 @@ enum ActionType //The actions supported (you can add more if needed)
     CUT,
     COPY,
     PASTE,
-    PLAY,
     HIDE,
     SCRAMBLE,
     EXIT, //Exit the application

@@ -25,22 +25,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
     //According to Action Type, create the corresponding action object
     switch (ActType) {
-    case DRAW_RECT:
-        pAct = new AddRectAction(this);
-        break;
+		case DRAW_RECT:
+			pAct = new AddRectAction(this);
+			break;
 
-    case DRAW_LINE:
-        ///create AddLineAction here
+		case DRAW_LINE:
+			///create AddLineAction here
 
-        break;
+			break;
 
-    case EXIT:
-        ///create ExitAction here
+		case EXIT:
+			///create ExitAction here
 
-        break;
+			break;
 
-    case STATUS: //a click on the status bar ==> no action
-        return;
+		case STATUS: //a click on the status bar ==> no action
+			return;
     }
 
     //Execute the created action
