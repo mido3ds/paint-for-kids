@@ -32,3 +32,13 @@ void CFigure::ChngFillClr(color filling_clr)
     is_filled = true;
     this->fill_clr = filling_clr;
 }
+
+void CFigure::SetId(int id)
+{
+    this->id = id;
+}
+
+int CFigure::GetId()
+{
+    return id;
+}

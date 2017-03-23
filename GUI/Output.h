@@ -1,6 +1,8 @@
 #ifndef OUPTUT_H
 #define OUPTUT_H
 
+#define PHASE1
+
 #include "Input.h"
 
 class Output // The application manager should have a pointer to this class
@@ -38,8 +40,6 @@ public:
 
     void DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
         bool selected) const; // Draw a  tringle
-
-    /// TODO: Make similar functions for drawing all other figures.
 
     void PrintMessage(string msg) const; // on Status bar
 

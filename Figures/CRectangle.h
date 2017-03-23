@@ -10,8 +10,7 @@ public:
     
     virtual void Draw(Output* out_p) const;
 
-    Point corner1;
-    Point corner2;
+    Point p1, p2;
 };
 
 #endif

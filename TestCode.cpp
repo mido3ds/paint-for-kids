@@ -1,8 +1,7 @@
 /*
     Phase1: test the Input and Output classes
-    to move to phase2, comment next define
+    to move to phase2, comment PHASE1 define in Output.h
 */
-#define PHASE1
 #define DEBUG
 
 #include "GUI/Input.h"
@@ -100,7 +99,6 @@ int main()
     out_p->PrintMessage("Action: highlighting click anywhere else -_--_--_-");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawLine(p1, p2, gfxInfo, true);
-    /// TODO: Add code to draw Line, Normal and Highlighted
 
     out_p->PrintMessage("Drawing a Line Test ==> OK,  Click anywhere to continue");
     in_p->GetPointClicked(x, y); // Wait for any click
@@ -140,7 +138,6 @@ int main()
     in_p->GetPointClicked(p3.x, p3.y);
     out_p->DrawTriangle(p1, p2, p3, gfxInfo, true);
     gfxInfo.is_filled = false;
-    /// TODO: Add code to draw Triangle in all possible states
 
     out_p->PrintMessage(
         "Drawing a Triangle Test ==> OK,  Click anywhere to continue");
@@ -173,7 +170,6 @@ int main()
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawCircle(p1, p2, gfxInfo, true);
     gfxInfo.is_filled = false;
-    /// TODO: Add code to draw Circle in all possible states
 
     out_p->PrintMessage(
         "Drawing a Circle Test ==> OK,  Click anywhere to continue");
@@ -188,7 +184,7 @@ int main()
         "TEST3: Now Time to test class Input, Click anywhere to continue");
     in_p->GetPointClicked(x, y); // Wait for any click
 
-    /// TODO: Add code here to
+    /// Add code here to
     // 1- Read a string from the user on the status bar
     // 2- After reading the stirng clear the status bar
     // 3- print on the status bar "You Entered" then print the string
@@ -211,7 +207,7 @@ int main()
 
     ActionType ActType;
     gfxInfo.is_filled = false;
-    /// TODO:
+    /// 
     // You must add a case for each action (both Draw mode and Play mode actions)
     // Add cases for the missing actions below
     do {

@@ -12,7 +12,10 @@ public:
     CFigure(const GfxInfo& figure_gfx_info);
     
     void SetSelected(bool s); 
-    bool IsSelected() const; 
+    bool IsSelected() const;
+
+    void SetId(int id);
+    int GetId();
 
     virtual void Draw(Output* out_p) const = 0; 
 

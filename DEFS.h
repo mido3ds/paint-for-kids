@@ -40,14 +40,19 @@ enum ActionType //The actions supported (you can add more if needed)
 
     TO_DRAW, //Switch interface to Draw mode
     TO_PLAY //Switch interface to Play mode
-
-    ///TODO: Add more action types (if needed)
 };
 
 struct Point // To be used for figures points
 {
-    int x = 0, 
-        y = 0;
+    int x, y;
+
+    Point(int a, int b)
+        : x(a), y(b)
+    {}
+
+    Point() 
+        :x(0), y(0)
+    {}
 };
 
 class GfxInfo // Graphical info of each figure (you may add more members)

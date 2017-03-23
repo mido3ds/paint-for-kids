@@ -1,5 +1,9 @@
 #include "ApplicationManager.h"
+
+// actions files
 #include "Actions/AddRectAction.h"
+#include "Actions/AddLineAction.h"
+#include "Actions/ExitAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -21,22 +25,22 @@ ActionType ApplicationManager::GetUserAction() const
 //Creates an action and executes it
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
-    Action* pAct = NULL;
+    Action* act_p = NULL;
 
     //According to Action Type, create the corresponding action object
     switch (ActType) {
 		case DRAW_RECT:
-			pAct = new AddRectAction(this);
+			act_p = new AddRectAction(this);
 			break;
 
 		case DRAW_LINE:
 			///create AddLineAction here
-
+            act_p = new AddLineAction(this);
 			break;
 
 		case EXIT:
 			///create ExitAction here
-
+            act_p = new ExitAction(this);
 			break;
 
 		case STATUS: //a click on the status bar ==> no action
@@ -44,10 +48,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
     }
 
     //Execute the created action
-    if (pAct != NULL) {
-        pAct->Execute(); //Execute
-        delete pAct; //Action is not needed any more ==> delete it
-        pAct = NULL;
+    if (act_p != NULL) {
+        act_p->Execute(); //Execute
+        delete act_p; //Action is not needed any more ==> delete it
+        act_p = NULL;
     }
 }
 //==================================================================================//

@@ -10,17 +10,17 @@ void AddRectAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-    out_p->PrintMessage("New CRectangle: Click at first corner");
+    out_p->PrintMessage("New Rectangle: Click at first corner");
 
     rect = new CRectangle();
 
     //Read 1st corner and store in point p1
-    in_p->GetPointClicked(rect->corner1.x, rect->corner1.y);
+    in_p->GetPointClicked(rect->p1.x, rect->p1.y);
 
-    out_p->PrintMessage("New CRectangle: Click at second corner");
+    out_p->PrintMessage("New Rectangle: Click at second corner");
 
     //Read 2nd corner and store in point p2
-    in_p->GetPointClicked(rect->corner2.x, rect->corner2.y);
+    in_p->GetPointClicked(rect->p2.x, rect->p2.y);
 
     rect->is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
@@ -37,6 +37,6 @@ void AddRectAction::Execute()
     //This action needs to read some parameters first
     ReadActionParameters();
 
-    //Add the rectangle to the list of figures
+    //Add the lineangle to the list of figures
     manager_p->AddFigure(rect);
 }
