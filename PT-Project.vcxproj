@@ -130,7 +130,9 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\AddLineAction.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -167,8 +169,11 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
+    <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="Figures\CFigure.cpp" />
+    <ClCompile Include="Figures\CLine.cpp" />
     <ClCompile Include="Figures\CRectangle.cpp" />
+    <ClCompile Include="Figures\CTrngl.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -176,7 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\AddLineAction.h" />
     <ClInclude Include="Actions\AddRectAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
@@ -198,8 +205,11 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
+    <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="Figures\CFigure.h" />
+    <ClInclude Include="Figures\CLine.h" />
     <ClInclude Include="Figures\CRectangle.h" />
+    <ClInclude Include="Figures\CTrngl.h" />
     <ClInclude Include="GUI\Input.h" />
     <ClInclude Include="GUI\Output.h" />
     <ClInclude Include="GUI\UI_Info.h" />

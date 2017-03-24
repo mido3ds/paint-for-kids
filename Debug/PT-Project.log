@@ -1,2 +1,4 @@
-﻿  TestCode.cpp
+﻿  CLine.cpp
+  LINK : .\Debug/PT Project.exe not found or not built by the last incremental link; performing full link
+AddLineAction.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   PT-Project.vcxproj -> C:\Users\Mahmoud Adas\Paint4Kids\.\Debug\PT Project.exe

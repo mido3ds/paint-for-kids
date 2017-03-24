@@ -10,7 +10,7 @@ CLine::CLine(Point p1, Point p2, GfxInfo line_gfx_info)
     this->p2 = p2;
 }
 
-virtual void CLine::Draw(Output* out_p) const
+void CLine::Draw(Output* out_p) const
 {
     out_p->DrawLine(p1, p2, *this, selected);
 }
