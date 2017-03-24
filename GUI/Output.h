@@ -1,8 +1,6 @@
 #ifndef OUPTUT_H
 #define OUPTUT_H
 
-#define PHASE1
-
 #include "Input.h"
 
 class Output // The application manager should have a pointer to this class

@@ -1,4 +1,20 @@
-﻿  CLine.cpp
-  LINK : .\Debug/PT Project.exe not found or not built by the last incremental link; performing full link
-AddLineAction.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+﻿  TestCode.cpp
+  Main.cpp
+  Output.cpp
+c:\users\mahmoud adas\paint4kids\gui\output.cpp(232): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Input.cpp
+  CRectangle.cpp
+  CFigure.cpp
+  ApplicationManager.cpp
+c:\users\mahmoud adas\paint4kids\applicationmanager.cpp(83): warning C4018: '<': signed/unsigned mismatch
+c:\users\mahmoud adas\paint4kids\applicationmanager.cpp(101): warning C4018: '<': signed/unsigned mismatch
+  AddRectAction.cpp
+  Generating Code...
+  Compiling...
+  CTrngl.cpp
+  CLine.cpp
+  CCircle.cpp
+  ExitAction.cpp
+  AddLineAction.cpp
+  Generating Code...
   PT-Project.vcxproj -> C:\Users\Mahmoud Adas\Paint4Kids\.\Debug\PT Project.exe
