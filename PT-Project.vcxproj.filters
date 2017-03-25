@@ -156,6 +156,12 @@
       <Filter>Figures</Filter>
     </ClCompile>
     <ClCompile Include="TestCode.cpp" />
+    <ClCompile Include="Actions\SwitchDrawMode.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SwitchPlayMode.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -255,6 +261,12 @@
     </ClInclude>
     <ClInclude Include="Figures\CTrngl.h">
       <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwitchDrawMode.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwitchPlayMode.h">
+      <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

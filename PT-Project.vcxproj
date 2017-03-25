@@ -133,6 +133,8 @@
     <ClCompile Include="Actions\AddLineAction.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
+    <ClCompile Include="Actions\SwitchDrawMode.cpp" />
+    <ClCompile Include="Actions\SwitchPlayMode.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -184,6 +186,8 @@
     <ClInclude Include="Actions\AddLineAction.h" />
     <ClInclude Include="Actions\AddRectAction.h" />
     <ClInclude Include="Actions\ExitAction.h" />
+    <ClInclude Include="Actions\SwitchDrawMode.h" />
+    <ClInclude Include="Actions\SwitchPlayMode.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />

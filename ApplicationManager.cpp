@@ -4,6 +4,8 @@
 #include "Actions/AddRectAction.h"
 #include "Actions/AddLineAction.h"
 #include "Actions/ExitAction.h"
+#include "Actions/SwitchDrawMode.h"
+#include "Actions/SwitchPlayMode.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -42,6 +44,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			///create ExitAction here
             act_p = new ExitAction(this);
 			break;
+
+        case TO_PLAY:
+            act_p = new SwitchPlayMode(this);
+            break;
+
+        case TO_DRAW:
+            act_p =  new SwitchDrawMode(this);
+            break;
 
 		case STATUS: //a click on the status bar ==> no action
 			return;
