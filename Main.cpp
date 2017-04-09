@@ -1,7 +1,5 @@
 #include "ApplicationManager.h"
 
-#ifndef PHASE1
-
 int main()
 {
     ActionType ActType;
@@ -17,5 +15,3 @@ int main()
 
     return 0;
 }
-
-#endif /* PHASE1 */
