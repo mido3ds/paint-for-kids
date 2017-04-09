@@ -47,6 +47,7 @@ public:
 
     void SetCrntDrawColor(color given_clr);
     void SetCrntFillColor(color given_clr);
+    void SetBkGrndColor(color given_clr);
     void SetCrntPenWidth(int new_width);
 
 private:

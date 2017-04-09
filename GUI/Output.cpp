@@ -318,5 +318,9 @@ void Output::SetCrntPenWidth(int new_width)
     UI.PenWidth = new_width;
 }
 
+void Output::SetBkGrndColor(color given_clr)
+{
+    UI.BkGrndColor = given_clr;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }
