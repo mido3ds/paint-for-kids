@@ -320,6 +320,7 @@ void Output::SetCrntPenWidth(int new_width)
 
 void Output::SetBkGrndColor(color given_clr)
 {
+    // TODO: make it effective
     UI.BkGrndColor = given_clr;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
