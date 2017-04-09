@@ -155,7 +155,6 @@
     <ClCompile Include="Figures\CTrngl.cpp">
       <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="TestCode.cpp" />
     <ClCompile Include="Actions\SwitchDrawMode.cpp">
       <Filter>Actions</Filter>
     </ClCompile>

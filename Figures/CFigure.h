@@ -36,4 +36,14 @@ protected:
     bool selected = false; // true if the figure is selected.
 };
 
+struct CmpFigures
+{
+    // used to compare figures based on z_index (made for set)
+    // lower z_index is put first
+    bool operator()(const CFigure& lhs, const CFigure& rhs) const
+    {
+        return lhs.z_index < rhs.z_index;
+    }
+};
+
 #endif

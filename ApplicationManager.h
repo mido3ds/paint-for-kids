@@ -5,7 +5,7 @@
 #include "Figures/CFigure.h"
 #include "GUI/Input.h"
 #include "GUI/Output.h"
-#include <vector>
+#include <set>
 
 //Main class that manages everything in the application.
 class ApplicationManager {
@@ -19,7 +19,7 @@ public:
     void ExecuteAction(ActionType); //Creates an action and executes it
 
     // -- Figures Management Functions
-    void AddFigure(CFigure* fig_p); //Adds a new figure to the fig_list
+    void AddFigure(CFigure* fig_p); //Adds a new figure to the figs
     CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 
     // -- Interface Management Functions
@@ -31,7 +31,7 @@ public:
     void LoadAll(ifstream& in_file);
 
 private:
-    vector<CFigure*> fig_list;
+    set<CFigure*, CmpFigures> figs;
 
     //Pointers to Input and Output classes
     Input* in_p;
