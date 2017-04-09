@@ -3,6 +3,8 @@
 // actions files
 #include "Actions/AddRectAction.h"
 #include "Actions/AddLineAction.h"
+#include "Actions/AddCircAction.h"
+#include "Actions/AddTrnglAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/SwitchDrawMode.h"
 #include "Actions/SwitchPlayMode.h"
@@ -35,13 +37,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			act_p = new AddRectAction(this);
 			break;
 
+		case DRAW_CIRC:
+			act_p = new AddCircAction(this);
+			break;
+
+		case DRAW_TRI:
+			act_p = new AddTrnglAction(this);
+			break;
+
 		case DRAW_LINE:
-			///create AddLineAction here
             act_p = new AddLineAction(this);
 			break;
 
 		case EXIT:
-			///create ExitAction here
             act_p = new ExitAction(this);
 			break;
 
@@ -71,7 +79,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* fig_p)
 {
-    fig_list.push_back(fig_p);
+    figs.insert(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -90,8 +98,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-    for (int i = 0; i < fig_list.size(); i++)
-        fig_list[i]->Draw(out_p); //Call Draw function (virtual member fn)
+    for (auto& fig : figs)
+        fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -108,8 +116,8 @@ Output* ApplicationManager::GetOutput() const
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-    for (int i = 0; i < fig_list.size(); i++)
-        delete fig_list[i];
+    for (auto& fig : figs)
+        delete fig;
     delete in_p;
     delete out_p;
 }
