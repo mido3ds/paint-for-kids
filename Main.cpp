@@ -1,6 +1,3 @@
-/*
-    Phase2 main function
-*/
 #include "ApplicationManager.h"
 
 #ifndef PHASE1
