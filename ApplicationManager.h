@@ -27,6 +27,9 @@ public:
     Output* GetOutput() const; //Return pointer to the output
     void UpdateInterface() const; //Redraws all the drawing window
 
+    void SaveAll(ofstream& out_file);
+    void LoadAll(ifstream& in_file);
+
 private:
     vector<CFigure*> fig_list;
 

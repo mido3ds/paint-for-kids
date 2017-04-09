@@ -22,17 +22,12 @@ public:
     void ChngDrawClr(color draw_clr); // changes the figure's drawing color
     void ChngFillClr(color filling_clr); // changes the figure's filling color
 
-    /// The following functions should be supported by the figure class
-    /// It should be overridden by each inherited figure
-
-    /// Decide the parameters that you should pass to each function
-
     //virtual void Rotate() = 0;
     //virtual void Resize() = 0;
     //virtual void Move() = 0;	
 
-    //virtual void Save(ofstream &out_file) = 0;	
-    //virtual void Load(ifstream &in_file) = 0;	
+    virtual void Save(ofstream &out_file) = 0;	
+    virtual void Load(ifstream &in_file) = 0;		
 
     //virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 

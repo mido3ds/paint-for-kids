@@ -105,6 +105,21 @@ Output* ApplicationManager::GetOutput() const
     return out_p;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::SaveAll(ofstream& out_file)
+{
+    // TODO
+    // iterate through all figures 
+    // call save for each one 
+}
+void ApplicationManager::LoadAll(ifstream& in_file)
+{
+    // TODO
+    // iterate through lines and make the apropriate figure
+    // call load for the figure
+}
+
+////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
