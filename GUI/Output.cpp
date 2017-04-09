@@ -180,25 +180,6 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
     wind_p->SetFont(20, BOLD, BY_NAME, "Arial");
     wind_p->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
 }
-//////////////////////////////////////////////////////////////////////////////////////////
-
-color Output::GetCrntDrawColor() const // get current drwawing color
-{
-    return UI.DrawColor;
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-
-color Output::GetCrntFillColor() const // get current filling color
-{
-    return UI.FillColor;
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-
-int Output::GetCrntPenWidth() const // get current pen width
-{
-    return UI.PenWidth;
-}
-
 //======================================================================================//
 //								Figures Drawing Functions
 ////
@@ -300,6 +281,41 @@ void Output::CreatePlayArea() const
 	wind_p->SetPen(BLACK);
 
 	wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+color Output::GetCrntDrawColor() const // get current drwawing color
+{
+    return UI.DrawColor;
+}
+
+color Output::GetCrntFillColor() const // get current filling color
+{
+    return UI.FillColor;
+}
+
+int Output::GetCrntPenWidth() const // get current pen width
+{
+    return UI.PenWidth;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::SetCrntDrawColor(color given_clr)
+{
+    UI.DrawColor = given_clr;
+}
+
+void Output::SetCrntFillColor(color given_clr)
+{
+    UI.FillColor = given_clr;
+}
+
+void Output::SetCrntPenWidth(int new_width)
+{
+    if (new_width < 0)
+        throw - 1;
+    UI.PenWidth = new_width;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

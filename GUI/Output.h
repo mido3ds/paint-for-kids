@@ -45,6 +45,10 @@ public:
     color GetCrntFillColor() const;
     int GetCrntPenWidth() const;
 
+    void SetCrntDrawColor(color given_clr);
+    void SetCrntFillColor(color given_clr);
+    void SetCrntPenWidth(int new_width);
+
 private:
     window* wind_p; // Pointer to the Graphics Window
 };
