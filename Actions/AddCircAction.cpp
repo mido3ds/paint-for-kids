@@ -2,7 +2,8 @@
 
 AddCircAction::AddCircAction(ApplicationManager* app_p)
     : Action(app_p)
-{}
+{
+}
 
 void AddCircAction::ReadActionParameters()
 {
@@ -34,7 +35,5 @@ void AddCircAction::ReadActionParameters()
 //Execute the action
 void AddCircAction::Execute()
 {
-    ReadActionParameters();
-
     manager_p->AddFigure(circ);
 }

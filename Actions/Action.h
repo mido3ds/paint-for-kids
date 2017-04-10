@@ -6,8 +6,7 @@
 class ApplicationManager; //forward class declaration
 
 //Base class for all possible actions
-class Action 
-{
+class Action {
 public:
     Action(ApplicationManager* app_p) { manager_p = app_p; } //constructor
 

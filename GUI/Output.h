@@ -17,18 +17,18 @@ public:
     void CreateStatusBar() const;
     void CreateColorBar() const;
 
-	void CreateDrawArea() const;
-	void CreatePlayArea() const;
+    void CreateDrawArea() const;
+    void CreatePlayArea() const;
 
     Input* CreateInput() const; // creates a pointer to the Input object
 
     void ClearStatusBar() const;
     void ClearDrawArea() const;
-	void ClearToolBar() const;
+    void ClearToolBar() const;
 
     // -- Figures Drawing functions
-	void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
-		bool selected) const;
+    void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
+        bool selected) const;
 
     void DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
         bool selected) const; // Draw a circle

@@ -31,6 +31,7 @@ public:
     void LoadAll(ifstream& in_file);
 
 private:
+    // TODO: set vs multiset,chooe the best
     set<CFigure*, CmpFigures> figs;
 
     //Pointers to Input and Output classes

@@ -2,7 +2,8 @@
 
 AddLineAction::AddLineAction(ApplicationManager* app_p)
     : Action(app_p)
-{}
+{
+}
 
 void AddLineAction::ReadActionParameters()
 {
@@ -34,9 +35,6 @@ void AddLineAction::ReadActionParameters()
 //Execute the action
 void AddLineAction::Execute()
 {
-    //This action needs to read some parameters first
-    ReadActionParameters();
-
     //Add the lineangle to the list of figures
     manager_p->AddFigure(line);
 }

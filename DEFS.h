@@ -47,13 +47,30 @@ struct Point // To be used for figures points
     int x, y;
 
     Point(int a, int b)
-        : x(a), y(b)
-    {}
+        : x(a)
+        , y(b)
+    {
+    }
 
-    Point() 
-        :x(0), y(0)
-    {}
+    Point()
+        : x(0)
+        , y(0)
+    {
+    }
 };
+
+// overload reading and writing point to a file
+ifstream& operator>>(ifstream& ifs, Point& p)
+{
+    ifs >> p.x >> p.y;
+    return ifs;
+}
+
+ofstream& operator<<(ofstream& ofs, const Point& p)
+{
+    ofs << p.x << ' ' << p.y;
+    return ofs;
+}
 
 class GfxInfo // Graphical info of each figure (you may add more members)
 {

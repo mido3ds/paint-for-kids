@@ -2,10 +2,12 @@
 
 SwitchPlayMode::SwitchPlayMode(ApplicationManager* app_p)
     : Action(app_p)
-{}
+{
+}
 
 void SwitchPlayMode::ReadActionParameters()
-{}
+{
+}
 
 void SwitchPlayMode::Execute()
 {

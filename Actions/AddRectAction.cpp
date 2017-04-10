@@ -2,7 +2,8 @@
 
 AddRectAction::AddRectAction(ApplicationManager* app_p)
     : Action(app_p)
-{}
+{
+}
 
 void AddRectAction::ReadActionParameters()
 {
@@ -34,9 +35,6 @@ void AddRectAction::ReadActionParameters()
 //Execute the action
 void AddRectAction::Execute()
 {
-    //This action needs to read some parameters first
-    ReadActionParameters();
-
     //Add the lineangle to the list of figures
     manager_p->AddFigure(rect);
 }

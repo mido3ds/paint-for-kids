@@ -2,7 +2,8 @@
 
 AddTrnglAction::AddTrnglAction(ApplicationManager* app_p)
     : Action(app_p)
-{}
+{
+}
 
 void AddTrnglAction::ReadActionParameters()
 {
@@ -39,7 +40,5 @@ void AddTrnglAction::ReadActionParameters()
 //Execute the action
 void AddTrnglAction::Execute()
 {
-    ReadActionParameters();
-
     manager_p->AddFigure(trngl);
 }

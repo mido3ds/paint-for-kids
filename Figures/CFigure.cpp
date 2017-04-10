@@ -10,7 +10,8 @@ CFigure::CFigure(const GfxInfo& figure_gfx_info)
 }
 
 CFigure::CFigure()
-{}
+{
+}
 
 void CFigure::SetSelected(bool s)
 {
