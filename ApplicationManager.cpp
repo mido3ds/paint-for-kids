@@ -118,7 +118,12 @@ void ApplicationManager::SaveAll(ofstream& out_file)
 {
     // TODO
     // iterate through all figures 
-    // call save for each one 
+    // call save for each one
+    out_file << UI.DrawColor << ' ' << UI.FillColor << ' ' << UI.BkGrndColor << '\n';
+    out_file << figs.size() << '\n';
+
+    for (auto& fig : figs)
+        fig->Save(out_file);
 }
 void ApplicationManager::LoadAll(ifstream& in_file)
 {
