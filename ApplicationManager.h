@@ -2,10 +2,27 @@
 #define APPLICATION_MANAGER_H
 
 #include "DEFS.h"
-#include "Figures/CFigure.h"
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 #include <set>
+
+// actions files
+#include "Actions/AddCircAction.h"
+#include "Actions/AddLineAction.h"
+#include "Actions/AddRectAction.h"
+#include "Actions/AddTrnglAction.h"
+#include "Actions/ExitAction.h"
+#include "Actions/LoadAction.h"
+#include "Actions/SaveAction.h"
+#include "Actions/SwitchDrawMode.h"
+#include "Actions/SwitchPlayMode.h"
+
+// figures files
+#include "Figures/CCircle.h"
+#include "Figures/CFigure.h"
+#include "Figures/CLine.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CTrngl.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager {
@@ -29,6 +46,9 @@ public:
 
     void SaveAll(ofstream& out_file);
     void LoadAll(ifstream& in_file);
+
+    Action* DetectAction(ActionType act_type);
+    Action* DetectFigure(string fig_name);
 
 private:
     // TODO: set vs multiset,chooe the best

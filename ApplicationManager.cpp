@@ -1,16 +1,5 @@
 #include "ApplicationManager.h"
 
-// actions files
-#include "Actions/AddCircAction.h"
-#include "Actions/AddLineAction.h"
-#include "Actions/AddRectAction.h"
-#include "Actions/AddTrnglAction.h"
-#include "Actions/ExitAction.h"
-#include "Actions/LoadAction.h"
-#include "Actions/SaveAction.h"
-#include "Actions/SwitchDrawMode.h"
-#include "Actions/SwitchPlayMode.h"
-
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -29,7 +18,7 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // According to Action Type, return the corresponding action object
-Action* DetectAction(ActionType act_type)
+Action* ApplicationManger::DetectAction(ActionType act_type)
 {
     switch (act_type) {
     case DRAW_RECT:
@@ -48,23 +37,6 @@ Action* DetectAction(ActionType act_type)
         return new SwitchDrawMode(this);
     case STATUS: //a click on the status bar ==> no action
         return nullptr;
-    }
-}
-////////////////////////////////////////////////////////////////////////////////////
-// According to given string, return the corresponding Add<figure>Action object
-Action* DetectFigure(string fig_name)
-{
-    switch (fig_name) {
-    case "RECTANGLE":
-        return new AddRectAction(this);
-    case "CIRCLE":
-        return new AddCircAction(this);
-    case "TRIANGLE":
-        return new AddTrnglAction(this);
-    case "LINE":
-        return new AddLineAction(this);
-    default:
-        throw - 1;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +69,23 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
     ///Add your code here to search for a figure given a point x,y
 
     return NULL;
+}
+////////////////////////////////////////////////////////////////////////////////////
+// According to given string, return the corresponding Figure object
+CFigure* ApplicationManger::DetectFigure(string fig_name)
+{
+    switch (fig_name) {
+    case "RECTANGLE":
+        return new CRectangle();
+    case "CIRCLE":
+        return new CCircle();
+    case "TRIANGLE":
+        return new CTrngl();
+    case "LINE":
+        return new CLine();
+    default:
+        throw - 1;
+    }
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -138,17 +127,17 @@ void ApplicationManager::LoadAll(ifstream& in_file)
     // TODO
     int size = 0;
     string fig_name;
-    Action* fig_act = nullptr;
+    CFigure* fig = nullptr;
 
     in_file >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
     in_file >> size;
 
     for (int i = 0; i < size; i++) {
         in_file >> fig_name;
-        fig_act = DetectFigure(fig_name);
-        fig_act->ExecuteAction();
+        fig = DetectFigure(fig_name);
+        fig->Load(in_file);
 
-        delete fig_act;
+        figs.insert(fig);
     }
 }
 
