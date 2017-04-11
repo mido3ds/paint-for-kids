@@ -174,7 +174,7 @@ void ApplicationManager::Undo()
     Action* to_undo = undo_st.top();
 
     to_undo->Undo();
-    redo_st->push(to_undo);
+    redo_st.push(to_undo);
     undo_st.pop();
 }
 
@@ -183,27 +183,46 @@ void ApplicationManager::Redo()
     Action* to_redo = redo_st.top();
 
     to_redo->Execute();
-    undo_st->push(to_redo);
+    undo_st.push(to_redo);
     redo_st.pop();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
 unsigned int ApplicationManager::GenerateNextId()
 {
-    return last_given_id++;
+    return next_id++;
 }
 
 void ApplicationManager::DeleteFigure(unsigned int id)
 {
-    CFigure*
+    auto itr = GetFigureIter(id);
+    if (itr != figs.end())
+    {
+        figs.erase(itr);
+        delete (*itr);
+    }
+    else
+    {
+        // cant delete figure not found
+        throw -1;
+    }
 }
 
-CFigure* ApplicationManager::GetFigure(unsigned int id)
+CFigure* ApplicationManager::GetFigure(unsigned int id) const
 {
     for (auto& fig : figs)
         if (fig->GetId() == id)
             return fig;
     return nullptr;
+}
+
+multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
+{
+    for (auto itr = figs.begin(); itr != figs.end(); itr++)
+        if ((*itr)->GetId() == id)
+            return itr;
+
+    return figs.end();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

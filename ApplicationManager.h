@@ -69,13 +69,17 @@ public:
 private:
     multiset<CFigure*, CmpFigures> figs;
 
-    CFigure* GetFigure(unsigned int id);
+    CFigure* GetFigure(unsigned int id) const;
+
+    // return iterator to the figure if found
+    // if not found, returns figs.end()
+    multiset<CFigure*, CmpFigures>::iterator GetFigureIter(unsigned int id) const;
 
     // for undo and redo
     stack<Action*> undo_st;
     stack<Action*> redo_st;
 
-    unsigned int last_given_id = 0;
+    unsigned int next_id = 0;
 
     //Pointers to Input and Output classes
     Input* in_p;
