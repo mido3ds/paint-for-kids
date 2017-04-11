@@ -1,12 +1,5 @@
 #include "ApplicationManager.h"
 
-// actions files
-#include "Actions/AddRectAction.h"
-#include "Actions/AddLineAction.h"
-#include "Actions/ExitAction.h"
-#include "Actions/SwitchDrawMode.h"
-#include "Actions/SwitchPlayMode.h"
-
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -24,44 +17,44 @@ ActionType ApplicationManager::GetUserAction() const
     return in_p->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType)
+// According to Action Type, return the corresponding action object
+Action* ApplicationManager::DetectAction(ActionType act_type)
 {
-    Action* act_p = NULL;
-
-    //According to Action Type, create the corresponding action object
-    switch (ActType) {
-		case DRAW_RECT:
-			act_p = new AddRectAction(this);
-			break;
-
-		case DRAW_LINE:
-			///create AddLineAction here
-            act_p = new AddLineAction(this);
-			break;
-
-		case EXIT:
-			///create ExitAction here
-            act_p = new ExitAction(this);
-			break;
-
-        case TO_PLAY:
-            act_p = new SwitchPlayMode(this);
-            break;
-
-        case TO_DRAW:
-            act_p =  new SwitchDrawMode(this);
-            break;
-
-		case STATUS: //a click on the status bar ==> no action
-			return;
+    switch (act_type) {
+    case DRAW_RECT:
+        return new AddRectAction(this);
+    case DRAW_CIRC:
+        return new AddCircAction(this);
+    case DRAW_TRI:
+        return new AddTrnglAction(this);
+    case DRAW_LINE:
+        return new AddLineAction(this);
+    case EXIT:
+        return new ExitAction(this);
+    case TO_PLAY:
+        return new SwitchPlayMode(this);
+    case TO_DRAW:
+        return new SwitchDrawMode(this);
+	case SAVE:
+		return new SaveAction(this);
+	case LOAD:
+		return new LoadAction(this);
+    case STATUS: //a click on the status bar ==> no action
+        return nullptr;
+	default:
+		return nullptr;
     }
+}
+////////////////////////////////////////////////////////////////////////////////////
+// gets action parameters and executes it
+void ApplicationManager::ExecuteAction(ActionType act_type)
+{
+    Action* act_p = DetectAction(act_type);
 
-    //Execute the created action
-    if (act_p != NULL) {
-        act_p->Execute(); //Execute
-        delete act_p; //Action is not needed any more ==> delete it
-        act_p = NULL;
+    if (act_p != nullptr) {
+        act_p->ReadActionParameters();
+        act_p->Execute();
+        delete act_p;
     }
 }
 //==================================================================================//
@@ -71,7 +64,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* fig_p)
 {
-    fig_list.push_back(fig_p);
+    figs.insert(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -83,6 +76,21 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 
     return NULL;
 }
+////////////////////////////////////////////////////////////////////////////////////
+// According to given string, return the corresponding Figure object
+CFigure* ApplicationManager::DetectFigure(string fig_name)
+{
+	if (fig_name == "RECTANGLE")
+		return new CRectangle();
+	 if (fig_name == "CIRCLE")
+		return new CCircle();
+	 if (fig_name == "TRIANGLE")
+		return new CTrngl();
+	 if (fig_name == "LINE")
+		return new CLine();
+	throw - 1;
+
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -90,8 +98,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-    for (int i = 0; i < fig_list.size(); i++)
-        fig_list[i]->Draw(out_p); //Call Draw function (virtual member fn)
+    for (auto& fig : figs)
+        fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -105,11 +113,65 @@ Output* ApplicationManager::GetOutput() const
     return out_p;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+// iterate through all figures
+// call save for each one
+void ApplicationManager::SaveAll(ofstream& out_file)
+{
+    // TODO
+    out_file << UI.DrawColor.ucRed << ' '
+		<< UI.DrawColor.ucGreen << ' '
+		<< UI.DrawColor.ucBlue << ' '
+
+		<< UI.FillColor.ucRed << ' '
+		<< UI.FillColor.ucGreen << ' '
+		<< UI.FillColor.ucBlue << ' '
+
+		<< UI.BkGrndColor.ucRed << ' '
+		<< UI.BkGrndColor.ucGreen << ' '
+		<< UI.BkGrndColor.ucBlue << '\n';
+    out_file << figs.size() << '\n';
+
+    for (auto& fig : figs)
+        fig->Save(out_file);
+}
+// iterate through lines and make the apropriate figure
+// call load for the figure
+void ApplicationManager::LoadAll(ifstream& in_file)
+{
+    // TODO
+    int size = 0;
+    string fig_name;
+    CFigure* fig = nullptr;
+
+    in_file >> UI.DrawColor.ucRed
+		>> UI.DrawColor.ucGreen
+		>> UI.DrawColor.ucBlue
+
+		>> UI.FillColor.ucRed
+		>> UI.FillColor.ucGreen
+		>> UI.FillColor.ucBlue
+
+		>> UI.BkGrndColor.ucRed
+		>> UI.BkGrndColor.ucGreen
+		>> UI.BkGrndColor.ucBlue;
+
+    in_file >> size;
+
+    for (int i = 0; i < size; i++) {
+        in_file >> fig_name;
+        fig = DetectFigure(fig_name);
+        fig->Load(in_file);
+
+        figs.insert(fig);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-    for (int i = 0; i < fig_list.size(); i++)
-        delete fig_list[i];
+    for (auto& fig : figs)
+        delete fig;
     delete in_p;
     delete out_p;
 }

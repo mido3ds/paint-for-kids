@@ -1,16 +1,14 @@
 #ifndef ADD_RECT_ACTION_H
 #define ADD_RECT_ACTION_H
 
-#include "Action.h"
-#include "../Figures/CRectangle.h"
 #include "../ApplicationManager.h"
+#include "../Figures/CRectangle.h"
+#include "Action.h"
 
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CRectangle Action class
-class AddRectAction : public Action 
-{
+class AddRectAction : public Action {
 public:
     AddRectAction(ApplicationManager* app_p);
 
@@ -19,7 +17,7 @@ public:
 
     //Add rectangle to the ApplicationManager
     virtual void Execute();
-    
+
 private:
     CRectangle* rect;
 };

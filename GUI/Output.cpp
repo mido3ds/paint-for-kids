@@ -16,9 +16,9 @@ Output::Output()
     UI.colorBarHeight = 600;
     UI.MenuItemWidth = 50;
 
-	UI.playAreaWidthone = UI.width / 2;
-	UI.playAreaWidthtwo = UI.playAreaWidthone;
-	UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
+    UI.playAreaWidthone = UI.width / 2;
+    UI.playAreaWidthtwo = UI.playAreaWidthone;
+    UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
 
     UI.DrawColor = BLUE; // Drawing color						///
     // this Is Not Used
@@ -82,7 +82,7 @@ void Output::CreateDrawToolBar() const
 {
     UI.InterfaceMode = MODE_DRAW;
 
-	ClearToolBar();
+    ClearToolBar();
 
     // You can draw the tool bar icons in any way you want.
     // Below is one possible way
@@ -136,7 +136,7 @@ void Output::CreatePlayToolBar() const
 {
     UI.InterfaceMode = MODE_PLAY;
 
-	ClearToolBar();
+    ClearToolBar();
 
     string MenuItemImages[PLAY_ITM_COUNT];
     MenuItemImages[ITM_PICK_HIDE] = "images\\MenuItems\\find.jpg";
@@ -166,9 +166,9 @@ void Output::ClearDrawArea() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearToolBar() const
 {
-	wind_p->SetBrush(WHITE);
-	wind_p->SetPen(BLACK);
-	wind_p->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+    wind_p->SetBrush(WHITE);
+    wind_p->SetPen(BLACK);
+    wind_p->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -271,16 +271,16 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 
 void Output::CreateDrawArea() const
 {
-	CreatePlayArea();
-	CreateColorBar();
+    CreatePlayArea();
+    CreateColorBar();
 }
 
 void Output::CreatePlayArea() const
 {
-	wind_p->SetBrush(WHITE);
-	wind_p->SetPen(BLACK);
+    wind_p->SetBrush(WHITE);
+    wind_p->SetPen(BLACK);
 
-	wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+    wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

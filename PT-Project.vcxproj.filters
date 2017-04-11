@@ -131,13 +131,31 @@
     </ClCompile>
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\LoadAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SaveAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SwitchDrawMode.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SwitchPlayMode.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddCircAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\AddLineAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\AddRectAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ExitAction.cpp">
+    <ClCompile Include="Actions\AddTrnglAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CCircle.cpp">
@@ -154,12 +172,6 @@
     </ClCompile>
     <ClCompile Include="Figures\CTrngl.cpp">
       <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\SwitchDrawMode.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\SwitchPlayMode.cpp">
-      <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,16 +246,34 @@
     </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="ApplicationManager.h" />
+    <ClInclude Include="Actions\AddTrnglAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ExitAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\LoadAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SaveAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwitchDrawMode.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwitchPlayMode.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\Action.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddCircAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\AddLineAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\AddRectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ExitAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CCircle.h">
@@ -260,12 +290,6 @@
     </ClInclude>
     <ClInclude Include="Figures\CTrngl.h">
       <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\SwitchDrawMode.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\SwitchPlayMode.h">
-      <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

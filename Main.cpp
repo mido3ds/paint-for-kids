@@ -2,16 +2,14 @@
 
 int main()
 {
-    ActionType ActType;
+    ActionType act_type;
     ApplicationManager AppManager;
 
-    do 
-    {
-        ActType = AppManager.GetUserAction();
-        AppManager.ExecuteAction(ActType);
+    do {
+        act_type = AppManager.GetUserAction();
+        AppManager.ExecuteAction(act_type);
         AppManager.UpdateInterface();
-    } 
-    while (ActType != EXIT);
+    } while (act_type != EXIT);
 
     return 0;
 }

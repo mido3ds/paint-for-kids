@@ -24,7 +24,7 @@ compile:
 	make clean
 
 duty:
-	egrep -H -n '(BUG|TODO):' $(SRC_DIR) -A 1 -B 1 2> /dev/null
+	egrep -H -n '(BUG|TODO):' **/* ** * -A 1 -B 1 2> /dev/null
 
 format:
 	clang-format -sort-includes -style=WebKit -i {GUI,Figures,Actions,.}/*.{cpp,h}

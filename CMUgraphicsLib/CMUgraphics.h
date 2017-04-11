@@ -211,22 +211,13 @@ class window {
     void FlushKeyQueue();
     void FlushMouseQueue();
 
-    // Sets the color of the current brush, which is used when drawing with
-    // the FILLED style.  Returns the last selected color.
-	color SetBrush(const double dRed, const double dGreen, const double dBlue);
-	  
 	// Same as above, but allows you to use characters instead of doubles,
 	// which is faster.  Returns the last selected color.
   	color SetBrush(const unsigned char ucRed, const unsigned char ucGreen, const unsigned char ucBlue);
 
 	// Set the brush color using a color object.  Returns the last selected color.
   	color SetBrush(const color &colBrush);
-  	
-  	// Set the color and size (if you specify the size) of the current pen, which
-  	// is used with drawing with the FRAME style and outlines entities drawing in
-  	// the FILLED style.  Returns the last selected color.
-	color SetPen(const double dRed, const double dGreen, const double dBlue, const int iWidth = ciDefBrushSize);
-	  
+  
 	// Same as above, just allowing the use of characters instead of doubles
 	// for speed.  Returns the last selected color.   
 	color SetPen(const unsigned char ucRed, const unsigned char ucGreen, const unsigned char ucBlue, const int iWidth = ciDefBrushSize);

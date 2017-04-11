@@ -2,7 +2,8 @@
 
 ExitAction::ExitAction(ApplicationManager* app_p)
     : Action(app_p)
-{}
+{
+}
 
 void ExitAction::ReadActionParameters()
 {
@@ -17,7 +18,6 @@ void ExitAction::ReadActionParameters()
 //Execute the action
 void ExitAction::Execute()
 {
-    ReadActionParameters();
     // it will exit automatically from the main function
     // look at do-while at Main.cpp
 }

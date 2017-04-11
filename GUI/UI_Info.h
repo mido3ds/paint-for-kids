@@ -62,21 +62,21 @@ enum PlayMenuItem // The items of the Play menu (you should add more items)
 // This line to prevent "redefinition error"
 __declspec(selectany)
 
-struct UI_Info // User Interface Info.
+    struct UI_Info // User Interface Info.
 {
     GUI_MODE InterfaceMode;
 
-	int width, height, // Window width and height
-		wx, wy, // Window starting coordinates
-		StatusBarHeight, // Status Bar Height
-		ToolBarHeight, // Tool Bar Height (distance from top of window to bottom
-		// line of toolbar)
-		MenuItemWidth, // Width of each item in toolbar menu
-		colorBarWidth, // Color Bar Width
-		colorBarHeight, // Color Bar height
-		playAreaWidthone,
-		playAreaWidthtwo,
-		playAreaHeight;
+    int width, height, // Window width and height
+        wx, wy, // Window starting coordinates
+        StatusBarHeight, // Status Bar Height
+        ToolBarHeight, // Tool Bar Height (distance from top of window to bottom
+        // line of toolbar)
+        MenuItemWidth, // Width of each item in toolbar menu
+        colorBarWidth, // Color Bar Width
+        colorBarHeight, // Color Bar height
+        playAreaWidthone,
+        playAreaWidthtwo,
+        playAreaHeight;
 
     color DrawColor; // Drawing color
     color FillColor; // Filling color
