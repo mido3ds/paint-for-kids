@@ -35,8 +35,14 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new SwitchPlayMode(this);
     case TO_DRAW:
         return new SwitchDrawMode(this);
+	case SAVE:
+		return new SaveAction(this);
+	case LOAD:
+		return new LoadAction(this);
     case STATUS: //a click on the status bar ==> no action
         return nullptr;
+	default:
+		return nullptr;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -112,7 +118,17 @@ Output* ApplicationManager::GetOutput() const
 void ApplicationManager::SaveAll(ofstream& out_file)
 {
     // TODO
-    out_file << UI.DrawColor << ' ' << UI.FillColor << ' ' << UI.BkGrndColor << '\n';
+    out_file << UI.DrawColor.ucRed << ' '
+		<< UI.DrawColor.ucGreen << ' '
+		<< UI.DrawColor.ucBlue << ' '
+
+		<< UI.FillColor.ucRed << ' '
+		<< UI.FillColor.ucGreen << ' '
+		<< UI.FillColor.ucBlue << ' '
+
+		<< UI.BkGrndColor.ucRed << ' '
+		<< UI.BkGrndColor.ucGreen << ' '
+		<< UI.BkGrndColor.ucBlue << '\n';
     out_file << figs.size() << '\n';
 
     for (auto& fig : figs)
@@ -127,7 +143,18 @@ void ApplicationManager::LoadAll(ifstream& in_file)
     string fig_name;
     CFigure* fig = nullptr;
 
-    in_file >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
+    in_file >> UI.DrawColor.ucRed
+		>> UI.DrawColor.ucGreen
+		>> UI.DrawColor.ucBlue
+
+		>> UI.FillColor.ucRed
+		>> UI.FillColor.ucGreen
+		>> UI.FillColor.ucBlue
+
+		>> UI.BkGrndColor.ucRed
+		>> UI.BkGrndColor.ucGreen
+		>> UI.BkGrndColor.ucBlue;
+
     in_file >> size;
 
     for (int i = 0; i < size; i++) {

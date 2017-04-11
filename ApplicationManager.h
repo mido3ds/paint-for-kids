@@ -53,7 +53,7 @@ public:
 
 private:
     // TODO: set vs multiset,chooe the best
-    set<CFigure*, CmpFigures> figs;
+    multiset<CFigure*, CmpFigures> figs;
 
     //Pointers to Input and Output classes
     Input* in_p;

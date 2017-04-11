@@ -7,7 +7,6 @@ LoadAction::LoadAction(ApplicationManager* app_p)
 
 void LoadAction::ReadActionParameters()
 {
-    //TODO: test this
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
@@ -23,6 +22,8 @@ void LoadAction::ReadActionParameters()
     } else {
         successfull = true;
     }
+
+	out_p->ClearStatusBar();
 }
 
 void LoadAction::Execute()

@@ -19,9 +19,9 @@ class color {
 
 
     // Color components.  0 = no intensity, 255 = full intensity
-    unsigned char ucRed;
-    unsigned char ucGreen;
-    unsigned char ucBlue;
+    unsigned int ucRed;
+    unsigned int ucGreen;
+    unsigned int ucBlue;
 
 };
 

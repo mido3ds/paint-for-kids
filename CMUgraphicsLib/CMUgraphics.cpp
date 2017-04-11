@@ -598,12 +598,6 @@ void window::FlushMouseQueue() {
 
 }
 
-color window::SetBrush(const double dRed, const double dGreen, const double dBlue) {
-
-	return SetBrush((unsigned char)(dRed * 255), (unsigned char)(dGreen * 255), (unsigned char)(dBlue * 255));
-
-}
-
 color window::SetBrush(const color &colBrush) {
 
     return SetBrush(colBrush.ucRed, colBrush.ucGreen, colBrush.ucBlue);
@@ -632,11 +626,6 @@ color window::SetBrush(const unsigned char ucRed, const unsigned char ucGreen, c
 	brshObject = CreateSolidBrush(RGB(ucRed, ucGreen, ucBlue));
 
     return colReturn;
-}
-
-color window::SetPen(const double dRed, const double dGreen, const double dBlue, const int iWidth) {
-
-	return SetPen((unsigned char)(dRed * 255), (unsigned char)(dGreen * 255), (unsigned char)(dBlue * 255), iWidth);
 }
 
 color window::SetPen(const color &colPen, const int iWidth) {

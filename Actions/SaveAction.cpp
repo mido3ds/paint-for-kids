@@ -7,7 +7,6 @@ SaveAction::SaveAction(ApplicationManager* app_p)
 
 void SaveAction::ReadActionParameters()
 {
-    //TODO: test this
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
@@ -15,7 +14,7 @@ void SaveAction::ReadActionParameters()
 
     string file_name = in_p->GetString(out_p);
 
-    out_file.open(file_name, ofstream::out | ofstream::app);
+    out_file.open(file_name, ofstream::out);
 
     // TODO: make exception handling system, use throw, then remove this way of handling the error (remove bool successful)
     if (!out_file.is_open()) {
@@ -23,6 +22,8 @@ void SaveAction::ReadActionParameters()
     } else {
         successfull = true;
     }
+
+	out_p->ClearStatusBar();
 }
 
 void SaveAction::Execute()
