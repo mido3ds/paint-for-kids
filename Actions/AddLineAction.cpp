@@ -44,5 +44,5 @@ void AddLineAction::Execute()
 
 void AddLineAction::Undo()
 {
-    
+    manager_p->DeleteFigure(id);
 }

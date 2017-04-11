@@ -43,5 +43,5 @@ void AddCircAction::Execute()
 
 void AddCircAction::Undo()
 {
-    
+    manager_p->DeleteFigure(id);
 }

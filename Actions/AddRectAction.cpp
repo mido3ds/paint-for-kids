@@ -44,5 +44,5 @@ void AddRectAction::Execute()
 
 void AddRectAction::Undo()
 {
-    
+    manager_p->DeleteFigure(id);
 }

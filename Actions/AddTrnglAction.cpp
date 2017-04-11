@@ -48,5 +48,5 @@ void AddTrnglAction::Execute()
 
 void AddTrnglAction::Undo()
 {
-    
+    manager_p->DeleteFigure(id);
 }
