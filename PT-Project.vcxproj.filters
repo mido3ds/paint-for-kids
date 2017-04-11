@@ -10,12 +10,6 @@
     <Filter Include="GUI Classes">
       <UniqueIdentifier>{03fd4e0d-92e0-4271-bb9b-d6e9f21ec35f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actions">
-      <UniqueIdentifier>{4366a171-b3d5-4ab2-a3d2-a88647ff0ccd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Figures">
-      <UniqueIdentifier>{3b0754b2-0638-4919-b8a8-da28108c0df9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -129,39 +123,7 @@
     <ClCompile Include="GUI\Output.cpp">
       <Filter>GUI Classes</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationManager.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Actions\AddLineAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\AddRectAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ExitAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CCircle.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CFigure.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CLine.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CRectangle.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CTrngl.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
     <ClCompile Include="TestCode.cpp" />
-    <ClCompile Include="Actions\SwitchDrawMode.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\SwitchPlayMode.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -234,39 +196,5 @@
       <Filter>GUI Classes</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="ApplicationManager.h" />
-    <ClInclude Include="Actions\Action.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\AddLineAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\AddRectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ExitAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CCircle.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CFigure.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CLine.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CRectangle.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CTrngl.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\SwitchDrawMode.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\SwitchPlayMode.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

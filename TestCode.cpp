@@ -1,13 +1,5 @@
-/*
-    Phase1: test the Input and Output classes
-    to move to phase2, comment PHASE1 define in Output.h
-*/
-#define DEBUG
-
 #include "GUI/Input.h"
 #include "GUI/Output.h"
-
-#ifdef PHASE1
 
 int main()
 {
@@ -58,26 +50,26 @@ int main()
     gfxInfo.is_filled = false; // CFigure is NOT filled
     out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else -_-");
+    out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawRect(p1, p2, gfxInfo, false);
-    out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
+    out_p->PrintMessage("Action: highlighting , click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: highlighting , click anywhere else -_--_--_-");
+    out_p->PrintMessage("Action: highlighting , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawRect(p1, p2, gfxInfo, true);
-    out_p->PrintMessage("Action: filling , click anywhere  -_--_--_--_-");
+    out_p->PrintMessage("Action: filling , click anywhere  ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: filling , click anywhere else -_____-");
+    out_p->PrintMessage("Action: filling , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     gfxInfo.border_width = 4;
     gfxInfo.draw_clr = BLUE; // any color for border
     gfxInfo.fill_clr = GREEN; // any color for filling
     gfxInfo.is_filled = true; // CFigure is filled
     out_p->DrawRect(p1, p2, gfxInfo, false);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere else -_____--_--_-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawRect(p1, p2, gfxInfo, true);
     gfxInfo.is_filled = false;
@@ -91,12 +83,12 @@ int main()
         "Drawing a Line, normal and Highlighted, Click to continue");
     out_p->PrintMessage("Action: Draw a Line , Click anywhere");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: Draw a Line , Click anywhere else -_-");
+    out_p->PrintMessage("Action: Draw a Line , Click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawLine(p1, p2, gfxInfo, false);
-    out_p->PrintMessage("Action: highlighting click anywhere -_--_-");
+    out_p->PrintMessage("Action: highlighting click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: highlighting click anywhere else -_--_--_-");
+    out_p->PrintMessage("Action: highlighting click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawLine(p1, p2, gfxInfo, true);
 
@@ -110,31 +102,31 @@ int main()
                         "filled/non-filled,  Click to continue");
     out_p->PrintMessage("Action: Draw a Triangle , Click anywhere");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: Draw a Circle , Click anywhere else -_-");
+    out_p->PrintMessage("Action: Draw a Triangle , Click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
-    out_p->PrintMessage("Action: Draw a Circle , Click anywhere else -_--_-");
+    out_p->PrintMessage("Action: Draw a Triangle , Click anywhere else ");
     in_p->GetPointClicked(p3.x, p3.y);
     out_p->DrawTriangle(p1, p2, p3, gfxInfo, false);
-    out_p->PrintMessage("Action: highlighting , click anywhere -_--_--_-");
+    out_p->PrintMessage("Action: highlighting , click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: highlighting , click anywhere else -_--_--_--_-");
+    out_p->PrintMessage("Action: highlighting , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
-    out_p->PrintMessage("Action: highlighting , click anywhere else -_____-");
+    out_p->PrintMessage("Action: highlighting , click anywhere else ");
     in_p->GetPointClicked(p3.x, p3.y);
     out_p->DrawTriangle(p1, p2, p3, gfxInfo, true);
-    out_p->PrintMessage("Action: filling , click anywhere  -_____--_-");
+    out_p->PrintMessage("Action: filling , click anywhere  ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: filling , click anywhere else -_____--_--_-");
+    out_p->PrintMessage("Action: filling , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
-    out_p->PrintMessage("Action: filling , click anywhere else -_____--_--_--_-");
+    out_p->PrintMessage("Action: filling , click anywhere else ");
     in_p->GetPointClicked(p3.x, p3.y);
     gfxInfo.is_filled = true;
     out_p->DrawTriangle(p1, p2, p3, gfxInfo, false);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_--_--_--_-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere else -__________-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere else -__________--_-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere else ");
     in_p->GetPointClicked(p3.x, p3.y);
     out_p->DrawTriangle(p1, p2, p3, gfxInfo, true);
     gfxInfo.is_filled = false;
@@ -150,23 +142,23 @@ int main()
                         "filled/non-filled,  Click to continue");
     out_p->PrintMessage("Action: Draw a Circle , Click anywhere");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: Draw a Circle , Click anywhere else -_-");
+    out_p->PrintMessage("Action: Draw a Circle , Click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawCircle(p1, p2, gfxInfo, false);
-    out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
+    out_p->PrintMessage("Action: highlighting , click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: highlighting , click anywhere else -_--_--_-");
+    out_p->PrintMessage("Action: highlighting , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawCircle(p1, p2, gfxInfo, true);
-    out_p->PrintMessage("Action: filling , click anywhere  -_--_--_--_-");
+    out_p->PrintMessage("Action: filling , click anywhere  ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: filling , click anywhere else -_____-");
+    out_p->PrintMessage("Action: filling , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     gfxInfo.is_filled = true;
     out_p->DrawCircle(p1, p2, gfxInfo, false);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere ");
     in_p->GetPointClicked(p1.x, p1.y);
-    out_p->PrintMessage("Action: filling highlighting , click anywhere else -_____--_--_-");
+    out_p->PrintMessage("Action: filling highlighting , click anywhere else ");
     in_p->GetPointClicked(p2.x, p2.y);
     out_p->DrawCircle(p1, p2, gfxInfo, true);
     gfxInfo.is_filled = false;
@@ -217,99 +209,18 @@ int main()
         switch (ActType) {
         case DRAW_RECT:
             out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere");
-            // Phase_2
-            /*in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: Draw a CRectangle , Click anywhere else -_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawRect(p1 , p2 , gfxInfo , false);
-			out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: highlighting , click anywhere else -_--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawRect(p1 , p2 , gfxInfo , true);
-			out_p->PrintMessage("Action: filling , click anywhere  -_--_--_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: filling , click anywhere else -_____-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			gfxInfo.is_filled = true;
-			out_p->DrawRect(p1 , p2 , gfxInfo , false);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere else -_____--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawRect(p1 , p2 , gfxInfo , true);*/
             break;
 
         case DRAW_LINE:
             out_p->PrintMessage("Action: Draw a Line , Click anywhere");
-            // Phase_2
-            /*in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: Draw a Line , Click anywhere else -_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawLine(p1 , p2 , gfxInfo , false);
-			out_p->PrintMessage("Action: highlighting click anywhere -_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: highlighting click anywhere else -_--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawLine(p1 , p2 , gfxInfo , true);*/
             break;
 
         case DRAW_CIRC:
             out_p->PrintMessage("Action: Draw a Circle , Click anywhere");
-            // Phase_2
-            /*in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: Draw a Circle , Click anywhere else -_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawCircle(p1 , p2 , gfxInfo , false);
-			out_p->PrintMessage("Action: highlighting , click anywhere -_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: highlighting , click anywhere else -_--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawCircle(p1 , p2 , gfxInfo , true);
-			out_p->PrintMessage("Action: filling , click anywhere  -_--_--_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: filling , click anywhere else -_____-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			gfxInfo.is_filled = true;
-			out_p->DrawCircle(p1 , p2 , gfxInfo , false);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere else -_____--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->DrawCircle(p1 , p2 , gfxInfo , true);*/
             break;
 
         case DRAW_TRI:
             out_p->PrintMessage("Action: Draw a Triangle , Click anywhere");
-            // Phase_2
-            /*in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: Draw a Circle , Click anywhere else -_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->PrintMessage("Action: Draw a Circle , Click anywhere else -_--_-");
-			in_p->GetPointClicked(p3.x , p3.y);
-			out_p->DrawTriangle(p1 , p2 , p3 , gfxInfo , false);
-			out_p->PrintMessage("Action: highlighting , click anywhere -_--_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: highlighting , click anywhere else -_--_--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->PrintMessage("Action: highlighting , click anywhere else -_____-");
-			in_p->GetPointClicked(p3.x , p3.y);
-			out_p->DrawTriangle(p1 , p2 , p3 , gfxInfo , true);
-			out_p->PrintMessage("Action: filling , click anywhere  -_____--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: filling , click anywhere else -_____--_--_-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->PrintMessage("Action: filling , click anywhere else -_____--_--_--_-");
-			in_p->GetPointClicked(p3.x , p3.y);
-			gfxInfo.is_filled = true;
-			out_p->DrawTriangle(p1 , p2 , p3 , gfxInfo , false);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere -_____--_--_--_--_-");
-			in_p->GetPointClicked(p1.x , p1.y);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere else -__________-");
-			in_p->GetPointClicked(p2.x , p2.y);
-			out_p->PrintMessage("Action: filling highlighting , click anywhere else -__________--_-");
-			in_p->GetPointClicked(p3.x , p3.y);
-			out_p->DrawTriangle(p1 , p2 , p3 , gfxInfo , true);*/
             break;
 
         case CHNG_DRAW_CLR:
@@ -428,5 +339,3 @@ int main()
     delete out_p;
     return 0;
 }
-
-#endif /* PHASE1 */
