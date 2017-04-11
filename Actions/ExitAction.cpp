@@ -21,3 +21,8 @@ void ExitAction::Execute()
     // it will exit automatically from the main function
     // look at do-while at Main.cpp
 }
+
+void ExitAction::Undo()
+{
+    
+}

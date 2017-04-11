@@ -19,3 +19,8 @@ void SwitchPlayMode::Execute()
     out_p->CreatePlayToolBar();
     out_p->CreatePlayArea();
 }
+
+void SwitchPlayMode::Undo()
+{
+    
+}

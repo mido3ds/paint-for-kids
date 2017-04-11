@@ -33,3 +33,8 @@ void SaveAction::Execute()
         out_file.close();
     }
 }
+
+void SaveAction::Undo()
+{
+    
+}

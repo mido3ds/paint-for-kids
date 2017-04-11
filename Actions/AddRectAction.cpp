@@ -38,3 +38,8 @@ void AddRectAction::Execute()
     //Add the lineangle to the list of figures
     manager_p->AddFigure(rect);
 }
+
+void AddRectAction::Undo()
+{
+    
+}

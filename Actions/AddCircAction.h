@@ -15,6 +15,8 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
 private:
     CCircle* circ;
 };

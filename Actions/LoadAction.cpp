@@ -33,3 +33,8 @@ void LoadAction::Execute()
         in_file.close();
     }
 }
+
+void LoadAction::Undo()
+{
+    
+}

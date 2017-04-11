@@ -37,3 +37,8 @@ void AddCircAction::Execute()
 {
     manager_p->AddFigure(circ);
 }
+
+void AddCircAction::Undo()
+{
+    
+}

@@ -42,3 +42,8 @@ void AddTrnglAction::Execute()
 {
     manager_p->AddFigure(trngl);
 }
+
+void AddTrnglAction::Undo()
+{
+    
+}
