@@ -23,7 +23,7 @@ void LoadAction::ReadActionParameters()
         successfull = true;
     }
 
-	out_p->ClearStatusBar();
+    out_p->ClearStatusBar();
 }
 
 void LoadAction::Execute()
@@ -32,4 +32,9 @@ void LoadAction::Execute()
         manager_p->LoadAll(in_file);
         in_file.close();
     }
+}
+
+void LoadAction::Undo()
+{
+    
 }

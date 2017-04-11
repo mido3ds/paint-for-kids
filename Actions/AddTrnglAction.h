@@ -15,8 +15,16 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
+    virtual ActionType GetActType() {return DRAW_TRI;}
+
 private:
     CTrngl* trngl;
+
+    unsigned int id;
+    GfxInfo gfx;
+    Point p1, p2, p3;
 };
 
 #endif /* __AddTrnglAction_h__ */

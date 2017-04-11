@@ -35,14 +35,18 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new SwitchPlayMode(this);
     case TO_DRAW:
         return new SwitchDrawMode(this);
-	case SAVE:
-		return new SaveAction(this);
-	case LOAD:
-		return new LoadAction(this);
+    case SAVE:
+        return new SaveAction(this);
+    case LOAD:
+        return new LoadAction(this);
+    case UNDO:
+        return new UndoAction(this);
+    case REDO:
+        return new RedoAction(this);
     case STATUS: //a click on the status bar ==> no action
         return nullptr;
-	default:
-		return nullptr;
+    default:
+        return nullptr;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +58,10 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
     if (act_p != nullptr) {
         act_p->ReadActionParameters();
         act_p->Execute();
-        delete act_p;
+
+		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
+		if (! (act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
+			undo_st.push(act_p);
     }
 }
 //==================================================================================//
@@ -80,16 +87,15 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 // According to given string, return the corresponding Figure object
 CFigure* ApplicationManager::DetectFigure(string fig_name)
 {
-	if (fig_name == "RECTANGLE")
-		return new CRectangle();
-	 if (fig_name == "CIRCLE")
-		return new CCircle();
-	 if (fig_name == "TRIANGLE")
-		return new CTrngl();
-	 if (fig_name == "LINE")
-		return new CLine();
-	throw - 1;
-
+    if (fig_name == "RECTANGLE")
+        return new CRectangle();
+    if (fig_name == "CIRCLE")
+        return new CCircle();
+    if (fig_name == "TRIANGLE")
+        return new CTrngl();
+    if (fig_name == "LINE")
+        return new CLine();
+    throw - 1;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -98,6 +104,7 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	out_p->ClearDrawArea();
     for (auto& fig : figs)
         fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
@@ -119,16 +126,16 @@ void ApplicationManager::SaveAll(ofstream& out_file)
 {
     // TODO
     out_file << UI.DrawColor.ucRed << ' '
-		<< UI.DrawColor.ucGreen << ' '
-		<< UI.DrawColor.ucBlue << ' '
+             << UI.DrawColor.ucGreen << ' '
+             << UI.DrawColor.ucBlue << ' '
 
-		<< UI.FillColor.ucRed << ' '
-		<< UI.FillColor.ucGreen << ' '
-		<< UI.FillColor.ucBlue << ' '
+             << UI.FillColor.ucRed << ' '
+             << UI.FillColor.ucGreen << ' '
+             << UI.FillColor.ucBlue << ' '
 
-		<< UI.BkGrndColor.ucRed << ' '
-		<< UI.BkGrndColor.ucGreen << ' '
-		<< UI.BkGrndColor.ucBlue << '\n';
+             << UI.BkGrndColor.ucRed << ' '
+             << UI.BkGrndColor.ucGreen << ' '
+             << UI.BkGrndColor.ucBlue << '\n';
     out_file << figs.size() << '\n';
 
     for (auto& fig : figs)
@@ -144,16 +151,16 @@ void ApplicationManager::LoadAll(ifstream& in_file)
     CFigure* fig = nullptr;
 
     in_file >> UI.DrawColor.ucRed
-		>> UI.DrawColor.ucGreen
-		>> UI.DrawColor.ucBlue
+        >> UI.DrawColor.ucGreen
+        >> UI.DrawColor.ucBlue
 
-		>> UI.FillColor.ucRed
-		>> UI.FillColor.ucGreen
-		>> UI.FillColor.ucBlue
+        >> UI.FillColor.ucRed
+        >> UI.FillColor.ucGreen
+        >> UI.FillColor.ucBlue
 
-		>> UI.BkGrndColor.ucRed
-		>> UI.BkGrndColor.ucGreen
-		>> UI.BkGrndColor.ucBlue;
+        >> UI.BkGrndColor.ucRed
+        >> UI.BkGrndColor.ucGreen
+        >> UI.BkGrndColor.ucBlue;
 
     in_file >> size;
 
@@ -168,13 +175,66 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
-    
+	if (undo_st.empty())
+		return;
+
+    Action* to_undo = undo_st.top();
+
+    to_undo->Undo();
+    redo_st.push(to_undo);
+    undo_st.pop();
 }
 
 void ApplicationManager::Redo()
 {
+	if (redo_st.empty())
+		return;
 
+    Action* to_redo = redo_st.top();
+
+    to_redo->Execute();
+    undo_st.push(to_redo);
+    redo_st.pop();
 }
+////////////////////////////////////////////////////////////////////////////////////
+
+unsigned int ApplicationManager::GenerateNextId()
+{
+    return next_id++;
+}
+
+void ApplicationManager::DeleteFigure(unsigned int id)
+{
+    auto itr = GetFigureIter(id);
+    if (itr != figs.end())
+    {
+        delete (*itr);
+        figs.erase(itr);
+    }
+    else
+    {
+        // cant delete figure not found
+        throw -1;
+    }
+}
+
+CFigure* ApplicationManager::GetFigure(unsigned int id) const
+{
+    for (auto& fig : figs)
+        if (fig->GetId() == id)
+            return fig;
+    return nullptr;
+}
+
+multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
+{
+    for (auto itr = figs.begin(); itr != figs.end(); itr++)
+        if ((*itr)->GetId() == id)
+            return itr;
+
+    return figs.end();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()

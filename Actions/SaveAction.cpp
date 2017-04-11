@@ -23,7 +23,7 @@ void SaveAction::ReadActionParameters()
         successfull = true;
     }
 
-	out_p->ClearStatusBar();
+    out_p->ClearStatusBar();
 }
 
 void SaveAction::Execute()
@@ -32,4 +32,9 @@ void SaveAction::Execute()
         manager_p->SaveAll(out_file);
         out_file.close();
     }
+}
+
+void SaveAction::Undo()
+{
+    
 }

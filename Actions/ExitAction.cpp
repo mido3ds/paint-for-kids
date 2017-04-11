@@ -1,4 +1,4 @@
-#include "ExitAction.h"
+﻿#include "ExitAction.h"
 
 ExitAction::ExitAction(ApplicationManager* app_p)
     : Action(app_p)
@@ -20,4 +20,10 @@ void ExitAction::Execute()
 {
     // it will exit automatically from the main function
     // look at do-while at Main.cpp
+}
+
+void ExitAction::Undo()
+{
+    // soo, you want to undo exitting ?
+	// انت بتهزر، صح؟
 }

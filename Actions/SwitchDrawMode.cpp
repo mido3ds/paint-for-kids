@@ -20,3 +20,8 @@ void SwitchDrawMode::Execute()
     out_p->CreateDrawToolBar();
     out_p->CreateDrawArea();
 }
+
+void SwitchDrawMode::Undo()
+{
+	manager_p->ExecuteAction(TO_PLAY);
+}

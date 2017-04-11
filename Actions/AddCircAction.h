@@ -15,8 +15,17 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
+    virtual ActionType GetActType() {return DRAW_CIRC;}
+
 private:
     CCircle* circ;
+
+    // properities
+    unsigned int id;
+    GfxInfo gfx;
+    Point p1, p2;
 };
 
 #endif /* __AddCircAction_h__ */

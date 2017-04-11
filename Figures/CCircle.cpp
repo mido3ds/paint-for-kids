@@ -65,6 +65,6 @@ void CCircle::Load(ifstream& in_file)
         >> fill_clr.ucRed
         >> fill_clr.ucGreen
         >> fill_clr.ucBlue;
-        
+
     p2 = GetSecondPointFromRadius(rad);
 }

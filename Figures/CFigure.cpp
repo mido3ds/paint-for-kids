@@ -34,12 +34,12 @@ void CFigure::ChngFillClr(color filling_clr)
     this->fill_clr = filling_clr;
 }
 
-void CFigure::SetId(int id)
+void CFigure::SetId(unsigned int id)
 {
     this->id = id;
 }
 
-int CFigure::GetId()
+unsigned int CFigure::GetId()
 {
     return id;
 }

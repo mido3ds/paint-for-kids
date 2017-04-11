@@ -15,8 +15,15 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
+    virtual ActionType GetActType() {return DRAW_LINE;}
 private:
     CLine* line;
+
+    unsigned int id;
+    GfxInfo gfx;
+    Point p1, p2;
 };
 
 #endif /* __AddLineAction_h__ */

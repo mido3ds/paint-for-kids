@@ -14,8 +14,8 @@ public:
     void SetSelected(bool s);
     bool IsSelected() const;
 
-    void SetId(int id);
-    int GetId();
+    void SetId(unsigned int id);
+    unsigned int GetId();
 
     virtual void Draw(Output* out_p) const = 0;
 
@@ -32,7 +32,7 @@ public:
     //virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 
 protected:
-    int id; // Each figure has an id
+    unsigned int id; // Each figure has an id
     bool selected = false; // true if the figure is selected.
 };
 

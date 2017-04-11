@@ -10,6 +10,10 @@ public:
 
     virtual void ReadActionParameters();
     virtual void Execute();
+
+    virtual void Undo();
+
+    virtual ActionType GetActType() {return UNDO;}
 };
 
 #endif /* __UndoAction_h__ */

@@ -13,6 +13,10 @@ public:
 
     virtual void ReadActionParameters();
     virtual void Execute();
+
+    virtual void Undo();
+
+    virtual ActionType GetActType() {return TO_DRAW;}
 };
 
 #endif

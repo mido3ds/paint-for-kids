@@ -5,8 +5,8 @@
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 #include <set>
-#include <string>
 #include <stack>
+#include <string>
 
 // actions files
 #include "Actions/AddCircAction.h"
@@ -15,11 +15,11 @@
 #include "Actions/AddTrnglAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
-#include "Actions/SaveAction.h"
-#include "Actions/UndoAction.h"
 #include "Actions/RedoAction.h"
+#include "Actions/SaveAction.h"
 #include "Actions/SwitchDrawMode.h"
 #include "Actions/SwitchPlayMode.h"
+#include "Actions/UndoAction.h"
 
 // figures files
 #include "Figures/CCircle.h"
@@ -59,12 +59,27 @@ public:
     // pop last action from redo_st, redo it, push it to undo_st
     void Redo();
 
+    // returns the next available id to assign to the fig
+    // used by Action to make the figure
+    unsigned int GenerateNextId();
+
+    // used by Action::Undo to delete a made-before figure given the stored id of it
+    void DeleteFigure(unsigned int id);
+
 private:
     multiset<CFigure*, CmpFigures> figs;
+
+    CFigure* GetFigure(unsigned int id) const;
+
+    // return iterator to the figure if found
+    // if not found, returns figs.end()
+    multiset<CFigure*, CmpFigures>::iterator GetFigureIter(unsigned int id) const;
 
     // for undo and redo
     stack<Action*> undo_st;
     stack<Action*> redo_st;
+
+    unsigned int next_id = 0;
 
     //Pointers to Input and Output classes
     Input* in_p;
