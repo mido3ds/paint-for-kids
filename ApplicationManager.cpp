@@ -102,6 +102,7 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	out_p->ClearDrawArea();
     for (auto& fig : figs)
         fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
@@ -199,8 +200,8 @@ void ApplicationManager::DeleteFigure(unsigned int id)
     auto itr = GetFigureIter(id);
     if (itr != figs.end())
     {
-        figs.erase(itr);
         delete (*itr);
+        figs.erase(itr);
     }
     else
     {
