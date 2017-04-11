@@ -20,7 +20,8 @@ private:
     CLine* line;
 
     unsigned int id;
-    // TODO add others
+    GfxInfo gfx;
+    Point p1, p2;
 };
 
 #endif /* __AddLineAction_h__ */

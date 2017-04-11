@@ -16,5 +16,5 @@ void RedoAction::Execute()
 
 void RedoAction::Undo()
 {
-    
+	manager_p->Undo();
 }

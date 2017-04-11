@@ -1,4 +1,4 @@
-#include "ExitAction.h"
+﻿#include "ExitAction.h"
 
 ExitAction::ExitAction(ApplicationManager* app_p)
     : Action(app_p)
@@ -24,5 +24,6 @@ void ExitAction::Execute()
 
 void ExitAction::Undo()
 {
-    
+    // soo, you want to undo exitting ?
+	// انت بتهزر، صح؟
 }

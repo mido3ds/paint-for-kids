@@ -23,5 +23,5 @@ void SwitchDrawMode::Execute()
 
 void SwitchDrawMode::Undo()
 {
-    
+	manager_p->ExecuteAction(TO_PLAY);
 }

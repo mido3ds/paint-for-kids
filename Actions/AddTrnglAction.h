@@ -21,7 +21,8 @@ private:
     CTrngl* trngl;
 
     unsigned int id;
-    // TODO add others
+    GfxInfo gfx;
+    Point p1, p2, p3;
 };
 
 #endif /* __AddTrnglAction_h__ */

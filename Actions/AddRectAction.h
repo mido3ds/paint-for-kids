@@ -24,7 +24,8 @@ private:
     CRectangle* rect;
 
     unsigned int id;
-    // TODO add othes
+    GfxInfo gfx;
+    Point p1, p2;
 };
 
 #endif

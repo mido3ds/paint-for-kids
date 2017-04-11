@@ -22,7 +22,8 @@ private:
 
     // properities
     unsigned int id;
-    // TODO add other things here
+    GfxInfo gfx;
+    Point p1, p2;
 };
 
 #endif /* __AddCircAction_h__ */

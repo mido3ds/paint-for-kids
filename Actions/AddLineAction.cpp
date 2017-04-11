@@ -13,32 +13,31 @@ void AddLineAction::ReadActionParameters()
 
     out_p->PrintMessage("New Line: Click at first point");
 
-    line = new CLine();
-
     //Read 1st corner and store in point p1
-    in_p->GetPointClicked(line->p1.x, line->p1.y);
+    in_p->GetPointClicked(p1.x, p1.y);
 
     out_p->PrintMessage("New Line: Click at second corner");
 
     //Read 2nd corner and store in point p2
-    in_p->GetPointClicked(line->p2.x, line->p2.y);
+    in_p->GetPointClicked(p2.x, p2.y);
 
-    line->is_filled = false; //default is not filled
+    gfx.is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
-    line->draw_clr = out_p->GetCrntDrawColor();
-    line->fill_clr = out_p->GetCrntFillColor();
-    line->border_width = out_p->GetCrntPenWidth();
+    gfx.draw_clr = out_p->GetCrntDrawColor();
+    gfx.fill_clr = out_p->GetCrntFillColor();
+    gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
 
     id = manager_p->GenerateNextId();
-    line->SetId(id);
 }
 
 //Execute the action
 void AddLineAction::Execute()
 {
     //Add the lineangle to the list of figures
+    line = new CLine(p1, p2, gfx);
+    line->SetId(id);
     manager_p->AddFigure(line);
 }
 
