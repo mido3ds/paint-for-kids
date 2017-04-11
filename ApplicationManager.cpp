@@ -187,6 +187,26 @@ void ApplicationManager::Redo()
     redo_st.pop();
 }
 ////////////////////////////////////////////////////////////////////////////////////
+
+unsigned int ApplicationManager::GenerateNextId()
+{
+    return last_given_id++;
+}
+
+void ApplicationManager::DeleteFigure(unsigned int id)
+{
+    CFigure*
+}
+
+CFigure* ApplicationManager::GetFigure(unsigned int id)
+{
+    for (auto& fig : figs)
+        if (fig->GetId() == id)
+            return fig;
+    return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
