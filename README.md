@@ -3,11 +3,15 @@
 SEMESTER
  
 TEAM # 14
-===========================================
+
+
 Name		|	B.N	|	SEC
 ===========================================
-Mahmoud Adas		23		2 |
-Hadi Maher		28		2 |
-Abdelrahman Mohamed	4		2 |
-Aisha Mousa		2		2 |
-===========================================
+
+Mahmoud Adas		    ,23		,2 
+
+Hadi Maher		    ,28		,2 
+
+Abdelrahman Mohamed	    ,4		,2 
+
+Aisha Mousa		    ,2		,2 
