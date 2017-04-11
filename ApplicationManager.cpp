@@ -165,7 +165,16 @@ void ApplicationManager::LoadAll(ifstream& in_file)
         figs.insert(fig);
     }
 }
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::Undo()
+{
+    
+}
 
+void ApplicationManager::Redo()
+{
+
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()

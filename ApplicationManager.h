@@ -6,6 +6,7 @@
 #include "GUI/Output.h"
 #include <set>
 #include <string>
+#include <stack>
 
 // actions files
 #include "Actions/AddCircAction.h"
@@ -15,6 +16,8 @@
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/SaveAction.h"
+#include "Actions/UndoAction.h"
+#include "Actions/RedoAction.h"
 #include "Actions/SwitchDrawMode.h"
 #include "Actions/SwitchPlayMode.h"
 
@@ -51,9 +54,17 @@ public:
     Action* DetectAction(ActionType act_type);
     CFigure* DetectFigure(string fig_name);
 
+    // pop last action from undo_dt, undo it, push it to redo_st
+    void Undo();
+    // pop last action from redo_st, redo it, push it to undo_st
+    void Redo();
+
 private:
-    // TODO: set vs multiset,chooe the best
     multiset<CFigure*, CmpFigures> figs;
+
+    // for undo and redo
+    stack<Action*> undo_st;
+    stack<Action*> redo_st;
 
     //Pointers to Input and Output classes
     Input* in_p;
