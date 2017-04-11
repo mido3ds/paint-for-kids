@@ -16,6 +16,8 @@ public:
 
     virtual void Undo();
 
+    virtual ActionType GetActType() {return SAVE;}
+
 private:
     bool successfull = false;
     ofstream out_file;

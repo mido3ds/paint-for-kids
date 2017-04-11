@@ -89,14 +89,10 @@ ActionType Input::GetUserAction() const
                 return ZOOM_OUT;
             case ITM_CUT:
                 return CUT;
-            /*case ITM_COPY:
+            case ITM_COPY:
                 return COPY;
             case ITM_PASTE:
-                return PASTE;*/
-			case ITM_COPY:
-				return UNDO;
-			case ITM_PASTE:
-				return REDO;
+                return PASTE;
             case ITM_PLAY:
                 return TO_PLAY;
 

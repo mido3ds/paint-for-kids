@@ -59,7 +59,9 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         act_p->ReadActionParameters();
         act_p->Execute();
 
-        undo_st.push(act_p);
+		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
+		if (! (act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
+			undo_st.push(act_p);
     }
 }
 //==================================================================================//
@@ -173,6 +175,9 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
+	if (undo_st.empty())
+		return;
+
     Action* to_undo = undo_st.top();
 
     to_undo->Undo();
@@ -182,6 +187,9 @@ void ApplicationManager::Undo()
 
 void ApplicationManager::Redo()
 {
+	if (redo_st.empty())
+		return;
+
     Action* to_redo = redo_st.top();
 
     to_redo->Execute();
