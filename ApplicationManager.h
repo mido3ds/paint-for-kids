@@ -5,8 +5,8 @@
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 #include <set>
-#include <string>
 #include <stack>
+#include <string>
 
 // actions files
 #include "Actions/AddCircAction.h"
@@ -15,11 +15,11 @@
 #include "Actions/AddTrnglAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
-#include "Actions/SaveAction.h"
-#include "Actions/UndoAction.h"
 #include "Actions/RedoAction.h"
+#include "Actions/SaveAction.h"
 #include "Actions/SwitchDrawMode.h"
 #include "Actions/SwitchPlayMode.h"
+#include "Actions/UndoAction.h"
 
 // figures files
 #include "Figures/CCircle.h"

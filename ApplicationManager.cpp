@@ -35,18 +35,18 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new SwitchPlayMode(this);
     case TO_DRAW:
         return new SwitchDrawMode(this);
-	case SAVE:
-		return new SaveAction(this);
-	case LOAD:
-		return new LoadAction(this);
+    case SAVE:
+        return new SaveAction(this);
+    case LOAD:
+        return new LoadAction(this);
     case UNDO:
         return new UndoAction(this);
     case REDO:
         return new RedoAction(this);
     case STATUS: //a click on the status bar ==> no action
         return nullptr;
-	default:
-		return nullptr;
+    default:
+        return nullptr;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -84,16 +84,15 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 // According to given string, return the corresponding Figure object
 CFigure* ApplicationManager::DetectFigure(string fig_name)
 {
-	if (fig_name == "RECTANGLE")
-		return new CRectangle();
-	 if (fig_name == "CIRCLE")
-		return new CCircle();
-	 if (fig_name == "TRIANGLE")
-		return new CTrngl();
-	 if (fig_name == "LINE")
-		return new CLine();
-	throw - 1;
-
+    if (fig_name == "RECTANGLE")
+        return new CRectangle();
+    if (fig_name == "CIRCLE")
+        return new CCircle();
+    if (fig_name == "TRIANGLE")
+        return new CTrngl();
+    if (fig_name == "LINE")
+        return new CLine();
+    throw - 1;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -123,16 +122,16 @@ void ApplicationManager::SaveAll(ofstream& out_file)
 {
     // TODO
     out_file << UI.DrawColor.ucRed << ' '
-		<< UI.DrawColor.ucGreen << ' '
-		<< UI.DrawColor.ucBlue << ' '
+             << UI.DrawColor.ucGreen << ' '
+             << UI.DrawColor.ucBlue << ' '
 
-		<< UI.FillColor.ucRed << ' '
-		<< UI.FillColor.ucGreen << ' '
-		<< UI.FillColor.ucBlue << ' '
+             << UI.FillColor.ucRed << ' '
+             << UI.FillColor.ucGreen << ' '
+             << UI.FillColor.ucBlue << ' '
 
-		<< UI.BkGrndColor.ucRed << ' '
-		<< UI.BkGrndColor.ucGreen << ' '
-		<< UI.BkGrndColor.ucBlue << '\n';
+             << UI.BkGrndColor.ucRed << ' '
+             << UI.BkGrndColor.ucGreen << ' '
+             << UI.BkGrndColor.ucBlue << '\n';
     out_file << figs.size() << '\n';
 
     for (auto& fig : figs)
@@ -148,16 +147,16 @@ void ApplicationManager::LoadAll(ifstream& in_file)
     CFigure* fig = nullptr;
 
     in_file >> UI.DrawColor.ucRed
-		>> UI.DrawColor.ucGreen
-		>> UI.DrawColor.ucBlue
+        >> UI.DrawColor.ucGreen
+        >> UI.DrawColor.ucBlue
 
-		>> UI.FillColor.ucRed
-		>> UI.FillColor.ucGreen
-		>> UI.FillColor.ucBlue
+        >> UI.FillColor.ucRed
+        >> UI.FillColor.ucGreen
+        >> UI.FillColor.ucBlue
 
-		>> UI.BkGrndColor.ucRed
-		>> UI.BkGrndColor.ucGreen
-		>> UI.BkGrndColor.ucBlue;
+        >> UI.BkGrndColor.ucRed
+        >> UI.BkGrndColor.ucGreen
+        >> UI.BkGrndColor.ucBlue;
 
     in_file >> size;
 
@@ -173,7 +172,7 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 void ApplicationManager::Undo()
 {
     Action* to_undo = undo_st.top();
-    
+
     to_undo->Undo();
     redo_st->push(to_undo);
     undo_st.pop();

@@ -23,7 +23,7 @@ void SaveAction::ReadActionParameters()
         successfull = true;
     }
 
-	out_p->ClearStatusBar();
+    out_p->ClearStatusBar();
 }
 
 void SaveAction::Execute()
