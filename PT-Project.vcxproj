@@ -130,9 +130,13 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\AddCircAction.cpp" />
     <ClCompile Include="Actions\AddLineAction.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
+    <ClCompile Include="Actions\AddTrnglAction.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\SwitchDrawMode.cpp" />
     <ClCompile Include="Actions\SwitchPlayMode.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
@@ -178,13 +182,18 @@
     <ClCompile Include="Figures\CTrngl.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
+    <ClCompile Include="iostreamoverloading.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\AddCircAction.h" />
     <ClInclude Include="Actions\AddLineAction.h" />
     <ClInclude Include="Actions\AddRectAction.h" />
+    <ClInclude Include="Actions\AddTrnglAction.h" />
     <ClInclude Include="Actions\ExitAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\SwitchDrawMode.h" />
     <ClInclude Include="Actions\SwitchPlayMode.h" />
     <ClInclude Include="ApplicationManager.h" />

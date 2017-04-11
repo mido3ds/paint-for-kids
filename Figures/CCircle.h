@@ -2,6 +2,7 @@
 #define __CCircle_h__
 
 #include "CFigure.h"
+#include <cmath>
 
 class CCircle : public CFigure {
 public:

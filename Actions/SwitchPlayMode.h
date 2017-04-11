@@ -7,7 +7,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CRectangle Action class
 class SwitchPlayMode : public Action {
 public:
     SwitchPlayMode(ApplicationManager* app_p);

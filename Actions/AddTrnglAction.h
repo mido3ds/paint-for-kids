@@ -8,7 +8,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CTrngl Action class
 class AddTrnglAction : public Action {
 public:
     AddTrnglAction(ApplicationManager* app_p);

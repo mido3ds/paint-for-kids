@@ -28,7 +28,7 @@ void LoadAction::ReadActionParameters()
 void LoadAction::Execute()
 {
     if (successfull) {
-        app_p->LoadAll(in_file);
+        manager_p->LoadAll(in_file);
         in_file.close();
     }
 }

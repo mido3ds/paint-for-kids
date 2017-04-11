@@ -8,7 +8,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CLine Action class
 class AddLineAction : public Action {
 public:
     AddLineAction(ApplicationManager* app_p);

@@ -18,7 +18,7 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // According to Action Type, return the corresponding action object
-Action* ApplicationManger::DetectAction(ActionType act_type)
+Action* ApplicationManager::DetectAction(ActionType act_type)
 {
     switch (act_type) {
     case DRAW_RECT:
@@ -72,20 +72,18 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // According to given string, return the corresponding Figure object
-CFigure* ApplicationManger::DetectFigure(string fig_name)
+CFigure* ApplicationManager::DetectFigure(string fig_name)
 {
-    switch (fig_name) {
-    case "RECTANGLE":
-        return new CRectangle();
-    case "CIRCLE":
-        return new CCircle();
-    case "TRIANGLE":
-        return new CTrngl();
-    case "LINE":
-        return new CLine();
-    default:
-        throw - 1;
-    }
+	if (fig_name == "RECTANGLE")
+		return new CRectangle();
+	 if (fig_name == "CIRCLE")
+		return new CCircle();
+	 if (fig_name == "TRIANGLE")
+		return new CTrngl();
+	 if (fig_name == "LINE")
+		return new CLine();
+	throw - 1;
+
 }
 //==================================================================================//
 //							Interface Management Functions							//

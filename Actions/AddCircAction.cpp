@@ -13,7 +13,7 @@ void AddCircAction::ReadActionParameters()
 
     out_p->PrintMessage("New Circle: Click at first point");
 
-    circ = new CLine();
+    circ = new CCircle();
 
     //Read 1st corner and store in point p1
     in_p->GetPointClicked(circ->p1.x, circ->p1.y);

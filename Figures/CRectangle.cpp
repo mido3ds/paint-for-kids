@@ -20,18 +20,39 @@ void CRectangle::Save(ofstream& out_file)
 {
     out_file << "RECTANGLE" << ' '
              << id << ' '
-             << p1 << ' '
-             << p2 << ' '
-             << DrawColor << ' '
-             << FillColor << ' '
+
+             << p1.x << ' '
+             << p1.y << ' '
+
+             << p2.x << ' '
+             << p2.y << ' '
+
+             << draw_clr.ucRed << ' '
+             << draw_clr.ucGreen << ' '
+             << draw_clr.ucBlue << ' '
+
+             << fill_clr.ucRed << ' '
+             << fill_clr.ucGreen << ' '
+             << fill_clr.ucBlue << ' '
+
              << '\n';
 }
 
 void CRectangle::Load(ifstream& in_file)
 {
     in_file >> id
-        >> p1
-        >> p2
-        >> DrawColor
-        >> FillColr;
+
+        >> p1.x
+        >> p1.y
+
+        >> p2.x
+        >> p2.y
+
+        >> draw_clr.ucRed
+        >> draw_clr.ucGreen
+        >> draw_clr.ucBlue
+
+        >> fill_clr.ucRed
+        >> fill_clr.ucGreen
+        >> fill_clr.ucBlue;
 }

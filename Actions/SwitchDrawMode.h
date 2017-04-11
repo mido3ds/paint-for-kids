@@ -7,7 +7,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CRectangle Action class
 class SwitchDrawMode : public Action {
 public:
     SwitchDrawMode(ApplicationManager* app_p);

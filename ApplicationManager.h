@@ -5,6 +5,7 @@
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 #include <set>
+#include <string>
 
 // actions files
 #include "Actions/AddCircAction.h"
@@ -48,7 +49,7 @@ public:
     void LoadAll(ifstream& in_file);
 
     Action* DetectAction(ActionType act_type);
-    Action* DetectFigure(string fig_name);
+    CFigure* DetectFigure(string fig_name);
 
 private:
     // TODO: set vs multiset,chooe the best

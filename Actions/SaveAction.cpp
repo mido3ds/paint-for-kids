@@ -28,7 +28,7 @@ void SaveAction::ReadActionParameters()
 void SaveAction::Execute()
 {
     if (successfull) {
-        app_p->SaveAll(out_file);
+        manager_p->SaveAll(out_file);
         out_file.close();
     }
 }

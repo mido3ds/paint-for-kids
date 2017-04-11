@@ -13,7 +13,7 @@ public:
     ~Input();
 
     void GetPointClicked(int& x, int& y) const; // Get coordinate where user clicks
-    string GetSrting(Output* pO) const; // Returns a string entered by the user
+    string GetString(Output* pO) const; // Returns a string entered by the user
 
     ActionType GetUserAction() const; // Read the user click and map to an action
 

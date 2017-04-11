@@ -59,19 +59,6 @@ struct Point // To be used for figures points
     }
 };
 
-// overload reading and writing point to a file
-ifstream& operator>>(ifstream& ifs, Point& p)
-{
-    ifs >> p.x >> p.y;
-    return ifs;
-}
-
-ofstream& operator<<(ofstream& ofs, const Point& p)
-{
-    ofs << p.x << ' ' << p.y;
-    return ofs;
-}
-
 class GfxInfo // Graphical info of each figure (you may add more members)
 {
 public:
@@ -80,7 +67,7 @@ public:
     bool is_filled = false; // CFigure Filled or not
     int border_width = 1; // Width of figure borders
 
-    int z_index = MAXINT32; // level of object on window, default to max size of int
+    int z_index = 0; // level of object on window, default to max size of int
 };
 
 #endif

@@ -28,20 +28,6 @@ class color {
 bool operator==(color a, color b);
 bool operator!=(color a, color b);
 
-ofstream& operator<<(ofstream& of, const color& cl) {
-    of << cl.ucRed << ' '
-       << cl.ucGreen << ' '
-       << cl.ucBlue;
-    return of;
-}
-
-ifstream& operator>>(ifstream& ifs, color& cl) {
-    ifs >> cl.ucRed
-        >> cl.ucGreen
-        >> cl.ucBlue;
-    return ifs;
-}
-
 /*
 
   Predefine some color objects...  Data was liberally borrowed from the

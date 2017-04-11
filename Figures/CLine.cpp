@@ -21,16 +21,31 @@ void CLine::Save(ofstream& out_file)
 {
     out_file << "LINE" << ' '
              << id << ' '
-             << p1 << ' '
-             << p2 << ' '
-             << DrawColor << ' '
+
+             << p1.x << ' '
+             << p1.y << ' '
+
+             << p2.x << ' '
+             << p2.y << ' '
+
+             << draw_clr.ucRed << ' '
+             << draw_clr.ucGreen << ' '
+             << draw_clr.ucBlue << ' '
+
              << '\n';
 }
 
 void CLine::Load(ifstream& in_file)
 {
     in_file >> id
-        >> p1
-        >> p2
-        >> DrawColor;
+
+        >> p1.x
+        >> p1.y
+
+        >> p2.x
+        >> p2.y
+
+        >> draw_clr.ucRed
+        >> draw_clr.ucGreen
+        >> draw_clr.ucBlue;
 }

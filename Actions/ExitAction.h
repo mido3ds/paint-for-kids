@@ -7,7 +7,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CLine Action class
 class ExitAction : public Action {
 public:
     ExitAction(ApplicationManager* app_p);

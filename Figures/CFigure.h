@@ -3,6 +3,7 @@
 
 #include "../DEFS.h"
 #include "../GUI/Output.h"
+#include <fstream>
 
 // Base class for all figures
 class CFigure : public GfxInfo {
@@ -38,9 +39,9 @@ protected:
 struct CmpFigures {
     // used to compare figures based on z_index (made for set)
     // lower z_index is put first
-    bool operator()(const CFigure& lhs, const CFigure& rhs) const
+    bool operator()(const CFigure* const lhs, const CFigure* const rhs) const
     {
-        return lhs.z_index < rhs.z_index;
+        return lhs->z_index < rhs->z_index;
     }
 };
 

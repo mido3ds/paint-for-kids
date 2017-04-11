@@ -8,7 +8,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CRectangle Action class
 class AddRectAction : public Action {
 public:
     AddRectAction(ApplicationManager* app_p);

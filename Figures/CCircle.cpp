@@ -14,8 +14,7 @@ CCircle::CCircle(Point p1, Point p2, GfxInfo circ_gfx_info)
 
 double CCircle::GetRadius()
 {
-    return sqrt(
-        pow(p1.x - p2.x) + pow(p1.y - p2.y));
+    return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
 }
 
 Point CCircle::GetSecondPointFromRadius(double rad)
@@ -32,10 +31,20 @@ void CCircle::Save(ofstream& out_file)
 {
     out_file << "CIRCLE" << ' '
              << id << ' '
-             << p1 << ' '
+
+             << p1.x << ' '
+             << p1.y << ' '
+
              << GetRadius() << ' '
-             << DrawColor << ' '
-             << FillColor << ' '
+
+             << draw_clr.ucRed << ' '
+             << draw_clr.ucGreen << ' '
+             << draw_clr.ucBlue << ' '
+
+             << fill_clr.ucRed << ' '
+             << fill_clr.ucGreen << ' '
+             << fill_clr.ucBlue << ' '
+
              << '\n';
 }
 
@@ -43,9 +52,19 @@ void CCircle::Load(ifstream& in_file)
 {
     double rad;
     in_file >> id
-        >> p1
+
+        >> p1.x
+        >> p1.y
+
         >> rad
-        >> DrawColor
-        >> FillColor;
+
+        >> draw_clr.ucRed
+        >> draw_clr.ucGreen
+        >> draw_clr.ucBlue
+
+        >> fill_clr.ucRed
+        >> fill_clr.ucGreen
+        >> fill_clr.ucBlue;
+        
     p2 = GetSecondPointFromRadius(rad);
 }

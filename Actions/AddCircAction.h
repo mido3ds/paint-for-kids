@@ -8,7 +8,6 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-//Add CCircle Action class
 class AddCircAction : public Action {
 public:
     AddCircAction(ApplicationManager* app_p);
