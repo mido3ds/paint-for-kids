@@ -18,6 +18,9 @@ public:
     virtual void Undo();
 private:
     CLine* line;
+
+    unsigned int id;
+    // TODO add others
 };
 
 #endif /* __AddLineAction_h__ */

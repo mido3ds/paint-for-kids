@@ -58,7 +58,8 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
     if (act_p != nullptr) {
         act_p->ReadActionParameters();
         act_p->Execute();
-        delete act_p;
+
+        undo_st.push(act_p);
     }
 }
 //==================================================================================//

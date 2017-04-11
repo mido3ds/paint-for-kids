@@ -22,6 +22,9 @@ public:
 
 private:
     CRectangle* rect;
+
+    unsigned int id;
+    // TODO add othes
 };
 
 #endif

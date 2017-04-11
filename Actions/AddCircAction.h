@@ -19,6 +19,10 @@ public:
 
 private:
     CCircle* circ;
+
+    // properities
+    unsigned int id;
+    // TODO add other things here
 };
 
 #endif /* __AddCircAction_h__ */

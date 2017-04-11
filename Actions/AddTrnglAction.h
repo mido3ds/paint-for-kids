@@ -19,6 +19,9 @@ public:
 
 private:
     CTrngl* trngl;
+
+    unsigned int id;
+    // TODO add others
 };
 
 #endif /* __AddTrnglAction_h__ */
