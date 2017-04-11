@@ -39,6 +39,10 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 		return new SaveAction(this);
 	case LOAD:
 		return new LoadAction(this);
+    case UNDO:
+        return new UndoAction(this);
+    case REDO:
+        return new RedoAction(this);
     case STATUS: //a click on the status bar ==> no action
         return nullptr;
 	default:
@@ -168,12 +172,20 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
+    Action* to_undo = undo_st.top();
     
+    to_undo->Undo();
+    redo_st->push(to_undo);
+    undo_st.pop();
 }
 
 void ApplicationManager::Redo()
 {
+    Action* to_redo = redo_st.top();
 
+    to_redo->Execute();
+    undo_st->push(to_redo);
+    redo_st.pop();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
