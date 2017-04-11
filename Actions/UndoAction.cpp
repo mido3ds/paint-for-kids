@@ -13,3 +13,8 @@ void UndoAction::Execute()
 {
     manager_p->Undo();
 }
+
+void UndoAction::Undo()
+{
+    
+}

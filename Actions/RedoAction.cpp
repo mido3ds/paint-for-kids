@@ -13,3 +13,8 @@ void RedoAction::Execute()
 {
     manager_p->Redo();
 }
+
+void RedoAction::Undo()
+{
+    
+}

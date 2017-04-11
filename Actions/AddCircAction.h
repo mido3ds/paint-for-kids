@@ -15,8 +15,14 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
 private:
     CCircle* circ;
+
+    // properities
+    unsigned int id;
+    // TODO add other things here
 };
 
 #endif /* __AddCircAction_h__ */

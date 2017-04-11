@@ -13,6 +13,8 @@ public:
 
     virtual void ReadActionParameters();
     virtual void Execute();
+
+    virtual void Undo();
 };
 
 #endif /* __ExitAction_h__ */

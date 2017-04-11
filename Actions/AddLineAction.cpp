@@ -30,6 +30,9 @@ void AddLineAction::ReadActionParameters()
     line->border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+
+    id = manager_p->GenerateNextId();
+    line->SetId(id);
 }
 
 //Execute the action
@@ -37,4 +40,9 @@ void AddLineAction::Execute()
 {
     //Add the lineangle to the list of figures
     manager_p->AddFigure(line);
+}
+
+void AddLineAction::Undo()
+{
+    
 }

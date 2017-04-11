@@ -30,10 +30,18 @@ void AddCircAction::ReadActionParameters()
     circ->border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+
+    id = manager_p->GenerateNextId();
+    circ->SetId(id);
 }
 
 //Execute the action
 void AddCircAction::Execute()
 {
     manager_p->AddFigure(circ);
+}
+
+void AddCircAction::Undo()
+{
+    
 }

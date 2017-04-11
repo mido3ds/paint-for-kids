@@ -15,8 +15,13 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
 private:
     CTrngl* trngl;
+
+    unsigned int id;
+    // TODO add others
 };
 
 #endif /* __AddTrnglAction_h__ */

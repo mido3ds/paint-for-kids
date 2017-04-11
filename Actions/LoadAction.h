@@ -14,6 +14,8 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
 
+    virtual void Undo();
+
 private:
     bool successfull = false;
     ifstream in_file;

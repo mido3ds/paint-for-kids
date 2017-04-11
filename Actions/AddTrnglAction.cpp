@@ -35,10 +35,18 @@ void AddTrnglAction::ReadActionParameters()
     trngl->border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+
+    id = manager_p->GenerateNextId();
+    trngl->SetId(id);
 }
 
 //Execute the action
 void AddTrnglAction::Execute()
 {
     manager_p->AddFigure(trngl);
+}
+
+void AddTrnglAction::Undo()
+{
+    
 }

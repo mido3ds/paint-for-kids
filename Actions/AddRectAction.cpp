@@ -30,6 +30,9 @@ void AddRectAction::ReadActionParameters()
     rect->border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+
+    id = manager_p->GenerateNextId();
+    rect->SetId(id);
 }
 
 //Execute the action
@@ -37,4 +40,9 @@ void AddRectAction::Execute()
 {
     //Add the lineangle to the list of figures
     manager_p->AddFigure(rect);
+}
+
+void AddRectAction::Undo()
+{
+    
 }
