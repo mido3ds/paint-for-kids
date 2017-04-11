@@ -1,0 +1,15 @@
+#include "UndoAction.h"
+
+UndoAction::UndoAction(ApplicationManager* app_p)
+    : Action(app_p)
+{
+}
+
+void UndoAction::ReadActionParameters()
+{
+}
+
+void UndoAction::Execute()
+{
+    manager_p->Undo();
+}
