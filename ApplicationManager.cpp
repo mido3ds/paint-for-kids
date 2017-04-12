@@ -60,7 +60,10 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         act_p->Execute();
 
 		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
-		if (! (act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
+        if (! (Action::IsFromAction<UndoAction>(act_p) 
+            || Action::IsFromAction<RedoAction>(act_p) 
+            || Action::IsFromAction<SwitchDrawMode>(act_p) 
+            || Action::IsFromAction<SwitchPlayMode>(act_p)))
 			undo_st.push(act_p);
     }
 }
