@@ -16,7 +16,6 @@ public:
 
     virtual void Undo();
 
-    virtual ActionType GetActType() {return TO_PLAY;}
 };
 
 #endif
