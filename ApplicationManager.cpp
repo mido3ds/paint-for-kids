@@ -64,8 +64,8 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         if (! (Action::IsFromAction<UndoAction>(act_p) 
             || Action::IsFromAction<RedoAction>(act_p) 
             || Action::IsFromAction<SwitchDrawMode>(act_p) 
-            || Action::IsFromAction<SwitchPlayMode>(act_p)))
-            || Action::IsFromAction<SaveAction>(act_p)))
+            || Action::IsFromAction<SwitchPlayMode>(act_p)
+            || Action::IsFromAction<SaveAction>(act_p)
             || Action::IsFromAction<LoadAction>(act_p)))
 			undo_st.push(act_p);
     }
