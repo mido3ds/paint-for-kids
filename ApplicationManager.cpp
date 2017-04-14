@@ -68,6 +68,8 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
             || Action::IsFromAction<SaveAction>(act_p)
             || Action::IsFromAction<LoadAction>(act_p)))
 			undo_st.push(act_p);
+        else
+            delete act_p;
     }
 }
 //==================================================================================//
