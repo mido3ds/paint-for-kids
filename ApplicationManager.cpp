@@ -132,7 +132,6 @@ Output* ApplicationManager::GetOutput() const
 // call save for each one
 void ApplicationManager::SaveAll(ofstream& out_file)
 {
-    // TODO
     out_file << UI.DrawColor.ucRed << ' '
              << UI.DrawColor.ucGreen << ' '
              << UI.DrawColor.ucBlue << ' '
@@ -247,8 +246,22 @@ multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsig
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+    // delete figs
     for (auto& fig : figs)
         delete fig;
+    
+    // remove actions in stacks
+    while (! undo_st.empty())
+    {
+        delete undo_st.top();
+        undo_st.pop();
+    }
+    while (! redo_st.empty())
+    {
+        delete redo_st.top();
+        redo_st.pop();
+    }
+
     delete in_p;
     delete out_p;
 }
