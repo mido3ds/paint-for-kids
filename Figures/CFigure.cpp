@@ -7,7 +7,6 @@ CFigure::CFigure(const GfxInfo& figure_gfx_info)
     is_filled = figure_gfx_info.is_filled;
     border_width = figure_gfx_info.border_width;
     z_index = figure_gfx_info.z_index;
-	//selected = true;
 }
 
 CFigure::CFigure()

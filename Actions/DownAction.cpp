@@ -17,5 +17,5 @@ void DownAction::Execute()
 
 void DownAction::Undo()
 {
-	manager_p->BringSelectedUp();
+	manager_p->SendSelectedUp();
 }

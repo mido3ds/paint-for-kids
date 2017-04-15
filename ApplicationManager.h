@@ -22,10 +22,10 @@
 #include "Actions/UndoAction.h"
 #include "Actions/ChFillColorAction.h"
 #include "Actions/ChBGColorAction.h"
-#include "Actions\ChBorderAction.h"
-#include "Actions\DownAction.h"
-#include "Actions\UpAction.h"
-#include "Actions\RotateAction.h"
+#include "Actions/ChBorderAction.h"
+#include "Actions/DownAction.h"
+#include "Actions/UpAction.h"
+#include "Actions/RotateAction.h"
 
 // figures files
 #include "Figures/CCircle.h"
@@ -78,7 +78,7 @@ public:
 
 	void SendSelecteDown();
 
-	void BringSelectedUp();
+	void SendSelectedUp();
 
 	void RotateSelected(int deg);
 

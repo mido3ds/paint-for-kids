@@ -55,7 +55,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 	case SEND_BACK:
 		return new DownAction(this);
 	case BRNG_FRNT:
-		return new Up(this);
+		return new UpAction(this);
 	case ROTATE:
 		return new RotateAction(this);
 	case COLOR_BAR:
@@ -321,7 +321,7 @@ void ApplicationManager::SendSelecteDown()
 	}
 }
 
-void ApplicationManager::BringSelectedUp()
+void ApplicationManager::SendSelectedUp()
 {
 	int x;
 	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
@@ -345,15 +345,17 @@ void ApplicationManager::BringSelectedUp()
 
 void ApplicationManager::RotateSelected(int deg)
 {
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-		if ((*itr)->IsSelected())
+	for (auto& fig : figs) 
+    {
+		if (fig->IsSelected())
 		{
-			(*itr)->Rotate(deg);
-			if ((*itr)->IsRotate())
+			fig->Rotate(deg);
+			if (fig->IsRotate())
 			{
-				(*itr)->Rotated(false);
+				fig->Rotated(false);
 			}
-			else {
+			else 
+            {
 				out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
 			}
 		}
