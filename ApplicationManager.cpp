@@ -274,35 +274,45 @@ multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsig
 bool ApplicationManager::ChangeSelectedFillColor(color c)
 {
 	bool flag = false;
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-		if ((*itr)->IsSelected())
+
+	for (auto& fig : figs)
+    {
+		if (fig->IsSelected())
 		{
-			(*itr)->ChngFillClr(c);
+			fig->ChngFillClr(c);
+
 			flag = true;
 		}
 	}
+
 	return flag;
 }
 
 bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 {
 	bool flag = false;
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-		if ((*itr)->IsSelected())
+
+	for (auto& fig : figs) 
+    {
+		if (fig->IsSelected())
 		{
-			(*itr)->ChngDrawClr(C);
-			(*itr)->ChngBorderWidth(W);
-			(*itr)->SetSelected(false);
+			fig->ChngDrawClr(C);
+			fig->ChngBorderWidth(W);
+			fig->SetSelected(false);
+
 			flag = true;
 		}
 	}
+
 	return flag;
 }
 
 void ApplicationManager::SendSelecteDown()
 {
+    // TODO: to be changed after making figs a vector not set
 	int x;
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
+	for (auto itr = figs.begin(); itr != figs.end(); itr++) 
+    {
 		if ((*itr)->IsSelected())
 		{
 			x = (*itr)->z_index;
@@ -323,12 +333,15 @@ void ApplicationManager::SendSelecteDown()
 
 void ApplicationManager::SendSelectedUp()
 {
+    // TODO: to be changed after making figs a vector not set
 	int x;
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
+	for (auto itr = figs.begin(); itr != figs.end(); itr++) 
+    {
 		if ((*itr)->IsSelected())
 		{
 			x = (*itr)->z_index;
-			for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
+			for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) 
+            {
 				if (x <= (*itr2)->z_index && itr != itr2)
 				{
 					x = (*itr2)->z_index + 1;
