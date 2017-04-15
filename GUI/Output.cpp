@@ -36,7 +36,7 @@ Output::Output()
     UI.DrawAreaWidth = UI.width;
     UI.DrawAreaHeight = UI.height - (UI.StatusBarHeight + UI.ToolBarHeight);
     UI.DrawAreaX = 0;
-    UI.DrawAreaY = UI.ToolBarHeight /*+ UI.TToolBarHeight*/;
+    UI.DrawAreaY = UI.ToolBarHeight; /*+ UI.TToolBarHeight*/
 
     // Play Area Parameters
     UI.playAreaWidthone = UI.width / 2;
@@ -58,11 +58,11 @@ Output::Output()
 
     // Create the output window
     wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
+
     // Change the title
     wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
     CreateDrawToolBar();
-    //CreateColorBar();
     CreateStatusBar();
 }
 
@@ -132,10 +132,6 @@ void Output::CreateDrawToolBar() const
     // Draw menu item one image at a time
     for (int i = 0; i < DRAW_ITM_COUNT; i++)
         wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.ToolBarY, UI.MenuItemWidth, UI.ToolBarHeight);
-
-    // Draw a line under the toolbar
-    //wind_p->SetPen(RED, 3);
-    //wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
 void Output::CreateFigItems() const
@@ -174,7 +170,6 @@ void Output::CreateFigActions() const
 
 void Output::CreateColorBar() const
 {
-    //ClearTToolBar();
     wind_p->iscolorbar = true;
     wind_p->DrawImage("images\\MenuItems\\color.jpg", UI.TToolBarX, UI.TToolBarY, UI.TToolBarWidth, UI.TToolBarHeight);
 }
@@ -196,10 +191,6 @@ void Output::CreatePlayToolBar() const
     for (int i = 0; i < PLAY_ITM_COUNT; i++)
         wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
             UI.MenuItemWidth, UI.ToolBarHeight);
-
-    // Draw a line under the toolbar
-    // wind_p->SetPen(RED, 3);
-    // wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -330,7 +321,6 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 void Output::CreateDrawArea() const
 {
     CreatePlayArea();
-    //CreateColorBar();
 }
 
 void Output::CreatePlayArea() const

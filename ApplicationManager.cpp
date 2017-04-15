@@ -96,8 +96,19 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         act_p->Execute();
 
         // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
+        // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
+        // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack 
         if (!(act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
+        if (! (Action::IsFromAction<UndoAction>(act_p) 
             undo_st.push(act_p);
+            || Action::IsFromAction<RedoAction>(act_p) 
+            || Action::IsFromAction<SwitchDrawMode>(act_p) 
+            || Action::IsFromAction<SwitchPlayMode>(act_p)
+            || Action::IsFromAction<SaveAction>(act_p)
+            || Action::IsFromAction<LoadAction>(act_p)))
+			undo_st.push(act_p);
+        else
+            delete act_p;
     }
 }
 //==================================================================================//
@@ -140,7 +151,6 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-    //out_p->ClearDrawArea();
     for (auto& fig : figs)
         fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
@@ -360,8 +370,22 @@ void ApplicationManager::RotateSelected(int deg)
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+    // delete figs
     for (auto& fig : figs)
         delete fig;
+    
+    // remove actions in stacks
+    while (! undo_st.empty())
+    {
+        delete undo_st.top();
+        undo_st.pop();
+    }
+    while (! redo_st.empty())
+    {
+        delete redo_st.top();
+        redo_st.pop();
+    }
+
     delete in_p;
     delete out_p;
 }

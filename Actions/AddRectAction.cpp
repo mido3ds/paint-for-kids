@@ -21,7 +21,7 @@ void AddRectAction::ReadActionParameters()
     //Read 2nd corner and store in point p2
     in_p->GetPointClicked(p2.x, p2.y);
 
-    gfx.is_filled = true; //default is not filled
+    gfx.is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetCrntDrawColor();
     gfx.fill_clr = out_p->GetCrntFillColor();
