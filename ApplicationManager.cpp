@@ -96,14 +96,11 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         act_p->Execute();
 
         // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
-        // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
         // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack 
-        if (!(act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
         if (! (Action::IsFromAction<UndoAction>(act_p) 
-            undo_st.push(act_p);
             || Action::IsFromAction<RedoAction>(act_p) 
-            || Action::IsFromAction<SwitchDrawMode>(act_p) 
-            || Action::IsFromAction<SwitchPlayMode>(act_p)
+            || Action::IsFromAction<ToDrawModeAction>(act_p) 
+            || Action::IsFromAction<ToPlayModeAction>(act_p)
             || Action::IsFromAction<SaveAction>(act_p)
             || Action::IsFromAction<LoadAction>(act_p)))
 			undo_st.push(act_p);

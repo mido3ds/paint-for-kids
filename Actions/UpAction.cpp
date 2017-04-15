@@ -1,22 +1,22 @@
 #include "UpAction.h"
 
-Up::Up(ApplicationManager* app_p)
+UpAction::UpAction(ApplicationManager* app_p)
     : Action(app_p)
 {
 }
 
-void Up::ReadActionParameters()
+void UpAction::ReadActionParameters()
 {
 }
 
-void Up::Execute()
+void UpAction::Execute()
 {
     Output* out_p = manager_p->GetOutput();
     out_p->ClearTToolBar();
     manager_p->SendSelectedUp();
 }
 
-void Up::Undo()
+void UpAction::Undo()
 {
     manager_p->SendSelecteDown();
 }
