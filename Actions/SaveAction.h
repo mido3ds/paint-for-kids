@@ -16,8 +16,6 @@ public:
 
     virtual void Undo();
 
-    
-
 private:
     bool successfull = false;
     ofstream out_file;

@@ -13,19 +13,19 @@
 #include "Actions/AddLineAction.h"
 #include "Actions/AddRectAction.h"
 #include "Actions/AddTrnglAction.h"
+#include "Actions/ChBGColorAction.h"
+#include "Actions/ChBorderAction.h"
+#include "Actions/ChFillColorAction.h"
+#include "Actions/DownAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/RedoAction.h"
+#include "Actions/RotateAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
 #include "Actions/UndoAction.h"
-#include "Actions/ChFillColorAction.h"
-#include "Actions/ChBGColorAction.h"
-#include "Actions/ChBorderAction.h"
-#include "Actions/DownAction.h"
 #include "Actions/UpAction.h"
-#include "Actions/RotateAction.h"
 
 // figures files
 #include "Figures/CCircle.h"
@@ -72,15 +72,15 @@ public:
     // used by Action::Undo to delete a made-before figure given the stored id of it
     void DeleteFigure(unsigned int id);
 
-	bool ChangeSelectedFillColor(color c);
+    bool ChangeSelectedFillColor(color c);
 
-	bool ChangeSelectedBorder(int W, color C);
+    bool ChangeSelectedBorder(int W, color C);
 
-	void SendSelecteDown();
+    void SendSelecteDown();
 
-	void SendSelectedUp();
+    void SendSelectedUp();
 
-	void RotateSelected(int deg);
+    void RotateSelected(int deg);
 
 private:
     multiset<CFigure*, CmpFigures> figs;

@@ -12,8 +12,6 @@ public:
     virtual void Execute();
 
     virtual void Undo();
-
-    
 };
 
 #endif /* __UndoAction_h__ */

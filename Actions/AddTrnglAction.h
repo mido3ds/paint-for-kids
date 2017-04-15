@@ -17,8 +17,6 @@ public:
 
     virtual void Undo();
 
-    
-
 private:
     CTrngl* trngl;
 

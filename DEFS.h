@@ -8,42 +8,42 @@
 
 enum ActionType //The actions supported (you can add more if needed)
 {
-	DRAW_FIG_ITM,
-	DRAW_LINE, //Draw Line
-	DRAW_RECT, //Draw CRectangle
-	DRAW_TRI, //Draw Triangle
-	DRAW_CIRC, //Draw Circle
-	CHNG_DRAW_CLR, //Change the drawing color
-	CHNG_FILL_CLR, //Change the filling color
-	CHNG_BK_CLR, //Change background color
-	DEL, //Delete a figure(s)
-	MOVE, //Move a figure(s)
-	SELECT,
-	CTR,	// Figure Actions Control
-	RESIZE, //Resize a figure(s)
-	ROTATE, //Rotate a figure(s)
-	SEND_BACK, //Send a figure to the back of all figures
-	BRNG_FRNT, //Bring a figure to the front of all figures
-	SAVE, //Save the whole graph to a file
-	LOAD, //Load a graph from a file
-	ZOOM_IN,
-	ZOOM_OUT,
-	CUT,
-	COPY,
-	PASTE,
-	HIDE,
-	SCRAMBLE,
-	UNDO,
-	REDO,
-	EXIT, //Exit the application
+    DRAW_FIG_ITM,
+    DRAW_LINE, //Draw Line
+    DRAW_RECT, //Draw CRectangle
+    DRAW_TRI, //Draw Triangle
+    DRAW_CIRC, //Draw Circle
+    CHNG_DRAW_CLR, //Change the drawing color
+    CHNG_FILL_CLR, //Change the filling color
+    CHNG_BK_CLR, //Change background color
+    DEL, //Delete a figure(s)
+    MOVE, //Move a figure(s)
+    SELECT,
+    CTR, // Figure Actions Control
+    RESIZE, //Resize a figure(s)
+    ROTATE, //Rotate a figure(s)
+    SEND_BACK, //Send a figure to the back of all figures
+    BRNG_FRNT, //Bring a figure to the front of all figures
+    SAVE, //Save the whole graph to a file
+    LOAD, //Load a graph from a file
+    ZOOM_IN,
+    ZOOM_OUT,
+    CUT,
+    COPY,
+    PASTE,
+    HIDE,
+    SCRAMBLE,
+    UNDO,
+    REDO,
+    EXIT, //Exit the application
 
-	DRAWING_AREA, //A click on the drawing area
-	COLOR_BAR, //A Click On The Color Bar
-	STATUS, //A click on the status bar
-	EMPTY, //A click on empty place in the toolbar
+    DRAWING_AREA, //A click on the drawing area
+    COLOR_BAR, //A Click On The Color Bar
+    STATUS, //A click on the status bar
+    EMPTY, //A click on empty place in the toolbar
 
-	TO_DRAW, //Switch interface to Draw mode
-	TO_PLAY //Switch interface to Play mode
+    TO_DRAW, //Switch interface to Draw mode
+    TO_PLAY //Switch interface to Play mode
 };
 
 struct Point // To be used for figures points

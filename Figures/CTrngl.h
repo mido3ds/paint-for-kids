@@ -10,14 +10,14 @@ public:
 
     virtual void Draw(Output* out_p) const;
 
-	virtual void Rotate(int deg);
-	virtual void Rotated(bool r);
-	virtual bool IsRotate();
+    virtual void Rotate(int deg);
+    virtual void Rotated(bool r);
+    virtual bool IsRotate();
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
 
-	virtual Point CalcCenter();
-	bool OutOfRange(Point p1, Point p2, Point p3);
+    virtual Point CalcCenter();
+    bool OutOfRange(Point p1, Point p2, Point p3);
 
     Point p1, p2, p3;
 };

@@ -8,17 +8,15 @@
 
 class RotateAction : public Action {
 public:
-	RotateAction(ApplicationManager* app_p);
+    RotateAction(ApplicationManager* app_p);
 
-	virtual void ReadActionParameters();
-	virtual void Execute();
+    virtual void ReadActionParameters();
+    virtual void Execute();
 
-	virtual void Undo();
-
-	
+    virtual void Undo();
 
 private:
-	int deg;
+    int deg;
 };
 
 #endif // !_ROTATE_

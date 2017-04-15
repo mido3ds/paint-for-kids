@@ -10,15 +10,13 @@
 
 class DownAction : public Action {
 public:
-	DownAction(ApplicationManager* app_p);
+    DownAction(ApplicationManager* app_p);
 
-	virtual void ReadActionParameters();
+    virtual void ReadActionParameters();
 
-	virtual void Execute();
+    virtual void Execute();
 
-	virtual void Undo();
-
-	
+    virtual void Undo();
 
 private:
 };

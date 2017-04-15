@@ -20,8 +20,6 @@ public:
 
     virtual void Undo();
 
-    
-
 private:
     CRectangle* rect;
 

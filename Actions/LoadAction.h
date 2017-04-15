@@ -16,8 +16,6 @@ public:
 
     virtual void Undo();
 
-    
-
 private:
     bool successfull = false;
     ifstream in_file;

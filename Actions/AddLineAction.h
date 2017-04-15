@@ -17,7 +17,6 @@ public:
 
     virtual void Undo();
 
-    
 private:
     CLine* line;
 

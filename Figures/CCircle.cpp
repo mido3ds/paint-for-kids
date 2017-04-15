@@ -19,17 +19,17 @@ double CCircle::GetRadius()
 
 bool CCircle::IsRotate()
 {
-	return rotate;
+    return rotate;
 }
 
 Point CCircle::CalcCenter()
 {
-	return p1;
+    return p1;
 }
 
 bool CCircle::OutOfRange(Point p1)
 {
-	return (p1.x - GetRadius() < UI.DrawAreaX || p1.x + GetRadius() > UI.DrawAreaX + UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y + GetRadius() > UI.DrawAreaY + UI.DrawAreaHeight);
+    return (p1.x - GetRadius() < UI.DrawAreaX || p1.x + GetRadius() > UI.DrawAreaX + UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y + GetRadius() > UI.DrawAreaY + UI.DrawAreaHeight);
 }
 
 Point CCircle::GetSecondPointFromRadius(double rad)
@@ -48,7 +48,7 @@ void CCircle::Rotate(int deg)
 
 void CCircle::Rotated(bool r)
 {
-	rotate = r;
+    rotate = r;
 }
 
 void CCircle::Save(ofstream& out_file)

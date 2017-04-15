@@ -33,7 +33,7 @@ void AddTrnglAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
-	out_p->ClearTToolBar();
+    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }
@@ -43,13 +43,11 @@ void AddTrnglAction::Execute()
 {
     trngl = new CTrngl(p1, p2, p3, gfx);
     trngl->SetId(id);
-	if (!trngl->OutOfRange(p1, p2, p3))
-	{
-		manager_p->AddFigure(trngl);
-	}
-	else {
-		manager_p->GetOutput()->PrintMessage("The Triangle Is Out Of Range");
-	}
+    if (!trngl->OutOfRange(p1, p2, p3)) {
+        manager_p->AddFigure(trngl);
+    } else {
+        manager_p->GetOutput()->PrintMessage("The Triangle Is Out Of Range");
+    }
 }
 
 void AddTrnglAction::Undo()

@@ -10,13 +10,13 @@
 
 class Up : public Action {
 public:
-	Up(ApplicationManager* app_p);
+    Up(ApplicationManager* app_p);
 
-	virtual void ReadActionParameters();
+    virtual void ReadActionParameters();
 
-	virtual void Execute();
+    virtual void Execute();
 
-	virtual void Undo();
+    virtual void Undo();
 
 private:
 };
