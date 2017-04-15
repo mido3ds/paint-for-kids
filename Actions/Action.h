@@ -23,10 +23,10 @@ public:
     // given object from action and class action
     // returns true if this object is instance of this action
     // used to detect what is this action during run-time
-    template<class action_class, typename C>
-    static bool IsFromAction(const C& object)
+    template<class action_class>
+    static bool IsFromAction(const Action* object)
     {
-        return typeid(object) == typeid(action_class);
+        return typeid(*object) == typeid(action_class);
     }
 protected:
     ApplicationManager* manager_p; //Actions needs AppMngr to do their job
