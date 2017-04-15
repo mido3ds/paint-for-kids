@@ -7,6 +7,7 @@ CFigure::CFigure(const GfxInfo& figure_gfx_info)
     is_filled = figure_gfx_info.is_filled;
     border_width = figure_gfx_info.border_width;
     z_index = figure_gfx_info.z_index;
+	//selected = true;
 }
 
 CFigure::CFigure()
@@ -32,6 +33,16 @@ void CFigure::ChngFillClr(color filling_clr)
 {
     is_filled = true;
     this->fill_clr = filling_clr;
+}
+
+void CFigure::ChngBorderWidth(int BW)
+{
+	this->border_width = BW;
+}
+
+void CFigure::ChngZindex(int Z)
+{
+	this->z_index = Z;
 }
 
 void CFigure::SetId(unsigned int id)

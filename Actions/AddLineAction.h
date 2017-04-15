@@ -17,6 +17,7 @@ public:
 
     virtual void Undo();
 
+    virtual ActionType GetActType() {return DRAW_LINE;}
 private:
     CLine* line;
 

@@ -20,6 +20,12 @@
 #include "Actions/SwitchDrawMode.h"
 #include "Actions/SwitchPlayMode.h"
 #include "Actions/UndoAction.h"
+#include "Actions/ChFillColor.h"
+#include "Actions/ChBGColor.h"
+#include "Actions\ChBorder.h"
+#include "Actions\Down.h"
+#include "Actions\UP.h"
+#include "Actions\Rotate.h"
 
 // figures files
 #include "Figures/CCircle.h"
@@ -65,6 +71,16 @@ public:
 
     // used by Action::Undo to delete a made-before figure given the stored id of it
     void DeleteFigure(unsigned int id);
+
+	bool ChangeSelectedFillColor(color c);
+
+	bool ChangeSelectedBorder(int W, color C);
+
+	void SendSelecteDown();
+
+	void BringSelectedUp();
+
+	void RotateSelected(int deg);
 
 private:
     multiset<CFigure*, CmpFigures> figs;

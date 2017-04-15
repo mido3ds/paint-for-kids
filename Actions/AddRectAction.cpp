@@ -21,13 +21,15 @@ void AddRectAction::ReadActionParameters()
     //Read 2nd corner and store in point p2
     in_p->GetPointClicked(p2.x, p2.y);
 
-    gfx.is_filled = false; //default is not filled
+    gfx.is_filled = true; //default is not filled
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetCrntDrawColor();
     gfx.fill_clr = out_p->GetCrntFillColor();
     gfx.border_width = out_p->GetCrntPenWidth();
 
+
     out_p->ClearStatusBar();
+	out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }
@@ -38,7 +40,13 @@ void AddRectAction::Execute()
     //Add the lineangle to the list of figures
     rect = new CRectangle(p1, p2, gfx);
     rect->SetId(id);
-    manager_p->AddFigure(rect);
+	if (!rect->OutOfRange(p1, p2))
+	{
+		manager_p->AddFigure(rect);
+	}
+	else {
+		manager_p->GetOutput()->PrintMessage("The Rectangle Is Out Of Range");
+	}
 }
 
 void AddRectAction::Undo()

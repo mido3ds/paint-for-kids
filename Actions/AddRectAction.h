@@ -20,6 +20,8 @@ public:
 
     virtual void Undo();
 
+    virtual ActionType GetActType() {return DRAW_RECT;}
+
 private:
     CRectangle* rect;
 

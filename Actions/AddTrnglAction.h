@@ -17,6 +17,8 @@ public:
 
     virtual void Undo();
 
+    virtual ActionType GetActType() {return DRAW_TRI;}
+
 private:
     CTrngl* trngl;
 

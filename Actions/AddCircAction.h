@@ -17,6 +17,8 @@ public:
 
     virtual void Undo();
 
+    virtual ActionType GetActType() {return DRAW_CIRC;}
+
 private:
     CCircle* circ;
 
