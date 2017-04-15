@@ -1,16 +1,17 @@
-#ifndef _DOWN_
-#define _DOWN_
+#ifndef _CH_BG_COLOR_
+#define _CH_BG_COLOR_
 
 #include "../ApplicationManager.h"
 #include "../Figures/CRectangle.h"
 #include "Action.h"
+#include "../CMUgraphicsLib/colors.h"
 
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class Down : public Action {
+class ChBGColorAction : public Action {
 public:
-	Down(ApplicationManager* app_p);
+	ChBGColorAction(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
 
@@ -18,9 +19,11 @@ public:
 
 	virtual void Undo();
 
-	virtual ActionType GetActType() { return SEND_BACK; }
+	
 
 private:
+	color C = UI.BkGrndColor;
+	color lastC = C;
 };
 
-#endif // !_DOWN_
+#endif // !_CH_BG_COLOR_

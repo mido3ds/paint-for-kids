@@ -1,10 +1,10 @@
-#include "ChBGColor.h"
+#include "ChBGColorAction.h"
 
-ChBGColor::ChBGColor(ApplicationManager * app_p) :Action(app_p)
+ChBGColorAction::ChBGColorAction(ApplicationManager * app_p) :Action(app_p)
 {
 }
 
-void ChBGColor::ReadActionParameters()
+void ChBGColorAction::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* out_p = manager_p->GetOutput();
@@ -18,14 +18,14 @@ void ChBGColor::ReadActionParameters()
 	out_p->ClearStatusBar();
 }
 
-void ChBGColor::Execute()
+void ChBGColorAction::Execute()
 {
 	Output *out_p = manager_p->GetOutput();
 	out_p->SetBkGrndColor(C);
 	out_p->ClearDrawArea();
 }
 
-void ChBGColor::Undo()
+void ChBGColorAction::Undo()
 {
 	Output *out_p = manager_p->GetOutput();
 	out_p->SetBkGrndColor(lastC);

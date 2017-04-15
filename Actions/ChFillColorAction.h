@@ -1,16 +1,17 @@
-#ifndef _UP_
-#define _UP_
+#ifndef __CH_FILL_COLOR__
+#define __CH_FILL_COLOR__
 
 #include "../ApplicationManager.h"
 #include "../Figures/CRectangle.h"
 #include "Action.h"
+#include "../CMUgraphicsLib/colors.h"
 
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class Up : public Action {
+class ChFillColorAction : public Action {
 public:
-	Up(ApplicationManager* app_p);
+	ChFillColorAction(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
 
@@ -18,9 +19,11 @@ public:
 
 	virtual void Undo();
 
-	virtual ActionType GetActType() { return BRNG_FRNT; }
+	
 
 private:
+	color C = UI.FillColor,
+		lastC = C;
 };
 
-#endif
+#endif // !_CH_FILL_COLOR_

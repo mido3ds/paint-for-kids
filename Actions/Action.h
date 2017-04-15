@@ -19,7 +19,7 @@ public:
     //To undo this action (code depends on action type)
     virtual void Undo() = 0;
 
-    virtual ActionType GetActType() = 0;
+    
 
 protected:
     ApplicationManager* manager_p; //Actions needs AppMngr to do their job

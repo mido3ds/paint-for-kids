@@ -9,9 +9,9 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class ChBorder : public Action {
+class ChBorderAction : public Action {
 public:
-	ChBorder(ApplicationManager* app_p);
+	ChBorderAction(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
 
@@ -19,7 +19,7 @@ public:
 
 	virtual void Undo();
 
-	virtual ActionType GetActType() { return CHNG_DRAW_CLR; }
+	
 
 private:
 	color C = UI.DrawColor,

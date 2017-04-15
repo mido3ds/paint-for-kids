@@ -1,24 +1,26 @@
-#ifndef _ROTATE_
-#define _ROTATE_
+#ifndef _DOWN_
+#define _DOWN_
 
 #include "../ApplicationManager.h"
-#include "../GUI/Input.h"
-#include "../GUI/Output.h"
+#include "../Figures/CRectangle.h"
 #include "Action.h"
 
-class Rotate : public Action {
+#include "../GUI/Input.h"
+#include "../GUI/Output.h"
+
+class DownAction : public Action {
 public:
-	Rotate(ApplicationManager* app_p);
+	DownAction(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
+
 	virtual void Execute();
 
 	virtual void Undo();
 
-	virtual ActionType GetActType() { return ROTATE; }
+	
 
 private:
-	int deg;
 };
 
-#endif // !_ROTATE_
+#endif // !_DOWN_

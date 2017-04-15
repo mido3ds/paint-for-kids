@@ -1,10 +1,10 @@
-#include "ChBorder.h"
+#include "ChBorderAction.h"
 
-ChBorder::ChBorder(ApplicationManager * app_p) :Action(app_p)
+ChBorderAction::ChBorderAction(ApplicationManager * app_p) :Action(app_p)
 {
 }
 
-void ChBorder::ReadActionParameters()
+void ChBorderAction::ReadActionParameters()
 {
 	Output *out_p = manager_p->GetOutput();
 	Input *in_p = manager_p->GetInput();
@@ -22,7 +22,7 @@ void ChBorder::ReadActionParameters()
 	out_p->ClearDrawArea();
 }
 
-void ChBorder::Execute()
+void ChBorderAction::Execute()
 {
 	if (!manager_p->ChangeSelectedBorder(w, C))
 	{
@@ -32,7 +32,7 @@ void ChBorder::Execute()
 	}
 }
 
-void ChBorder::Undo()
+void ChBorderAction::Undo()
 {
 	if (!manager_p->ChangeSelectedBorder(lastW, lastC))
 	{

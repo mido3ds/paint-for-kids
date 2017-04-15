@@ -35,9 +35,9 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case EXIT:
         return new ExitAction(this);
     case TO_PLAY:
-        return new SwitchPlayMode(this);
+        return new ToPlayModeAction(this);
     case TO_DRAW:
-        return new SwitchDrawMode(this);
+        return new ToDrawModeAction(this);
     case SAVE:
         return new SaveAction(this);
     case LOAD:
@@ -47,17 +47,17 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case REDO:
         return new RedoAction(this);
 	case CHNG_FILL_CLR:
-		return new ChFillColor(this);
+		return new ChFillColorAction(this);
 	case CHNG_BK_CLR:
-		return new ChBGColor(this);
+		return new ChBGColorAction(this);
 	case CHNG_DRAW_CLR:
-		return new ChBorder(this);
+		return new ChBorderAction(this);
 	case SEND_BACK:
-		return new Down(this);
+		return new DownAction(this);
 	case BRNG_FRNT:
 		return new Up(this);
 	case ROTATE:
-		return new Rotate(this);
+		return new RotateAction(this);
 	case COLOR_BAR:
 		out_p->ClearTToolBar();
 		return nullptr;

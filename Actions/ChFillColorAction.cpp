@@ -1,11 +1,11 @@
-#include "ChFillColor.h"
+#include "ChFillColorAction.h"
 
-ChFillColor::ChFillColor(ApplicationManager * app_p)
+ChFillColorAction::ChFillColorAction(ApplicationManager * app_p)
 	: Action(app_p)
 {
 }
 
-void ChFillColor::ReadActionParameters()
+void ChFillColorAction::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* out_p = manager_p->GetOutput();
@@ -20,7 +20,7 @@ void ChFillColor::ReadActionParameters()
 	out_p->ClearStatusBar();
 }
 
-void ChFillColor::Execute()
+void ChFillColorAction::Execute()
 {
 	if (!manager_p->ChangeSelectedFillColor(C))
 	{
@@ -29,7 +29,7 @@ void ChFillColor::Execute()
 	}
 }
 
-void ChFillColor::Undo()
+void ChFillColorAction::Undo()
 {
 	if (!manager_p->ChangeSelectedFillColor(lastC))
 	{
