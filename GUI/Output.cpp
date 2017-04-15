@@ -10,12 +10,35 @@ Output::Output()
     UI.wx = 5;
     UI.wy = 5;
 
-    UI.StatusBarHeight = 50;
+    // ToolBar Parameters
     UI.ToolBarHeight = 50;
-    UI.colorBarWidth = 100;
-    UI.colorBarHeight = 600;
-    UI.MenuItemWidth = 50;
+    UI.ToolBarWidth = UI.width;
+    UI.ToolBarX = 0;
+    UI.ToolBarY = 0;
 
+    // Temp ToolBar Parameters
+    UI.TToolBarWidth = UI.width;
+    UI.TToolBarHeight = 60;
+    UI.TToolBarX = 0;
+    UI.TToolBarY = UI.ToolBarHeight;
+
+    // Status Bar Parameters
+    UI.StatusBarWidth = UI.width;
+    UI.StatusBarHeight = 50;
+    UI.StatusBarX = 0;
+    UI.StatusBarY = UI.height - UI.StatusBarHeight;
+
+    // Items Parameters
+    UI.MenuItemWidth = 50;
+    UI.MenuItemHeight = 50;
+
+    // Draw Area Parameters
+    UI.DrawAreaWidth = UI.width;
+    UI.DrawAreaHeight = UI.height - (UI.StatusBarHeight + UI.ToolBarHeight);
+    UI.DrawAreaX = 0;
+    UI.DrawAreaY = UI.ToolBarHeight; /*+ UI.TToolBarHeight*/
+
+    // Play Area Parameters
     UI.playAreaWidthone = UI.width / 2;
     UI.playAreaWidthtwo = UI.playAreaWidthone;
     UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
@@ -35,11 +58,11 @@ Output::Output()
 
     // Create the output window
     wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
+
     // Change the title
     wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
     CreateDrawToolBar();
-    CreateColorBar();
     CreateStatusBar();
 }
 
@@ -59,7 +82,7 @@ window* Output::CreateWind(int w, int h, int x, int y) const
     window* pW = new window(w, h, x, y);
     pW->SetBrush(UI.BkGrndColor);
     pW->SetPen(UI.BkGrndColor, 1);
-    pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
+    pW->DrawRectangle(UI.DrawAreaX, UI.DrawAreaY, UI.DrawAreaX + UI.DrawAreaWidth, UI.DrawAreaY + UI.DrawAreaHeight);
     return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +90,7 @@ void Output::CreateStatusBar() const
 {
     wind_p->SetPen(UI.StatusBarColor, 1);
     wind_p->SetBrush(UI.StatusBarColor);
-    wind_p->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+    wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
@@ -75,7 +98,7 @@ void Output::ClearStatusBar() const
     // Clear Status bar by drawing a filled white rectangle
     wind_p->SetPen(UI.StatusBarColor, 1);
     wind_p->SetBrush(UI.StatusBarColor);
-    wind_p->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+    wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -91,44 +114,64 @@ void Output::CreateDrawToolBar() const
     // To control the order of these images in the menu,
     // reoder them in UI_Info.h ==> enum DrawMenuItem
     string MenuItemImages[DRAW_ITM_COUNT];
-    MenuItemImages[ITM_LINE] = "images\\MenuItems\\line.jpg";
-    MenuItemImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";
-    MenuItemImages[ITM_TRI] = "images\\MenuItems\\tringle.jpg";
-    MenuItemImages[ITM_CIRC] = "images\\MenuItems\\circle.jpg";
-    MenuItemImages[ITM_CHDC] = "images\\MenuItems\\draw-color.jpg";
-    MenuItemImages[ITM_CHFC] = "images\\MenuItems\\fill-icon.jpg";
-    MenuItemImages[ITM_CHBGC] = "images\\MenuItems\\background.jpg";
-    MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
-    MenuItemImages[ITM_MOVE] = "images\\MenuItems\\move_icon.jpg";
+    MenuItemImages[ITM_FIG] = "images\\MenuItems\\borderPen.jpg";
     MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
-    MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize_icon.jpg";
-    MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\rotate_icon.jpg";
-    MenuItemImages[ITM_SEND_BACK] = "images\\MenuItems\\up.jpg";
-    MenuItemImages[ITM_BRING_FRONT] = "images\\MenuItems\\down.jpg";
+    MenuItemImages[ITM_CHDC] = "images\\MenuItems\\border.jpg";
+    MenuItemImages[ITM_CHFC] = "images\\MenuItems\\coloring.jpg";
+    MenuItemImages[ITM_CHBGC] = "images\\MenuItems\\background.jpg";
     MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save.jpg";
     MenuItemImages[ITM_LOAD] = "images\\MenuItems\\open.jpg";
-    MenuItemImages[ITM_ZOOM_IN] = "images\\MenuItems\\zoom_in.jpg";
-    MenuItemImages[ITM_ZOOM_OUT] = "images\\MenuItems\\zoom_out.jpg";
-    MenuItemImages[ITM_CUT] = "images\\MenuItems\\cut.jpg";
-    MenuItemImages[ITM_COPY] = "images\\MenuItems\\copy.jpg";
-    MenuItemImages[ITM_PASTE] = "images\\MenuItems\\paste.jpg";
-    MenuItemImages[ITM_PLAY] = "images\\MenuItems\\play.jpg";
+    MenuItemImages[ITM_CTR] = "images\\MenuItems\\Controls.jpg";
+    MenuItemImages[ITM_ZOOM_IN] = "images\\MenuItems\\Zin.jpg";
+    MenuItemImages[ITM_ZOOM_OUT] = "images\\MenuItems\\Zout.jpg";
+    MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo.jpg";
+    MenuItemImages[ITM_REDO] = "images\\MenuItems\\redo.jpg";
+    MenuItemImages[ITM_PLAY] = "images\\MenuItems\\play2.jpg";
     MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
 
     // Draw menu item one image at a time
     for (int i = 0; i < DRAW_ITM_COUNT; i++)
-        wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
-            UI.MenuItemWidth, UI.ToolBarHeight);
+        wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.ToolBarY, UI.MenuItemWidth, UI.ToolBarHeight);
+}
 
-    // Draw a line under the toolbar
-    wind_p->SetPen(RED, 3);
-    wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+void Output::CreateFigItems() const
+{
+    ClearTToolBar();
+    wind_p->isfigitems = true;
+
+    string MenuItemImages[FIG_ITM_COUNT];
+    MenuItemImages[ITM_LINE] = "images\\MenuItems\\line-.jpg";
+    MenuItemImages[ITM_RECT] = "images\\MenuItems\\rect.jpg";
+    MenuItemImages[ITM_TRI] = "images\\MenuItems\\triangle.jpg";
+    MenuItemImages[ITM_CIRC] = "images\\MenuItems\\circle.jpg";
+
+    for (int i = 0; i < FIG_ITM_COUNT; i++)
+        wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+void Output::CreateFigActions() const
+{
+    ClearTToolBar();
+    wind_p->isfigactions = true;
+
+    string MenuItemImages[FIG_ACT_COUNT];
+    MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete.jpg";
+    MenuItemImages[ITM_MOVE] = "images\\MenuItems\\move.jpg";
+    MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize2.jpg";
+    MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\rotate.jpg";
+    MenuItemImages[ITM_SEND_BACK] = "images\\MenuItems\\down.jpg";
+    MenuItemImages[ITM_BRING_FRONT] = "images\\MenuItems\\up.jpg";
+    MenuItemImages[ITM_CUT] = "images\\MenuItems\\cut.jpg";
+    MenuItemImages[ITM_COPY] = "images\\MenuItems\\copy.jpg";
+    MenuItemImages[ITM_PASTE] = "images\\MenuItems\\paste.jpg";
+
+    for (int i = 0; i < FIG_ACT_COUNT; i++)
+        wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
 
 void Output::CreateColorBar() const
 {
-    wind_p->DrawImage("images\\MenuItems\\coloring.jpg", 0, UI.ToolBarHeight,
-        UI.colorBarWidth, UI.colorBarHeight);
+    wind_p->iscolorbar = true;
+    wind_p->DrawImage("images\\MenuItems\\color.jpg", UI.TToolBarX, UI.TToolBarY, UI.TToolBarWidth, UI.TToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -148,27 +191,33 @@ void Output::CreatePlayToolBar() const
     for (int i = 0; i < PLAY_ITM_COUNT; i++)
         wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0,
             UI.MenuItemWidth, UI.ToolBarHeight);
-
-    // Draw a line under the toolbar
-    wind_p->SetPen(RED, 3);
-    wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::ClearDrawArea() const
 {
-    wind_p->SetPen(UI.BkGrndColor, 1);
+    wind_p->SetPen(UI.BkGrndColor, UI.PenWidth);
     wind_p->SetBrush(UI.BkGrndColor);
-    wind_p->DrawRectangle(UI.colorBarWidth, UI.ToolBarHeight, UI.width,
-        UI.height - UI.StatusBarHeight);
+    wind_p->DrawRectangle(UI.DrawAreaX, UI.DrawAreaY, UI.DrawAreaX + UI.DrawAreaWidth, UI.DrawAreaY + UI.DrawAreaHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearToolBar() const
 {
     wind_p->SetBrush(WHITE);
-    wind_p->SetPen(BLACK);
-    wind_p->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+    wind_p->SetPen(WHITE);
+    wind_p->DrawRectangle(UI.ToolBarX, UI.ToolBarY, UI.ToolBarX + UI.ToolBarWidth, UI.ToolBarY + UI.ToolBarHeight);
+}
+
+void Output::ClearTToolBar() const
+{
+    wind_p->isfigactions = false;
+    wind_p->isfigitems = false;
+    wind_p->iscolorbar = false;
+    wind_p->SetBrush(WHITE);
+    wind_p->SetPen(WHITE);
+    wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
+    ClearDrawArea();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -272,7 +321,6 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 void Output::CreateDrawArea() const
 {
     CreatePlayArea();
-    CreateColorBar();
 }
 
 void Output::CreatePlayArea() const

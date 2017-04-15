@@ -1,21 +1,24 @@
-#ifndef __SwitchDrawMode_H__
-#define __SwitchDrawMode_H__
+#ifndef _DOWN_
+#define _DOWN_
 
 #include "../ApplicationManager.h"
+#include "../Figures/CRectangle.h"
 #include "Action.h"
 
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class SwitchDrawMode : public Action {
+class DownAction : public Action {
 public:
-    SwitchDrawMode(ApplicationManager* app_p);
+    DownAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
+
     virtual void Execute();
 
     virtual void Undo();
 
+private:
 };
 
-#endif
+#endif // !_DOWN_

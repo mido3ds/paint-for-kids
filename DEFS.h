@@ -8,6 +8,7 @@
 
 enum ActionType //The actions supported (you can add more if needed)
 {
+    DRAW_FIG_ITM,
     DRAW_LINE, //Draw Line
     DRAW_RECT, //Draw CRectangle
     DRAW_TRI, //Draw Triangle
@@ -18,14 +19,13 @@ enum ActionType //The actions supported (you can add more if needed)
     DEL, //Delete a figure(s)
     MOVE, //Move a figure(s)
     SELECT,
+    CTR, // Figure Actions Control
     RESIZE, //Resize a figure(s)
     ROTATE, //Rotate a figure(s)
     SEND_BACK, //Send a figure to the back of all figures
     BRNG_FRNT, //Bring a figure to the front of all figures
     SAVE, //Save the whole graph to a file
     LOAD, //Load a graph from a file
-    UNDO,
-    REDO,
     ZOOM_IN,
     ZOOM_OUT,
     CUT,
@@ -33,6 +33,8 @@ enum ActionType //The actions supported (you can add more if needed)
     PASTE,
     HIDE,
     SCRAMBLE,
+    UNDO,
+    REDO,
     EXIT, //Exit the application
 
     DRAWING_AREA, //A click on the drawing area

@@ -1,15 +1,15 @@
-#include "SwitchPlayMode.h"
+#include "ToPlayModeAction.h"
 
-SwitchPlayMode::SwitchPlayMode(ApplicationManager* app_p)
+ToPlayModeAction::ToPlayModeAction(ApplicationManager* app_p)
     : Action(app_p)
 {
 }
 
-void SwitchPlayMode::ReadActionParameters()
+void ToPlayModeAction::ReadActionParameters()
 {
 }
 
-void SwitchPlayMode::Execute()
+void ToPlayModeAction::Execute()
 {
     //Get a Pointer to the Input / Output Interfaces
     Output* out_p = manager_p->GetOutput();
@@ -20,7 +20,7 @@ void SwitchPlayMode::Execute()
     out_p->CreatePlayArea();
 }
 
-void SwitchPlayMode::Undo()
+void ToPlayModeAction::Undo()
 {
-	manager_p->ExecuteAction(TO_DRAW);
+    manager_p->ExecuteAction(TO_DRAW);
 }

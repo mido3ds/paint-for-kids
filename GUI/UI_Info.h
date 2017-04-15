@@ -17,33 +17,50 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
 {
     // Note: Items are ordered here as they appear in menu
     // If you want to change the menu items order, change the order here
-    ITM_LINE, // Line
-    ITM_RECT, // Recangle item in menu
-    ITM_TRI, // Triangle
-    ITM_CIRC, // Circle item in menu
+
+    //ITM_CHBGC, // change Background Item
+    ITM_FIG,
+    ITM_SELECT,
     ITM_CHDC, // Change Draw Color
     ITM_CHFC, // Change Fill Color
-    ITM_CHBGC, // change Background Item
-    ITM_DEL, // Delete
-    ITM_MOVE, // Move
-    ITM_SELECT,
-    ITM_RESIZE, // Resize
-    ITM_ROTATE, // Rotate
-    ITM_SEND_BACK, // Send Back
-    ITM_BRING_FRONT, // Bring Front
+    ITM_CHBGC,
     ITM_SAVE, // Save
     ITM_LOAD, // Load File
+    ITM_CTR,
     ITM_ZOOM_IN,
     ITM_ZOOM_OUT,
-    ITM_CUT,
-    ITM_COPY,
-    ITM_PASTE,
+    ITM_UNDO,
+    ITM_REDO,
+
     ITM_PLAY,
 
     ITM_EXIT, // Exit item
 
     DRAW_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
 
+};
+
+enum figuresItems {
+    ITM_LINE, // Line
+    ITM_RECT, // Recangle item in menu
+    ITM_TRI, // Triangle
+    ITM_CIRC, // Circle item in menu
+
+    FIG_ITM_COUNT
+};
+
+enum figureActions {
+    ITM_DEL, // Delete
+    ITM_MOVE, // Move
+    ITM_RESIZE, // Resize
+    ITM_ROTATE, // Rotate
+    ITM_SEND_BACK, // Send Back
+    ITM_BRING_FRONT, // Bring Front
+    ITM_CUT,
+    ITM_COPY,
+    ITM_PASTE,
+
+    FIG_ACT_COUNT
 };
 
 enum PlayMenuItem // The items of the Play menu (you should add more items)
@@ -68,12 +85,30 @@ __declspec(selectany)
 
     int width, height, // Window width and height
         wx, wy, // Window starting coordinates
+
         StatusBarHeight, // Status Bar Height
-        ToolBarHeight, // Tool Bar Height (distance from top of window to bottom
-        // line of toolbar)
+        StatusBarWidth,
+        StatusBarX,
+        StatusBarY,
+
+        ToolBarWidth,
+        ToolBarHeight, // Tool Bar Height (distance from top of window to bottom line of toolbar)
+        ToolBarX,
+        ToolBarY,
+
         MenuItemWidth, // Width of each item in toolbar menu
-        colorBarWidth, // Color Bar Width
-        colorBarHeight, // Color Bar height
+        MenuItemHeight,
+
+        TToolBarWidth, // Temp ToolBar Width
+        TToolBarHeight, // Temp ToolBar height
+        TToolBarX,
+        TToolBarY,
+
+        DrawAreaWidth,
+        DrawAreaHeight,
+        DrawAreaX,
+        DrawAreaY,
+
         playAreaWidthone,
         playAreaWidthtwo,
         playAreaHeight;

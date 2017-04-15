@@ -1,15 +1,15 @@
-#include "SwitchDrawMode.h"
+#include "ToDrawModeAction.h"
 
-SwitchDrawMode::SwitchDrawMode(ApplicationManager* app_p)
+ToDrawModeAction::ToDrawModeAction(ApplicationManager* app_p)
     : Action(app_p)
 {
 }
 
-void SwitchDrawMode::ReadActionParameters()
+void ToDrawModeAction::ReadActionParameters()
 {
 }
 
-void SwitchDrawMode::Execute()
+void ToDrawModeAction::Execute()
 {
     //Get a Pointer to the Input / Output Interfaces
     Output* out_p = manager_p->GetOutput();
@@ -21,7 +21,7 @@ void SwitchDrawMode::Execute()
     out_p->CreateDrawArea();
 }
 
-void SwitchDrawMode::Undo()
+void ToDrawModeAction::Undo()
 {
-	manager_p->ExecuteAction(TO_PLAY);
+    manager_p->ExecuteAction(TO_PLAY);
 }

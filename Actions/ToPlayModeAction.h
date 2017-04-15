@@ -7,15 +7,14 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class SwitchPlayMode : public Action {
+class ToPlayModeAction : public Action {
 public:
-    SwitchPlayMode(ApplicationManager* app_p);
+    ToPlayModeAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
     virtual void Execute();
 
     virtual void Undo();
-
 };
 
 #endif

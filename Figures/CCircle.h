@@ -11,10 +11,17 @@ public:
 
     virtual void Draw(Output* out_p) const;
 
+    virtual void Rotate(int deg);
+    virtual void Rotated(bool r);
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
 
     double GetRadius();
+    virtual bool IsRotate();
+
+    virtual Point CalcCenter();
+
+    bool OutOfRange(Point p1);
 
     // TODO: make it one point and the radius, then del GetRadius and GetSecon....
     Point p1, p2;

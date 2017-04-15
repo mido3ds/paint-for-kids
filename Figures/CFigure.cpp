@@ -34,6 +34,16 @@ void CFigure::ChngFillClr(color filling_clr)
     this->fill_clr = filling_clr;
 }
 
+void CFigure::ChngBorderWidth(int BW)
+{
+    this->border_width = BW;
+}
+
+void CFigure::ChngZindex(int Z)
+{
+    this->z_index = Z;
+}
+
 void CFigure::SetId(unsigned int id)
 {
     this->id = id;
