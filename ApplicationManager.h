@@ -6,7 +6,10 @@
 #include "GUI/Output.h"
 #include <set>
 #include <stack>
+#include <vector>
 #include <string>
+#include <fstream>
+
 
 // actions files
 #include "Actions/AddCircAction.h"
@@ -20,6 +23,9 @@
 #include "Actions/SwitchDrawMode.h"
 #include "Actions/SwitchPlayMode.h"
 #include "Actions/UndoAction.h"
+#include "Actions/ResizeAction.h"
+#include "Actions/ZoomInAction.h"
+#include "Actions/ZoomOutAction.h"
 
 // figures files
 #include "Figures/CCircle.h"
@@ -38,14 +44,18 @@ public:
     //Reads the input command from the user and returns the corresponding action type
     ActionType GetUserAction() const;
     void ExecuteAction(ActionType); //Creates an action and executes it
+	void ExecuteAction(Action* action); //Takes already created action and excute it
 
     // -- Figures Management Functions
     void AddFigure(CFigure* fig_p); //Adds a new figure to the figs
     CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	multiset<CFigure*, CmpFigures>* GetFigures(); //Search for a figure given it's index in figure list
 
     // -- Interface Management Functions
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
+	int GetZoom() const; //Return value of zoom
+	Point GetManagerZoomPoint() const; //Return current zooming if there was zooming
     void UpdateInterface() const; //Redraws all the drawing window
 
     void SaveAll(ofstream& out_file);
@@ -80,6 +90,10 @@ private:
     stack<Action*> redo_st;
 
     unsigned int next_id = 0;
+
+	//variable to indecate zooming state...zoom=0 -> no zoom at all, zoom=1 -> zoom_in x2, zoom=-1 -> zoom_out x0.5, etc
+	int zoom = 0;
+	Point manager_zoom_point;
 
     //Pointers to Input and Output classes
     Input* in_p;

@@ -20,7 +20,7 @@ Output::Output()
     UI.playAreaWidthtwo = UI.playAreaWidthone;
     UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
 
-    UI.DrawColor = BLUE; // Drawing color						///
+    UI.DrawColor = BLACK; // Drawing color						///
     // this Is Not Used
     UI.FillColor = GREEN; // Filling color
     UI.MsgColor = RED; // Messages color
@@ -29,7 +29,7 @@ Output::Output()
     // Color]
     UI.HighlightColor = MAGENTA; // This color should NOT be used to draw figures.
     // use if for highlight only
-    UI.StatusBarColor = TURQUOISE;
+    UI.StatusBarColor = ABLUE;
     UI.PenWidth = 3; // width of the figures frames			/// This Is Not Used
     // Also
 
@@ -113,6 +113,8 @@ void Output::CreateDrawToolBar() const
     MenuItemImages[ITM_COPY] = "images\\MenuItems\\copy.jpg";
     MenuItemImages[ITM_PASTE] = "images\\MenuItems\\paste.jpg";
     MenuItemImages[ITM_PLAY] = "images\\MenuItems\\play.jpg";
+	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo.jpg";
+	MenuItemImages[ITM_REDO] = "images\\MenuItems\\redo.jpg";
     MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
 
     // Draw menu item one image at a time
@@ -150,7 +152,7 @@ void Output::CreatePlayToolBar() const
             UI.MenuItemWidth, UI.ToolBarHeight);
 
     // Draw a line under the toolbar
-    wind_p->SetPen(RED, 3);
+    wind_p->SetPen(BLACK, 1);
     wind_p->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -166,7 +168,7 @@ void Output::ClearDrawArea() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearToolBar() const
 {
-    wind_p->SetBrush(WHITE);
+    wind_p->SetBrush(AGRAY);
     wind_p->SetPen(BLACK);
     wind_p->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
@@ -176,8 +178,8 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 {
     ClearStatusBar(); // First clear the status bar
 
-    wind_p->SetPen(UI.MsgColor, 50);
-    wind_p->SetFont(20, BOLD, BY_NAME, "Arial");
+    wind_p->SetPen(WHITE, 50);
+    wind_p->SetFont(20, PLAIN, BY_NAME, "Arial");
     wind_p->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
 }
 //======================================================================================//

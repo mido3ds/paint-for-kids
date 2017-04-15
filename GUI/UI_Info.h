@@ -39,6 +39,8 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
     ITM_COPY,
     ITM_PASTE,
     ITM_PLAY,
+	ITM_UNDO,
+	ITM_REDO,
 
     ITM_EXIT, // Exit item
 

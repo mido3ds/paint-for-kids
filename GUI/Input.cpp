@@ -95,6 +95,10 @@ ActionType Input::GetUserAction() const
                 return PASTE;
             case ITM_PLAY:
                 return TO_PLAY;
+			case ITM_UNDO:
+				return UNDO;
+			case ITM_REDO:
+				return REDO;
 
             default:
                 return EMPTY; // A click on empty place in desgin toolbar
