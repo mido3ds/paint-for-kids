@@ -1,4 +1,3 @@
-#include "Output.h"
 
 Output::Output()
 {
@@ -7,8 +6,8 @@ Output::Output()
 
     UI.width = 1350;
     UI.height = 700;
-    UI.wx = 5;
-    UI.wy = 5;
+    UI.wx = 90;
+    UI.wy = 90;
 
     // ToolBar Parameters
     UI.ToolBarHeight = 50;
@@ -43,7 +42,7 @@ Output::Output()
     UI.playAreaWidthtwo = UI.playAreaWidthone;
     UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
 
-    UI.DrawColor = BLUE; // Drawing color						///
+    UI.DrawColor = BLACK; // Drawing color						///
     // this Is Not Used
     UI.FillColor = GREEN; // Filling color
     UI.MsgColor = RED; // Messages color
@@ -52,7 +51,7 @@ Output::Output()
     // Color]
     UI.HighlightColor = MAGENTA; // This color should NOT be used to draw figures.
     // use if for highlight only
-    UI.StatusBarColor = TURQUOISE;
+    UI.StatusBarColor = ABLUE;
     UI.PenWidth = 3; // width of the figures frames			/// This Is Not Used
     // Also
 
@@ -225,8 +224,8 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 {
     ClearStatusBar(); // First clear the status bar
 
-    wind_p->SetPen(UI.MsgColor, 50);
-    wind_p->SetFont(20, BOLD, BY_NAME, "Arial");
+    wind_p->SetPen(WHITE, 50);
+    wind_p->SetFont(20, PLAIN, BY_NAME, "Arial");
     wind_p->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
 }
 //======================================================================================//

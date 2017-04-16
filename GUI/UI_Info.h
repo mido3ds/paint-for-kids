@@ -17,8 +17,6 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
 {
     // Note: Items are ordered here as they appear in menu
     // If you want to change the menu items order, change the order here
-
-    //ITM_CHBGC, // change Background Item
     ITM_FIG,
     ITM_SELECT,
     ITM_CHDC, // Change Draw Color
@@ -40,7 +38,8 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
 
 };
 
-enum figuresItems {
+enum figuresItems 
+{
     ITM_LINE, // Line
     ITM_RECT, // Recangle item in menu
     ITM_TRI, // Triangle
@@ -49,7 +48,8 @@ enum figuresItems {
     FIG_ITM_COUNT
 };
 
-enum figureActions {
+enum figureActions 
+{
     ITM_DEL, // Delete
     ITM_MOVE, // Move
     ITM_RESIZE, // Resize
@@ -109,6 +109,8 @@ __declspec(selectany)
         DrawAreaX,
         DrawAreaY,
 
+        colorBarWidth, // Color Bar Width
+        colorBarHeight, // Color Bar height
         playAreaWidthone,
         playAreaWidthtwo,
         playAreaHeight;

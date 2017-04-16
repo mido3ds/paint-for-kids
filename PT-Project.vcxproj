@@ -141,12 +141,23 @@
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\ToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ToPlayModeAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Actions\UpAction.cpp" />
+=======
+    <ClCompile Include="Actions\ResizeAction.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\SwitchDrawMode.cpp" />
+    <ClCompile Include="Actions\SwitchPlayMode.cpp" />
+    <ClCompile Include="Actions\UndoAction.cpp" />
+    <ClCompile Include="Actions\ZoomInAction.cpp" />
+    <ClCompile Include="Actions\ZoomOutAction.cpp" />
+>>>>>>> mergefix
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -205,12 +216,23 @@
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
+<<<<<<< HEAD
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\ToDrawModeAction.h" />
     <ClInclude Include="Actions\ToPlayModeAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\UpAction.h" />
+=======
+    <ClInclude Include="Actions\ResizeAction.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\SwitchDrawMode.h" />
+    <ClInclude Include="Actions\SwitchPlayMode.h" />
+    <ClInclude Include="Actions\UndoAction.h" />
+    <ClInclude Include="Actions\ZoomInAction.h" />
+    <ClInclude Include="Actions\ZoomOutAction.h" />
+>>>>>>> mergefix
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />

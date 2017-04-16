@@ -31,7 +31,11 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case DRAW_TRI:
         return new AddTrnglAction(this);
     case DRAW_LINE:
-        return new AddLineAction(this);
+        return new AddLineAction(this);	
+	case ZOOM_IN:
+		return new ZoomInAction(this);
+	case ZOOM_OUT:
+		return new ZoomOutAction(this);
     case EXIT:
         return new ExitAction(this);
     case TO_PLAY:
@@ -46,7 +50,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UndoAction(this);
     case REDO:
         return new RedoAction(this);
-    case CHNG_FILL_CLR:
+	case CHNG_FILL_CLR:
         return new ChFillColorAction(this);
     case CHNG_BK_CLR:
         return new ChBGColorAction(this);
@@ -72,7 +76,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return nullptr;
     case RESIZE:
         out_p->ClearTToolBar();
-        return nullptr;
+        return new ResizeAction(this);
     case COPY:
         out_p->ClearTToolBar();
         return nullptr;
@@ -91,11 +95,77 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 {
     Action* act_p = DetectAction(act_type);
 
-    if (act_p != nullptr) {
+	if (act_type == ZOOM_IN)
+		zoom++;
+	else if (act_type == ZOOM_OUT)
+		zoom--;
+
+    if (act_p != nullptr) 
+	{
         act_p->ReadActionParameters();
+
+		if (act_type == ZOOM_IN)
+		{
+			ZoomInAction* zoom_in = dynamic_cast<ZoomInAction*>(act_p);
+			manager_zoom_point = zoom_in->GetZoomPoint();
+		}
+		else if (act_type == ZOOM_OUT)
+		{
+			ZoomOutAction* zoom_out = dynamic_cast<ZoomOutAction*>(act_p);
+			manager_zoom_point = zoom_out->GetZoomPoint();
+		}
+
         act_p->Execute();
 
-        // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
+		if (zoom != 0)
+		{
+			CFigure* last_figure = GetFigure(figs.size() - 1);
+			if (act_type == DRAW_LINE)
+			{
+				CLine* last_line = dynamic_cast<CLine*>(last_figure);
+
+				last_line->p1.x = (last_line->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_line->p1.y = (last_line->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_line->p2.x = (last_line->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_line->p2.y = (last_line->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+			else if (act_type == DRAW_RECT)
+			{
+				CRectangle* last_rect = dynamic_cast<CRectangle*>(last_figure);
+
+				last_rect->p1.x = (last_rect->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_rect->p1.y = (last_rect->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_rect->p2.x = (last_rect->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_rect->p2.y = (last_rect->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+			else if (act_type == DRAW_CIRC)
+			{
+				CCircle* last_circ = dynamic_cast<CCircle*>(last_figure);
+
+				last_circ->p1.x = (last_circ->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_circ->p1.y = (last_circ->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_circ->p2.x = (last_circ->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_circ->p2.y = (last_circ->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+			else if (act_type == DRAW_TRI)
+			{
+				CTrngl* last_trngl = dynamic_cast<CTrngl*>(last_figure);
+
+				last_trngl->p1.x = (last_trngl->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_trngl->p1.y = (last_trngl->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_trngl->p2.x = (last_trngl->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_trngl->p2.y = (last_trngl->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_trngl->p3.x = (last_trngl->p3.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_trngl->p3.y = (last_trngl->p3.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+		}
+
+		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
         // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack 
         if (! (Action::IsFromAction<UndoAction>(act_p) 
             || Action::IsFromAction<RedoAction>(act_p) 
@@ -107,6 +177,91 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         else
             delete act_p;
     }
+}
+////////////////////////////////////////////////////////////////////////////////////
+// gets action and executes it
+void ApplicationManager::ExecuteAction(Action* act_p)
+{
+
+	ActionType act_type = act_p->GetActType();
+
+	if (act_type == ZOOM_IN)
+	{
+		zoom++;
+		ZoomInAction* zoom_in = dynamic_cast<ZoomInAction*>(act_p);
+		manager_zoom_point = zoom_in->GetZoomPoint();
+	}
+	else if (act_type == ZOOM_OUT)
+	{
+		zoom--;
+		ZoomOutAction* zoom_out = dynamic_cast<ZoomOutAction*>(act_p);
+		manager_zoom_point = zoom_out->GetZoomPoint();
+	}
+
+	if (act_p != nullptr)
+	{
+		act_p->Execute();
+
+		if (zoom != 0)
+		{
+			CFigure* last_figure = GetFigure(figs.size() - 1);
+			if (act_type == DRAW_LINE)
+			{
+				CLine* last_line = dynamic_cast<CLine*>(last_figure);
+
+				last_line->p1.x = (last_line->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_line->p1.y = (last_line->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_line->p2.x = (last_line->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_line->p2.y = (last_line->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+			else if (act_type == DRAW_RECT)
+			{
+				CRectangle* last_rect = dynamic_cast<CRectangle*>(last_figure);
+
+				last_rect->p1.x = (last_rect->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_rect->p1.y = (last_rect->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_rect->p2.x = (last_rect->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_rect->p2.y = (last_rect->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+			else if (act_type == DRAW_CIRC)
+			{
+				CCircle* last_circ = dynamic_cast<CCircle*>(last_figure);
+
+				last_circ->p1.x = (last_circ->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_circ->p1.y = (last_circ->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_circ->p2.x = (last_circ->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_circ->p2.y = (last_circ->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+			else if (act_type == DRAW_TRI)
+			{
+				CTrngl* last_trngl = dynamic_cast<CTrngl*>(last_figure);
+
+				last_trngl->p1.x = (last_trngl->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_trngl->p1.y = (last_trngl->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_trngl->p2.x = (last_trngl->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_trngl->p2.y = (last_trngl->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+
+				last_trngl->p3.x = (last_trngl->p3.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
+				last_trngl->p3.y = (last_trngl->p3.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
+			}
+		}
+
+		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
+        // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack 
+        if (! (Action::IsFromAction<UndoAction>(act_p) 
+            || Action::IsFromAction<RedoAction>(act_p) 
+            || Action::IsFromAction<ToDrawModeAction>(act_p) 
+            || Action::IsFromAction<ToPlayModeAction>(act_p)
+            || Action::IsFromAction<SaveAction>(act_p)
+            || Action::IsFromAction<LoadAction>(act_p)))
+			undo_st.push(act_p);
+        else
+            delete act_p;
+	}
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -161,6 +316,16 @@ Input* ApplicationManager::GetInput() const
 Output* ApplicationManager::GetOutput() const
 {
     return out_p;
+}
+
+int ApplicationManager::GetZoom() const
+{
+	return zoom;
+}
+////////////////////////////////////////////////////////////////////////////////////
+Point ApplicationManager::GetManagerZoomPoint() const
+{
+	return manager_zoom_point;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // iterate through all figures
@@ -264,6 +429,11 @@ CFigure* ApplicationManager::GetFigure(unsigned int id) const
         if (fig->GetId() == id)
             return fig;
     return nullptr;
+}
+
+multiset<CFigure*, CmpFigures>* ApplicationManager::GetFigures()
+{
+	return &figs;
 }
 
 multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsigned int id) const

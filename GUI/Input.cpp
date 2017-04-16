@@ -80,6 +80,7 @@ ActionType Input::GetUserAction() const
 				return ZOOM_IN;
 			case ITM_ZOOM_OUT:
 				return ZOOM_OUT;
+
 			case ITM_UNDO:
 				return UNDO;
 			case ITM_REDO:
@@ -188,6 +189,7 @@ ActionType Input::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
+
 }
 /////////////////////////////////
 
