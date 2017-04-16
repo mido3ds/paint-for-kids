@@ -28,6 +28,7 @@ void AddRectAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }
@@ -38,7 +39,11 @@ void AddRectAction::Execute()
     //Add the lineangle to the list of figures
     rect = new CRectangle(p1, p2, gfx);
     rect->SetId(id);
-    manager_p->AddFigure(rect);
+    if (!rect->OutOfRange(p1, p2)) {
+        manager_p->AddFigure(rect);
+    } else {
+        manager_p->GetOutput()->PrintMessage("The Rectangle Is Out Of Range");
+    }
 }
 
 void AddRectAction::Undo()
