@@ -146,12 +146,6 @@
     <ClCompile Include="Figures\CTrngl.cpp">
       <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\DownAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ExitAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\LoadAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -197,16 +191,10 @@
     <ClCompile Include="Actions\ChFillColorAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ResizeAction.cpp">
+    <ClCompile Include="Actions\DownAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ZoomInAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ZoomOutAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\SelectAction.cpp">
+    <ClCompile Include="Actions\ExitAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -297,9 +285,6 @@
     <ClInclude Include="Figures\CTrngl.h">
       <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\DownAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\ExitAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -351,16 +336,7 @@
     <ClInclude Include="Actions\ChFillColorAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ResizeAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ZoomInAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ZoomOutAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\SelectAction.h">
+    <ClInclude Include="Actions\DownAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
