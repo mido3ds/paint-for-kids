@@ -21,6 +21,9 @@ ActionType ApplicationManager::GetUserAction() const
 Action* ApplicationManager::DetectAction(ActionType act_type)
 {
     switch (act_type) {
+	case DRAW_FIG_ITM:
+		out_p->CreateFigItems();
+		return nullptr;
     case DRAW_RECT:
         return new AddRectAction(this);
     case DRAW_CIRC:
@@ -28,9 +31,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case DRAW_TRI:
         return new AddTrnglAction(this);
     case DRAW_LINE:
-        return new AddLineAction(this);
-	case RESIZE:
-		return new ResizeAction(this);
+        return new AddLineAction(this);	
 	case ZOOM_IN:
 		return new ZoomInAction(this);
 	case ZOOM_OUT:
@@ -38,9 +39,9 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case EXIT:
         return new ExitAction(this);
     case TO_PLAY:
-        return new SwitchPlayMode(this);
+        return new ToPlayMode(this);
     case TO_DRAW:
-        return new SwitchDrawMode(this);
+        return new ToDrawMode(this);
     case SAVE:
         return new SaveAction(this);
     case LOAD:
@@ -49,6 +50,39 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UndoAction(this);
     case REDO:
         return new RedoAction(this);
+	case CHNG_FILL_CLR:
+        return new ChFillColorAction(this);
+    case CHNG_BK_CLR:
+        return new ChBGColorAction(this);
+    case CHNG_DRAW_CLR:
+        return new ChBorderAction(this);
+    case SEND_BACK:
+        return new DownAction(this);
+    case BRNG_FRNT:
+        return new UpAction(this);
+    case ROTATE:
+        return new RotateAction(this);
+    case COLOR_BAR:
+        out_p->ClearTToolBar();
+        return nullptr;
+    case CTR:
+        out_p->CreateFigActions();
+        return nullptr;
+    case DEL:
+        out_p->ClearTToolBar();
+        return nullptr;
+    case MOVE:
+        out_p->ClearTToolBar();
+        return nullptr;
+    case RESIZE:
+        out_p->ClearTToolBar();
+        return new ResizeAction(this);
+    case COPY:
+        out_p->ClearTToolBar();
+        return nullptr;
+    case PASTE:
+        out_p->ClearTToolBar();
+        return nullptr;
     case STATUS: //a click on the status bar ==> no action
         return nullptr;
     default:
@@ -66,7 +100,8 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 	else if (act_type == ZOOM_OUT)
 		zoom--;
 
-    if (act_p != nullptr) {
+    if (act_p != nullptr) 
+	{
         act_p->ReadActionParameters();
 
 		if (act_type == ZOOM_IN)
@@ -131,8 +166,16 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 		}
 
 		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
-		if (! (act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
+        // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack 
+        if (! (Action::IsFromAction<UndoAction>(act_p) 
+            || Action::IsFromAction<RedoAction>(act_p) 
+            || Action::IsFromAction<ToDrawModeAction>(act_p) 
+            || Action::IsFromAction<ToPlayModeAction>(act_p)
+            || Action::IsFromAction<SaveAction>(act_p)
+            || Action::IsFromAction<LoadAction>(act_p)))
 			undo_st.push(act_p);
+        else
+            delete act_p;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -206,9 +249,18 @@ void ApplicationManager::ExecuteAction(Action* act_p)
 				last_trngl->p3.y = (last_trngl->p3.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
 			}
 		}
+
 		// only add action if not (undo or redo or switchPlaymode or switchDrawMode)
-		if (!(act_p->GetActType() == UNDO || act_p->GetActType() == REDO || act_p->GetActType() == TO_DRAW || act_p->GetActType() == TO_PLAY))
+        // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack 
+        if (! (Action::IsFromAction<UndoAction>(act_p) 
+            || Action::IsFromAction<RedoAction>(act_p) 
+            || Action::IsFromAction<ToDrawModeAction>(act_p) 
+            || Action::IsFromAction<ToPlayModeAction>(act_p)
+            || Action::IsFromAction<SaveAction>(act_p)
+            || Action::IsFromAction<LoadAction>(act_p)))
 			undo_st.push(act_p);
+        else
+            delete act_p;
 	}
 }
 //==================================================================================//
@@ -349,8 +401,7 @@ void ApplicationManager::Redo()
 
     Action* to_redo = redo_st.top();
 
-    //to_redo->Execute();
-	ExecuteAction(to_redo);
+    to_redo->Execute();
     undo_st.push(to_redo);
     redo_st.pop();
 }
@@ -398,12 +449,114 @@ multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsig
     return figs.end();
 }
 
+bool ApplicationManager::ChangeSelectedFillColor(color c)
+{
+    bool flag = false;
+
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            fig->ChngFillClr(c);
+
+            flag = true;
+        }
+    }
+
+    return flag;
+}
+
+bool ApplicationManager::ChangeSelectedBorder(int W, color C)
+{
+    bool flag = false;
+
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            fig->ChngDrawClr(C);
+            fig->ChngBorderWidth(W);
+            fig->SetSelected(false);
+
+            flag = true;
+        }
+    }
+
+    return flag;
+}
+
+void ApplicationManager::SendSelecteDown()
+{
+    // TODO: to be changed after making figs a vector not set
+    int x;
+    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
+        if ((*itr)->IsSelected()) {
+            x = (*itr)->z_index;
+            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
+                if (x >= (*itr2)->z_index && itr != itr2) {
+                    x = (*itr2)->z_index - 1;
+                }
+            }
+            (*itr)->ChngZindex(x);
+            (*itr)->SetSelected(false);
+            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
+            figs = list;
+            itr = figs.begin();
+        }
+    }
+}
+
+void ApplicationManager::SendSelectedUp()
+{
+    // TODO: to be changed after making figs a vector not set
+    int x;
+    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
+        if ((*itr)->IsSelected()) {
+            x = (*itr)->z_index;
+            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
+                if (x <= (*itr2)->z_index && itr != itr2) {
+                    x = (*itr2)->z_index + 1;
+                }
+            }
+            (*itr)->ChngZindex(x);
+            (*itr)->SetSelected(false);
+            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
+            figs = list;
+            itr = figs.begin();
+        }
+    }
+}
+
+void ApplicationManager::RotateSelected(int deg)
+{
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            fig->Rotate(deg);
+            if (fig->IsRotate()) {
+                fig->Rotated(false);
+            } else {
+                out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
+            }
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for (auto& fig : figs)
-		delete fig;
+    // delete figs
+    for (auto& fig : figs)
+        delete fig;
+    
+    // remove actions in stacks
+    while (! undo_st.empty())
+    {
+        delete undo_st.top();
+        undo_st.pop();
+    }
+    while (! redo_st.empty())
+    {
+        delete redo_st.top();
+        redo_st.pop();
+    }
+
     delete in_p;
     delete out_p;
 }
