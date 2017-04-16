@@ -36,5 +36,4 @@ void SaveAction::Execute()
 
 void SaveAction::Undo()
 {
-    
 }

@@ -28,6 +28,7 @@ void AddCircAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }
@@ -37,7 +38,11 @@ void AddCircAction::Execute()
 {
     circ = new CCircle(p1, p2, gfx);
     circ->SetId(id);
-    manager_p->AddFigure(circ);
+    if (!circ->OutOfRange(p1)) {
+        manager_p->AddFigure(circ);
+    } else {
+        manager_p->GetOutput()->PrintMessage("The Circle Is Out Of Range");
+    }
 }
 
 void AddCircAction::Undo()

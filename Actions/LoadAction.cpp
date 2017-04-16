@@ -36,5 +36,4 @@ void LoadAction::Execute()
 
 void LoadAction::Undo()
 {
-    
 }

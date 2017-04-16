@@ -28,6 +28,7 @@ void AddLineAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
+    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }
@@ -38,7 +39,11 @@ void AddLineAction::Execute()
     //Add the lineangle to the list of figures
     line = new CLine(p1, p2, gfx);
     line->SetId(id);
-    manager_p->AddFigure(line);
+    if (!line->OutOfRange(p1, p2)) {
+        manager_p->AddFigure(line);
+    } else {
+        manager_p->GetOutput()->PrintMessage("The Line Is Out Of Range");
+    }
 }
 
 void AddLineAction::Undo()
