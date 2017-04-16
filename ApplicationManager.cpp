@@ -39,9 +39,9 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case EXIT:
         return new ExitAction(this);
     case TO_PLAY:
-        return new ToPlayMode(this);
+        return new ToPlayModeAction(this);
     case TO_DRAW:
-        return new ToDrawMode(this);
+        return new ToDrawModeAction(this);
     case SAVE:
         return new SaveAction(this);
     case LOAD:

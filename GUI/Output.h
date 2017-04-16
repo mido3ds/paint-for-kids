@@ -12,6 +12,8 @@ public:
     window* CreateWind(int, int, int, int) const; // main window
 
     void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
+    void CreateFigItems() const;
+    void CreateFigActions() const;
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
 
     void CreateStatusBar() const;
@@ -25,6 +27,7 @@ public:
     void ClearStatusBar() const;
     void ClearDrawArea() const;
     void ClearToolBar() const;
+    void ClearTToolBar() const;
 
     // -- Figures Drawing functions
     void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
