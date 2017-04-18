@@ -29,6 +29,9 @@
 #include "Actions/ToPlayModeAction.h"
 #include "Actions/UndoAction.h"
 #include "Actions/UpAction.h"
+#include "Actions/ZoomInAction.h"
+#include "Actions/ZoomOutAction.h"
+#include "Actions/ResizeAction.h"
 
 // figures files
 #include "Figures/CCircle.h"
