@@ -180,10 +180,14 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // gets action and executes it
+// TODO remove this function
 void ApplicationManager::ExecuteAction(Action* act_p)
 {
+	// GetActType is obsolete and deleted it cannot be used
+	//ActionType act_type = act_p->GetActType();
 
-	ActionType act_type = act_p->GetActType();
+	// i have put this just to run the program untill it is removed
+	ActionType act_type = ActionType::EMPTY;
 
 	if (act_type == ZOOM_IN)
 	{
@@ -301,10 +305,28 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() const
+void ApplicationManager::UpdateInterface()
 {
-    for (auto& fig : figs)
-        fig->Draw(out_p); //Call Draw function (virtual member fn)
+	// TODO: there is a better approach
+	if (GetZoom() > 0)
+	{
+		ZoomInAction zoom_in(this);
+		zoom_in.SetZoomFactor(pow(2, GetZoom()));
+		zoom_in.SetZoompoint(GetManagerZoomPoint());
+		zoom_in.Execute();
+	}
+	else if (GetZoom() < 0)
+	{
+		ZoomOutAction zoom_out(this);
+		zoom_out.SetZoomFactor(pow(2, GetZoom()));
+		zoom_out.SetZoompoint(GetManagerZoomPoint());
+		zoom_out.Execute();
+	}
+	else
+	{
+		for (auto& fig : figs)
+			fig->Draw(out_p); //Call Draw function (virtual member fn)
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -353,7 +375,6 @@ void ApplicationManager::SaveAll(ofstream& out_file)
 // call load for the figure
 void ApplicationManager::LoadAll(ifstream& in_file)
 {
-    // TODO
     int size = 0;
     string fig_name;
     CFigure* fig = nullptr;

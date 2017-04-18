@@ -62,7 +62,7 @@ public:
     Output* GetOutput() const; //Return pointer to the output
 	int GetZoom() const; //Return value of zoom
 	Point GetManagerZoomPoint() const; //Return current zooming if there was zooming
-    void UpdateInterface() const; //Redraws all the drawing window
+    void UpdateInterface(); //Redraws all the drawing window
 
     void SaveAll(ofstream& out_file);
     void LoadAll(ifstream& in_file);
