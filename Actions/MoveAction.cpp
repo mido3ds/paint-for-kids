@@ -21,7 +21,7 @@ void MoveAction::ReadActionParameters()
 void MoveAction::Execute()
 {
     if (manager_p->Num_Selected > 0) {
-        old = manager_p->MoveActionSelected(p);
+        old = manager_p->MoveSelected(p);
         moveActiond = true;
     }
 }
@@ -29,7 +29,7 @@ void MoveAction::Execute()
 void MoveAction::Undo()
 {
     if (moveActiond) {
-        manager_p->ReturnMoveActiond(old);
+        manager_p->ReturnMoved(old);
         moveActiond = false;
     }
 }

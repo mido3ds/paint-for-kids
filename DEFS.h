@@ -19,6 +19,7 @@ enum ActionType //The actions supported (you can add more if needed)
     DEL, //Delete a figure(s)
     MOVE, //Move a figure(s)
     SELECT,
+	UNSELECT,
     CTR, // Figure Actions Control
     RESIZE, //Resize a figure(s)
     ROTATE, //Rotate a figure(s)

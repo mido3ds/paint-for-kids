@@ -131,20 +131,29 @@
     </ClCompile>
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Figures\CCircle.cpp">
-      <Filter>Figures</Filter>
+    <ClCompile Include="Actions\SelectAction.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Figures\CFigure.cpp">
-      <Filter>Figures</Filter>
+    <ClCompile Include="Actions\ToDrawModeAction.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Figures\CLine.cpp">
-      <Filter>Figures</Filter>
+    <ClCompile Include="Actions\ToPlayModeAction.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Figures\CRectangle.cpp">
-      <Filter>Figures</Filter>
+    <ClCompile Include="Actions\UndoAction.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Figures\CTrngl.cpp">
-      <Filter>Figures</Filter>
+    <ClCompile Include="Actions\UnSelectAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UpAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ZoomInAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ZoomOutAction.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\AddCircAction.cpp">
       <Filter>Actions</Filter>
@@ -167,6 +176,15 @@
     <ClCompile Include="Actions\ChFillColorAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\CopyAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\CutAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\DeleteAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\DownAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -174,6 +192,12 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\LoadAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\MoveAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PasteAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\RedoAction.cpp">
@@ -188,23 +212,23 @@
     <ClCompile Include="Actions\SaveAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ToDrawModeAction.cpp">
-      <Filter>Actions</Filter>
+    <ClCompile Include="Figures\CCircle.cpp">
+      <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ToPlayModeAction.cpp">
-      <Filter>Actions</Filter>
+    <ClCompile Include="Figures\CFigure.cpp">
+      <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\UndoAction.cpp">
-      <Filter>Actions</Filter>
+    <ClCompile Include="Figures\CLine.cpp">
+      <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\UpAction.cpp">
-      <Filter>Actions</Filter>
+    <ClCompile Include="Figures\CRectangle.cpp">
+      <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ZoomInAction.cpp">
-      <Filter>Actions</Filter>
+    <ClCompile Include="Figures\CTrngl.cpp">
+      <Filter>Figures</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ZoomOutAction.cpp">
-      <Filter>Actions</Filter>
+    <ClCompile Include="Figures\Trigonometry.cpp">
+      <Filter>Figures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,20 +303,29 @@
     </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="ApplicationManager.h" />
-    <ClInclude Include="Figures\CCircle.h">
-      <Filter>Figures</Filter>
+    <ClInclude Include="Actions\SelectAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\CFigure.h">
-      <Filter>Figures</Filter>
+    <ClInclude Include="Actions\ToDrawModeAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\CLine.h">
-      <Filter>Figures</Filter>
+    <ClInclude Include="Actions\ToPlayModeAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\CRectangle.h">
-      <Filter>Figures</Filter>
+    <ClInclude Include="Actions\UndoAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\CTrngl.h">
-      <Filter>Figures</Filter>
+    <ClInclude Include="Actions\UnSelectAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UpAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ZoomInAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ZoomOutAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\Action.h">
       <Filter>Actions</Filter>
@@ -318,6 +351,15 @@
     <ClInclude Include="Actions\ChFillColorAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\CopyAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\CutAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\DeleteAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\DownAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -325,6 +367,12 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\LoadAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\MoveAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PasteAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\RedoAction.h">
@@ -339,23 +387,23 @@
     <ClInclude Include="Actions\SaveAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ToDrawModeAction.h">
-      <Filter>Actions</Filter>
+    <ClInclude Include="Figures\CCircle.h">
+      <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ToPlayModeAction.h">
-      <Filter>Actions</Filter>
+    <ClInclude Include="Figures\CFigure.h">
+      <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\UndoAction.h">
-      <Filter>Actions</Filter>
+    <ClInclude Include="Figures\CLine.h">
+      <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\UpAction.h">
-      <Filter>Actions</Filter>
+    <ClInclude Include="Figures\CRectangle.h">
+      <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ZoomInAction.h">
-      <Filter>Actions</Filter>
+    <ClInclude Include="Figures\CTrngl.h">
+      <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ZoomOutAction.h">
-      <Filter>Actions</Filter>
+    <ClInclude Include="Figures\Trigonometry.h">
+      <Filter>Figures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,17 +15,17 @@ void DeleteAction::ReadActionParameters()
 void DeleteAction::Execute()
 {
     if (manager_p->Num_Selected > 0) {
-        clipboard = manager_p->DeleteActionSelected();
-        deleteActiond = true;
+        clipboard = manager_p->DeleteSelected();
+        deleted = true;
     }
 }
 
 void DeleteAction::Undo()
 {
-    if (deleteActiond) {
+    if (deleted) {
         for (int i = 0; i < clipboard.size(); i++) {
             manager_p->AddFigure(clipboard[i]);
         }
-        deleteActiond = false;
+        deleted = false;
     }
 }
