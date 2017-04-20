@@ -71,27 +71,26 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return nullptr;
     case DEL:
         out_p->ClearTToolBar();
-        return new Delete(this);
+        return new DeleteAction(this);
     case MOVE:
         out_p->ClearTToolBar();
-        return new Move(this);
+        return new MoveAction(this);
     case RESIZE:
         out_p->ClearTToolBar();
         return new ResizeAction(this);
     case COPY:
         out_p->ClearTToolBar();
-        return new Copy(this);
+        return new CopyAction(this);
     case PASTE:
         out_p->ClearTToolBar();
-        return new Paste(this);
-    case STATUS: //a click on the status bar ==> no action
-        return nullptr;
+        return new PasteAction(this);
     case SELECT:
-        return new Select(this);
+        return new SelectAction(this);
     case UNSELECT:
         return new UnSelectAction(this);
     case CUT:
-        return new Cut(this);
+        return new CutAction(this);
+
     default:
         return nullptr;
     }
@@ -455,7 +454,7 @@ multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsig
 
 bool ApplicationManager::ChangeSelectedFillColor(color c)
 {
-     bool flag = false;
+    bool flag = false;
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
@@ -487,7 +486,7 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
 void ApplicationManager::SendSelecteDown()
 {
-	// TODO: to be changed after making figs a vector not set
+    // TODO: to be changed after making figs a vector not set
     int x;
     for (auto itr = figs.begin(); itr != figs.end(); itr++) {
         if ((*itr)->IsSelected()) {
@@ -508,7 +507,7 @@ void ApplicationManager::SendSelecteDown()
 
 void ApplicationManager::SendSelectedUp()
 {
-	// TODO: to be changed after making figs a vector not set
+    // TODO: to be changed after making figs a vector not set
     int x;
     for (auto itr = figs.begin(); itr != figs.end(); itr++) {
         if ((*itr)->IsSelected()) {
