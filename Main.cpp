@@ -11,7 +11,7 @@ int main()
 
         app_manager.ExecuteAction(act_type);
 
-		app_manager.UpdateInterface();
+        app_manager.UpdateInterface();
 
     } while (act_type != EXIT);
 

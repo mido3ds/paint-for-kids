@@ -12,7 +12,7 @@ void UndoAction::ReadActionParameters()
 void UndoAction::Execute()
 {
     manager_p->Undo();
-	manager_p->GetOutput()->ClearDrawArea();
+    manager_p->GetOutput()->ClearDrawArea();
 }
 
 void UndoAction::Undo()

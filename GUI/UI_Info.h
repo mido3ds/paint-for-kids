@@ -38,8 +38,7 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
 
 };
 
-enum FigureItems 
-{
+enum FigureItems {
     ITM_LINE, // Line
     ITM_RECT, // Recangle item in menu
     ITM_TRI, // Triangle
@@ -48,8 +47,7 @@ enum FigureItems
     FIG_ITM_COUNT
 };
 
-enum FigureActions 
-{
+enum FigureActions {
     ITM_DEL, // Delete
     ITM_MOVE, // Move
     ITM_RESIZE, // Resize

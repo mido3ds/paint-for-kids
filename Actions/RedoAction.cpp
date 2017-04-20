@@ -12,7 +12,7 @@ void RedoAction::ReadActionParameters()
 void RedoAction::Execute()
 {
     manager_p->Redo();
-	manager_p->GetOutput()->ClearDrawArea();
+    manager_p->GetOutput()->ClearDrawArea();
 }
 
 void RedoAction::Undo()
