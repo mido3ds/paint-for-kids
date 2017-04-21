@@ -22,9 +22,6 @@ public:
     bool OutOfRange(Point p1, Point p2, Point p3);
 
     Point p1, p2, p3;
-    
-private:
-    Trigonometry SubTri;
 };
 
 #endif /* __CTrngl_h__ */

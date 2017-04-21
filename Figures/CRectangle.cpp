@@ -153,10 +153,10 @@ bool CRectangle::PointCheck(Point p) const
     p3.y = p1.y;
     p4.x = p1.x;
     p4.y = p2.y;
-    float A1 = SubTri.Area(p, p1, p3);
-    float A2 = SubTri.Area(p, p2, p3);
-    float A3 = SubTri.Area(p, p2, p4);
-    float A4 = SubTri.Area(p, p1, p4);
+    float A1 = Trigonometry::Area(p, p1, p3);
+    float A2 = Trigonometry::Area(p, p2, p3);
+    float A3 = Trigonometry::Area(p, p2, p4);
+    float A4 = Trigonometry::Area(p, p1, p4);
     float A = abs(p1.x - p2.x) * abs(p1.y - p2.y);
     return (A == A1 + A2 + A3 + A4);
 }
