@@ -198,7 +198,6 @@
     <ClCompile Include="Figures\CLine.cpp" />
     <ClCompile Include="Figures\CRectangle.cpp" />
     <ClCompile Include="Figures\CTrngl.cpp" />
-    <ClCompile Include="Figures\Trigonometry.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="History.cpp" />
