@@ -16,7 +16,6 @@ void LoadAction::ReadActionParameters()
 
     in_file.open(file_name, ofstream::in);
 
-    // TODO: make exception handling system, use throw, then remove this way of handling the error (remove bool successful)
     if (!in_file.is_open()) {
         out_p->PrintMessage("Cant open file!");
     } else {

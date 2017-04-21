@@ -83,7 +83,7 @@ public:
     void SendSelecteDown();
     void SendSelectedUp();
     void RotateSelected(int deg);
-    void PrintSelected();   // TODO: edit name if its only for printing size, or make it print shapes info
+    void PrintSelectedSize();
     Point MoveSelected(Point p);
     vector<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
     int Num_Selected;   // TODO: make it private, change nameStyle
@@ -104,7 +104,7 @@ public:
     int GetZoom() const; //Return value of zoom
     Point GetManagerZoomPoint() const; //Return zooming point if there was zooming
 
-    /*  ------------------------------- Clipboard ------------------------------- */ 
+    /*  ------------------------------- clipboard ------------------------------- */ 
 
     bool PasteClipboard(Point p);
     void SetClipboard();    // TODO why two methods ?
@@ -119,10 +119,10 @@ private:
     
     // TODO: make it vector
     multiset<CFigure*, CmpFigures> figs;
-    multiset<CFigure*, CmpFigures> Clipboard; // TODO: rename
-    multiset<CFigure*, CmpFigures> Moved;  // TODO: rename
+    multiset<CFigure*, CmpFigures> moved_figs;
+    multiset<CFigure*, CmpFigures> clipboard; 
 
-    unsigned int next_id = 0;  // saves last given id for a shape // TODO rename to next_fig_id
+    unsigned int next_fig_id = 0;  // saves last given id for a shape
 
     int zoom = 0;  // zooming state...zoom=0 -> no zoom at all, zoom=1 -> zoom_in x2, zoom=-1 -> zoom_out x0.5, etc
     Point manager_zoom_point;

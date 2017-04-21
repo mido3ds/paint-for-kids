@@ -63,7 +63,7 @@ public:
     bool is_filled = false; // CFigure Filled or not
     int border_width = 1; // Width of figure borders
 
-    int z_index = 0; // level of object on window, default to max size of int // TODO: remove z_index
+    int z_index = 0; // level of object on window, default to 0 // TODO: remove z_index
 };
 
 #endif

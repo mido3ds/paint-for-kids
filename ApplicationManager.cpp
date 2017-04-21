@@ -295,7 +295,7 @@ void ApplicationManager::UpdateInterface()
         zoom_out.Execute();
     } else {
         for (auto& fig : figs)
-            fig->Draw(out_p); //Call Draw function (virtual member fn)
+            fig->Draw(out_p); 
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -374,7 +374,7 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 
 unsigned int ApplicationManager::GenerateNextId()
 {
-    return next_id++;
+    return next_fig_id++;
 }
 
 void ApplicationManager::DeleteFigure(unsigned int id)
@@ -499,11 +499,10 @@ void ApplicationManager::RotateSelected(int deg)
     }
 }
 
-void ApplicationManager::PrintSelected()
+void ApplicationManager::PrintSelectedSize()
 {
-    // TODO: edit it to print the num of selected
-    if (Num_Selected != 1) // TODO: why 1 ?
-        out_p->PrintMessage("Number of selected figures are ");
+    if (Num_Selected != 0)
+        out_p->PrintMessage("Number of selected figures are " + to_string(Num_Selected));
 }
 
 Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
@@ -526,7 +525,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             fig->Move(x, y);
-            Moved.insert(fig);
+            moved_figs.insert(fig);
         }
     }
     p.x = minx;
@@ -539,7 +538,7 @@ bool ApplicationManager::PasteClipboard(Point p)
 
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
-    for (auto& fig : Clipboard) {
+    for (auto& fig : clipboard) {
         Point c = fig->CalcCenter();
         if (c.x <= minx && c.y <= miny) {
             minx = c.x;
@@ -549,7 +548,7 @@ bool ApplicationManager::PasteClipboard(Point p)
     bool a = true;
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
-    for (auto& fig : Clipboard) {
+    for (auto& fig : clipboard) {
         if (!fig->Move(x, y))
             a = false;
         AddFigure(fig);
@@ -564,24 +563,24 @@ void ApplicationManager::ReturnMoved(Point p)
 
 void ApplicationManager::SetClipboard()
 {
-    Clipboard.clear();
+    clipboard.clear();
     CFigure* copy;
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             copy = fig->Copy();
             copy->SetId(GenerateNextId());
-            Clipboard.insert(copy);
+            clipboard.insert(copy);
         }
     }
 }
 
 void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip)
 {
-    Clipboard = clip;
+    clipboard = clip;
 }
 multiset<CFigure*, CmpFigures> ApplicationManager::GetClipboard()
 {
-    return Clipboard;
+    return clipboard;
 }
 
 vector<CFigure*> ApplicationManager::DeleteSelected()
