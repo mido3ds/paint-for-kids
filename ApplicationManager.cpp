@@ -161,6 +161,7 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 
         // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
         // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack
+        // TODO: make class History and remove this from here so this method does one thing
         if (!(Action::IsFromAction<UndoAction>(act_p)
                 || Action::IsFromAction<RedoAction>(act_p)
                 || Action::IsFromAction<ToDrawModeAction>(act_p)
@@ -238,7 +239,6 @@ void ApplicationManager::ExecuteAction(Action* act_p)
 
         // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
         // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack
-        // TODO: make class History and remove this from here so this method does one thing
         if (!(Action::IsFromAction<UndoAction>(act_p)
                 || Action::IsFromAction<RedoAction>(act_p)
                 || Action::IsFromAction<ToDrawModeAction>(act_p)
