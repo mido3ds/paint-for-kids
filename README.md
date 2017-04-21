@@ -1,4 +1,4 @@
-# Basic gui application to enable kids to draw and play with shapes.
+# Simple gui application to enable kids to draw and play with shapes.
 
 SEMESTER
  
