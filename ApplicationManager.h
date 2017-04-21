@@ -4,7 +4,6 @@
 // std 
 #include <fstream> // fstream
 #include <set>  // multiset
-#include <stack>
 #include <string>
 #include <vector>
 
@@ -46,6 +45,7 @@
 
 // other
 #include "DEFS.h"
+#include "History.h"
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 
@@ -86,9 +86,6 @@ public:
     vector<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
     int Num_Selected;   // TODO: make it private, change nameStyle
 
-    void Undo(); // pop last action from undo_dt, undo it, push it to redo_st
-    void Redo(); // reverse Undo
-
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
     /*  ------------------------------- File ------------------------------- */ 
@@ -113,6 +110,7 @@ public:
     multiset<CFigure*, CmpFigures> GetClipboard();
 
 private:
+    History history;
     CFigure* GetFigure(unsigned int id) const;
     multiset<CFigure*, CmpFigures>::iterator 
         GetFigureIter(unsigned int id) const;  // return iterator to the figure if found, otherwise figs.end()
@@ -121,9 +119,6 @@ private:
     multiset<CFigure*, CmpFigures> figs;
     multiset<CFigure*, CmpFigures> Clipboard; // TODO: rename
     multiset<CFigure*, CmpFigures> Moved;  // TODO: rename
-
-    stack<Action*> undo_st; // TODO rename to undo_stack
-    stack<Action*> redo_st;  // TODO rename to redo_stack
 
     unsigned int next_id = 0;  // saves last given id for a shape // TODO rename to next_fig_id
 

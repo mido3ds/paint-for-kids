@@ -1,7 +1,7 @@
 #include "RedoAction.h"
 
 RedoAction::RedoAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p), can_undo(false)
 {
 }
 

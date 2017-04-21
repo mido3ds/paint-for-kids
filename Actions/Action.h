@@ -20,6 +20,9 @@ public:
     //To undo this action (code depends on action type)
     virtual void Undo() = 0;
 
+    // is this action can be undoed? determine whether to add it to history or not
+    bool CanUndo() { return can_undo; }
+
     // given object from action and class action
     // returns true if this object is instance of this action
     // used to detect what is this action during run-time
@@ -31,6 +34,7 @@ public:
 
 protected:
     ApplicationManager* manager_p; //Actions needs AppMngr to do their job
+    bool can_undo = true; // action can be undoed by default
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "ToPlayModeAction.h"
 
 ToPlayModeAction::ToPlayModeAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p), can_undo(false)
 {
 }
 

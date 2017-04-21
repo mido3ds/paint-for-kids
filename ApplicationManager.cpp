@@ -159,17 +159,8 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
             }
         }
 
-        // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
-        // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack
-        // TODO: make class History and remove this from here so this method does one thing
-        if (!(Action::IsFromAction<UndoAction>(act_p)
-                || Action::IsFromAction<RedoAction>(act_p)
-                || Action::IsFromAction<ToDrawModeAction>(act_p)
-                || Action::IsFromAction<ToPlayModeAction>(act_p)
-                || Action::IsFromAction<SaveAction>(act_p)
-                || Action::IsFromAction<LoadAction>(act_p)))
-            undo_st.push(act_p);
-        else
+        // try to add action, else delete it
+        if (!history->AddAction(act_p))
             delete act_p;
     }
 }
@@ -237,16 +228,8 @@ void ApplicationManager::ExecuteAction(Action* act_p)
             }
         }
 
-        // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
-        // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack
-        if (!(Action::IsFromAction<UndoAction>(act_p)
-                || Action::IsFromAction<RedoAction>(act_p)
-                || Action::IsFromAction<ToDrawModeAction>(act_p)
-                || Action::IsFromAction<ToPlayModeAction>(act_p)
-                || Action::IsFromAction<SaveAction>(act_p)
-                || Action::IsFromAction<LoadAction>(act_p)))
-            undo_st.push(act_p);
-        else
+        // try to add action, else delete it
+        if (!history->AddAction(act_p))
             delete act_p;
     }
 }
@@ -341,7 +324,6 @@ Point ApplicationManager::GetManagerZoomPoint() const
 // call save for each one
 void ApplicationManager::SaveAll(ofstream& out_file)
 {
-    // TODO
     out_file << UI.DrawColor.ucRed << ' '
              << UI.DrawColor.ucGreen << ' '
              << UI.DrawColor.ucBlue << ' '
@@ -387,30 +369,6 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 
         figs.insert(fig);
     }
-}
-////////////////////////////////////////////////////////////////////////////////////
-void ApplicationManager::Undo()
-{
-    if (undo_st.empty())
-        return;
-
-    Action* to_undo = undo_st.top();
-
-    to_undo->Undo();
-    redo_st.push(to_undo);
-    undo_st.pop();
-}
-
-void ApplicationManager::Redo()
-{
-    if (redo_st.empty())
-        return;
-
-    Action* to_redo = redo_st.top();
-
-    to_redo->Execute();
-    undo_st.push(to_redo);
-    redo_st.pop();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -649,16 +607,6 @@ ApplicationManager::~ApplicationManager()
     // delete figs
     for (auto& fig : figs)
         delete fig;
-
-    // remove actions in stacks
-    while (!undo_st.empty()) {
-        delete undo_st.top();
-        undo_st.pop();
-    }
-    while (!redo_st.empty()) {
-        delete redo_st.top();
-        redo_st.pop();
-    }
 
     delete in_p;
     delete out_p;
