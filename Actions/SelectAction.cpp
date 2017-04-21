@@ -25,7 +25,7 @@ void SelectAction::Execute()
         originaldraw = Selected->draw_clr;
         originalfill = Selected->fill_clr;
         manager_p->Num_Selected++;
-        manager_p->PrintSelected();
+        manager_p->PrintSelectedSize();
     }
 }
 void SelectAction::Undo()

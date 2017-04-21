@@ -1,16 +1,13 @@
 #ifndef APPLICATION_MANAGER_H
 #define APPLICATION_MANAGER_H
 
-#include "DEFS.h"
-#include "GUI/Input.h"
-#include "GUI/Output.h"
-#include <fstream>
-#include <set>
-#include <stack>
+// std 
+#include <fstream> // fstream
+#include <set>  // multiset
 #include <string>
 #include <vector>
 
-// actions files
+// actions
 #include "Actions/AddCircAction.h"
 #include "Actions/AddLineAction.h"
 #include "Actions/AddRectAction.h"
@@ -39,104 +36,97 @@
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 
-// figures files
+// figures
 #include "Figures/CCircle.h"
 #include "Figures/CFigure.h"
 #include "Figures/CLine.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CTrngl.h"
 
-//Main class that manages everything in the application.
+// other
+#include "DEFS.h"
+#include "History.h"
+#include "GUI/Input.h"
+#include "GUI/Output.h"
+
 class ApplicationManager {
 public:
     ApplicationManager();
     ~ApplicationManager();
 
-    // -- Action-Related Functions
-    //Reads the input command from the user and returns the corresponding action type
-    ActionType GetUserAction() const;
-    void ExecuteAction(ActionType); //Creates an action and executes it
-    void ExecuteAction(Action* action); //Takes already created action and excute it
 
-    // -- Figures Management Functions
-    void AddFigure(CFigure* fig_p); //Adds a new figure to the figs
+    /*  ------------------------------- DEPRECATED ------------------------------- */ 
+    // !!
+    // TODO: to be removed, redundant or breaks classes resposibilities
+    multiset<CFigure*, CmpFigures>* GetFigures(); //Search for a figure given it's index in figure list // why gives other classes my private members?
+    void ExecuteAction(Action* action); //Takes already created action and excute it // duplicate
+    void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
+    // !!
+
+    /*  ------------------------------- Actions ------------------------------- */ 
+
+    ActionType GetUserAction() const; // Reads the input command from the user and returns the corresponding action type
+    Action* DetectAction(ActionType act_type); // return action object from action enum
+    void ExecuteAction(ActionType); // execute given action 
+    void Undo();
+    void Redo();
+
+    /*  ------------------------------- Figures ------------------------------- */ 
+
+    void AddFigure(CFigure* fig_p); // Adds a new figure to the figs
+    CFigure* DetectFigure(string fig_name); // make new figure from its name
     CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-    multiset<CFigure*, CmpFigures>* GetFigures(); //Search for a figure given it's index in figure list
+    void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 
-    // -- Interface Management Functions
+    bool ChangeSelectedFillColor(color c);
+    bool ChangeSelectedBorder(int W, color C);
+    void SendSelecteDown();
+    void SendSelectedUp();
+    void RotateSelected(int deg);
+    void PrintSelectedSize();
+    Point MoveSelected(Point p);
+    vector<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    int Num_Selected;   // TODO: make it private, change nameStyle
+
+    unsigned int GenerateNextId(); // returns next available id to assign to figure
+
+    /*  ------------------------------- File ------------------------------- */ 
+
+    // TODO solve issue of not saving pen width in file
+    void SaveAll(ofstream& out_file); // call save for figures
+    void LoadAll(ifstream& in_file);  // call load for figures
+
+    /*  ------------------------------- Interface ------------------------------- */ 
+
+    void UpdateInterface(); //Redraws all the drawing window // TODO: make it const method
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
     int GetZoom() const; //Return value of zoom
-    Point GetManagerZoomPoint() const; //Return current zooming if there was zooming
-    void UpdateInterface(); //Redraws all the drawing window
+    Point GetManagerZoomPoint() const; //Return zooming point if there was zooming
 
-    void SaveAll(ofstream& out_file);
-    void LoadAll(ifstream& in_file);
-
-    Action* DetectAction(ActionType act_type);
-    CFigure* DetectFigure(string fig_name);
-
-    // pop last action from undo_dt, undo it, push it to redo_st
-    void Undo();
-    // pop last action from redo_st, redo it, push it to undo_st
-    void Redo();
-
-    // returns the next available id to assign to the fig
-    // used by Action to make the figure
-    unsigned int GenerateNextId();
-
-    // used by Action::Undo to delete a made-before figure given the stored id of it
-    void DeleteFigure(unsigned int id);
-
-    bool ChangeSelectedFillColor(color c);
-
-    bool ChangeSelectedBorder(int W, color C);
-
-    void SendSelecteDown();
-
-    void SendSelectedUp();
-
-    void RotateSelected(int deg);
-
-    void PrintSelected();
-
-    Point MoveSelected(Point p);
+    /*  ------------------------------- clipboard ------------------------------- */ 
 
     bool PasteClipboard(Point p);
-
-    void ReturnMoved(Point p);
-
-    void SetClipboard();
-    void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip);
-
+    void SetClipboard();    // TODO why two methods ?
+    void SetClipboard(multiset<CFigure*, CmpFigures> clip);
     multiset<CFigure*, CmpFigures> GetClipboard();
 
-    vector<CFigure*> DeleteSelected();
-
-    int Num_Selected;
-
 private:
-    multiset<CFigure*, CmpFigures> figs;
-    multiset<CFigure*, CmpFigures> Clipboard;
-    multiset<CFigure*, CmpFigures> Moved;
-
+    History history;
     CFigure* GetFigure(unsigned int id) const;
+    multiset<CFigure*, CmpFigures>::iterator 
+        GetFigureIter(unsigned int id) const;  // return iterator to the figure if found, otherwise figs.end()
+    
+    // TODO: make it vector
+    multiset<CFigure*, CmpFigures> figs;
+    multiset<CFigure*, CmpFigures> moved_figs;
+    multiset<CFigure*, CmpFigures> clipboard; 
 
-    // return iterator to the figure if found
-    // if not found, returns figs.end()
-    multiset<CFigure*, CmpFigures>::iterator GetFigureIter(unsigned int id) const;
+    unsigned int next_fig_id = 0;  // saves last given id for a shape
 
-    // for undo and redo
-    stack<Action*> undo_st;
-    stack<Action*> redo_st;
-
-    unsigned int next_id = 0;
-
-    //variable to indecate zooming state...zoom=0 -> no zoom at all, zoom=1 -> zoom_in x2, zoom=-1 -> zoom_out x0.5, etc
-    int zoom = 0;
+    int zoom = 0;  // zooming state...zoom=0 -> no zoom at all, zoom=1 -> zoom_in x2, zoom=-1 -> zoom_out x0.5, etc
     Point manager_zoom_point;
 
-    //Pointers to Input and Output classes
     Input* in_p;
     Output* out_p;
 };

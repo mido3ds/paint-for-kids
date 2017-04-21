@@ -1,7 +1,7 @@
 ﻿#include "ExitAction.h"
 
 ExitAction::ExitAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p, false)
 {
 }
 

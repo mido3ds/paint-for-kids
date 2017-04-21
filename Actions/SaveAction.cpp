@@ -1,7 +1,7 @@
 #include "SaveAction.h"
 
 SaveAction::SaveAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p, false)
 {
 }
 
@@ -16,7 +16,6 @@ void SaveAction::ReadActionParameters()
 
     out_file.open(file_name, ofstream::out);
 
-    // TODO: make exception handling system, use throw, then remove this way of handling the error (remove bool successful)
     if (!out_file.is_open()) {
         out_p->PrintMessage("Cant open file!");
     } else {

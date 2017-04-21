@@ -79,7 +79,6 @@ ActionType Input::GetUserAction() const
                 return ZOOM_IN;
             case ITM_ZOOM_OUT:
                 return ZOOM_OUT;
-
             case ITM_UNDO:
                 return UNDO;
             case ITM_REDO:
@@ -174,6 +173,7 @@ ActionType Input::GetUserAction() const
                 return TO_DRAW;
             case ITM_EXIT_PLAY:
                 return EXIT;
+                
             default:
                 return EMPTY; // A click on empty place in desgin toolbar
             }

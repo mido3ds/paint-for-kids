@@ -190,10 +190,10 @@ bool CTrngl::OutOfRange(Point p1, Point p2, Point p3)
 }
 bool CTrngl::PointCheck(Point p) const
 {
-    float A1 = SubTri.Area(p, p1, p2);
-    float A2 = SubTri.Area(p, p2, p3);
-    float A3 = SubTri.Area(p, p1, p3);
-    float A = SubTri.Area(p1, p2, p3);
+    float A1 = Trigonometry::Area(p, p1, p2);
+    float A2 = Trigonometry::Area(p, p2, p3);
+    float A3 = Trigonometry::Area(p, p1, p3);
+    float A = Trigonometry::Area(p1, p2, p3);
     return (A == A1 + A2 + A3);
 }
 

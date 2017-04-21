@@ -123,38 +123,9 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c">
       <Filter>CMUgraphicsLib\JPEG</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Input.cpp">
-      <Filter>GUI Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI\Output.cpp">
-      <Filter>GUI Classes</Filter>
-    </ClCompile>
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Actions\SelectAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ToDrawModeAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ToPlayModeAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\UndoAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\UnSelectAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\UpAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ZoomInAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ZoomOutAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
+    <ClCompile Include="History.cpp" />
     <ClCompile Include="Actions\AddCircAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -212,6 +183,36 @@
     <ClCompile Include="Actions\SaveAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\SelectAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ToDrawModeAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ToPlayModeAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UndoAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UnSelectAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UpAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ZoomInAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ZoomOutAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Input.cpp">
+      <Filter>GUI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Output.cpp">
+      <Filter>GUI Classes</Filter>
+    </ClCompile>
     <ClCompile Include="Figures\CCircle.cpp">
       <Filter>Figures</Filter>
     </ClCompile>
@@ -225,9 +226,6 @@
       <Filter>Figures</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CTrngl.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\Trigonometry.cpp">
       <Filter>Figures</Filter>
     </ClCompile>
   </ItemGroup>
@@ -292,41 +290,9 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h">
       <Filter>CMUgraphicsLib\JPEG</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\Input.h">
-      <Filter>GUI Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\Output.h">
-      <Filter>GUI Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\UI_Info.h">
-      <Filter>GUI Classes</Filter>
-    </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="ApplicationManager.h" />
-    <ClInclude Include="Actions\SelectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ToDrawModeAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ToPlayModeAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\UndoAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\UnSelectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\UpAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ZoomInAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ZoomOutAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
+    <ClInclude Include="History.h" />
     <ClInclude Include="Actions\Action.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -386,6 +352,39 @@
     </ClInclude>
     <ClInclude Include="Actions\SaveAction.h">
       <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SelectAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ToDrawModeAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ToPlayModeAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UnSelectAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UpAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ZoomInAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ZoomOutAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Input.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Output.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\UI_Info.h">
+      <Filter>GUI Classes</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CCircle.h">
       <Filter>Figures</Filter>
