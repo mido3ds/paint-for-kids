@@ -238,6 +238,7 @@ void ApplicationManager::ExecuteAction(Action* act_p)
 
         // only add action if not (undo or redo or switchPlaymode or switchDrawMode)
         // TODO make it better, you may check if action is a draw add it, and ignore others or make draw action add itself to the stack
+        // TODO: make class History and remove this from here so this method does one thing
         if (!(Action::IsFromAction<UndoAction>(act_p)
                 || Action::IsFromAction<RedoAction>(act_p)
                 || Action::IsFromAction<ToDrawModeAction>(act_p)
@@ -542,10 +543,11 @@ void ApplicationManager::RotateSelected(int deg)
 
 void ApplicationManager::PrintSelected()
 {
-
-    if (Num_Selected != 1)
+    // TODO: edit it to print the num of selected
+    if (Num_Selected != 1) // TODO: why 1 ?
         out_p->PrintMessage("Number of selected figures are ");
 }
+
 Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
 {
 
@@ -614,6 +616,7 @@ void ApplicationManager::SetClipboard()
         }
     }
 }
+
 void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip)
 {
     Clipboard = clip;
@@ -625,6 +628,7 @@ multiset<CFigure*, CmpFigures> ApplicationManager::GetClipboard()
 
 vector<CFigure*> ApplicationManager::DeleteSelected()
 {
+    // TODO: why is this returning vec? it should do one thing
     vector<int> vec;
     vector<CFigure*> deleted;
     for (auto& fig : figs) {

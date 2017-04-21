@@ -50,17 +50,8 @@ struct Point // To be used for figures points
 {
     int x, y;
 
-    Point(int a, int b)
-        : x(a)
-        , y(b)
-    {
-    }
-
-    Point()
-        : x(0)
-        , y(0)
-    {
-    }
+    Point(int a, int b): x(a), y(b) {}
+    Point(): x(0), y(0) {}
 };
 
 class GfxInfo // Graphical info of each figure (you may add more members)
@@ -71,7 +62,7 @@ public:
     bool is_filled = false; // CFigure Filled or not
     int border_width = 1; // Width of figure borders
 
-    int z_index = 0; // level of object on window, default to max size of int
+    int z_index = 0; // level of object on window, default to max size of int // TODO: remove z_index
 };
 
 #endif
