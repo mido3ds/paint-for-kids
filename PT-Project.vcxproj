@@ -137,16 +137,23 @@
     <ClCompile Include="Actions\ChBGColorAction.cpp" />
     <ClCompile Include="Actions\ChBorderAction.cpp" />
     <ClCompile Include="Actions\ChFillColorAction.cpp" />
+    <ClCompile Include="Actions\CopyAction.cpp" />
+    <ClCompile Include="Actions\CutAction.cpp" />
+    <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\DownAction.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ToPlayModeAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
+    <ClCompile Include="Actions\UnSelectAction.cpp" />
     <ClCompile Include="Actions\UpAction.cpp" />
     <ClCompile Include="Actions\ZoomInAction.cpp" />
     <ClCompile Include="Actions\ZoomOutAction.cpp" />
@@ -193,6 +200,7 @@
     <ClCompile Include="Figures\CTrngl.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
+    <ClCompile Include="History.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,16 +212,23 @@
     <ClInclude Include="Actions\ChBGColorAction.h" />
     <ClInclude Include="Actions\ChBorderAction.h" />
     <ClInclude Include="Actions\ChFillColorAction.h" />
+    <ClInclude Include="Actions\CopyAction.h" />
+    <ClInclude Include="Actions\CutAction.h" />
+    <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\DownAction.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ToDrawModeAction.h" />
     <ClInclude Include="Actions\ToPlayModeAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
+    <ClInclude Include="Actions\UnSelectAction.h" />
     <ClInclude Include="Actions\UpAction.h" />
     <ClInclude Include="Actions\ZoomInAction.h" />
     <ClInclude Include="Actions\ZoomOutAction.h" />
@@ -238,15 +253,17 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
+    <ClInclude Include="DEFS.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="Figures\CFigure.h" />
     <ClInclude Include="Figures\CLine.h" />
     <ClInclude Include="Figures\CRectangle.h" />
     <ClInclude Include="Figures\CTrngl.h" />
+    <ClInclude Include="Figures\Trigonometry.h" />
     <ClInclude Include="GUI\Input.h" />
     <ClInclude Include="GUI\Output.h" />
     <ClInclude Include="GUI\UI_Info.h" />
-    <ClInclude Include="DEFS.h" />
+    <ClInclude Include="History.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

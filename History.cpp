@@ -3,7 +3,7 @@
 History::History() 
 {}
 
-~History::History()
+History::~History()
 {
     // remove & delete actions in stacks
     while (!undo_stack.empty()) {

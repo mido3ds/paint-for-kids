@@ -1,9 +1,8 @@
 #include "UndoAction.h"
 
 UndoAction::UndoAction(ApplicationManager* app_p)
-    : Action(app_p), can_undo(false)
-{
-}
+    : Action(app_p, false)
+{}
 
 void UndoAction::ReadActionParameters()
 {

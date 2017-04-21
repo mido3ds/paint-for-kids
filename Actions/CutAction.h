@@ -9,7 +9,7 @@ public:
     CutAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
-    virtual void ExecutActione();
+    virtual void Execute();
 
     virtual void Undo();
 

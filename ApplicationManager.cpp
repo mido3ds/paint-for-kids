@@ -160,7 +160,7 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         }
 
         // try to add action, else delete it
-        if (!history->AddAction(act_p))
+        if (!history.AddAction(act_p))
             delete act_p;
     }
 }
@@ -229,7 +229,7 @@ void ApplicationManager::ExecuteAction(Action* act_p)
         }
 
         // try to add action, else delete it
-        if (!history->AddAction(act_p))
+        if (!history.AddAction(act_p))
             delete act_p;
     }
 }
@@ -600,6 +600,17 @@ vector<CFigure*> ApplicationManager::DeleteSelected()
     }
     return deleted;
 }
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::Undo()
+{
+    history.Undo();
+}
+
+void ApplicationManager::Redo()
+{
+    history.Redo();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()

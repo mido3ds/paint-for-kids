@@ -9,7 +9,7 @@ void CutAction::ReadActionParameters()
 {
 }
 
-void CutAction::ExecutActione()
+void CutAction::Execute()
 {
     if (manager_p->Num_Selected > 0) {
         clipboard = manager_p->GetClipboard();

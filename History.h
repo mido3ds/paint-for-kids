@@ -1,5 +1,5 @@
 /*
-    stores actions to be undoes, redoed
+    stores actions to be undoed, redoed
 */
 #ifndef __History_h__
 #define __History_h__

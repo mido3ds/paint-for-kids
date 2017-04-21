@@ -9,7 +9,9 @@ class ApplicationManager; //forward class declaration
 //Base class for all possible actions
 class Action {
 public:
-    Action(ApplicationManager* app_p) { manager_p = app_p; } //constructor
+    Action(ApplicationManager* app_p, bool given_can_undo = true)
+		: can_undo(given_can_undo), manager_p(app_p)
+	{}
 
     //Reads parameters required for action to execute (code depends on action type)
     virtual void ReadActionParameters() = 0;
@@ -34,7 +36,7 @@ public:
 
 protected:
     ApplicationManager* manager_p; //Actions needs AppMngr to do their job
-    bool can_undo = true; // action can be undoed by default
+    const bool can_undo; // action can be undoed by default
 };
 
 #endif

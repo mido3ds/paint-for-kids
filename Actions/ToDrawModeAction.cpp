@@ -1,7 +1,7 @@
 #include "ToDrawModeAction.h"
 
 ToDrawModeAction::ToDrawModeAction(ApplicationManager* app_p)
-    : Action(app_p), can_undo(false)
+    : Action(app_p, false)
 {
 }
 

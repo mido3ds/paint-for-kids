@@ -68,6 +68,8 @@ public:
     ActionType GetUserAction() const; // Reads the input command from the user and returns the corresponding action type
     Action* DetectAction(ActionType act_type); // return action object from action enum
     void ExecuteAction(ActionType); // execute given action 
+    void Undo();
+    void Redo();
 
     /*  ------------------------------- Figures ------------------------------- */ 
 

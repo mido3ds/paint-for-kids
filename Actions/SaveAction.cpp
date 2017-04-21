@@ -1,7 +1,7 @@
 #include "SaveAction.h"
 
 SaveAction::SaveAction(ApplicationManager* app_p)
-    : Action(app_p), can_undo(false)
+    : Action(app_p, false)
 {
 }
 
