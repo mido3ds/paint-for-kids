@@ -6,23 +6,30 @@
 
 class CCircle : public CFigure {
 public:
-    CCircle();
-    CCircle(Point p1, Point p2, GfxInfo circ_gfx_info);
+	CCircle();
+	CCircle(Point p1, Point p2, GfxInfo circ_gfx_info);
 
-    virtual void Draw(Output* out_p) const;
+	virtual void Draw(Output* out_p) const;
 
-    virtual void Save(ofstream& out_file);
-    virtual void Load(ifstream& in_file);
+	virtual void Rotate(int deg);
+	virtual void Rotated(bool r);
+	virtual void Save(ofstream& out_file);
+	virtual void Load(ifstream& in_file);
 
-    double GetRadius();
+	double GetRadius();
+	virtual bool IsRotate();
 
-    // TODO: make it one point and the radius, then del GetRadius and GetSecon....
-    Point p1, p2;
+	virtual Point CalcCenter();
+
+	bool OutOfRange(Point p1);
+
+	// TODO: make it one point and the radius, then del GetRadius and GetSecon....
+	Point p1, p2;
 
 private:
-    // given radius and this point, return another point
-    // another point is (p.x, p.y + rad)
-    Point GetSecondPointFromRadius(double rad);
+	// given radius and this point, return another point
+	// another point is (p.x, p.y + rad)
+	Point GetSecondPointFromRadius(double rad);
 };
 
 #endif /* __CCircle_h__ */

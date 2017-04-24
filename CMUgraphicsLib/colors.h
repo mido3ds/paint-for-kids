@@ -1,4 +1,4 @@
-/* 
+/*
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
@@ -10,18 +10,18 @@ This file was last modified on 05.16.1999
 
 class color {
 
-  public:
+public:
 
-    // Default constructor creates black
-    color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) { 
-        ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
-    }
+	// Default constructor creates black
+	color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) {
+		ucRed = Red;  ucGreen = Green;  ucBlue = Blue;
+	}
 
 
-    // Color components.  0 = no intensity, 255 = full intensity
-    unsigned int ucRed;
-    unsigned int ucGreen;
-    unsigned int ucBlue;
+	// Color components.  0 = no intensity, 255 = full intensity
+	unsigned int ucRed;
+	unsigned int ucGreen;
+	unsigned int ucBlue;
 
 };
 
@@ -30,10 +30,10 @@ bool operator!=(color a, color b);
 
 /*
 
-  Predefine some color objects...  Data was liberally borrowed from the
-  Open Group's X11 rbg.txt file
+Predefine some color objects...  Data was liberally borrowed from the
+Open Group's X11 rbg.txt file
 
-  $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp 
+$XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp
 
 */
 
