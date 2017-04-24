@@ -20,6 +20,7 @@ public:
 	virtual bool IsRotate();
 
 	virtual Point CalcCenter();
+	virtual void Resize(int resize_factor);
 
 	bool OutOfRange(Point p1);
 

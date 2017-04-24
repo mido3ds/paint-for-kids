@@ -291,6 +291,20 @@ multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsig
 	return figs.end();
 }
 
+bool ApplicationManager::ResizeSelected(int resize_factor)
+{
+	bool flag = false;
+
+	for (auto& fig : figs)
+		if (fig->IsSelected())
+		{
+			fig->Resize(resize_factor);
+			flag = true;
+		}
+
+	return flag;
+}
+
 bool ApplicationManager::ChangeSelectedFillColor(color c)
 {
 	bool flag = false;

@@ -25,7 +25,7 @@ public:
 	void ChngZindex(int Z); // Changes Z_Index
 
 	virtual void Rotate(int deg) = 0;
-	//virtual void Resize() = 0;
+	virtual void Resize(int resize_factor) = 0;
 	//virtual void Move() = 0;
 
 	virtual void Save(ofstream& out_file) = 0;

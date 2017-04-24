@@ -22,6 +22,12 @@ bool CCircle::IsRotate()
 	return rotate;
 }
 
+void CCircle::Resize(int resize_factor)
+{
+	p2.x = (int(resize_factor * (p2.x - p1.x))) + p1.x;
+	p2.y = (int(resize_factor * (p2.y - p1.y))) + p1.y;
+}
+
 Point CCircle::CalcCenter()
 {
 	return p1;

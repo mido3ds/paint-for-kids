@@ -137,6 +137,15 @@ void CRectangle::Load(ifstream& in_file)
 		>> fill_clr.ucBlue;
 }
 
+void CRectangle::Resize(int resize_factor)
+{
+	Point c = CalcCenter();
+	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
+	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
+	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
+	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+}
+
 Point CRectangle::CalcCenter()
 {
 	Point c;

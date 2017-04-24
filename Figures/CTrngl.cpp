@@ -122,6 +122,17 @@ bool CTrngl::IsRotate()
 	return rotate;
 }
 
+void CTrngl::Resize(int resize_factor)
+{
+	Point c = CalcCenter();
+	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
+	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
+	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
+	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+	p3.x = (int(resize_factor * (p3.x - c.x))) + c.x;
+	p3.y = (int(resize_factor * (p3.y - c.y))) + c.y;
+}
+
 void CTrngl::Save(ofstream& out_file)
 {
 	out_file << "TRIANGLE" << ' '

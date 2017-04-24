@@ -17,6 +17,8 @@ public:
 	virtual void Load(ifstream& in_file);
 
 	virtual Point CalcCenter();
+	virtual void Resize(int resize_factor);
+
 	bool OutOfRange(Point p1, Point p2, Point p3);
 
 	Point p1, p2, p3;

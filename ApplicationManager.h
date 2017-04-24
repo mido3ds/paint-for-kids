@@ -80,6 +80,8 @@ public:
 
 	bool ChangeSelectedBorder(int W, color C);
 
+	bool ResizeSelected(int resize_factor);
+
 	void SendSelecteDown();
 
 	void SendSelectedUp();
