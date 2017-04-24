@@ -8,15 +8,16 @@
 // Base class for all figures
 class CFigure : public GfxInfo {
 public:
-    CFigure();
-    CFigure(const GfxInfo& figure_gfx_info);
+	CFigure();
+	CFigure(const GfxInfo& figure_gfx_info);
 
-    void SetSelected(bool s);
-    bool IsSelected() const;
+	void SetSelected(bool s);
+	bool IsSelected() const;
 
-    void SetId(unsigned int id);
-    unsigned int GetId();
+	void SetId(unsigned int id);
+	unsigned int GetId();
 
+<<<<<<< HEAD
     virtual void Draw(Output* out_p) const = 0;
     virtual bool PointCheck(Point p) const = 0;
     void ChngDrawClr(color draw_clr); // changes the figure's drawing color
@@ -33,22 +34,46 @@ public:
     virtual Point CalcCenter() = 0;
     virtual void Rotated(bool r) = 0;
     virtual bool IsRotate() = 0;
+=======
+	virtual void Draw(Output* out_p) const = 0;
 
-    //virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
+	void ChngDrawClr(color draw_clr); // changes the figure's drawing color
+	void ChngFillClr(color filling_clr); // changes the figure's filling color
+	void ChngBorderWidth(int BW); // Changes Border Width
+	void ChngZindex(int Z); // Changes Z_Index
+
+	virtual void Rotate(int deg) = 0;
+	virtual void Resize(int resize_factor) = 0;
+	//virtual void Move() = 0;
+
+	virtual void Save(ofstream& out_file) = 0;
+	virtual void Load(ifstream& in_file) = 0;
+	virtual Point CalcCenter() = 0;
+	virtual void Rotated(bool r) = 0;
+	virtual bool IsRotate() = 0;
+>>>>>>> abdo
+
+	//virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 
 protected:
+<<<<<<< HEAD
     unsigned int id; // Each figure has an id
     bool selected = false; // true if the figure is selected.
     bool rotate = false;
+=======
+	unsigned int id; // Each figure has an id
+	bool selected = false; // true if the figure is selected.
+	bool rotate = false;
+>>>>>>> abdo
 };
 
 struct CmpFigures {
-    // used to compare figures based on z_index (made for set)
-    // lower z_index is put first
-    bool operator()(const CFigure* const lhs, const CFigure* const rhs) const
-    {
-        return lhs->z_index < rhs->z_index;
-    }
+	// used to compare figures based on z_index (made for set)
+	// lower z_index is put first
+	bool operator()(const CFigure* const lhs, const CFigure* const rhs) const
+	{
+		return lhs->z_index < rhs->z_index;
+	}
 };
 
 #endif

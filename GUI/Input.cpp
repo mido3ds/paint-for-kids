@@ -3,30 +3,38 @@
 
 Input::Input(window* pW)
 {
-    wind_p = pW; // point to the passed window
+	wind_p = pW; // point to the passed window
 }
 
-void Input::GetPointClicked(int& x, int& y) const
+clicktype Input::GetPointClicked(int& x, int& y) const
 {
-    wind_p->WaitMouseClick(x, y); // Wait for mouse click
+	return wind_p->WaitMouseClick(x, y); // Wait for mouse click
 }
 
 string Input::GetString(Output* pO) const
 {
-    string Label;
-    char Key;
-    while (1) {
-        wind_p->WaitKeyPress(Key);
-        if (Key == 27) // ESCAPE key is pressed
-            return ""; // returns nothing as user has cancelled label
-        if (Key == 13) // ENTER key is pressed
-            return Label;
-        if (Key == 8) // BackSpace is pressed
-            Label.resize(Label.size() - 1);
-        else
-            Label += Key;
-        pO->PrintMessage(Label);
-    }
+	string Label;
+	char Key;
+	while (1) {
+		wind_p->WaitKeyPress(Key);
+		if (Key == 27) // ESCAPE key is pressed
+			return ""; // returns nothing as user has cancelled label
+		if (Key == 13) // ENTER key is pressed
+			return Label;
+		if (Key == 8 && Label.size() != 0) // BackSpace is pressed
+			Label.resize(Label.size() - 1);
+		else
+			Label += Key;
+		pO->PrintMessage(Label);
+	}
+}
+
+color Input::PickColor(int ix, int iy)
+{
+	if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) {
+		return WHITE;
+	}
+	return wind_p->GetColor(ix, iy);
 }
 
 color Input::PickColor(int ix, int iy)
@@ -187,6 +195,7 @@ ActionType Input::GetUserAction() const
         //[3] User clicks on the status bar
         return STATUS;
     }
+
 }
 /////////////////////////////////
 

@@ -137,9 +137,12 @@
     <ClCompile Include="Actions\ChBGColorAction.cpp" />
     <ClCompile Include="Actions\ChBorderAction.cpp" />
     <ClCompile Include="Actions\ChFillColorAction.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
+=======
+>>>>>>> abdo
     <ClCompile Include="Actions\DownAction.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
@@ -149,11 +152,17 @@
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ToPlayModeAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Actions\UnSelectAction.cpp" />
+=======
+    <ClCompile Include="Actions\ToDrawModeAction.cpp" />
+    <ClCompile Include="Actions\ToPlayModeAction.cpp" />
+    <ClCompile Include="Actions\UndoAction.cpp" />
+>>>>>>> abdo
     <ClCompile Include="Actions\UpAction.cpp" />
     <ClCompile Include="Actions\ZoomInAction.cpp" />
     <ClCompile Include="Actions\ZoomOutAction.cpp" />
@@ -212,9 +221,12 @@
     <ClInclude Include="Actions\ChBGColorAction.h" />
     <ClInclude Include="Actions\ChBorderAction.h" />
     <ClInclude Include="Actions\ChFillColorAction.h" />
+<<<<<<< HEAD
     <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
+=======
+>>>>>>> abdo
     <ClInclude Include="Actions\DownAction.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
@@ -224,11 +236,17 @@
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+<<<<<<< HEAD
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ToDrawModeAction.h" />
     <ClInclude Include="Actions\ToPlayModeAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\UnSelectAction.h" />
+=======
+    <ClInclude Include="Actions\ToDrawModeAction.h" />
+    <ClInclude Include="Actions\ToPlayModeAction.h" />
+    <ClInclude Include="Actions\UndoAction.h" />
+>>>>>>> abdo
     <ClInclude Include="Actions\UpAction.h" />
     <ClInclude Include="Actions\ZoomInAction.h" />
     <ClInclude Include="Actions\ZoomOutAction.h" />

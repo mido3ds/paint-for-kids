@@ -6,9 +6,10 @@
 class CRectangle : public CFigure {
 
 public:
-    CRectangle();
-    CRectangle(Point, Point, GfxInfo figure_gfx_info);
+	CRectangle();
+	CRectangle(Point, Point, GfxInfo figure_gfx_info);
 
+<<<<<<< HEAD
     virtual void Draw(Output* out_p) const;
     virtual bool PointCheck(Point p) const;
     virtual void Rotate(int deg);
@@ -20,8 +21,22 @@ public:
     virtual CFigure* Copy();
     virtual Point CalcCenter();
     bool OutOfRange(Point p1, Point p2);
+=======
+	virtual void Draw(Output* out_p) const;
 
-    Point p1, p2;
+	virtual void Rotate(int deg);
+	virtual void Rotated(bool r);
+	virtual bool IsRotate();
+	virtual void Save(ofstream& out_file);
+	virtual void Load(ifstream& in_file);
+>>>>>>> abdo
+
+	virtual Point CalcCenter();
+	virtual void Resize(int resize_factor);
+
+	bool OutOfRange(Point p1, Point p2);
+
+	Point p1, p2;
 };
 
 #endif
