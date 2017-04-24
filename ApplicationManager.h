@@ -45,7 +45,7 @@
 
 // other
 #include "DEFS.h"
-#include "History.h"
+#include "HistoryManager.h"
 #include "GUI/Input.h"
 #include "GUI/Output.h"
 
@@ -112,7 +112,7 @@ public:
     multiset<CFigure*, CmpFigures> GetClipboard();
 
 private:
-    History history;
+    HistoryManager history;
     CFigure* GetFigure(unsigned int id) const;
     multiset<CFigure*, CmpFigures>::iterator 
         GetFigureIter(unsigned int id) const;  // return iterator to the figure if found, otherwise figs.end()

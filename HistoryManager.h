@@ -8,11 +8,11 @@
 #include <stack>
 using namespace std;
 
-class History
+class HistoryManager
 {
 public:
-    History();
-    ~History();
+    HistoryManager();
+    ~HistoryManager();
     
     // methods return true on success
 

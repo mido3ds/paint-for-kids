@@ -1,9 +1,9 @@
-#include "History.h"
+#include "HistoryManager.h"
 
-History::History() 
+HistoryManager::HistoryManager() 
 {}
 
-History::~History()
+HistoryManager::~HistoryManager()
 {
     // remove & delete actions in stacks
     while (!undo_stack.empty()) {
@@ -17,7 +17,7 @@ History::~History()
 }
 
 
-bool History::AddAction(Action* given_act)
+bool HistoryManager::AddAction(Action* given_act)
 {
     if (!given_act)
         throw runtime_error("add null action to stack");
@@ -30,7 +30,7 @@ bool History::AddAction(Action* given_act)
     return false;
 }
 
-bool History::Undo()
+bool HistoryManager::Undo()
 {
     if (undo_stack.empty())
         return false;
@@ -44,7 +44,7 @@ bool History::Undo()
     return true;
 }
 
-bool History::Redo()
+bool HistoryManager::Redo()
 {
     if (redo_stack.empty())
         return false;
