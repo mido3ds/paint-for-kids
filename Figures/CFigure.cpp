@@ -44,16 +44,6 @@ void CFigure::ChngZindex(int Z)
 	this->z_index = Z;
 }
 
-void CFigure::ChngBorderWidth(int BW)
-{
-    this->border_width = BW;
-}
-
-void CFigure::ChngZindex(int Z)
-{
-    this->z_index = Z;
-}
-
 void CFigure::SetId(unsigned int id)
 {
 	this->id = id;

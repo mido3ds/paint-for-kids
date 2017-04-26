@@ -1,5 +1,5 @@
-#ifndef _SELECT_
-#define _SELECT_
+#ifndef __SelectAction_h__
+#define __SelectAction_h__
 
 #include "../ApplicationManager.h"
 #include "../CMUgraphicsLib/colors.h"
@@ -19,10 +19,10 @@ public:
     virtual void Undo();
 
 private:
-    CFigure* Selected;
+    CFigure* selected;
     Point p;
-    color originalfill;
+    //color originalfill;
     color originaldraw;
 };
 
-#endif
+#endif /* __SelectAction_h__ */

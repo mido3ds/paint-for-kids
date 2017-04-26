@@ -8,7 +8,12 @@ Input::Input(window* pW)
 
 clicktype Input::GetPointClicked(int& x, int& y) const
 {
-	return wind_p->WaitMouseClick(x, y); // Wait for mouse click
+	clicktype click;
+	do
+	{
+		click = wind_p->WaitMouseClick(x, y); // Wait for mouse click
+	} while (y <= UI.ToolBarHeight || y >= UI.StatusBarY);
+	return click;
 }
 
 string Input::GetString(Output* pO) const
@@ -35,14 +40,6 @@ color Input::PickColor(int ix, int iy)
 		return WHITE;
 	}
 	return wind_p->GetColor(ix, iy);
-}
-
-color Input::PickColor(int ix, int iy)
-{
-    if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) {
-        return WHITE;
-    }
-    return wind_p->GetColor(ix, iy);
 }
 
 // This function reads the position where the user clicks to determine the
@@ -73,6 +70,8 @@ ActionType Input::GetUserAction() const
                 return CHNG_BK_CLR;
             case ITM_SELECT:
                 return SELECT;
+			case ITM_DESELECT:
+				return DESELECT;
             case ITM_CHDC:
                 return CHNG_DRAW_CLR;
             case ITM_CHFC:

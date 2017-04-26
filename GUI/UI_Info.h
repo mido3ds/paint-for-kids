@@ -19,6 +19,7 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
     // If you want to change the menu items order, change the order here
     ITM_FIG,
     ITM_SELECT,
+	ITM_DESELECT,
     ITM_CHDC, // Change Draw Color
     ITM_CHFC, // Change Fill Color
     ITM_CHBGC,

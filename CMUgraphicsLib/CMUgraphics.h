@@ -115,9 +115,8 @@ private:
 	mqueue mqueInput;
 	kqueue kqueInput;
 
-<<<<<<< HEAD
     // The current state of the left and right buttons
-    buttonstate bsLeft;
+    /*buttonstate bsLeft;
     buttonstate bsRight;
 
     // Kludge to solve problems with the stupid way Win32 messaging system works
@@ -136,7 +135,7 @@ private:
 
     // Prevent inadvertent copying... 
     void operator=(window &); 
-    window(window &);
+    window(window &);*/
     
   public:
 
@@ -161,7 +160,7 @@ private:
     // Turn double buffering on or off.  The way things currently work the background
     // color of the double buffer defaults to black, whereas the normal screen defaults
     // to white.  Returns the old state.
-=======
+
 	// The current state of the left and right buttons
 	buttonstate bsLeft;
 	buttonstate bsRight;
@@ -184,30 +183,6 @@ private:
 	void operator=(window &);
 	window(window &);
 
-public:
-
-	bool isfigitems = false;
-	bool isfigactions = false;
-	bool iscolorbar = false;
-
-	// Create a new window! iWindWidth and iWindHeight will change the size of 
-	// the window created. iWindXPos and iWindYPos is the position the window
-	// will appear on the screen
-	window(const int iWindWidth = ciDefWindWidth, const int iWindHeight = ciDefWindHeight, const int iWindXPos = ciDefWindXPos, const int iWindYPos = ciDefWindYPos);
-
-	// Window destructor
-	~window();
-
-	// If this window is the last window on screen, the default behavior is that in
-	// the window destructor the program waits for a mouse click before closing 
-	// the window.  This function will allow you to change this behavior.  The 
-	// default value is true.  It will return whatever the previous state was.
-	bool SetWaitClose(const bool bSetting) const;
-
-	// Turn double buffering on or off.  The way things currently work the background
-	// color of the double buffer defaults to black, whereas the normal screen defaults
-	// to white.  Returns the old state.
->>>>>>> abdo
 	bool SetBuffering(const bool bSetting);
 
 	// When double buffering is turned on this will copy the offscreen buffer to 

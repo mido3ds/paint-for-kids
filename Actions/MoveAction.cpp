@@ -10,7 +10,8 @@ void MoveAction::ReadActionParameters()
 
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
-    if (manager_p->Num_Selected > 0) {
+
+    if (manager_p->GetNumSelected() > 0) {
         out_p->PrintMessage("Please Click The Point You Want To MoveAction Selected Figure/s At");
         in_p->GetPointClicked(p.x, p.y);
         out_p->ClearStatusBar();
@@ -20,7 +21,7 @@ void MoveAction::ReadActionParameters()
 
 void MoveAction::Execute()
 {
-    if (manager_p->Num_Selected > 0) {
+    if (manager_p->GetNumSelected() > 0) {
         old = manager_p->MoveSelected(p);
         moveActiond = true;
     }

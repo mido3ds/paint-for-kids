@@ -116,12 +116,13 @@ void Output::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_FIG] = "images\\MenuItems\\borderPen.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
+	MenuItemImages[ITM_DESELECT] = "images\\MenuItems\\deselect.jpg";
 	MenuItemImages[ITM_CHDC] = "images\\MenuItems\\border.jpg";
-	MenuItemImages[ITM_CHFC] = "images\\MenuItems\\coloring.jpg";
-	MenuItemImages[ITM_CHBGC] = "images\\MenuItems\\background.jpg";
+	MenuItemImages[ITM_CHFC] = "images\\MenuItems\\color_picker.jpg";
+	MenuItemImages[ITM_CHBGC] = "images\\MenuItems\\paint_bucket.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\open.jpg";
-	MenuItemImages[ITM_CTR] = "images\\MenuItems\\Controls.jpg";
+	MenuItemImages[ITM_CTR] = "images\\MenuItems\\control.jpg";
 	MenuItemImages[ITM_ZOOM_IN] = "images\\MenuItems\\Zin.jpg";
 	MenuItemImages[ITM_ZOOM_OUT] = "images\\MenuItems\\Zout.jpg";
 	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo.jpg";
@@ -136,14 +137,15 @@ void Output::CreateDrawToolBar() const
 
 void Output::CreateFigItems() const
 {
-	UI.TToolBarWidth = 200;
+	
 	ClearTToolBar();
+	UI.TToolBarWidth = 200;
 	wind_p->isfigitems = true;
 
 	string MenuItemImages[FIG_ITM_COUNT];
 	MenuItemImages[ITM_LINE] = "images\\MenuItems\\line.jpg";
-	MenuItemImages[ITM_RECT] = "images\\MenuItems\\rect.jpg";
-	MenuItemImages[ITM_TRI] = "images\\MenuItems\\triangle.jpg";
+	MenuItemImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";
+	MenuItemImages[ITM_TRI] = "images\\MenuItems\\tringle.jpg";
 	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\circle.jpg";
 
 	for (int i = 0; i < FIG_ITM_COUNT; i++)
@@ -187,7 +189,7 @@ void Output::CreatePlayToolBar() const
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[ITM_PICK_HIDE] = "images\\MenuItems\\find.jpg";
 	MenuItemImages[ITM_SCR_FIND] = "images\\MenuItems\\scramble.jpg";
-	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\draw.jpg";
+	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\to_draw.jpg";
 	MenuItemImages[ITM_EXIT_PLAY] = "images\\MenuItems\\exit.jpg";
 
 	// Draw menu item one image at a time

@@ -16,18 +16,12 @@ void AddCircAction::ReadActionParameters()
     out_p->PrintMessage("New Circle: Click at first point");
 	
     //Read 1st corner and store in point p1
-	do
-	{
-		in_p->GetPointClicked(p1.x, p1.y);
-	} while (p1.y <= UI.ToolBarHeight);
+	in_p->GetPointClicked(p1.x, p1.y);
 
     out_p->PrintMessage("New Circle: Click at second point");
 
     //Read 2nd corner and store in point p2
-	do
-	{
-		in_p->GetPointClicked(p2.x, p2.y);
-	} while (p2.y <= UI.ToolBarHeight);
+	in_p->GetPointClicked(p2.x, p2.y);
     
 	p1.x = (p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
 	p1.y = (p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;

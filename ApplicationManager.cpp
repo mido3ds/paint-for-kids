@@ -6,7 +6,7 @@ ApplicationManager::ApplicationManager()
     //Create Input and output
     out_p = new Output;
     in_p = out_p->CreateInput();
-    Num_Selected = 0;
+    num_selected = 0;
 }
 
 //==================================================================================//
@@ -24,7 +24,6 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     switch (act_type) {
     case DRAW_FIG_ITM:
         bar = 1;
-        out_p->CreateFigItems();
         return nullptr;
     case DRAW_RECT:
         return new AddRectAction(this);
@@ -69,7 +68,6 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return nullptr;
     case CTR:
         bar = 2;
-        out_p->CreateFigActions();
         return nullptr;
     case DEL:
         //out_p->ClearTToolBar();
@@ -88,7 +86,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new PasteAction(this);
     case SELECT:
         return new SelectAction(this);
-    case UNSELECT:
+    case DESELECT:
         return new UnSelectAction(this);
     case CUT:
         return new CutAction(this);
@@ -111,7 +109,6 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
         if (!history.AddAction(act_p))
             delete act_p;
     }
-}
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -142,6 +139,18 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
     return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+// gets number of selected figures
+int ApplicationManager::GetNumSelected() const
+{
+	return num_selected;
+}
+////////////////////////////////////////////////////////////////////////////////////
+// sets number of selected figures
+void ApplicationManager::SetNumSelected(int n_selected)
+{
+	num_selected = n_selected;
+}
+////////////////////////////////////////////////////////////////////////////////////
 // According to given string, return the corresponding Figure object
 CFigure* ApplicationManager::DetectFigure(string fig_name)
 {
@@ -162,6 +171,8 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface()
 {
+	out_p->ClearDrawArea();
+
 	for (auto& fig : figs)
 		fig->Draw(out_p); //Call Draw function (virtual member fn)
 
@@ -184,11 +195,6 @@ Output* ApplicationManager::GetOutput() const
     return out_p;
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-int ApplicationManager::GetBar() const
-{
-	return bar;
-}
 ////////////////////////////////////////////////////////////////////////////////////
 // iterate through all figures
 // call save for each one
@@ -276,92 +282,19 @@ multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsig
 	return figs.end();
 }
 
-bool ApplicationManager::ResizeSelected(int resize_factor)
+bool ApplicationManager::ResizeSelected(double resize_factor)
 {
 	bool flag = false;
 
 	for (auto& fig : figs)
+	{
 		if (fig->IsSelected())
 		{
 			fig->Resize(resize_factor);
 			flag = true;
 		}
-
+	}
 	return flag;
-}
-
-bool ApplicationManager::ChangeSelectedFillColor(color c)
-{
-	bool flag = false;
-
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			fig->ChngFillClr(c);
-
-			flag = true;
-		}
-	}
-
-	return flag;
-}
-
-bool ApplicationManager::ChangeSelectedBorder(int W, color C)
-{
-	bool flag = false;
-
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			fig->ChngDrawClr(C);
-			fig->ChngBorderWidth(W);
-			fig->SetSelected(false);
-
-			flag = true;
-		}
-	}
-
-	return flag;
-}
-
-void ApplicationManager::SendSelecteDown()
-{
-	// TODO: to be changed after making figs a vector not set
-	int x;
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-		if ((*itr)->IsSelected()) {
-			x = (*itr)->z_index;
-			for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-				if (x >= (*itr2)->z_index && itr != itr2) {
-					x = (*itr2)->z_index - 1;
-				}
-			}
-			(*itr)->ChngZindex(x);
-			(*itr)->SetSelected(false);
-			multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-			figs = list;
-			itr = figs.begin();
-		}
-	}
-}
-
-void ApplicationManager::SendSelectedUp()
-{
-	// TODO: to be changed after making figs a vector not set
-	int x;
-	for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-		if ((*itr)->IsSelected()) {
-			x = (*itr)->z_index;
-			for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-				if (x <= (*itr2)->z_index && itr != itr2) {
-					x = (*itr2)->z_index + 1;
-				}
-			}
-			(*itr)->ChngZindex(x);
-			(*itr)->SetSelected(false);
-			multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-			figs = list;
-			itr = figs.begin();
-		}
-	}
 }
 
 void ApplicationManager::RotateSelected(int deg)
@@ -411,6 +344,12 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
     return flag;
 }
 
+bool ApplicationManager::DeselectAll()
+{
+	for (auto& fig : figs)
+		fig->SetSelected(false);
+}
+
 void ApplicationManager::SendSelecteDown()
 {
     // TODO: to be changed after making figs a vector not set
@@ -424,7 +363,7 @@ void ApplicationManager::SendSelecteDown()
                 }
             }
             (*itr)->ChngZindex(x);
-            (*itr)->SetSelected(false);
+            //(*itr)->SetSelected(false);
             multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
             figs = list;
             itr = figs.begin();
@@ -453,24 +392,10 @@ void ApplicationManager::SendSelectedUp()
     }
 }
 
-void ApplicationManager::RotateSelected(int deg)
-{
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
-            fig->Rotate(deg);
-            if (fig->IsRotate()) {
-                fig->Rotated(false);
-            } else {
-                out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
-            }
-        }
-    }
-}
-
 void ApplicationManager::PrintSelectedSize()
 {
-    if (Num_Selected != 0)
-        out_p->PrintMessage("Number of selected figures are " + to_string(Num_Selected));
+    if (num_selected != 0)
+        out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
 Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
@@ -546,6 +471,7 @@ void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip)
 {
     clipboard = clip;
 }
+
 multiset<CFigure*, CmpFigures> ApplicationManager::GetClipboard()
 {
     return clipboard;

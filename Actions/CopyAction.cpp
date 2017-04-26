@@ -11,7 +11,7 @@ void CopyAction::ReadActionParameters()
 
 void CopyAction::Execute()
 {
-    if (manager_p->Num_Selected > 0) {
+    if (manager_p->GetNumSelected() > 0) {
         clipboard = manager_p->GetClipboard();
         manager_p->SetClipboard();
         copied = true;

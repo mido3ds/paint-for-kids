@@ -22,7 +22,7 @@ bool CCircle::IsRotate()
 	return rotate;
 }
 
-void CCircle::Resize(int resize_factor)
+void CCircle::Resize(double resize_factor)
 {
 	p2.x = (int(resize_factor * (p2.x - p1.x))) + p1.x;
 	p2.y = (int(resize_factor * (p2.y - p1.y))) + p1.y;
@@ -36,21 +36,6 @@ Point CCircle::CalcCenter()
 bool CCircle::OutOfRange(Point p1)
 {
 	return (p1.x - GetRadius() < UI.DrawAreaX || p1.x + GetRadius() > UI.DrawAreaX + UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y + GetRadius() > UI.DrawAreaY + UI.DrawAreaHeight);
-}
-
-bool CCircle::IsRotate()
-{
-    return rotate;
-}
-
-Point CCircle::CalcCenter()
-{
-    return p1;
-}
-
-bool CCircle::OutOfRange(Point p1)
-{
-    return (p1.x - GetRadius() < UI.DrawAreaX || p1.x + GetRadius() > UI.DrawAreaX + UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y + GetRadius() > UI.DrawAreaY + UI.DrawAreaHeight);
 }
 
 Point CCircle::GetSecondPointFromRadius(double rad)
@@ -72,14 +57,6 @@ void CCircle::Rotated(bool r)
 	rotate = r;
 }
 
-void CCircle::Rotate(int deg)
-{
-}
-
-void CCircle::Rotated(bool r)
-{
-    rotate = r;
-}
 
 void CCircle::Save(ofstream& out_file)
 {
@@ -120,7 +97,6 @@ void CCircle::Load(ifstream& in_file)
 		>> fill_clr.ucGreen
 		>> fill_clr.ucBlue;
 
-<<<<<<< HEAD
     p2 = GetSecondPointFromRadius(rad);
 }
 
@@ -156,7 +132,4 @@ CFigure* CCircle::Copy()
     c.z_index = this->z_index;
     CFigure* copy = new CCircle(p1, p2, c);
     return copy;
-=======
-	p2 = GetSecondPointFromRadius(rad);
->>>>>>> abdo
 }

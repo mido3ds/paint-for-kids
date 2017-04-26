@@ -22,6 +22,9 @@ void ResizeAction::ReadActionParameters()
 
 	out_p->ClearTToolBar();
 
+	out_p->ClearStatusBar();
+	out_p->PrintMessage("Enter resize factor");
+
 	string data;
 	char* val = NULL;
 	do
@@ -29,6 +32,7 @@ void ResizeAction::ReadActionParameters()
 		data = in_p->GetString(out_p);
 		resize_factor = strtod(data.c_str(), &val);
 	} while (*val == data[0] || resize_factor <= 0);
+	out_p->ClearStatusBar();
 }
 
 //Execute the action
@@ -37,16 +41,17 @@ void ResizeAction::Execute()
 
 	Output* out_p = manager_p->GetOutput();
 
-
-	//clearing the drawing area to remove the old shape and draw a new one with the new size
 	out_p->ClearDrawArea();
 
 	if (!manager_p->ResizeSelected(resize_factor))
+	{
 		out_p->PrintMessage("Error no figures selected");
+		resize_factor = 1;
+	}
 }
 
 
 void ResizeAction::Undo()
 {
-	// TODO: 
+	manager_p->ResizeSelected(1 / resize_factor);
 }
