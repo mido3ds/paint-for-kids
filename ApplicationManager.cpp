@@ -139,6 +139,12 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
     return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+
+int ApplicationManager::GetNumFigures() const
+{
+	return figs.size();
+}
+////////////////////////////////////////////////////////////////////////////////////
 // gets number of selected figures
 int ApplicationManager::GetNumSelected() const
 {
@@ -495,6 +501,14 @@ deque<CFigure*> ApplicationManager::DeleteSelected()
     return deleted;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::DeleteAllFigures()
+{
+	for (auto& fig : figs)
+		delete fig;
+	figs.clear();
+}
+////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
     history.Undo();
@@ -509,9 +523,7 @@ void ApplicationManager::Redo()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-    // delete figs
-    for (auto& fig : figs)
-        delete fig;
+	DeleteAllFigures();
 
     delete in_p;
     delete out_p;

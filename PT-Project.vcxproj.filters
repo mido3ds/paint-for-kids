@@ -125,7 +125,6 @@
     </ClCompile>
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="History.cpp" />
     <ClCompile Include="Actions\AddCircAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -228,6 +227,7 @@
     <ClCompile Include="Figures\CTrngl.cpp">
       <Filter>Figures</Filter>
     </ClCompile>
+    <ClCompile Include="HistoryManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -292,7 +292,6 @@
     </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="ApplicationManager.h" />
-    <ClInclude Include="History.h" />
     <ClInclude Include="Actions\Action.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -404,5 +403,6 @@
     <ClInclude Include="Figures\Trigonometry.h">
       <Filter>Figures</Filter>
     </ClInclude>
+    <ClInclude Include="HistoryManager.h" />
   </ItemGroup>
 </Project>

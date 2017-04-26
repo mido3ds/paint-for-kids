@@ -115,6 +115,8 @@ void CLine::Save(ofstream& out_file)
 		<< draw_clr.ucGreen << ' '
 		<< draw_clr.ucBlue << ' '
 
+		<< border_width
+
 		<< '\n';
 }
 
@@ -130,7 +132,9 @@ void CLine::Load(ifstream& in_file)
 
         >> draw_clr.ucRed
         >> draw_clr.ucGreen
-        >> draw_clr.ucBlue;
+        >> draw_clr.ucBlue
+		
+		>> border_width;
 }
 
 bool CLine::PointCheck(Point p) const
