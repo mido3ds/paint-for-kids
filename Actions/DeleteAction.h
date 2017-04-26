@@ -14,7 +14,7 @@ public:
     virtual void Undo();
 
 private:
-    vector<CFigure*> clipboard;
+    deque<CFigure*> clipboard;
     bool deleted = false;
 };
 

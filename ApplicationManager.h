@@ -3,9 +3,8 @@
 
 // std 
 #include <fstream> // fstream
-#include <set>  // multiset
 #include <string>
-#include <vector>
+#include <deque> // brother of vector
 #include <cmath>
 
 // actions
@@ -57,7 +56,7 @@ public:
     /*  ------------------------------- DEPRECATED ------------------------------- */ 
     // !!
     // TODO: to be removed, redundant or breaks classes resposibilities
-    multiset<CFigure*, CmpFigures>* GetFigures(); //Search for a figure given it's index in figure list // why gives other classes my private members?
+    deque<CFigure*>* GetFigures(); //Search for a figure given it's index in figure list // why gives other classes my private members?
     void ExecuteAction(Action* action); //Takes already created action and excute it // duplicate
     void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
     // !!
@@ -88,7 +87,7 @@ public:
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    vector<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
@@ -110,19 +109,19 @@ public:
 
     bool PasteClipboard(Point p);
     void SetClipboard();    // TODO why two methods ?
-    void SetClipboard(multiset<CFigure*, CmpFigures> clip);
-    multiset<CFigure*, CmpFigures> GetClipboard();
+    void SetClipboard(deque<CFigure*> clip);
+    deque<CFigure*> GetClipboard();
 
 private:
     History history;
     CFigure* GetFigure(unsigned int id) const;
-    multiset<CFigure*, CmpFigures>::iterator 
+    deque<CFigure*>::iterator 
         GetFigureIter(unsigned int id) const;  // return iterator to the figure if found, otherwise figs.end()
     
-    // TODO: make it vector
-    multiset<CFigure*, CmpFigures> figs;
-    multiset<CFigure*, CmpFigures> moved_figs;
-    multiset<CFigure*, CmpFigures> clipboard; 
+    // TODO: make it deque
+    deque<CFigure*> figs;
+    deque<CFigure*> moved_figs;
+    deque<CFigure*> clipboard; 
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
     int bar = 0;

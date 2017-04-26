@@ -14,8 +14,8 @@ public:
     virtual void Undo();
 
 private:
-    multiset<CFigure*, CmpFigures> clipboard; //to store old clipboard
-    vector<CFigure*> cutAction;
+    deque<CFigure*> clipboard; //to store old clipboard
+    deque<CFigure*> cutAction;
     bool cutActioned = false;
 };
 

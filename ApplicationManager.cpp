@@ -117,7 +117,7 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* fig_p)
 {
-	figs.insert(fig_p);
+	figs.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -243,7 +243,7 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 		fig = DetectFigure(fig_name);
 		fig->Load(in_file);
 
-		figs.insert(fig);
+		figs.push_back(fig);
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -273,7 +273,7 @@ CFigure* ApplicationManager::GetFigure(unsigned int id) const
 	return nullptr;
 }
 
-multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
+deque<CFigure*>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
 {
 	for (auto itr = figs.begin(); itr != figs.end(); itr++)
 		if ((*itr)->GetId() == id)
@@ -352,42 +352,27 @@ bool ApplicationManager::DeselectAll()
 
 void ApplicationManager::SendSelecteDown()
 {
-    // TODO: to be changed after making figs a vector not set
-    int x;
-    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-        if ((*itr)->IsSelected()) {
-            x = (*itr)->z_index;
-            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-                if (x >= (*itr2)->z_index && itr != itr2) {
-                    x = (*itr2)->z_index - 1;
-                }
-            }
-            (*itr)->ChngZindex(x);
-            //(*itr)->SetSelected(false);
-            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-            figs = list;
-            itr = figs.begin();
+    // TODO: test
+    for (auto itr = figs.begin(); itr != figs.end(); itr++)
+    {
+        if ((*itr)->IsSelected())
+        {
+            CFigure* temp = *itr;
+            figs.erase(itr);
+            figs.push_front(temp);
         }
     }
 }
 
 void ApplicationManager::SendSelectedUp()
 {
-    // TODO: to be changed after making figs a vector not set
-    int x;
-    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-        if ((*itr)->IsSelected()) {
-            x = (*itr)->z_index;
-            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-                if (x <= (*itr2)->z_index && itr != itr2) {
-                    x = (*itr2)->z_index + 1;
-                }
-            }
-            (*itr)->ChngZindex(x);
-            (*itr)->SetSelected(false);
-            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-            figs = list;
-            itr = figs.begin();
+    for (auto itr = figs.begin(); itr != figs.end(); itr++)
+    {
+        if ((*itr)->IsSelected())
+        {
+            CFigure* temp = *itr;
+            figs.erase(itr);
+            figs.push_back(temp);
         }
     }
 }
@@ -418,7 +403,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             fig->Move(x, y);
-            moved_figs.insert(fig);
+            moved_figs.push_back(fig);
         }
     }
     p.x = minx;
@@ -462,26 +447,26 @@ void ApplicationManager::SetClipboard()
         if (fig->IsSelected()) {
             copy = fig->Copy();
             copy->SetId(GenerateNextId());
-            clipboard.insert(copy);
+            clipboard.push_back(copy);
         }
     }
 }
 
-void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip)
+void ApplicationManager::SetClipboard(deque<CFigure*> clip)
 {
     clipboard = clip;
 }
 
-multiset<CFigure*, CmpFigures> ApplicationManager::GetClipboard()
+deque<CFigure*> ApplicationManager::GetClipboard()
 {
     return clipboard;
 }
 
-vector<CFigure*> ApplicationManager::DeleteSelected()
+deque<CFigure*> ApplicationManager::DeleteSelected()
 {
     // TODO: why is this returning vec? it should do one thing
-    vector<int> vec;
-    vector<CFigure*> deleted;
+    deque<int> vec;
+    deque<CFigure*> deleted;
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             vec.push_back(fig->GetId());
