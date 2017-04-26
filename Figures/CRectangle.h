@@ -6,8 +6,8 @@
 class CRectangle : public CFigure {
 
 public:
-    CRectangle();
-    CRectangle(Point, Point, GfxInfo figure_gfx_info);
+	CRectangle();
+	CRectangle(Point, Point, GfxInfo figure_gfx_info);
 
     virtual void Draw(Output* out_p) const;
     virtual bool PointCheck(Point p) const;
@@ -18,10 +18,13 @@ public:
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual CFigure* Copy();
-    virtual Point CalcCenter();
-    bool OutOfRange(Point p1, Point p2);
 
-    Point p1, p2;
+	virtual Point CalcCenter();
+	virtual void Resize(double resize_factor);
+
+	bool OutOfRange(Point p1, Point p2);
+
+	Point p1, p2;
 };
 
 #endif

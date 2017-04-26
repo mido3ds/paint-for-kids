@@ -3,38 +3,43 @@
 
 Input::Input(window* pW)
 {
-    wind_p = pW; // point to the passed window
+	wind_p = pW; // point to the passed window
 }
 
-void Input::GetPointClicked(int& x, int& y) const
+clicktype Input::GetPointClicked(int& x, int& y) const
 {
-    wind_p->WaitMouseClick(x, y); // Wait for mouse click
+	clicktype click;
+	do
+	{
+		click = wind_p->WaitMouseClick(x, y); // Wait for mouse click
+	} while (y <= UI.ToolBarHeight || y >= UI.StatusBarY);
+	return click;
 }
 
 string Input::GetString(Output* pO) const
 {
-    string Label;
-    char Key;
-    while (1) {
-        wind_p->WaitKeyPress(Key);
-        if (Key == 27) // ESCAPE key is pressed
-            return ""; // returns nothing as user has cancelled label
-        if (Key == 13) // ENTER key is pressed
-            return Label;
-        if (Key == 8) // BackSpace is pressed
-            Label.resize(Label.size() - 1);
-        else
-            Label += Key;
-        pO->PrintMessage(Label);
-    }
+	string Label;
+	char Key;
+	while (1) {
+		wind_p->WaitKeyPress(Key);
+		if (Key == 27) // ESCAPE key is pressed
+			return ""; // returns nothing as user has cancelled label
+		if (Key == 13) // ENTER key is pressed
+			return Label;
+		if (Key == 8 && Label.size() != 0) // BackSpace is pressed
+			Label.resize(Label.size() - 1);
+		else
+			Label += Key;
+		pO->PrintMessage(Label);
+	}
 }
 
 color Input::PickColor(int ix, int iy)
 {
-    if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) {
-        return WHITE;
-    }
-    return wind_p->GetColor(ix, iy);
+	if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) {
+		return WHITE;
+	}
+	return wind_p->GetColor(ix, iy);
 }
 
 // This function reads the position where the user clicks to determine the
@@ -65,6 +70,8 @@ ActionType Input::GetUserAction() const
                 return CHNG_BK_CLR;
             case ITM_SELECT:
                 return SELECT;
+			case ITM_DESELECT:
+				return DESELECT;
             case ITM_CHDC:
                 return CHNG_DRAW_CLR;
             case ITM_CHFC:
@@ -187,6 +194,7 @@ ActionType Input::GetUserAction() const
         //[3] User clicks on the status bar
         return STATUS;
     }
+
 }
 /////////////////////////////////
 

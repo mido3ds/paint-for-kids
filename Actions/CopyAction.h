@@ -14,7 +14,7 @@ public:
     virtual void Undo();
 
 private:
-    multiset<CFigure*, CmpFigures> clipboard;
+    deque<CFigure*> clipboard;
     bool copied = false;
 };
 

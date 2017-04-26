@@ -1,5 +1,5 @@
 /*
-    some global constants and definitions to be used in the project.
+some global constants and definitions to be used in the project.
 */
 #ifndef DEFS_H
 #define DEFS_H
@@ -19,7 +19,7 @@ enum ActionType //The actions supported (you can add more if needed)
     DEL, //Delete a figure(s)
     MOVE, //Move a figure(s)
     SELECT,
-	UNSELECT,
+	DESELECT,
     CTR, // Figure Actions Control
     RESIZE, //Resize a figure(s)
     ROTATE, //Rotate a figure(s)
@@ -38,18 +38,18 @@ enum ActionType //The actions supported (you can add more if needed)
     REDO,
     EXIT, //Exit the application
 
-    DRAWING_AREA, //A click on the drawing area
-    COLOR_BAR, //A Click On The Color Bar
-    STATUS, //A click on the status bar
-    EMPTY, //A click on empty place in the toolbar
+	DRAWING_AREA, //A click on the drawing area
+	COLOR_BAR, //A Click On The Color Bar
+	STATUS, //A click on the status bar
+	EMPTY, //A click on empty place in the toolbar
 
-    TO_DRAW, //Switch interface to Draw mode
-    TO_PLAY //Switch interface to Play mode
+	TO_DRAW, //Switch interface to Draw mode
+	TO_PLAY //Switch interface to Play mode
 };
 
 struct Point // To be used for figures points
 {
-    int x, y;
+	int x, y;
 
     Point(int a, int b): x(a), y(b) {}
     Point(): x(0), y(0) {}
@@ -58,10 +58,10 @@ struct Point // To be used for figures points
 class GfxInfo // Graphical info of each figure (you may add more members)
 {
 public:
-    color draw_clr = BLACK; // Draw color of the figure
-    color fill_clr = WHITE; // Fill color of the figure
-    bool is_filled = false; // CFigure Filled or not
-    int border_width = 1; // Width of figure borders
+	color draw_clr = BLACK; // Draw color of the figure
+	color fill_clr = WHITE; // Fill color of the figure
+	bool is_filled = false; // CFigure Filled or not
+	int border_width = 1; // Width of figure borders
 
     int z_index = 0; // level of object on window, default to 0 // TODO: remove z_index
 };

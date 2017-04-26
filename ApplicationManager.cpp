@@ -6,7 +6,7 @@ ApplicationManager::ApplicationManager()
     //Create Input and output
     out_p = new Output;
     in_p = out_p->CreateInput();
-    Num_Selected = 0;
+    num_selected = 0;
 }
 
 //==================================================================================//
@@ -14,8 +14,8 @@ ApplicationManager::ApplicationManager()
 //==================================================================================//
 ActionType ApplicationManager::GetUserAction() const
 {
-    //Ask the input to get the action from the user.
-    return in_p->GetUserAction();
+	//Ask the input to get the action from the user.
+	return in_p->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // According to Action Type, return the corresponding action object
@@ -23,7 +23,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 {
     switch (act_type) {
     case DRAW_FIG_ITM:
-        out_p->CreateFigItems();
+        bar = 1;
         return nullptr;
     case DRAW_RECT:
         return new AddRectAction(this);
@@ -64,29 +64,29 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case ROTATE:
         return new RotateAction(this);
     case COLOR_BAR:
-        out_p->ClearTToolBar();
+        //out_p->ClearTToolBar();
         return nullptr;
     case CTR:
-        out_p->CreateFigActions();
+        bar = 2;
         return nullptr;
     case DEL:
-        out_p->ClearTToolBar();
+        //out_p->ClearTToolBar();
         return new DeleteAction(this);
     case MOVE:
-        out_p->ClearTToolBar();
+        //out_p->ClearTToolBar();
         return new MoveAction(this);
     case RESIZE:
-        out_p->ClearTToolBar();
+        //out_p->ClearTToolBar();
         return new ResizeAction(this);
     case COPY:
-        out_p->ClearTToolBar();
+        //out_p->ClearTToolBar();
         return new CopyAction(this);
     case PASTE:
-        out_p->ClearTToolBar();
+        //out_p->ClearTToolBar();
         return new PasteAction(this);
     case SELECT:
         return new SelectAction(this);
-    case UNSELECT:
+    case DESELECT:
         return new UnSelectAction(this);
     case CUT:
         return new CutAction(this);
@@ -101,132 +101,9 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 {
     Action* act_p = DetectAction(act_type);
 
-    if (act_type == ZOOM_IN)
-        zoom++;
-    else if (act_type == ZOOM_OUT)
-        zoom--;
-
     if (act_p != nullptr) {
         act_p->ReadActionParameters();
-
-        if (act_type == ZOOM_IN) {
-            ZoomInAction* zoom_in = dynamic_cast<ZoomInAction*>(act_p);
-            manager_zoom_point = zoom_in->GetZoomPoint();
-        } else if (act_type == ZOOM_OUT) {
-            ZoomOutAction* zoom_out = dynamic_cast<ZoomOutAction*>(act_p);
-            manager_zoom_point = zoom_out->GetZoomPoint();
-        }
-
         act_p->Execute();
-
-        if (zoom != 0) {
-            CFigure* last_figure = GetFigure(figs.size() - 1);
-            if (act_type == DRAW_LINE) {
-                CLine* last_line = dynamic_cast<CLine*>(last_figure);
-
-                last_line->p1.x = (last_line->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_line->p1.y = (last_line->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_line->p2.x = (last_line->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_line->p2.y = (last_line->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            } else if (act_type == DRAW_RECT) {
-                CRectangle* last_rect = dynamic_cast<CRectangle*>(last_figure);
-
-                last_rect->p1.x = (last_rect->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_rect->p1.y = (last_rect->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_rect->p2.x = (last_rect->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_rect->p2.y = (last_rect->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            } else if (act_type == DRAW_CIRC) {
-                CCircle* last_circ = dynamic_cast<CCircle*>(last_figure);
-
-                last_circ->p1.x = (last_circ->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_circ->p1.y = (last_circ->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_circ->p2.x = (last_circ->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_circ->p2.y = (last_circ->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            } else if (act_type == DRAW_TRI) {
-                CTrngl* last_trngl = dynamic_cast<CTrngl*>(last_figure);
-
-                last_trngl->p1.x = (last_trngl->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_trngl->p1.y = (last_trngl->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_trngl->p2.x = (last_trngl->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_trngl->p2.y = (last_trngl->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_trngl->p3.x = (last_trngl->p3.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_trngl->p3.y = (last_trngl->p3.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            }
-        }
-
-        // try to add action, else delete it
-        if (!history.AddAction(act_p))
-            delete act_p;
-    }
-}
-////////////////////////////////////////////////////////////////////////////////////
-// gets action and executes it
-// TODO remove this function
-void ApplicationManager::ExecuteAction(Action* act_p)
-{
-    // GetActType is obsolete and deleted it cannot be used
-    //ActionType act_type = act_p->GetActType();
-
-    // i have put this just to run the program untill it is removed
-    ActionType act_type = ActionType::EMPTY;
-
-    if (act_type == ZOOM_IN) {
-        zoom++;
-        ZoomInAction* zoom_in = dynamic_cast<ZoomInAction*>(act_p);
-        manager_zoom_point = zoom_in->GetZoomPoint();
-    } else if (act_type == ZOOM_OUT) {
-        zoom--;
-        ZoomOutAction* zoom_out = dynamic_cast<ZoomOutAction*>(act_p);
-        manager_zoom_point = zoom_out->GetZoomPoint();
-    }
-
-    if (act_p != nullptr) {
-        act_p->Execute();
-
-        if (zoom != 0) {
-            CFigure* last_figure = GetFigure(figs.size() - 1);
-            if (act_type == DRAW_LINE) {
-                CLine* last_line = dynamic_cast<CLine*>(last_figure);
-
-                last_line->p1.x = (last_line->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_line->p1.y = (last_line->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_line->p2.x = (last_line->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_line->p2.y = (last_line->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            } else if (act_type == DRAW_RECT) {
-                CRectangle* last_rect = dynamic_cast<CRectangle*>(last_figure);
-
-                last_rect->p1.x = (last_rect->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_rect->p1.y = (last_rect->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_rect->p2.x = (last_rect->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_rect->p2.y = (last_rect->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            } else if (act_type == DRAW_CIRC) {
-                CCircle* last_circ = dynamic_cast<CCircle*>(last_figure);
-
-                last_circ->p1.x = (last_circ->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_circ->p1.y = (last_circ->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_circ->p2.x = (last_circ->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_circ->p2.y = (last_circ->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            } else if (act_type == DRAW_TRI) {
-                CTrngl* last_trngl = dynamic_cast<CTrngl*>(last_figure);
-
-                last_trngl->p1.x = (last_trngl->p1.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_trngl->p1.y = (last_trngl->p1.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_trngl->p2.x = (last_trngl->p2.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_trngl->p2.y = (last_trngl->p2.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-
-                last_trngl->p3.x = (last_trngl->p3.x - manager_zoom_point.x) / pow(2, zoom) + manager_zoom_point.x;
-                last_trngl->p3.y = (last_trngl->p3.y - manager_zoom_point.y) / pow(2, zoom) + manager_zoom_point.y;
-            }
-        }
 
         // try to add action, else delete it
         if (!history.AddAction(act_p))
@@ -240,7 +117,7 @@ void ApplicationManager::ExecuteAction(Action* act_p)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* fig_p)
 {
-    figs.insert(fig_p);
+	figs.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -262,18 +139,30 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
     return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+// gets number of selected figures
+int ApplicationManager::GetNumSelected() const
+{
+	return num_selected;
+}
+////////////////////////////////////////////////////////////////////////////////////
+// sets number of selected figures
+void ApplicationManager::SetNumSelected(int n_selected)
+{
+	num_selected = n_selected;
+}
+////////////////////////////////////////////////////////////////////////////////////
 // According to given string, return the corresponding Figure object
 CFigure* ApplicationManager::DetectFigure(string fig_name)
 {
-    if (fig_name == "RECTANGLE")
-        return new CRectangle();
-    if (fig_name == "CIRCLE")
-        return new CCircle();
-    if (fig_name == "TRIANGLE")
-        return new CTrngl();
-    if (fig_name == "LINE")
-        return new CLine();
-    throw - 1;
+	if (fig_name == "RECTANGLE")
+		return new CRectangle();
+	if (fig_name == "CIRCLE")
+		return new CCircle();
+	if (fig_name == "TRIANGLE")
+		return new CTrngl();
+	if (fig_name == "LINE")
+		return new CLine();
+	cerr << "Detect figure has been given unknown fig_name as a parameter, fig_name = " << fig_name;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -282,27 +171,23 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface()
 {
-    // TODO: there is a better approach
-    if (GetZoom() > 0) {
-        ZoomInAction zoom_in(this);
-        zoom_in.SetZoomFactor(pow(2, GetZoom()));
-        zoom_in.SetZoompoint(GetManagerZoomPoint());
-        zoom_in.Execute();
-    } else if (GetZoom() < 0) {
-        ZoomOutAction zoom_out(this);
-        zoom_out.SetZoomFactor(pow(2, GetZoom()));
-        zoom_out.SetZoompoint(GetManagerZoomPoint());
-        zoom_out.Execute();
-    } else {
-        for (auto& fig : figs)
-            fig->Draw(out_p); 
-    }
+	out_p->ClearDrawArea();
+
+	for (auto& fig : figs)
+		fig->Draw(out_p); //Call Draw function (virtual member fn)
+
+	if (bar == 1)
+		out_p->CreateFigItems();
+	else if (bar == 2)
+		out_p->CreateFigActions();
+
+	bar = 0;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const
 {
-    return in_p;
+	return in_p;
 }
 //Return a pointer to the output
 Output* ApplicationManager::GetOutput() const
@@ -310,15 +195,6 @@ Output* ApplicationManager::GetOutput() const
     return out_p;
 }
 
-int ApplicationManager::GetZoom() const
-{
-    return zoom;
-}
-////////////////////////////////////////////////////////////////////////////////////
-Point ApplicationManager::GetManagerZoomPoint() const
-{
-    return manager_zoom_point;
-}
 ////////////////////////////////////////////////////////////////////////////////////
 // iterate through all figures
 // call save for each one
@@ -348,27 +224,27 @@ void ApplicationManager::LoadAll(ifstream& in_file)
     string fig_name;
     CFigure* fig = nullptr;
 
-    in_file >> UI.DrawColor.ucRed
-        >> UI.DrawColor.ucGreen
-        >> UI.DrawColor.ucBlue
+	in_file >> UI.DrawColor.ucRed
+		>> UI.DrawColor.ucGreen
+		>> UI.DrawColor.ucBlue
 
-        >> UI.FillColor.ucRed
-        >> UI.FillColor.ucGreen
-        >> UI.FillColor.ucBlue
+		>> UI.FillColor.ucRed
+		>> UI.FillColor.ucGreen
+		>> UI.FillColor.ucBlue
 
-        >> UI.BkGrndColor.ucRed
-        >> UI.BkGrndColor.ucGreen
-        >> UI.BkGrndColor.ucBlue;
+		>> UI.BkGrndColor.ucRed
+		>> UI.BkGrndColor.ucGreen
+		>> UI.BkGrndColor.ucBlue;
 
-    in_file >> size;
+	in_file >> size;
 
-    for (int i = 0; i < size; i++) {
-        in_file >> fig_name;
-        fig = DetectFigure(fig_name);
-        fig->Load(in_file);
+	for (int i = 0; i < size; i++) {
+		in_file >> fig_name;
+		fig = DetectFigure(fig_name);
+		fig->Load(in_file);
 
-        figs.insert(fig);
-    }
+		figs.push_back(fig);
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -385,30 +261,55 @@ void ApplicationManager::DeleteFigure(unsigned int id)
         figs.erase(itr);
     } else {
         // cant delete figure not found
-        throw - 1;
+        cerr << "Cant delete figure, figure not found, id = " << id << endl;
     }
 }
 
 CFigure* ApplicationManager::GetFigure(unsigned int id) const
 {
-    for (auto& fig : figs)
-        if (fig->GetId() == id)
-            return fig;
-    return nullptr;
+	for (auto& fig : figs)
+		if (fig->GetId() == id)
+			return fig;
+	return nullptr;
 }
 
-multiset<CFigure*, CmpFigures>* ApplicationManager::GetFigures()
+deque<CFigure*>::iterator ApplicationManager::GetFigureIter(unsigned int id)
 {
-    return &figs;
+	for (auto itr = figs.begin(); itr != figs.end(); itr++)
+		if ((*itr)->GetId() == id)
+			return itr;
+
+	return figs.end();
 }
 
-multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
+bool ApplicationManager::ResizeSelected(double resize_factor)
 {
-    for (auto itr = figs.begin(); itr != figs.end(); itr++)
-        if ((*itr)->GetId() == id)
-            return itr;
+	bool flag = false;
 
-    return figs.end();
+	for (auto& fig : figs)
+	{
+		if (fig->IsSelected())
+		{
+			fig->Resize(resize_factor);
+			flag = true;
+		}
+	}
+	return flag;
+}
+
+void ApplicationManager::RotateSelected(int deg)
+{
+	for (auto& fig : figs) {
+		if (fig->IsSelected()) {
+			fig->Rotate(deg);
+			if (fig->IsRotate()) {
+				fig->Rotated(false);
+			}
+			else {
+				out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
+			}
+		}
+	}
 }
 
 bool ApplicationManager::ChangeSelectedFillColor(color c)
@@ -443,66 +344,59 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
     return flag;
 }
 
+bool ApplicationManager::DeselectAll()
+{
+	bool found_selected = false;
+	for (auto& fig : figs)
+	{
+		found_selected = true;
+		fig->SetSelected(false);
+	}
+
+	return found_selected;
+}
+
 void ApplicationManager::SendSelecteDown()
 {
-    // TODO: to be changed after making figs a vector not set
-    int x;
-    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-        if ((*itr)->IsSelected()) {
-            x = (*itr)->z_index;
-            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-                if (x >= (*itr2)->z_index && itr != itr2) {
-                    x = (*itr2)->z_index - 1;
-                }
-            }
-            (*itr)->ChngZindex(x);
-            (*itr)->SetSelected(false);
-            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-            figs = list;
-            itr = figs.begin();
+    // TODO: test
+	vector<CFigure*> temp;
+    for (auto itr = figs.begin(); itr != figs.end();)
+    {
+        if ((*itr)->IsSelected())
+        {
+            temp.push_back(*itr);
+            itr = figs.erase(itr);
+			continue;
         }
+		++itr;
     }
+
+	for (auto& fig : temp)
+		figs.push_front(fig);
 }
 
 void ApplicationManager::SendSelectedUp()
 {
-    // TODO: to be changed after making figs a vector not set
-    int x;
-    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-        if ((*itr)->IsSelected()) {
-            x = (*itr)->z_index;
-            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-                if (x <= (*itr2)->z_index && itr != itr2) {
-                    x = (*itr2)->z_index + 1;
-                }
-            }
-            (*itr)->ChngZindex(x);
-            (*itr)->SetSelected(false);
-            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-            figs = list;
-            itr = figs.begin();
-        }
-    }
-}
+	vector<CFigure*> temp;
+	for (auto itr = figs.begin(); itr != figs.end();)
+	{
+		if ((*itr)->IsSelected())
+		{
+			temp.push_back(*itr);
+			itr = figs.erase(itr);
+			continue;
+		}
+		++itr;
+	}
 
-void ApplicationManager::RotateSelected(int deg)
-{
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
-            fig->Rotate(deg);
-            if (fig->IsRotate()) {
-                fig->Rotated(false);
-            } else {
-                out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
-            }
-        }
-    }
+	for (auto& fig : temp)
+		figs.push_back(fig);
 }
 
 void ApplicationManager::PrintSelectedSize()
 {
-    if (Num_Selected != 0)
-        out_p->PrintMessage("Number of selected figures are " + to_string(Num_Selected));
+    if (num_selected != 0)
+        out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
 Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
@@ -525,7 +419,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             fig->Move(x, y);
-            moved_figs.insert(fig);
+            moved_figs.push_back(fig);
         }
     }
     p.x = minx;
@@ -569,25 +463,26 @@ void ApplicationManager::SetClipboard()
         if (fig->IsSelected()) {
             copy = fig->Copy();
             copy->SetId(GenerateNextId());
-            clipboard.insert(copy);
+            clipboard.push_back(copy);
         }
     }
 }
 
-void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip)
+void ApplicationManager::SetClipboard(deque<CFigure*> clip)
 {
     clipboard = clip;
 }
-multiset<CFigure*, CmpFigures> ApplicationManager::GetClipboard()
+
+deque<CFigure*> ApplicationManager::GetClipboard()
 {
     return clipboard;
 }
 
-vector<CFigure*> ApplicationManager::DeleteSelected()
+deque<CFigure*> ApplicationManager::DeleteSelected()
 {
     // TODO: why is this returning vec? it should do one thing
-    vector<int> vec;
-    vector<CFigure*> deleted;
+    deque<int> vec;
+    deque<CFigure*> deleted;
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             vec.push_back(fig->GetId());

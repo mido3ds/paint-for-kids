@@ -9,8 +9,8 @@
 
 enum GUI_MODE // Graphical user interface mode
 {
-    MODE_DRAW, // Drawing mode (startup mode)
-    MODE_PLAY // Playing mode
+	MODE_DRAW, // Drawing mode (startup mode)
+	MODE_PLAY // Playing mode
 };
 
 enum DrawMenuItem // The items of the Draw menu (you should add more items)
@@ -19,6 +19,7 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
     // If you want to change the menu items order, change the order here
     ITM_FIG,
     ITM_SELECT,
+	ITM_DESELECT,
     ITM_CHDC, // Change Draw Color
     ITM_CHFC, // Change Fill Color
     ITM_CHBGC,
@@ -63,21 +64,21 @@ enum FigureActions {
 
 enum PlayMenuItem // The items of the Play menu (you should add more items)
 {
-    // Note: Items are ordered here as they appear in menu
-    // If you want to change the menu items order, change the order here
-    ITM_PICK_HIDE,
-    ITM_SCR_FIND,
-    ITM_DRAW,
-    ITM_EXIT_PLAY,
+	// Note: Items are ordered here as they appear in menu
+	// If you want to change the menu items order, change the order here
+	ITM_PICK_HIDE,
+	ITM_SCR_FIND,
+	ITM_DRAW,
+	ITM_EXIT_PLAY,
 
-    PLAY_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
+	PLAY_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
 
 };
 
 // This line to prevent "redefinition error"
 __declspec(selectany)
 
-    struct UI_Info // User Interface Info.
+struct UI_Info // User Interface Info.
 {
     GUI_MODE InterfaceMode;
 

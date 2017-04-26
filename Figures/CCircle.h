@@ -6,8 +6,8 @@
 
 class CCircle : public CFigure {
 public:
-    CCircle();
-    CCircle(Point p1, Point p2, GfxInfo circ_gfx_info);
+	CCircle();
+	CCircle(Point p1, Point p2, GfxInfo circ_gfx_info);
 
     virtual void Draw(Output* out_p) const;
     virtual bool PointCheck(Point p) const;
@@ -22,15 +22,17 @@ public:
 
     virtual Point CalcCenter();
 
-    bool OutOfRange(Point p1);
+	virtual void Resize(double resize_factor);
 
-    // TODO: make it one point and the radius, then del GetRadius and GetSecon....
-    Point p1, p2;
+	bool OutOfRange(Point p1);
+
+	// TODO: make it one point and the radius, then del GetRadius and GetSecon....
+	Point p1, p2;
 
 private:
-    // given radius and this point, return another point
-    // another point is (p.x, p.y + rad)
-    Point GetSecondPointFromRadius(double rad);
+	// given radius and this point, return another point
+	// another point is (p.x, p.y + rad)
+	Point GetSecondPointFromRadius(double rad);
 };
 
 #endif /* __CCircle_h__ */

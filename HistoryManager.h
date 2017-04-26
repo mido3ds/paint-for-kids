@@ -6,6 +6,7 @@
 
 #include "Actions/Action.h"
 #include <stack>
+#include <iostream> // cerr
 using namespace std;
 
 class HistoryManager

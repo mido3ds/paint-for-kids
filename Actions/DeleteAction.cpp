@@ -8,13 +8,13 @@ DeleteAction::DeleteAction(ApplicationManager* app_p)
 void DeleteAction::ReadActionParameters()
 {
     Output* out_p = manager_p->GetOutput();
-    if (manager_p->Num_Selected == 0)
+    if (manager_p->GetNumSelected() == 0)
         out_p->PrintMessage("No Selected Figures To Move");
 }
 
 void DeleteAction::Execute()
 {
-    if (manager_p->Num_Selected > 0) {
+    if (manager_p->GetNumSelected() > 0) {
         clipboard = manager_p->DeleteSelected();
         deleted = true;
     }

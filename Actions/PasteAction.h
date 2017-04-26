@@ -18,7 +18,7 @@ public:
     virtual void Undo();
 
 private:
-    multiset<CFigure*, CmpFigures> clipboard;
+    deque<CFigure*> clipboard;
     Point p;
 };
 #endif

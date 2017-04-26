@@ -19,8 +19,11 @@ HistoryManager::~HistoryManager()
 
 bool HistoryManager::AddAction(Action* given_act)
 {
-    if (!given_act)
-        throw runtime_error("add null action to stack");
+	if (!given_act)
+	{
+        cerr << "null action was passed to Undo stack\n";
+		return false;
+	}
 
     if (given_act->CanUndo()) {
         undo_stack.push(given_act);

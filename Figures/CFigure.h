@@ -8,14 +8,14 @@
 // Base class for all figures
 class CFigure : public GfxInfo {
 public:
-    CFigure();
-    CFigure(const GfxInfo& figure_gfx_info);
+	CFigure();
+	CFigure(const GfxInfo& figure_gfx_info);
 
-    void SetSelected(bool s);
-    bool IsSelected() const;
+	void SetSelected(bool s);
+	bool IsSelected() const;
 
-    void SetId(unsigned int id);
-    unsigned int GetId();
+	void SetId(unsigned int id);
+	unsigned int GetId();
 
     virtual void Draw(Output* out_p) const = 0;
     virtual bool PointCheck(Point p) const = 0;
@@ -25,7 +25,6 @@ public:
     void ChngZindex(int Z); // Changes Z_Index
 
     virtual void Rotate(int deg) = 0;
-    //virtual void Resize() = 0;
     virtual bool Move(int x, int y) = 0;
     virtual CFigure* Copy() = 0;
     virtual void Save(ofstream& out_file) = 0;
@@ -33,8 +32,10 @@ public:
     virtual Point CalcCenter() = 0;
     virtual void Rotated(bool r) = 0;
     virtual bool IsRotate() = 0;
+	virtual void Resize(double resize_factor) = 0;
 
-    //virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
+
+	//virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 
 protected:
     unsigned int id; // Each figure has an id
@@ -43,12 +44,12 @@ protected:
 };
 
 struct CmpFigures {
-    // used to compare figures based on z_index (made for set)
-    // lower z_index is put first
-    bool operator()(const CFigure* const lhs, const CFigure* const rhs) const
-    {
-        return lhs->z_index < rhs->z_index;
-    }
+	// used to compare figures based on z_index (made for set)
+	// lower z_index is put first
+	bool operator()(const CFigure* const lhs, const CFigure* const rhs) const
+	{
+		return lhs->z_index < rhs->z_index;
+	}
 };
 
 #endif

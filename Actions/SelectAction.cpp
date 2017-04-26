@@ -17,21 +17,21 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 
-    Selected = manager_p->GetFigure(p.x, p.y);
-    while (Selected == nullptr)
+    selected = manager_p->GetFigure(p.x, p.y);
+    while (selected == nullptr)
         ReadActionParameters();
-    if (Selected != nullptr) {
-        Selected->SetSelected(true);
-        originaldraw = Selected->draw_clr;
-        originalfill = Selected->fill_clr;
-        manager_p->Num_Selected++;
+    if (selected != nullptr && !selected->IsSelected()) {
+		selected->SetSelected(true);
+        originaldraw = selected->draw_clr;
+        //originalfill = Selected->fill_clr;
+		manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
         manager_p->PrintSelectedSize();
     }
 }
 void SelectAction::Undo()
 {
-    Selected->ChngDrawClr(originaldraw);
-    Selected->ChngFillClr(originalfill);
-    Selected->SetSelected(false);
-    manager_p->Num_Selected--;
+	selected->ChngDrawClr(originaldraw);
+    //Selected->ChngFillClr(originalfill);
+	selected->SetSelected(false);
+    manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 }
