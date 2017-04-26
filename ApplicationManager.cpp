@@ -162,7 +162,7 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 		return new CTrngl();
 	if (fig_name == "LINE")
 		return new CLine();
-	throw - 1;
+	cerr << "Detect figure has been given unknown fig_name as a parameter, fig_name = " << fig_name;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -261,7 +261,7 @@ void ApplicationManager::DeleteFigure(unsigned int id)
         figs.erase(itr);
     } else {
         // cant delete figure not found
-        throw - 1;
+        cerr << "Cant delete figure, figure not found, id = " << id << endl;
     }
 }
 
@@ -273,7 +273,7 @@ CFigure* ApplicationManager::GetFigure(unsigned int id) const
 	return nullptr;
 }
 
-deque<CFigure*>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
+deque<CFigure*>::iterator ApplicationManager::GetFigureIter(unsigned int id)
 {
 	for (auto itr = figs.begin(); itr != figs.end(); itr++)
 		if ((*itr)->GetId() == id)
@@ -346,35 +346,51 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
 bool ApplicationManager::DeselectAll()
 {
+	bool found_selected = false;
 	for (auto& fig : figs)
+	{
+		found_selected = true;
 		fig->SetSelected(false);
+	}
+
+	return found_selected;
 }
 
 void ApplicationManager::SendSelecteDown()
 {
     // TODO: test
-    for (auto itr = figs.begin(); itr != figs.end(); itr++)
+	vector<CFigure*> temp;
+    for (auto itr = figs.begin(); itr != figs.end();)
     {
         if ((*itr)->IsSelected())
         {
-            CFigure* temp = *itr;
-            figs.erase(itr);
-            figs.push_front(temp);
+            temp.push_back(*itr);
+            itr = figs.erase(itr);
+			continue;
         }
+		++itr;
     }
+
+	for (auto& fig : temp)
+		figs.push_front(fig);
 }
 
 void ApplicationManager::SendSelectedUp()
 {
-    for (auto itr = figs.begin(); itr != figs.end(); itr++)
-    {
-        if ((*itr)->IsSelected())
-        {
-            CFigure* temp = *itr;
-            figs.erase(itr);
-            figs.push_back(temp);
-        }
-    }
+	vector<CFigure*> temp;
+	for (auto itr = figs.begin(); itr != figs.end();)
+	{
+		if ((*itr)->IsSelected())
+		{
+			temp.push_back(*itr);
+			itr = figs.erase(itr);
+			continue;
+		}
+		++itr;
+	}
+
+	for (auto& fig : temp)
+		figs.push_back(fig);
 }
 
 void ApplicationManager::PrintSelectedSize()

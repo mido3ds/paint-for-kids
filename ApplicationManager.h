@@ -2,9 +2,11 @@
 #define APPLICATION_MANAGER_H
 
 // std 
+#include <iostream> // cerr, TODO: use boost::log instead
 #include <fstream> // fstream
 #include <string>
 #include <deque> // brother of vector
+#include <vector>
 #include <cmath>
 
 // actions
@@ -116,7 +118,7 @@ private:
     History history;
     CFigure* GetFigure(unsigned int id) const;
     deque<CFigure*>::iterator 
-        GetFigureIter(unsigned int id) const;  // return iterator to the figure if found, otherwise figs.end()
+        GetFigureIter(unsigned int id);  // return iterator to the figure if found, otherwise figs.end()
     
     // TODO: make it deque
     deque<CFigure*> figs;
