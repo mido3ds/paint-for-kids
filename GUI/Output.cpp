@@ -436,7 +436,12 @@ void Output::SetCrntFillColor(color given_clr)
 void Output::SetCrntPenWidth(int new_width)
 {
 	if (new_width < 0)
-		throw - 1;
+	{
+		cerr << "cant set pen width to negative number, current penwidth is " << UI.PenWidth
+			<< " and given new_width is " << new_width << endl;
+
+		return;
+	}
 	UI.PenWidth = new_width;
 }
 

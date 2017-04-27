@@ -3,6 +3,7 @@
 
 #include "Input.h"
 #include <cmath>
+#include <iostream> // cerr
 
 class Output // The application manager should have a pointer to this class
 {

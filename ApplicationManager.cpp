@@ -117,7 +117,7 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* fig_p)
 {
-	figs.insert(fig_p);
+	figs.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -137,6 +137,12 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
     }
     return GetFigure(id);
     return nullptr;
+}
+////////////////////////////////////////////////////////////////////////////////////
+
+int ApplicationManager::GetNumFigures() const
+{
+	return figs.size();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // gets number of selected figures
@@ -162,7 +168,7 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 		return new CTrngl();
 	if (fig_name == "LINE")
 		return new CLine();
-	throw - 1;
+	cerr << "Detect figure has been given unknown fig_name as a parameter, fig_name = " << fig_name;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -243,7 +249,7 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 		fig = DetectFigure(fig_name);
 		fig->Load(in_file);
 
-		figs.insert(fig);
+		figs.push_back(fig);
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -261,7 +267,7 @@ void ApplicationManager::DeleteFigure(unsigned int id)
         figs.erase(itr);
     } else {
         // cant delete figure not found
-        throw - 1;
+        cerr << "Cant delete figure, figure not found, id = " << id << endl;
     }
 }
 
@@ -273,7 +279,7 @@ CFigure* ApplicationManager::GetFigure(unsigned int id) const
 	return nullptr;
 }
 
-multiset<CFigure*, CmpFigures>::iterator ApplicationManager::GetFigureIter(unsigned int id) const
+deque<CFigure*>::iterator ApplicationManager::GetFigureIter(unsigned int id)
 {
 	for (auto itr = figs.begin(); itr != figs.end(); itr++)
 		if ((*itr)->GetId() == id)
@@ -346,50 +352,51 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
 bool ApplicationManager::DeselectAll()
 {
+	bool found_selected = false;
 	for (auto& fig : figs)
+	{
+		found_selected = true;
 		fig->SetSelected(false);
+	}
+
+	return found_selected;
 }
 
 void ApplicationManager::SendSelecteDown()
 {
-    // TODO: to be changed after making figs a vector not set
-    int x;
-    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-        if ((*itr)->IsSelected()) {
-            x = (*itr)->z_index;
-            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-                if (x >= (*itr2)->z_index && itr != itr2) {
-                    x = (*itr2)->z_index - 1;
-                }
-            }
-            (*itr)->ChngZindex(x);
-            //(*itr)->SetSelected(false);
-            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-            figs = list;
-            itr = figs.begin();
+    // TODO: test
+	vector<CFigure*> temp;
+    for (auto itr = figs.begin(); itr != figs.end();)
+    {
+        if ((*itr)->IsSelected())
+        {
+            temp.push_back(*itr);
+            itr = figs.erase(itr);
+			continue;
         }
+		++itr;
     }
+
+	for (auto& fig : temp)
+		figs.push_front(fig);
 }
 
 void ApplicationManager::SendSelectedUp()
 {
-    // TODO: to be changed after making figs a vector not set
-    int x;
-    for (auto itr = figs.begin(); itr != figs.end(); itr++) {
-        if ((*itr)->IsSelected()) {
-            x = (*itr)->z_index;
-            for (auto itr2 = figs.begin(); itr2 != figs.end(); itr2++) {
-                if (x <= (*itr2)->z_index && itr != itr2) {
-                    x = (*itr2)->z_index + 1;
-                }
-            }
-            (*itr)->ChngZindex(x);
-            (*itr)->SetSelected(false);
-            multiset<CFigure*, CmpFigures> list(figs.begin(), figs.end());
-            figs = list;
-            itr = figs.begin();
-        }
-    }
+	vector<CFigure*> temp;
+	for (auto itr = figs.begin(); itr != figs.end();)
+	{
+		if ((*itr)->IsSelected())
+		{
+			temp.push_back(*itr);
+			itr = figs.erase(itr);
+			continue;
+		}
+		++itr;
+	}
+
+	for (auto& fig : temp)
+		figs.push_back(fig);
 }
 
 void ApplicationManager::PrintSelectedSize()
@@ -418,7 +425,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             fig->Move(x, y);
-            moved_figs.insert(fig);
+            moved_figs.push_back(fig);
         }
     }
     p.x = minx;
@@ -462,26 +469,26 @@ void ApplicationManager::SetClipboard()
         if (fig->IsSelected()) {
             copy = fig->Copy();
             copy->SetId(GenerateNextId());
-            clipboard.insert(copy);
+            clipboard.push_back(copy);
         }
     }
 }
 
-void ApplicationManager::SetClipboard(multiset<CFigure*, CmpFigures> clip)
+void ApplicationManager::SetClipboard(deque<CFigure*> clip)
 {
     clipboard = clip;
 }
 
-multiset<CFigure*, CmpFigures> ApplicationManager::GetClipboard()
+deque<CFigure*> ApplicationManager::GetClipboard()
 {
     return clipboard;
 }
 
-vector<CFigure*> ApplicationManager::DeleteSelected()
+deque<CFigure*> ApplicationManager::DeleteSelected()
 {
     // TODO: why is this returning vec? it should do one thing
-    vector<int> vec;
-    vector<CFigure*> deleted;
+    deque<int> vec;
+    deque<CFigure*> deleted;
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             vec.push_back(fig->GetId());
@@ -492,6 +499,14 @@ vector<CFigure*> ApplicationManager::DeleteSelected()
         DeleteFigure(vec[i]);
     }
     return deleted;
+}
+////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::DeleteAllFigures()
+{
+	for (auto& fig : figs)
+		delete fig;
+	figs.clear();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
@@ -508,9 +523,7 @@ void ApplicationManager::Redo()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-    // delete figs
-    for (auto& fig : figs)
-        delete fig;
+	DeleteAllFigures();
 
     delete in_p;
     delete out_p;

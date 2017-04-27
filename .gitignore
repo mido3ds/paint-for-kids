@@ -1,2 +1,4 @@
 *.txt
 Debug
+*.sdf
+._*

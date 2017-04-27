@@ -76,6 +76,8 @@ void CCircle::Save(ofstream& out_file)
 		<< fill_clr.ucGreen << ' '
 		<< fill_clr.ucBlue << ' '
 
+		<< border_width
+
 		<< '\n';
 }
 
@@ -95,7 +97,9 @@ void CCircle::Load(ifstream& in_file)
 
 		>> fill_clr.ucRed
 		>> fill_clr.ucGreen
-		>> fill_clr.ucBlue;
+		>> fill_clr.ucBlue
+		
+		>> border_width;
 
     p2 = GetSecondPointFromRadius(rad);
 }
