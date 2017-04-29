@@ -10,7 +10,6 @@ void DrawFigItems::ReadActionParameters()
 	Output *out_p = manager_p->GetOutput();
 	out_p->CreateFigItems();
 	act = in_p->GetUserAction();
-	out_p->ClearTToolBar();
 }
 
 void DrawFigItems::Execute()

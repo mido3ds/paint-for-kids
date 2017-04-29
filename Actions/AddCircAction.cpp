@@ -11,8 +11,6 @@ void AddCircAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-	out_p->ClearTToolBar();
-
     out_p->PrintMessage("New Circle: Click at first point");
 	
     //Read 1st corner and store in point p1
@@ -36,7 +34,6 @@ void AddCircAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
-    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }

@@ -62,25 +62,17 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UpAction(this);
     case ROTATE:
         return new RotateAction(this);
-    case COLOR_BAR:
-        out_p->ClearTToolBar();
-        return nullptr;
     case CTR:
         return new DrawFigActions(this);
     case DEL:
-        //out_p->ClearTToolBar();
         return new DeleteAction(this);
     case MOVE:
-        //out_p->ClearTToolBar();
         return new MoveAction(this);
     case RESIZE:
-        //out_p->ClearTToolBar();
         return new ResizeAction(this);
     case COPY:
-        //out_p->ClearTToolBar();
         return new CopyAction(this);
     case PASTE:
-        //out_p->ClearTToolBar();
         return new PasteAction(this);
     case SELECT:
         return new SelectAction(this);
