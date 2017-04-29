@@ -186,8 +186,8 @@ void ApplicationManager::UpdateInterface()
 		out_p->CreateFigItems();
 	else if (bar == 2)
 		out_p->CreateFigActions();
-
 	bar = 0;
+	out_p->ClearStatusBar();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
