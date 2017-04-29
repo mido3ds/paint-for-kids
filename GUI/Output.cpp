@@ -142,6 +142,7 @@ void Output::CreateFigItems() const
 	UI.TToolBarWidth = 200;
 	wind_p->isfigitems = true;
 
+
 	string MenuItemImages[FIG_ITM_COUNT];
 	MenuItemImages[ITM_LINE] = "images\\MenuItems\\line.jpg";
 	MenuItemImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";
@@ -219,7 +220,7 @@ void Output::ClearTToolBar() const
 	wind_p->isfigactions = false;
 	wind_p->isfigitems = false;
 	wind_p->iscolorbar = false;
-	wind_p->SetBrush(WHITE);
+	wind_p->SetBrush(UI.BkGrndColor);
 	wind_p->SetPen(WHITE);
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
 	//ClearDrawArea();
