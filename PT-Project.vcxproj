@@ -141,6 +141,8 @@
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\DownAction.cpp" />
+    <ClCompile Include="Actions\DrawFigActions.cpp" />
+    <ClCompile Include="Actions\DrawFigItems.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
@@ -216,6 +218,8 @@
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\DownAction.h" />
+    <ClInclude Include="Actions\DrawFigActions.h" />
+    <ClInclude Include="Actions\DrawFigItems.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />

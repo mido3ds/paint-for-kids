@@ -23,8 +23,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 {
     switch (act_type) {
     case DRAW_FIG_ITM:
-        bar = 1;
-        return nullptr;
+        return new DrawFigItems(this);
     case DRAW_RECT:
         return new AddRectAction(this);
     case DRAW_CIRC:
@@ -64,11 +63,10 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case ROTATE:
         return new RotateAction(this);
     case COLOR_BAR:
-        //out_p->ClearTToolBar();
+        out_p->ClearTToolBar();
         return nullptr;
     case CTR:
-        bar = 2;
-        return nullptr;
+        return new DrawFigActions(this);
     case DEL:
         //out_p->ClearTToolBar();
         return new DeleteAction(this);
@@ -182,12 +180,12 @@ void ApplicationManager::UpdateInterface()
 	for (auto& fig : figs)
 		fig->Draw(out_p); //Call Draw function (virtual member fn)
 
-	if (bar == 1)
+	/*if (bar == 1)
 		out_p->CreateFigItems();
 	else if (bar == 2)
-		out_p->CreateFigActions();
+		out_p->CreateFigActions();*/
 
-	bar = 0;
+	/*bar = 0;*/
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

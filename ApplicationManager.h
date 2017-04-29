@@ -37,6 +37,8 @@
 #include "Actions/UpAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
+#include "Actions/DrawFigActions.h"
+#include "Actions/DrawFigItems.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -128,7 +130,7 @@ private:
     deque<CFigure*> clipboard; 
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
-    int bar = 0;
+    //int bar = 0;
 	int num_selected = 0;
     Input* in_p;
     Output* out_p;
