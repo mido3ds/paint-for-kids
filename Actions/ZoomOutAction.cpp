@@ -4,19 +4,9 @@ ZoomOutAction::ZoomOutAction(ApplicationManager* app_p)
 	: Action(app_p)
 {}
 
-void ZoomOutAction::SetZoomFactor(double z_factor)
-{
-	zoom_factor = z_factor;
-}
-
 void ZoomOutAction::SetZoompoint(Point z_point)
 {
 	zoom_point = z_point;
-}
-
-double ZoomOutAction::GetZoomFactor() const
-{
-	return zoom_factor;
 }
 
 Point ZoomOutAction::GetZoomPoint() const
@@ -42,7 +32,6 @@ void ZoomOutAction::Execute()
 	Output* out_p = manager_p->GetOutput();
 
 	out_p->SetZoom(out_p->GetZoom() - 1);
-	zoom_factor = pow(2, out_p->GetZoom());
 	out_p->SetZoomPoint(zoom_point);
 
 	//clearing the drawing area to draw the shapes after zooming
