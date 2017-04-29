@@ -30,7 +30,6 @@ public:
 	virtual void Undo();
 	
 private:
-	double zoom_factor = 0;
 	Point zoom_point;
 };
 

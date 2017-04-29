@@ -219,7 +219,7 @@ void Output::ClearTToolBar() const
 	wind_p->isfigactions = false;
 	wind_p->isfigitems = false;
 	wind_p->iscolorbar = false;
-	wind_p->SetBrush(WHITE);
+	wind_p->SetBrush(UI.BkGrndColor);
 	wind_p->SetPen(WHITE);
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
 	//ClearDrawArea();
