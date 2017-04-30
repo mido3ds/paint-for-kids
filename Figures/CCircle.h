@@ -17,7 +17,7 @@ public:
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual CFigure* Copy();
-    double GetRadius();
+    double GetRadius() const;
     virtual bool IsRotate();
 
     virtual Point CalcCenter();

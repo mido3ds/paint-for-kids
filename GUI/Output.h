@@ -35,7 +35,7 @@ public:
 	void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 		bool selected) const;
 
-	void DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
+	void DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 		bool selected) const; // Draw a circle
 
 	void DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
@@ -62,8 +62,8 @@ public:
 private:
 	window* wind_p; // Pointer to the Graphics Window
 
-	// returns zoomed point
-	Point TranslatePoint(const Point&) const;
+	Point TranslatePoint(const Point&) const; // returns zoomed point
+	int TranslateRadius(const Point&, int) const; // returns zoomed radius 
 
 	int zoom = 0;
 	Point zoom_point;

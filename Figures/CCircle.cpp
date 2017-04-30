@@ -12,7 +12,7 @@ CCircle::CCircle(Point p1, Point p2, GfxInfo circ_gfx_info)
 	this->p2 = p2;
 }
 
-double CCircle::GetRadius()
+double CCircle::GetRadius() const
 {
 	return sqrt(pow((p1.x - p2.x), 2)  +  pow((p1.y - p2.y), 2));
 }
@@ -45,7 +45,7 @@ Point CCircle::GetSecondPointFromRadius(double rad)
 
 void CCircle::Draw(Output* out_p) const
 {
-	out_p->DrawCircle(p1, p2, *this, selected);
+	out_p->DrawCircle(p1, GetRadius(), *this, selected);
 }
 
 void CCircle::Rotate(int deg)
