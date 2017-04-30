@@ -3,18 +3,19 @@
 CCircle::CCircle()
 	: p1(0, 0)
 	, p2(0, 0)
+	, radius(0)
 {
 }
-CCircle::CCircle(Point p1, Point p2, GfxInfo circ_gfx_info)
+CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 	: CFigure(circ_gfx_info)
 {
 	this->p1 = p1;
-	this->p2 = p2;
-}
+	this->radius = radius;
 
-double CCircle::GetRadius() const
-{
-	return sqrt(pow((p1.x - p2.x), 2)  +  pow((p1.y - p2.y), 2));
+	p2 = {
+		p1.x + radius,
+		p1.y
+	};
 }
 
 bool CCircle::IsRotate()
@@ -33,9 +34,14 @@ Point CCircle::CalcCenter()
 	return p1;
 }
 
+int CCircle::GetRadius() const
+{
+	return radius;
+}
+
 bool CCircle::OutOfRange(Point p1)
 {
-	return (p1.x - GetRadius() < UI.DrawAreaX || p1.x  +  GetRadius() > UI.DrawAreaX  +  UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y  +  GetRadius() > UI.DrawAreaY  +  UI.DrawAreaHeight);
+	return (p1.x - radius < UI.DrawAreaX || p1.x  +  radius > UI.DrawAreaX  +  UI.DrawAreaWidth || p1.y - radius < UI.DrawAreaY || p1.y  +  radius > UI.DrawAreaY  +  UI.DrawAreaHeight);
 }
 
 Point CCircle::GetSecondPointFromRadius(double rad)
@@ -45,7 +51,7 @@ Point CCircle::GetSecondPointFromRadius(double rad)
 
 void CCircle::Draw(Output* out_p) const
 {
-	out_p->DrawCircle(p1, GetRadius(), *this, selected);
+	out_p->DrawCircle(p1, radius, *this, selected);
 }
 
 void CCircle::Rotate(int deg)
@@ -66,7 +72,7 @@ void CCircle::Save(ofstream& out_file)
 		<< p1.x << ' '
 		<< p1.y << ' '
 
-		<< GetRadius() << ' '
+		<< radius << ' '
 
 		<< draw_clr.ucRed << ' '
 		<< draw_clr.ucGreen << ' '
@@ -134,7 +140,7 @@ CFigure* CCircle::Copy()
     c.fill_clr = this->fill_clr;
     c.is_filled = this->is_filled;
 
-    CFigure* copy = new CCircle(p1, p2, c);
+    CFigure* copy = new CCircle(p1, radius, c);
 
 	copy->SetSelected(this->IsSelected());
 	copy->SetId(this->GetId());
@@ -144,5 +150,5 @@ CFigure* CCircle::Copy()
 
 void CCircle::PrintInfo(Output* out_p)
 {
-	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(this->GetRadius()));
+	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(radius));
 }
