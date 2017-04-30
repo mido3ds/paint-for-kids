@@ -46,27 +46,27 @@ void CFigure::SetId(unsigned int id)
 	this->id = id;
 }
 
-unsigned int CFigure::GetId()
+unsigned int CFigure::GetId() const
 {
 	return id;
 }
 
-color CFigure::GetDrawClr()
+color CFigure::GetDrawClr() const
 {
 	return draw_clr;
 }
 
-color CFigure::GetFillClr()
+color CFigure::GetFillClr() const
 {
 	return fill_clr;
 }
 
-int CFigure::GetBorderWidth()
+int CFigure::GetBorderWidth() const
 {
 	return border_width;
 }
 
-bool CFigure::IsFilled()
+bool CFigure::IsFilled() const
 {
 	return is_filled;
 }

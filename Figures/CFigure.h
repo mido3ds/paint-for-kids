@@ -15,7 +15,7 @@ public:
 	bool IsSelected() const;
 
 	void SetId(unsigned int id);
-	unsigned int GetId();
+	unsigned int GetId() const;
 
     virtual void Draw(Output* out_p) const = 0;
     virtual bool PointCheck(Point p) const = 0;
@@ -24,10 +24,10 @@ public:
     void SetFillClr(color filling_clr); // changes the figure's filling color
     void SetBorderWidth(int BW); // Changes Border Width
 
-    color GetDrawClr();
-    color GetFillClr();
-    int GetBorderWidth();
-    bool IsFilled();
+    color GetDrawClr() const;
+    color GetFillClr() const;
+    int GetBorderWidth() const;
+    bool IsFilled() const;
 
     virtual void Rotate(int deg) = 0;
     virtual bool Move(int x, int y) = 0;
