@@ -36,6 +36,7 @@
         "xutility": "cpp",
         "__split_buffer": "cpp",
         "string": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "xmemory0": "cpp"
     }
 }

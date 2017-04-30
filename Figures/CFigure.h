@@ -5,8 +5,8 @@
 #include "../GUI/Output.h"
 #include <fstream>
 
-// Base class for all figures
-class CFigure : public GfxInfo {
+class CFigure : protected GfxInfo 
+{
 public:
 	CFigure();
 	CFigure(const GfxInfo& figure_gfx_info);
@@ -19,10 +19,15 @@ public:
 
     virtual void Draw(Output* out_p) const = 0;
     virtual bool PointCheck(Point p) const = 0;
-    void ChngDrawClr(color draw_clr); // changes the figure's drawing color
-    void ChngFillClr(color filling_clr); // changes the figure's filling color
-    void ChngBorderWidth(int BW); // Changes Border Width
-    void ChngZindex(int Z); // Changes Z_Index
+
+    void SetDrawClr(color draw_clr); // changes the figure's drawing color
+    void SetFillClr(color filling_clr); // changes the figure's filling color
+    void SetBorderWidth(int BW); // Changes Border Width
+
+    color GetDrawClr();
+    color GetFillClr();
+    int GetBorderWidth();
+    bool IsFilled();
 
     virtual void Rotate(int deg) = 0;
     virtual bool Move(int x, int y) = 0;

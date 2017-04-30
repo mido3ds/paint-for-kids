@@ -6,7 +6,6 @@ CFigure::CFigure(const GfxInfo& figure_gfx_info)
 	fill_clr = figure_gfx_info.fill_clr;
 	is_filled = figure_gfx_info.is_filled;
 	border_width = figure_gfx_info.border_width;
-	z_index = figure_gfx_info.z_index;
 }
 
 CFigure::CFigure()
@@ -23,25 +22,23 @@ bool CFigure::IsSelected() const
 	return selected;
 }
 
-void CFigure::ChngDrawClr(color draw_clr)
+void CFigure::SetDrawClr(color draw_clr)
 {
 	this->draw_clr = draw_clr;
 }
 
-void CFigure::ChngFillClr(color filling_clr)
+void CFigure::SetFillClr(color filling_clr)
 {
-	is_filled = true;
-	this->fill_clr = filling_clr;
+	is_filled = (filling_clr != WHITE);
+	fill_clr = filling_clr;
 }
 
-void CFigure::ChngBorderWidth(int BW)
+void CFigure::SetBorderWidth(int BW)
 {
-	this->border_width = BW;
-}
-
-void CFigure::ChngZindex(int Z)
-{
-	this->z_index = Z;
+	if (BW > 0)
+		border_width = BW;
+	else 
+		cerr << "border width of figure cant be <= 0, given border width is " << BW << "\n";
 }
 
 void CFigure::SetId(unsigned int id)
@@ -52,4 +49,24 @@ void CFigure::SetId(unsigned int id)
 unsigned int CFigure::GetId()
 {
 	return id;
+}
+
+color CFigure::GetDrawClr()
+{
+	return draw_clr;
+}
+
+color CFigure::GetFillClr()
+{
+	return fill_clr;
+}
+
+int CFigure::GetBorderWidth()
+{
+	return border_width;
+}
+
+bool CFigure::IsFilled()
+{
+	return is_filled;
 }

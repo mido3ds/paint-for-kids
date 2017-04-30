@@ -112,20 +112,16 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
-    //If a figure is found return a pointer to it.
-    //if this point (x,y) does not belong to any figure return NULL
-    Point p;
-    p.x = x;
-    p.y = y;
-    unsigned int max_z = 0, id = 0;
-
-    for (auto& fig : figs) {
-        if (fig->PointCheck(p) && fig->z_index >= max_z) {
-            max_z = fig->z_index;
-            id = fig->GetId();
-        }
+    // reverse iterator, to iterate in figs from end to beginning 
+    for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
+    {
+        // if a figure is found return a pointer to it.
+        if ((*r_itr)->PointCheck({x, y}))
+            return *r_itr;
     }
-    return GetFigure(id);
+
+    // (x,y) does not belong to any figure
+    return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -306,7 +302,7 @@ bool ApplicationManager::ChangeSelectedFillColor(color c)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->ChngFillClr(c);
+            fig->SetFillClr(c);
 
             flag = true;
         }
@@ -321,8 +317,8 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->ChngDrawClr(C);
-            fig->ChngBorderWidth(W);
+            fig->SetDrawClr(C);
+            fig->SetBorderWidth(W);
 
             flag = true;
         }

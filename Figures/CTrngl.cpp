@@ -241,7 +241,7 @@ CFigure* CTrngl::Copy()
     c.draw_clr = this->draw_clr;
     c.fill_clr = this->fill_clr;
     c.is_filled = this->is_filled;
-    c.z_index = this->z_index;
+	
     CFigure* copy = new CTrngl(p1, p2, p3, c);
 
 	copy->SetSelected(this->IsSelected());

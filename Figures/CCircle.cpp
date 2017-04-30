@@ -133,10 +133,12 @@ CFigure* CCircle::Copy()
     c.draw_clr = this->draw_clr;
     c.fill_clr = this->fill_clr;
     c.is_filled = this->is_filled;
-    c.z_index = this->z_index;
+
     CFigure* copy = new CCircle(p1, p2, c);
+
 	copy->SetSelected(this->IsSelected());
 	copy->SetId(this->GetId());
+	
     return copy;
 }
 
