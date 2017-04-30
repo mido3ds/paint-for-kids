@@ -11,8 +11,6 @@ void AddRectAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-	out_p->ClearTToolBar();
-
     out_p->PrintMessage("New Rectangle: Click at first corner");
 
     //Read 1st corner and store in point p1
@@ -36,7 +34,6 @@ void AddRectAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
-    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }

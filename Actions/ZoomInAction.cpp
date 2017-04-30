@@ -44,7 +44,6 @@ void ZoomInAction::Execute()
 
 }
 
-
 void ZoomInAction::Undo()
 {
 	Output* out_p = manager_p->GetOutput();

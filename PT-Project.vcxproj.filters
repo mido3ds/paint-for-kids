@@ -228,6 +228,12 @@
       <Filter>Figures</Filter>
     </ClCompile>
     <ClCompile Include="HistoryManager.cpp" />
+    <ClCompile Include="Actions\DrawFigActions.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\DrawFigItems.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -404,5 +410,11 @@
       <Filter>Figures</Filter>
     </ClInclude>
     <ClInclude Include="HistoryManager.h" />
+    <ClInclude Include="Actions\DrawFigActions.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\DrawFigItems.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,5 +32,4 @@ private:
 	Point zoom_point;
 };
 
-
 #endif  /* __ZoomOutAction_h__ */
