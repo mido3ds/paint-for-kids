@@ -171,7 +171,22 @@ void Output::CreateFigActions() const
 	for (int i = 0; i < FIG_ACT_COUNT; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
+void Output::CreateBorderWidth() const
+{
 
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->isfigitems = true;
+
+	string MenuItemImages[4];
+	MenuItemImages[0] = "images\\MenuItems\\line.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\rectangle.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\tringle.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\circle.jpg";
+
+	for (int i = 0; i < 4; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
 void Output::CreateColorBar() const
 {
 	UI.TToolBarWidth = UI.width;
