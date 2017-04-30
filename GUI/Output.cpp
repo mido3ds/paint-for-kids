@@ -243,20 +243,8 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 	bool selected) const
 {
 
-	Point pf1;
-	Point pf2;
-
-	/*This equation -> P = (zoom_factor*(x-a)+a , zoom_factor*(y-b)+b)
-	this equation holds for any point in the drawing area it's based on
-	Analytic Geometry where we translate axes to the clicked point multiply
-	by the zooming factor and then translate back to the main axes to get
-	the new point after zooming the following piece of code check the pointer
-	to know which figure to draw calcuate the new points of the shape then
-	draw it*/
-	pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;
+	Point pf1 = TranslatePoint(p1);
+	Point pf2 = TranslatePoint(p2);
 
 	color DrawingClr;
 	if (selected)
@@ -282,13 +270,8 @@ void Output::DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
 	bool selected) const
 {
 
-	Point pf1;
-	Point pf2;
-
-	pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;
+	Point pf1 = TranslatePoint(p1);
+	Point pf2 = TranslatePoint(p2);
 
 	int radius = sqrt(pow((pf2.y - pf1.y), 2) + pow((pf2.x - pf1.x), 2));
 	color DrawingClr;
@@ -315,13 +298,8 @@ void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
 	bool selected) const
 {
 
-	Point pf1;
-	Point pf2;
-
-	pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;
+	Point pf1 = TranslatePoint(p1);
+	Point pf2 = TranslatePoint(p2);
 
 	color DrawingClr;
 	if (selected)
@@ -341,16 +319,9 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 	bool selected) const
 {
 
-	Point pf1;
-	Point pf2;
-	Point pf3;
-
-	pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;
-	pf3.x = (int(pow(2, zoom) * (p3.x - zoom_point.x))) + zoom_point.x;
-	pf3.y = (int(pow(2, zoom) * (p3.y - zoom_point.y))) + zoom_point.y;
+	Point pf1 = TranslatePoint(p1);
+	Point pf2 = TranslatePoint(p2);
+	Point pf3 = TranslatePoint(p3);
 
 	color DrawingClr;
 	if (selected)
@@ -445,6 +416,20 @@ void Output::SetCrntPenWidth(int new_width)
 void Output::SetBkGrndColor(color given_clr)
 {
 	UI.BkGrndColor = given_clr;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+Point Output::TranslatePoint(const Point& g_point) const
+{
+	/*this equation holds for any point in the drawing area it's based on
+	Analytic Geometry where we translate axes to the clicked point multiply
+	by the zooming factor and then translate back to the main axes to get
+	the new point after zooming the following piece of code check the pointer
+	to know which figure to draw calcuate the new points of the shape then
+	draw it*/
+	return {
+		static_cast<int>(pow(2, zoom) * (g_point.x - zoom_point.x)) + zoom_point.x,
+		static_cast<int>(pow(2, zoom) * (g_point.y - zoom_point.y)) + zoom_point.y
+	};
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }

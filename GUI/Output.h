@@ -62,6 +62,9 @@ public:
 private:
 	window* wind_p; // Pointer to the Graphics Window
 
+	// returns zoomed point
+	Point TranslatePoint(const Point&) const;
+
 	int zoom = 0;
 	Point zoom_point;
 };
