@@ -172,12 +172,9 @@ void ApplicationManager::UpdateInterface()
 	for (auto& fig : figs)
 		fig->Draw(out_p); //Call Draw function (virtual member fn)
 
-	/*if (bar == 1)
-		out_p->CreateFigItems();
-	else if (bar == 2)
-		out_p->CreateFigActions();*/
+	out_p->CreateDrawToolBar();
+	out_p->ClearStatusBar();
 
-	/*bar = 0;*/
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
