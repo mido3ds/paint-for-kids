@@ -165,8 +165,14 @@ void ApplicationManager::UpdateInterface()
 	out_p->ClearDrawArea();
 
 	for (auto& fig : figs)
-		fig->Draw(out_p); //Call Draw function (virtual member fn)
+		fig->Draw(out_p);
 
+	if (UI.InterfaceMode == MODE_DRAW)
+		out_p->CreateDrawToolBar();
+	else
+		out_p->CreatePlayToolBar();
+
+	out_p->ClearStatusBar();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -341,7 +347,6 @@ bool ApplicationManager::DeselectAll()
 
 void ApplicationManager::SendSelecteDown()
 {
-    // TODO: test
 	vector<CFigure*> temp;
     for (auto itr = figs.begin(); itr != figs.end();)
     {
