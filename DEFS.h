@@ -36,6 +36,12 @@ enum ActionType //The actions supported (you can add more if needed)
     SCRAMBLE,
     UNDO,
     REDO,
+
+	PICK_COLOR,
+	PICK_TYPE,
+	PICK_AREA,
+	PICK_COL_TYP,
+
     EXIT, //Exit the application
 
 	DRAWING_AREA, //A click on the drawing area

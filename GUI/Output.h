@@ -17,7 +17,9 @@ public:
     void CreateFigItems() const;
     void CreateFigActions() const;
 	void CreateBorderWidth() const;
+
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
+	void Output::CreatePickBar() const;
 
 	void CreateStatusBar() const;
 	void CreateColorBar() const;

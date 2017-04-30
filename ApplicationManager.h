@@ -39,6 +39,7 @@
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
 #include "Actions/DrawFigItems.h"
+#include "Actions/PickAction.h"
 
 // figures
 #include "Figures/CCircle.h"

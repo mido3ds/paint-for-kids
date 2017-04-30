@@ -176,7 +176,7 @@ void Output::CreateBorderWidth() const
 
 	ClearTToolBar();
 	UI.TToolBarWidth = 200;
-	wind_p->isfigitems = true;
+	wind_p->isborderwidth = true;
 
 	string MenuItemImages[4];
 	MenuItemImages[0] = "images\\MenuItems\\line.jpg";
@@ -185,6 +185,22 @@ void Output::CreateBorderWidth() const
 	MenuItemImages[3] = "images\\MenuItems\\circle.jpg";
 
 	for (int i = 0; i < 4; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+void Output::CreatePickBar() const
+{
+
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->ispickbar = true;
+
+	string MenuItemImages[PICK_ITM_COUNT];
+	MenuItemImages[ITM_PICK_COLOR] = "images\\MenuItems\\ByColor.jpg";
+	MenuItemImages[ITM_PICK_TYPE] = "images\\MenuItems\\Type2.jpg";
+	MenuItemImages[ITM_PICK_AREA] = "images\\MenuItems\\Area.jpg";
+	MenuItemImages[ITM_PICK_COL_TYP] = "images\\MenuItems\\Type&Color.jpg";
+
+	for (int i = 0; i < PICK_ITM_COUNT; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
 void Output::CreateColorBar() const
@@ -234,6 +250,8 @@ void Output::ClearTToolBar() const
 	wind_p->isfigactions = false;
 	wind_p->isfigitems = false;
 	wind_p->iscolorbar = false;
+	wind_p->isborderwidth = false;
+	wind_p->ispickbar = false;
 	wind_p->SetBrush(WHITE);
 	wind_p->SetPen(WHITE);
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);

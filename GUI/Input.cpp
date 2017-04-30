@@ -185,6 +185,25 @@ ActionType Input::GetUserAction() const
                 return EMPTY; // A click on empty place in desgin toolbar
             }
         }
+		if (wind_p->ispickbar) {
+			if (y >= UI.TToolBarY && y < UI.TToolBarY + UI.TToolBarHeight) {
+
+				int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+				switch (ClickedItemOrder) {
+				case ITM_PICK_COLOR:
+					return PICK_COLOR;
+				case ITM_PICK_TYPE:
+					return PICK_TYPE;
+				case ITM_PICK_AREA:
+					return PICK_AREA;
+				case ITM_PICK_COL_TYP:
+					return PICK_COL_TYP;
+				default:
+					return EMPTY;
+				}
+			}
+		}
 
         //[2] User clicks on the drawing area
         if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight && x >= 0) {

@@ -68,19 +68,14 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case CTR:
         return new DrawFigActions(this);
     case DEL:
-        //out_p->ClearTToolBar();
         return new DeleteAction(this);
     case MOVE:
-        //out_p->ClearTToolBar();
         return new MoveAction(this);
     case RESIZE:
-        //out_p->ClearTToolBar();
         return new ResizeAction(this);
     case COPY:
-        //out_p->ClearTToolBar();
         return new CopyAction(this);
     case PASTE:
-        //out_p->ClearTToolBar();
         return new PasteAction(this);
     case SELECT:
         return new SelectAction(this);
@@ -88,6 +83,21 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UnSelectAction(this);
     case CUT:
         return new CutAction(this);
+
+	case HIDE:
+		return new PickAction(this);
+	case PICK_COLOR:
+		out_p->PrintMessage("Picking By Color");		// Just For Testing
+		return nullptr;
+	case PICK_TYPE:
+		out_p->PrintMessage("Picking By Type");		// Just For Testing
+		return nullptr;
+	case PICK_AREA:
+		out_p->PrintMessage("Picking By Area");		// Just For Testing
+		return nullptr;
+	case PICK_COL_TYP:
+		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
+		return nullptr;
 
     default:
         return nullptr;
