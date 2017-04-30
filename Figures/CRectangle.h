@@ -27,6 +27,7 @@ public:
 
 	virtual void PrintInfo(Output* out_p);
 
+private:
 	Point p1, p2;
 };
 

@@ -27,10 +27,11 @@ public:
 	bool OutOfRange(Point p1);
 
 	virtual void PrintInfo(Output* out_p) ;
+
+private:
 	// TODO: make it one point and the radius, then del GetRadius and GetSecon....
 	Point p1, p2;
 
-private:
 	// given radius and this point, return another point
 	// another point is (p.x, p.y + rad)
 	Point GetSecondPointFromRadius(double rad);

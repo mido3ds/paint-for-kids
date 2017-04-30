@@ -409,15 +409,15 @@
     <ClInclude Include="Figures\CTrngl.h">
       <Filter>Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\Trigonometry.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
     <ClInclude Include="HistoryManager.h" />
     <ClInclude Include="Actions\DrawFigActions.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\DrawFigItems.h">
       <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\Trigonometry.h">
+      <Filter>Figures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

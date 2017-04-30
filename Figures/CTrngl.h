@@ -3,6 +3,7 @@
 
 #include "CFigure.h"
 #include "Trigonometry.h"
+
 class CTrngl : public CFigure {
 
 public:
@@ -24,7 +25,8 @@ public:
 	bool OutOfRange(Point p1, Point p2, Point p3);
 
 	virtual void PrintInfo(Output* out_p);
-    
+
+private:
 	Point p1, p2, p3;
 };
 
