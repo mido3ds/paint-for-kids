@@ -246,11 +246,6 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
 
-	/*pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;*/
-
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
@@ -278,13 +273,7 @@ void Output::DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
 
-	/*pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;*/
-
-	int radius = sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2));
-	int fradius = sqrt(pow((pf2.y - pf1.y), 2) + pow((pf2.x - pf1.x), 2));
+	int radius = sqrt(pow((pf2.y - pf1.y), 2) + pow((pf2.x - pf1.x), 2));
 	
 	color DrawingClr;
 	if (selected)
@@ -303,7 +292,7 @@ void Output::DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
 	else
 		style = FRAME;
 
-	wind_p->DrawCircle(pf1.x, pf1.y, fradius, style);
+	wind_p->DrawCircle(pf1.x, pf1.y, radius, style);
 }
 
 void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
@@ -311,11 +300,6 @@ void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
 {
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
-
-	/*pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;*/
 
 	color DrawingClr;
 	if (selected)
@@ -338,13 +322,6 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
 	Point pf3 = TranslatePoint(p3);
-
-	/*pf1.x = (int(pow(2, zoom) * (p1.x - zoom_point.x))) + zoom_point.x;
-	pf1.y = (int(pow(2, zoom) * (p1.y - zoom_point.y))) + zoom_point.y;
-	pf2.x = (int(pow(2, zoom) * (p2.x - zoom_point.x))) + zoom_point.x;
-	pf2.y = (int(pow(2, zoom) * (p2.y - zoom_point.y))) + zoom_point.y;
-	pf3.x = (int(pow(2, zoom) * (p3.x - zoom_point.x))) + zoom_point.x;
-	pf3.y = (int(pow(2, zoom) * (p3.y - zoom_point.y))) + zoom_point.y;*/
 
 	color DrawingClr;
 	if (selected)
@@ -456,20 +433,6 @@ Point Output::TranslatePoint(const Point& g_point) const
 		static_cast<int>(pow(2, zoom) * (g_point.x - zoom_point.x)) + zoom_point.x,
 		static_cast<int>(pow(2, zoom) * (g_point.y - zoom_point.y)) + zoom_point.y
 	};
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-int Output::TranslateRadius(const Point& f_point, int radius) const
-{
-	// calculates second point from given point, gets it translated
-	Point s_point = TranslatePoint({
-		f_point.x + radius,
-		f_point.y
-	});
-
-	// then returns the zoomed radius from those two points
-	return static_cast<int>(
-		sqrt(pow((s_point.y - f_point.y), 2) + pow((s_point.x - f_point.x), 2))
-		);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }

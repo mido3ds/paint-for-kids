@@ -34,14 +34,6 @@ void ZoomInAction::Execute()
 
 	out_p->SetZoom(out_p->GetZoom() + 1);
 	out_p->SetZoomPoint(zoom_point);
-
-	//clearing the drawing area to draw the shapes after zooming
-	out_p->ClearDrawArea();
-
-	//redrawing bars to avoid any shape be drawn on them
-	out_p->ClearStatusBar();
-	out_p->CreateDrawToolBar();
-
 }
 
 void ZoomInAction::Undo()

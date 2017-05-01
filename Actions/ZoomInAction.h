@@ -19,10 +19,7 @@ class ZoomInAction : public Action
 public:
 	ZoomInAction(ApplicationManager* app_p);
 
-	void SetZoomFactor(double z_factor);
 	void SetZoompoint(Point z_point);
-
-	double GetZoomFactor() const;
 	Point GetZoomPoint() const;
 
 	virtual void ReadActionParameters();

@@ -23,7 +23,6 @@ public:
 	virtual void Execute();
 
 	void SetZoompoint(Point z_point);
-
 	Point GetZoomPoint() const;
 
 	virtual void Undo();
