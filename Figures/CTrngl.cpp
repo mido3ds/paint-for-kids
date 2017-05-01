@@ -243,5 +243,13 @@ CFigure* CTrngl::Copy()
     c.is_filled = this->is_filled;
     c.z_index = this->z_index;
     CFigure* copy = new CTrngl(p1, p2, p3, c);
+
+	copy->SetSelected(this->IsSelected());
+	copy->SetId(this->GetId());
     return copy;
+}
+
+void CTrngl::PrintInfo(Output* out_p)
+{
+	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
 }

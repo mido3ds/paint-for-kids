@@ -12,6 +12,7 @@ void UpAction::ReadActionParameters()
 void UpAction::Execute()
 {
     Output* out_p = manager_p->GetOutput();
+
     manager_p->SendSelectedUp();
 }
 

@@ -14,7 +14,7 @@ CCircle::CCircle(Point p1, Point p2, GfxInfo circ_gfx_info)
 
 double CCircle::GetRadius()
 {
-	return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
+	return sqrt(pow((p1.x - p2.x), 2)  +  pow((p1.y - p2.y), 2));
 }
 
 bool CCircle::IsRotate()
@@ -24,8 +24,8 @@ bool CCircle::IsRotate()
 
 void CCircle::Resize(double resize_factor)
 {
-	p2.x = (int(resize_factor * (p2.x - p1.x))) + p1.x;
-	p2.y = (int(resize_factor * (p2.y - p1.y))) + p1.y;
+	p2.x = (int(resize_factor * (p2.x - p1.x)))  +  p1.x;
+	p2.y = (int(resize_factor * (p2.y - p1.y)))  +  p1.y;
 }
 
 Point CCircle::CalcCenter()
@@ -35,12 +35,12 @@ Point CCircle::CalcCenter()
 
 bool CCircle::OutOfRange(Point p1)
 {
-	return (p1.x - GetRadius() < UI.DrawAreaX || p1.x + GetRadius() > UI.DrawAreaX + UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y + GetRadius() > UI.DrawAreaY + UI.DrawAreaHeight);
+	return (p1.x - GetRadius() < UI.DrawAreaX || p1.x  +  GetRadius() > UI.DrawAreaX  +  UI.DrawAreaWidth || p1.y - GetRadius() < UI.DrawAreaY || p1.y  +  GetRadius() > UI.DrawAreaY  +  UI.DrawAreaHeight);
 }
 
 Point CCircle::GetSecondPointFromRadius(double rad)
 {
-	return Point(p1.x, p1.y + rad);
+	return Point(p1.x, p1.y  +  rad);
 }
 
 void CCircle::Draw(Output* out_p) const
@@ -106,18 +106,18 @@ void CCircle::Load(ifstream& in_file)
 
 bool CCircle::PointCheck(Point p) const
 {
-    float RadiusSquare = pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2);
-    float NewDistance = pow(p.x - p1.x, 2) + pow(p.y - p1.y, 2);
+    float RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
+    float NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
     return (NewDistance <= RadiusSquare);
 }
 
 bool CCircle::Move(int x, int y)
 {
     Point tp1, tp2;
-    tp1.x = p1.x + x;
-    tp1.y = p1.y + y;
-    tp2.x = p2.x + x;
-    tp2.y = p2.y + y;
+    tp1.x = p1.x  +  x;
+    tp1.y = p1.y  +  y;
+    tp2.x = p2.x  +  x;
+    tp2.y = p2.y  +  y;
     if (!OutOfRange(p1)) {
         p1 = tp1;
         p2 = tp2;
@@ -135,5 +135,12 @@ CFigure* CCircle::Copy()
     c.is_filled = this->is_filled;
     c.z_index = this->z_index;
     CFigure* copy = new CCircle(p1, p2, c);
+	copy->SetSelected(this->IsSelected());
+	copy->SetId(this->GetId());
     return copy;
+}
+
+void CCircle::PrintInfo(Output* out_p)
+{
+	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(this->GetRadius()));
 }

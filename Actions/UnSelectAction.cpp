@@ -23,8 +23,8 @@ void UnSelectAction::Execute()
 		figure->SetSelected(false);
 		manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 	}
-	else if (figure == nullptr && !manager_p->DeselectAll())
-		out_p->PrintMessage("No selected figures to deselect");
+	else 
+		manager_p->DeselectAll();
 }
 
 void UnSelectAction::Undo()

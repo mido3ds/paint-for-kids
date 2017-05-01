@@ -1,7 +1,7 @@
 #include "CutAction.h"
 
 CutAction::CutAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p, false)
 {
 }
 
@@ -21,11 +21,4 @@ void CutAction::Execute()
 
 void CutAction::Undo()
 {
-    if (cutActioned) {
-        for (int i = 0; i < cutAction.size(); i++) {
-            manager_p->AddFigure(cutAction[i]);
-        }
-        manager_p->SetClipboard(clipboard);
-        cutActioned = false;
-    }
 }

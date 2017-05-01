@@ -35,21 +35,12 @@ public:
 	virtual void Resize(double resize_factor) = 0;
 
 
-	//virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
+	virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
 
 protected:
     unsigned int id; // Each figure has an id
     bool selected = false; // true if the figure is selected.
     bool rotate = false;
-};
-
-struct CmpFigures {
-	// used to compare figures based on z_index (made for set)
-	// lower z_index is put first
-	bool operator()(const CFigure* const lhs, const CFigure* const rhs) const
-	{
-		return lhs->z_index < rhs->z_index;
-	}
 };
 
 #endif

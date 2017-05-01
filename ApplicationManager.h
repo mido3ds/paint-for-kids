@@ -5,7 +5,7 @@
 #include <iostream> // cerr, TODO: redirect cerr to a log file
 #include <fstream> // fstream
 #include <string>
-#include <deque> // brother of vector
+#include <deque> // double-ended-queue; to insert at beginning and end
 #include <vector>
 #include <cmath>
 

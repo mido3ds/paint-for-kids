@@ -212,10 +212,19 @@ CFigure* CRectangle::Copy()
     c.is_filled = this->is_filled;
     c.z_index = this->z_index;
     CFigure* copy = new CRectangle(p1, p2, c);
+	copy->SetSelected(this->IsSelected());
+	copy->SetId(this->GetId());
     return copy;
 }
 
 bool CRectangle::OutOfRange(Point p1, Point p2)
 {
 	return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width);
+}
+
+void CRectangle::PrintInfo(Output* out_p)
+{
+	int width = abs(p1.x-p2.x);
+	int height = abs(p1.y - p2.y);
+	out_p->PrintMessage("Rectangle... ID:" + to_string(this->GetId()) + " Height: "+to_string(height)+" Width: "+to_string(width));
 }

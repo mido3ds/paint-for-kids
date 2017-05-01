@@ -2,7 +2,8 @@
 #define CRECT_H
 
 #include "CFigure.h"
-#include "Trigonometry.h"
+#include <cmath>
+
 class CRectangle : public CFigure {
 
 public:
@@ -23,6 +24,8 @@ public:
 	virtual void Resize(double resize_factor);
 
 	bool OutOfRange(Point p1, Point p2);
+
+	virtual void PrintInfo(Output* out_p);
 
 	Point p1, p2;
 };

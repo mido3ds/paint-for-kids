@@ -126,7 +126,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
         }
     }
     return GetFigure(id);
-    return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -172,12 +171,6 @@ void ApplicationManager::UpdateInterface()
 	for (auto& fig : figs)
 		fig->Draw(out_p); //Call Draw function (virtual member fn)
 
-	/*if (bar == 1)
-		out_p->CreateFigItems();
-	else if (bar == 2)
-		out_p->CreateFigActions();*/
-
-	/*bar = 0;*/
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -256,7 +249,6 @@ void ApplicationManager::DeleteFigure(unsigned int id)
         delete (*itr);
         figs.erase(itr);
     } else {
-        // cant delete figure not found
         cerr << "Cant delete figure, figure not found, id = " << id << endl;
     }
 }
@@ -331,7 +323,6 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
         if (fig->IsSelected()) {
             fig->ChngDrawClr(C);
             fig->ChngBorderWidth(W);
-            fig->SetSelected(false);
 
             flag = true;
         }
@@ -348,7 +339,7 @@ bool ApplicationManager::DeselectAll()
 		found_selected = true;
 		fig->SetSelected(false);
 	}
-
+	num_selected = 0;
 	return found_selected;
 }
 
@@ -391,8 +382,20 @@ void ApplicationManager::SendSelectedUp()
 
 void ApplicationManager::PrintSelectedSize()
 {
-    if (num_selected != 0)
-        out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
+	if (num_selected == 1)
+	{
+		CFigure *selected;
+		for (auto& fig : figs)
+		{
+			if (fig->IsSelected()) 
+			{
+				selected = fig;
+				break;
+			}
+		}
+		selected->PrintInfo(out_p);
+	}
+	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
 Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
@@ -415,6 +418,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             fig->Move(x, y);
+			fig->SetSelected(true);
             moved_figs.push_back(fig);
         }
     }
@@ -441,7 +445,10 @@ bool ApplicationManager::PasteClipboard(Point p)
     for (auto& fig : clipboard) {
         if (!fig->Move(x, y))
             a = false;
-        AddFigure(fig);
+		CFigure*copy = fig->Copy();
+		copy->SetId(GenerateNextId());
+        AddFigure(copy);
+		fig->SetId(copy->GetId());
     }
     return a;
 }
@@ -459,6 +466,7 @@ void ApplicationManager::SetClipboard()
         if (fig->IsSelected()) {
             copy = fig->Copy();
             copy->SetId(GenerateNextId());
+			copy->SetSelected(false);
             clipboard.push_back(copy);
         }
     }
@@ -482,11 +490,13 @@ deque<CFigure*> ApplicationManager::DeleteSelected()
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             vec.push_back(fig->GetId());
-            deleted.push_back(fig->Copy());
+			CFigure*copy = fig->Copy();
+            deleted.push_back(copy);
         }
     }
     for (int i = 0; i < vec.size(); i++) {
         DeleteFigure(vec[i]);
+		num_selected--;
     }
     return deleted;
 }

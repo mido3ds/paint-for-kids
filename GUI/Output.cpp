@@ -379,9 +379,6 @@ void Output::CreateDrawArea() const
 
 void Output::CreatePlayArea() const
 {
-	//wind_p->SetBrush(WHITE);
-	//wind_p->SetPen(BLACK);
-
 	wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
