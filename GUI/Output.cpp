@@ -179,10 +179,10 @@ void Output::CreateBorderWidth() const
 	wind_p->isborderwidth = true;
 
 	string MenuItemImages[4];
-	MenuItemImages[0] = "images\\MenuItems\\line.jpg";
-	MenuItemImages[1] = "images\\MenuItems\\rectangle.jpg";
-	MenuItemImages[2] = "images\\MenuItems\\tringle.jpg";
-	MenuItemImages[3] = "images\\MenuItems\\circle.jpg";
+	MenuItemImages[0] = "images\\MenuItems\\very_small.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\small.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\mid.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\big.jpg";
 
 	for (int i = 0; i < 4; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
