@@ -21,5 +21,4 @@ void ToPlayModeAction::Execute()
 
 void ToPlayModeAction::Undo()
 {
-    manager_p->ExecuteAction(TO_DRAW);
 }

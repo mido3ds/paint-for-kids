@@ -9,7 +9,7 @@ void DeleteAction::ReadActionParameters()
 {
     Output* out_p = manager_p->GetOutput();
     if (manager_p->GetNumSelected() == 0)
-        out_p->PrintMessage("No Selected Figures To Move");
+        out_p->PrintMessage("No Selected Figures To Delete");
 }
 
 void DeleteAction::Execute()
@@ -24,7 +24,9 @@ void DeleteAction::Undo()
 {
     if (deleted) {
         for (int i = 0; i < clipboard.size(); i++) {
-            manager_p->AddFigure(clipboard[i]);
+			clipboard[i]->SetSelected(false);
+			CFigure*copy = clipboard[i]->Copy();
+            manager_p->AddFigure(copy);
         }
         deleted = false;
     }

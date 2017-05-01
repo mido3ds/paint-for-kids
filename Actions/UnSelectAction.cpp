@@ -1,7 +1,7 @@
 #include "UnSelectAction.h"
 
 UnSelectAction::UnSelectAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p, false)
 {
 }
 
@@ -23,14 +23,10 @@ void UnSelectAction::Execute()
 		figure->SetSelected(false);
 		manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 	}
-	else if (figure == nullptr && !manager_p->DeselectAll())
-		out_p->PrintMessage("No selected figures to deselect");
+	else 
+		manager_p->DeselectAll();
 }
 
 void UnSelectAction::Undo()
 {
-    if (figure != nullptr && !figure->IsSelected()) {
-        figure->SetSelected(true);
-		manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
-    }
 }

@@ -28,6 +28,7 @@ void AddCircAction::ReadActionParameters()
 	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
 
     gfx.is_filled = false; //default is not filled
+
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetCrntDrawColor();
     gfx.fill_clr = out_p->GetCrntFillColor();
@@ -35,13 +36,17 @@ void AddCircAction::ReadActionParameters()
 
     out_p->ClearStatusBar();
 
+	radius = static_cast<int>(
+		sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2))
+	);
+
     id = manager_p->GenerateNextId();
 }
 
 //Execute the action
 void AddCircAction::Execute()
 {
-    circ = new CCircle(p1, p2, gfx);
+    circ = new CCircle(p1, radius, gfx);
     circ->SetId(id);
     if (!circ->OutOfRange(p1)) {
         manager_p->AddFigure(circ);

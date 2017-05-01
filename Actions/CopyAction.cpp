@@ -1,7 +1,7 @@
 #include "CopyAction.h"
 
 CopyAction::CopyAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p, false)
 {
 }
 
@@ -20,8 +20,4 @@ void CopyAction::Execute()
 
 void CopyAction::Undo()
 {
-    if (copied) {
-        manager_p->SetClipboard(clipboard);
-        copied = false;
-    }
 }

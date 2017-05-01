@@ -139,16 +139,14 @@ void CLine::Load(ifstream& in_file)
 
 bool CLine::PointCheck(Point p) const
 {
-	float m = (float)(p1.y - p2.y) / (p1.x - p2.x);
-	if ((p.y == m*(p.x - p1.x) + p1.y) || ((p.y - (m*(p.x - p1.x) + p1.y)) <= 1) || ((p.y - (m*(p.x - p1.x) + p1.y)) >= -1))
-		return true;
-	else
-		return false;
-    /*if (p1.x != p2.x) {
-        float m = (float)(p1.y - p2.y) / (p1.x - p2.x);
-        return (((float)p.y - p.x * m) == ((float)p1.y - p1.x * m));
-    } else
-        return (((p.y >= p1.y) && (p.y <= p2.y)) || ((p.y >= p2.y) && (p.y <= p1.y)));*/
+	double d1 = sqrt(pow(p.x - p1.x, 2) + pow(p.y - p1.y, 2));
+	double d2 = sqrt(pow(p.x - p2.x, 2) + pow(p.y - p2.y, 2));
+	double d = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+	double c = d1 + d2;
+	double scale = 0.1;
+	c = (int)(c / scale)*scale;
+	d = (int)(d / scale)*scale;
+	return (c == d);
 }
 
 bool CLine::Move(int x, int y)
@@ -173,8 +171,12 @@ CFigure* CLine::Copy()
     c.draw_clr = this->draw_clr;
     c.fill_clr = this->fill_clr;
     c.is_filled = this->is_filled;
-    c.z_index = this->z_index;
+
     CFigure* copy = new CLine(p1, p2, c);
+
+	copy->SetSelected(this->IsSelected());
+	copy->SetId(this->GetId());
+	
     return copy;
 }
 
@@ -198,4 +200,9 @@ Point CLine::CalcCenter()
 bool CLine::OutOfRange(Point p1, Point p2)
 {
 	return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width);
+}
+
+void CLine::PrintInfo(Output* out_p)
+{
+	out_p->PrintMessage("Line... ID:" + to_string(this->GetId()) + " Start:(" + to_string(p1.x) + "," + to_string(p1.y) + ") End:(" + to_string(p2.x) + "," + to_string(p2.y) + ")");
 }
