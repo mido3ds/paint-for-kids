@@ -1,7 +1,7 @@
 #include "SelectAction.h"
 
 SelectAction::SelectAction(ApplicationManager* app_p)
-    : Action(app_p)
+    : Action(app_p, false)
 {
 }
 
@@ -30,8 +30,4 @@ void SelectAction::Execute()
 }
 void SelectAction::Undo()
 {
-	selected->ChngDrawClr(originaldraw);
-    //Selected->ChngFillClr(originalfill);
-	selected->SetSelected(false);
-    manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 }
