@@ -237,6 +237,9 @@
     <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ScrambleFind.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -418,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="Figures\Trigonometry.h">
       <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ScrambleFind.h">
+      <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
