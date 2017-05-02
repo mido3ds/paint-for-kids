@@ -234,14 +234,10 @@
     <ClCompile Include="Actions\DrawFigItems.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Actions\PickAction.cpp">
-=======
     <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ScrambleFind.cpp">
->>>>>>> 81de9ca8d52644c663467e5f4bf8513f16d5af67
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -423,14 +419,10 @@
     <ClInclude Include="Actions\DrawFigItems.h">
       <Filter>Actions</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Actions\PickAction.h">
-=======
     <ClInclude Include="Figures\Trigonometry.h">
       <Filter>Figures</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ScrambleFind.h">
->>>>>>> 81de9ca8d52644c663467e5f4bf8513f16d5af67
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
