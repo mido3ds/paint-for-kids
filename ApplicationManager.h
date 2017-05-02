@@ -83,6 +83,8 @@ public:
     void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 	void DeleteAllFigures(); // clear deque and deletes figures
 
+	vector<color> GetColors();
+
 	bool DeselectAll();
     bool ChangeSelectedFillColor(color c);
     bool ChangeSelectedBorder(int W, color C);
@@ -107,8 +109,6 @@ public:
     void UpdateInterface(); //Redraws all the drawing window // TODO: make it const method
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
-    int GetZoom() const; //Return value of zoom
-    Point GetManagerZoomPoint() const; //Return zooming point if there was zooming
 
     /*  ------------------------------- clipboard ------------------------------- */ 
 

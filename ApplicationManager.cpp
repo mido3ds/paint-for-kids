@@ -516,6 +516,14 @@ void ApplicationManager::DeleteAllFigures()
 		delete fig;
 	figs.clear();
 }
+vector<color> ApplicationManager::GetColors()
+{
+	vector <color> colors;
+	for (auto &fig : figs) {
+		colors.push_back(fig->fill_clr);
+	}
+	return colors;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {

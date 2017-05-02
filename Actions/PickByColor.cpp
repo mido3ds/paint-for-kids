@@ -11,13 +11,16 @@ void PickByColor::ReadActionParameters()
 	out_p->PrintMessage("Picking With Color");
 	int x, y;
 	CFigure *fig;
+	int numOfFigs = manager_p->GetNumFigures();
+	vector <color> colors = manager_p->GetColors();		// Get The List Of Avialable Colors
 	do {
 
 		in_p->GetPointClicked(x, y);
 		fig = manager_p->GetFigure(x, y);
 
+		numOfFigs--;									// Should Be Reduced After Correct Pick
 
-	} while (manager_p->GetNumFigures() > 0);
+	} while (numOfFigs > 0);
 }
 
 void PickByColor::Execute()
