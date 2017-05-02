@@ -80,7 +80,8 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UnSelectAction(this);
     case CUT:
         return new CutAction(this);
-
+	case SCRAMBLE:
+		return new ScrambleFind(this);
     default:
         return nullptr;
     }
@@ -520,6 +521,17 @@ void ApplicationManager::Redo()
     history.Redo();
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+
+deque<CFigure*> ApplicationManager::GetCopyOfFigures()
+{
+    deque<CFigure*> result;
+
+    for (auto& fig : figs)
+        result.push_back(fig->Copy());
+
+    return result;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()

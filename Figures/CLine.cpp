@@ -206,3 +206,18 @@ void CLine::PrintInfo(Output* out_p)
 {
 	out_p->PrintMessage("Line... ID:" + to_string(this->GetId()) + " Start:(" + to_string(p1.x) + "," + to_string(p1.y) + ") End:(" + to_string(p2.x) + "," + to_string(p2.y) + ")");
 }
+
+void CLine::MoveToLeftSide()
+{
+	Point center = CalcCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+
+	center.x /= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+}

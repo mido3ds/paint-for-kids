@@ -35,9 +35,10 @@ public:
     virtual void Save(ofstream& out_file) = 0;
     virtual void Load(ifstream& in_file) = 0;
     virtual Point CalcCenter() = 0;
-    virtual void Rotated(bool r) = 0;
+    virtual void Rotated(bool r) = 0; // TODO: rename to SetRotate
     virtual bool IsRotate() = 0;
 	virtual void Resize(double resize_factor) = 0;
+    virtual void MoveToLeftSide() = 0; // side for ScrambleAndFind mode
 
 
 	virtual void PrintInfo(Output* out_p) = 0;	// on the status bar

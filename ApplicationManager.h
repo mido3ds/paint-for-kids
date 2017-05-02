@@ -39,6 +39,7 @@
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
 #include "Actions/DrawFigItems.h"
+#include "Actions/ScrambleFind.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -80,6 +81,7 @@ public:
 	void SetNumSelected(int n_selected); //Change number of selected figures
     void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 	void DeleteAllFigures(); // clear deque and deletes figures
+    deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode
 
 	bool DeselectAll();
     bool ChangeSelectedFillColor(color c);

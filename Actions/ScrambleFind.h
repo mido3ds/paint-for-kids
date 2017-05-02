@@ -10,11 +10,15 @@
 class ScrambleFind : public Action {
 public:
     ScrambleFind(ApplicationManager* app_p);
+	~ScrambleFind();
 
     virtual void ReadActionParameters();
     virtual void Execute();
 
     virtual void Undo();
+
+private:
+    deque<CFigure*> figs;
 };
 
 #endif

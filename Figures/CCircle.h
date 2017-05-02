@@ -16,6 +16,7 @@ public:
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
+    virtual void MoveToLeftSide();
     virtual CFigure* Copy();
     virtual bool IsRotate();
     int GetRadius() const;
