@@ -2,15 +2,19 @@
 
 ScrambleFind::ScrambleFind(ApplicationManager* app_p)
     : Action(app_p, false)
-	// figs is initialized with copy of application_manager figs
-	,figs(manager_p->GetCopyOfFigures()) 
+	// l_figs is initialized with copy of application_manager figs
+	,l_figs(manager_p->GetCopyOfFigures())
+	,r_figs(l_figs)
 {
 }
 
 ScrambleFind::~ScrambleFind()
 {
-	for (auto& fig : figs)
+	for (auto& fig : l_figs)
 		delete fig;
+
+	for (auto& fig : r_figs)
+        delete fig;
 }
 
 void ScrambleFind::ReadActionParameters()
@@ -33,7 +37,7 @@ void ScrambleFind::Execute()
     // resize the graph to half its size, put at left side 
 	out_p->ClearDrawArea();
 	out_p->ClearStatusBar();
-    for (auto& fig : figs)
+    for (auto& fig : l_figs)
     {
         fig->MoveToLeftSide();
         fig->Resize(0.5);
@@ -56,10 +60,10 @@ void ScrambleFind::Execute()
 		// if fig1 == fig2:
 			// fig1.disappear()
 			// fig2.disappear()
-	} while (figs.size() > 0);
+	} while (l_figs.size() > 0);
 
     // diplay a final grade 
-	out_p->PrintMessage("final graded is " + to_string(valid_count)); // TODO: what is final grade?
+	out_p->PrintMessage("final grade is " + to_string(valid_count)); // TODO: what is final grade?
 }
 
 void ScrambleFind::Undo()

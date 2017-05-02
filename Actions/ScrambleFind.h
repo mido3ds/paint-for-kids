@@ -18,7 +18,8 @@ public:
     virtual void Undo();
 
 private:
-    deque<CFigure*> figs;
+    deque<CFigure*> l_figs; // figures in the left
+    deque<CFigure*> r_figs; // figures in the right
 };
 
 #endif
