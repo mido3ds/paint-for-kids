@@ -62,9 +62,6 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UpAction(this);
     case ROTATE:
         return new RotateAction(this);
-    case COLOR_BAR:
-        out_p->ClearTToolBar();
-        return nullptr;
     case CTR:
         return new DrawFigActions(this);
     case DEL:
@@ -130,20 +127,15 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
-    //If a figure is found return a pointer to it.
-    //if this point (x,y) does not belong to any figure return NULL
-    Point p;
-    p.x = x;
-    p.y = y;
-    unsigned int max_z = 0, id = 0;
-
-    for (auto& fig : figs) {
-        if (fig->PointCheck(p) && fig->z_index >= max_z) {
-            max_z = fig->z_index;
-            id = fig->GetId();
-        }
+    // reverse iterator, to iterate in figs from end to beginning 
+    for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
+    {
+        // if a figure is found return a pointer to it.
+        if ((*r_itr)->PointCheck({x, y}))
+            return *r_itr;
     }
-    return GetFigure(id);
+
+    // (x,y) does not belong to any figure
     return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -188,14 +180,14 @@ void ApplicationManager::UpdateInterface()
 	out_p->ClearDrawArea();
 
 	for (auto& fig : figs)
-		fig->Draw(out_p); //Call Draw function (virtual member fn)
+		fig->Draw(out_p);
 
-	/*if (bar == 1)
-		out_p->CreateFigItems();
-	else if (bar == 2)
-		out_p->CreateFigActions();*/
+	if (UI.InterfaceMode == MODE_DRAW)
+		out_p->CreateDrawToolBar();
+	else
+		out_p->CreatePlayToolBar();
 
-	/*bar = 0;*/
+	out_p->ClearStatusBar();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -274,7 +266,6 @@ void ApplicationManager::DeleteFigure(unsigned int id)
         delete (*itr);
         figs.erase(itr);
     } else {
-        // cant delete figure not found
         cerr << "Cant delete figure, figure not found, id = " << id << endl;
     }
 }
@@ -332,7 +323,7 @@ bool ApplicationManager::ChangeSelectedFillColor(color c)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->ChngFillClr(c);
+            fig->SetFillClr(c);
 
             flag = true;
         }
@@ -347,9 +338,8 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->ChngDrawClr(C);
-            fig->ChngBorderWidth(W);
-            fig->SetSelected(false);
+            fig->SetDrawClr(C);
+            fig->SetBorderWidth(W);
 
             flag = true;
         }
@@ -366,13 +356,12 @@ bool ApplicationManager::DeselectAll()
 		found_selected = true;
 		fig->SetSelected(false);
 	}
-
+	num_selected = 0;
 	return found_selected;
 }
 
 void ApplicationManager::SendSelecteDown()
 {
-    // TODO: test
 	vector<CFigure*> temp;
     for (auto itr = figs.begin(); itr != figs.end();)
     {
@@ -409,8 +398,20 @@ void ApplicationManager::SendSelectedUp()
 
 void ApplicationManager::PrintSelectedSize()
 {
-    if (num_selected != 0)
-        out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
+	if (num_selected == 1)
+	{
+		CFigure *selected;
+		for (auto& fig : figs)
+		{
+			if (fig->IsSelected()) 
+			{
+				selected = fig;
+				break;
+			}
+		}
+		selected->PrintInfo(out_p);
+	}
+	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
 Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
@@ -433,6 +434,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             fig->Move(x, y);
+			fig->SetSelected(true);
             moved_figs.push_back(fig);
         }
     }
@@ -459,7 +461,10 @@ bool ApplicationManager::PasteClipboard(Point p)
     for (auto& fig : clipboard) {
         if (!fig->Move(x, y))
             a = false;
-        AddFigure(fig);
+		CFigure*copy = fig->Copy();
+		copy->SetId(GenerateNextId());
+        AddFigure(copy);
+		fig->SetId(copy->GetId());
     }
     return a;
 }
@@ -477,6 +482,7 @@ void ApplicationManager::SetClipboard()
         if (fig->IsSelected()) {
             copy = fig->Copy();
             copy->SetId(GenerateNextId());
+			copy->SetSelected(false);
             clipboard.push_back(copy);
         }
     }
@@ -500,11 +506,13 @@ deque<CFigure*> ApplicationManager::DeleteSelected()
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             vec.push_back(fig->GetId());
-            deleted.push_back(fig->Copy());
+			CFigure*copy = fig->Copy();
+            deleted.push_back(copy);
         }
     }
     for (int i = 0; i < vec.size(); i++) {
         DeleteFigure(vec[i]);
+		num_selected--;
     }
     return deleted;
 }

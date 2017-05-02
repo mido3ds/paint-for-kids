@@ -24,6 +24,7 @@ private:
     unsigned int id;
     GfxInfo gfx;
     Point p1, p2;
+    int radius;
 };
 
 #endif /* __AddCircAction_h__ */

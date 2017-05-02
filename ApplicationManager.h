@@ -2,10 +2,10 @@
 #define APPLICATION_MANAGER_H
 
 // std 
-#include <iostream> // cerr, TODO: use boost::log instead
+#include <iostream> // cerr, TODO: redirect cerr to a log file
 #include <fstream> // fstream
 #include <string>
-#include <deque> // brother of vector
+#include <deque> // double-ended-queue; to insert at beginning and end
 #include <vector>
 #include <cmath>
 
@@ -59,18 +59,15 @@ public:
 	ApplicationManager();
 	~ApplicationManager();
     /*  ------------------------------- DEPRECATED ------------------------------- */ 
-    // !!
-    // TODO: to be removed, redundant or breaks classes resposibilities
-    deque<CFigure*>* GetFigures(); //Search for a figure given it's index in figure list // why gives other classes my private members?
-    void ExecuteAction(Action* action); //Takes already created action and excute it // duplicate
+
     void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
-    // !!
 
     /*  ------------------------------- Actions ------------------------------- */ 
 
     ActionType GetUserAction() const; // Reads the input command from the user and returns the corresponding action type
     Action* DetectAction(ActionType act_type); // return action object from action enum
     void ExecuteAction(ActionType); // execute given action 
+
     void Undo();
     void Redo();
 
@@ -100,7 +97,6 @@ public:
 
     /*  ------------------------------- File ------------------------------- */ 
 
-    // TODO solve issue of not saving pen width in file
     void SaveAll(ofstream& out_file); // call save for figures
     void LoadAll(ifstream& in_file);  // call load for figures
 
@@ -125,14 +121,13 @@ private:
     deque<CFigure*>::iterator 
         GetFigureIter(unsigned int id);  // return iterator to the figure if found, otherwise figs.end()
     
-    // TODO: make it deque
     deque<CFigure*> figs;
     deque<CFigure*> moved_figs;
     deque<CFigure*> clipboard; 
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
-    //int bar = 0;
 	int num_selected = 0;
+
     Input* in_p;
     Output* out_p;
 };

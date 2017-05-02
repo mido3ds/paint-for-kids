@@ -11,8 +11,6 @@ void AddCircAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-	out_p->ClearTToolBar();
-
     out_p->PrintMessage("New Circle: Click at first point");
 	
     //Read 1st corner and store in point p1
@@ -30,13 +28,17 @@ void AddCircAction::ReadActionParameters()
 	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
 
     gfx.is_filled = false; //default is not filled
+
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetCrntDrawColor();
     gfx.fill_clr = out_p->GetCrntFillColor();
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
-    out_p->ClearTToolBar();
+
+	radius = static_cast<int>(
+		sqrt(pow((p2.y - p1.y), 2) + pow((p2.x - p1.x), 2))
+	);
 
     id = manager_p->GenerateNextId();
 }
@@ -44,7 +46,7 @@ void AddCircAction::ReadActionParameters()
 //Execute the action
 void AddCircAction::Execute()
 {
-    circ = new CCircle(p1, p2, gfx);
+    circ = new CCircle(p1, radius, gfx);
     circ->SetId(id);
     if (!circ->OutOfRange(p1)) {
         manager_p->AddFigure(circ);

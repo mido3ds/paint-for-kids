@@ -1,6 +1,6 @@
 #include "DrawFigActions.h"
 
-DrawFigActions::DrawFigActions(ApplicationManager * app_p) :Action(app_p)
+DrawFigActions::DrawFigActions(ApplicationManager * app_p) :Action(app_p, false)
 {
 }
 
@@ -10,7 +10,6 @@ void DrawFigActions::ReadActionParameters()
 	Output *out_p = manager_p->GetOutput();
 	out_p->CreateFigActions();
 	act = in_p->GetUserAction();
-	out_p->ClearTToolBar();
 }
 
 void DrawFigActions::Execute()

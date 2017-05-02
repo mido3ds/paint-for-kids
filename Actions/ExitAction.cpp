@@ -24,6 +24,4 @@ void ExitAction::Execute()
 
 void ExitAction::Undo()
 {
-    // soo, you want to undo exitting ?
-    // انت بتهزر، صح؟
 }

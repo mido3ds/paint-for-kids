@@ -11,8 +11,6 @@ void AddTrnglAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-	out_p->ClearTToolBar();
-
     out_p->PrintMessage("New triangle: Click at first point");
 
     //Read 1st corner and store in point p1
@@ -44,7 +42,6 @@ void AddTrnglAction::ReadActionParameters()
     gfx.border_width = out_p->GetCrntPenWidth();
 
     out_p->ClearStatusBar();
-    out_p->ClearTToolBar();
 
     id = manager_p->GenerateNextId();
 }

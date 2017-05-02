@@ -23,6 +23,9 @@ public:
 
 	bool OutOfRange(Point p1, Point p2);
 
+	virtual void PrintInfo(Output* out_p);
+
+private:
 	Point p1, p2;
 };
 

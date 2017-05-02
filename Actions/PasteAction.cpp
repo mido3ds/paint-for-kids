@@ -9,16 +9,16 @@ void PasteAction::ReadActionParameters()
 {
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
-    out_p->PrintMessage("Please Click The Point You Want To PasteAction Selected Figure/s At");
+
+    out_p->PrintMessage("Please Click The Point You Want To Paste Selected Figure/s At");
     in_p->GetPointClicked(p.x, p.y);
     out_p->ClearStatusBar();
 }
 
 void PasteAction::Execute()
 {
-    clipboard = manager_p->GetClipboard();
-    while (!manager_p->PasteClipboard(p))
-        ReadActionParameters();
+	manager_p->PasteClipboard(p);
+	clipboard = manager_p->GetClipboard();
 }
 
 void PasteAction::Undo()

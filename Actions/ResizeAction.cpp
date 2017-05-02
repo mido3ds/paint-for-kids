@@ -20,8 +20,6 @@ void ResizeAction::ReadActionParameters()
 	Output* out_p = manager_p->GetOutput();
 	Input* in_p = manager_p->GetInput();
 
-	out_p->ClearTToolBar();
-
 	out_p->ClearStatusBar();
 	out_p->PrintMessage("Enter resize factor");
 

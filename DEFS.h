@@ -61,15 +61,12 @@ struct Point // To be used for figures points
     Point(): x(0), y(0) {}
 };
 
-class GfxInfo // Graphical info of each figure (you may add more members)
+struct GfxInfo // Graphical info of each figure (you may add more members)
 {
-public:
 	color draw_clr = BLACK; // Draw color of the figure
 	color fill_clr = WHITE; // Fill color of the figure
 	bool is_filled = false; // CFigure Filled or not
 	int border_width = 1; // Width of figure borders
-
-    int z_index = 0; // level of object on window, default to 0 // TODO: remove z_index
 };
 
 #endif
