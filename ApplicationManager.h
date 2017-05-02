@@ -61,8 +61,6 @@ public:
     /*  ------------------------------- DEPRECATED ------------------------------- */ 
     // !!
     // TODO: to be removed, redundant or breaks classes resposibilities
-    deque<CFigure*>* GetFigures(); //Search for a figure given it's index in figure list // why gives other classes my private members?
-    void ExecuteAction(Action* action); //Takes already created action and excute it // duplicate
     void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
     // !!
 
