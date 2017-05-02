@@ -43,14 +43,15 @@ void ScrambleFind::Execute()
         fig->Resize(0.5);
     }
 	
-	do {
-		// right_figs.randomize()
+	while (l_figs.size() > 0) 
+	{
+		// shuffle(r_figs)
 
         // show counters for valid and invalid user trials 
 		out_p->PrintMessage("Valid trials: " + to_string(valid_count) + " Unvalid trials: " + to_string(invalid_count));
 
 		// fig = choose_random_figure()
-		// fig.highlight()
+		// fig.SetDrawClr()
 		out_p->PrintMessage("Click on highlighted figure");
 
 		act = in_p->GetUserAction();
@@ -60,7 +61,7 @@ void ScrambleFind::Execute()
 		// if fig1 == fig2:
 			// fig1.disappear()
 			// fig2.disappear()
-	} while (l_figs.size() > 0);
+	}
 
     // diplay a final grade 
 	out_p->PrintMessage("final grade is " + to_string(valid_count)); // TODO: what is final grade?

@@ -12,10 +12,7 @@ CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 	this->p1 = p1;
 	this->radius = radius;
 
-	p2 = {
-		p1.x + radius,
-		p1.y
-	};
+	p2 = GetSecondPointFromRadius(radius);
 }
 
 bool CCircle::IsRotate()

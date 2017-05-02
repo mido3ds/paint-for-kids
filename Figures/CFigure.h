@@ -24,7 +24,7 @@ public:
     void SetFillClr(color filling_clr); // changes the figure's filling color
     void SetBorderWidth(int BW); // Changes Border Width
 
-    color GetDrawClr() const;
+    color GetDrawClr() const; // TODO: rename every clr to color
     color GetFillClr() const;
     int GetBorderWidth() const;
     bool IsFilled() const;
@@ -35,8 +35,8 @@ public:
     virtual void Save(ofstream& out_file) = 0;
     virtual void Load(ifstream& in_file) = 0;
     virtual Point CalcCenter() = 0;
-    virtual void Rotated(bool r) = 0; // TODO: rename to SetRotate
-    virtual bool IsRotate() = 0;
+    virtual void Rotated(bool r) = 0; // TODO: rename to SetRotated
+    virtual bool IsRotate() = 0; // TODO: rename to IsRotated
 	virtual void Resize(double resize_factor) = 0;
     virtual void MoveToLeftSide() = 0; // side for ScrambleAndFind mode
 

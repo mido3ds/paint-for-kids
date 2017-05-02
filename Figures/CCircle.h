@@ -30,7 +30,6 @@ public:
 	virtual void PrintInfo(Output* out_p) ;
 
 private:
-	// TODO: make it one point and the radius, then del GetRadius and GetSecon....
 	Point p1, p2;
     int radius;
 
