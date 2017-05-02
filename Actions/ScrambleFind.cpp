@@ -4,12 +4,17 @@ ScrambleFind::ScrambleFind(ApplicationManager* app_p)
     : Action(app_p, false)
 	// l_figs is initialized with copy of application_manager figs
 	,l_figs(manager_p->GetCopyOfFigures())
-	,r_figs(l_figs)
+	,r_figs(manager_p->GetCopyOfFigures())
+    ,middle_line({ UI.width / 2 - 3, 50 }, { UI.width / 2 + 3, UI.StatusBarY }, info)
+    ,out_p(manager_p->GetOutput())
+	,in_p(manager_p->GetInput())
 {
+    middle_line.SetBorderWidth(3);
 }
 
 ScrambleFind::~ScrambleFind()
 {
+    // delete all copied figures
 	for (auto& fig : l_figs)
 		delete fig;
 
@@ -23,16 +28,8 @@ void ScrambleFind::ReadActionParameters()
 
 void ScrambleFind::Execute()
 {
-	Output* out_p = manager_p->GetOutput();
-	Input* in_p = manager_p->GetInput();
 	ActionType act = ActionType::EMPTY;
 	int invalid_count = 0, valid_count = 0;
-
-	// for line
-	GfxInfo info;
-	info.border_width = 3;
-	CLine line({ UI.width / 2 - 3, 50 }, { UI.width / 2 + 3, UI.StatusBarY }, info);
-	line.Draw(out_p);
 
     // resize the graph to half its size, put at left side 
 	out_p->ClearDrawArea();
@@ -43,25 +40,34 @@ void ScrambleFind::Execute()
         fig->Resize(0.5);
     }
 	
+	ShuffleFigures();
+
 	while (l_figs.size() > 0) 
 	{
-		// shuffle(r_figs)
+        // redraw them
+        UpdateInterface();
 
-        // show counters for valid and invalid user trials 
-		out_p->PrintMessage("Valid trials: " + to_string(valid_count) + " Unvalid trials: " + to_string(invalid_count));
+        // show counters for valid and invalid user trials
+        out_p->PrintMessage("Valid trials: " + to_string(valid_count) + " Unvalid trials: " + to_string(invalid_count));
 
-		// fig = choose_random_figure()
-		// fig.SetDrawClr()
-		out_p->PrintMessage("Click on highlighted figure");
+        // get random figure from left
+        auto itr = RandomFigure();
+        CFigure* fig1 = *itr;
+        fig1->SetDrawClr(UI.HighlightColor);
 
-		act = in_p->GetUserAction();
-		if (act == EXIT || act == SCRAMBLE || act == TO_DRAW)
-			break;
+        out_p->PrintMessage("Click on highlighted figure");
 
-		// if fig1 == fig2:
-			// fig1.disappear()
-			// fig2.disappear()
-	}
+        act = in_p->GetUserAction();
+        if (act != DRAWING_AREA && act != EMPTY && act != STATUS)
+            break;
+
+        // get point clicked
+        // get fig2 at that point
+        
+        // if fig1.id == fig2.id:
+            // fig1.disappear()
+            // fig2.disappear()
+    }
 
     // diplay a final grade 
 	out_p->PrintMessage("final grade is " + to_string(valid_count)); // TODO: what is final grade?
@@ -69,4 +75,19 @@ void ScrambleFind::Execute()
 
 void ScrambleFind::Undo()
 {
+}
+
+void ScrambleFind::UpdateInterface()
+{
+    out_p->ClearDrawArea();
+    out_p->ClearStatusBar();
+    middle_line.Draw(out_p);
+
+    // draw left figures
+    for (auto& fig : l_figs)
+        fig->Draw();
+    
+    // draw right figures
+    for (auto& fig : r_figs)
+        fig->Draw();
 }
