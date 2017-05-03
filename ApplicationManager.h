@@ -88,8 +88,6 @@ public:
 
 	deque <CFigure *> CopyFigs();
 
-	// vector<color> GetColors();
-
 	bool DeselectAll();
     bool ChangeSelectedFillColor(color c);
     bool ChangeSelectedBorder(int W, color C);
@@ -99,7 +97,7 @@ public:
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()   My Note : In High Level Languge It's True
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
