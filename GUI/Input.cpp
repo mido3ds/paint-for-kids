@@ -47,10 +47,11 @@ color Input::PickColor(int ix, int iy)
 
 // This function reads the position where the user clicks to determine the
 // desired action
-ActionType Input::GetUserAction() const
+ActionType Input::GetUserAction()
 {
     int x, y;
     wind_p->WaitMouseClick(x, y); // Get the coordinates of the user click
+    last_click = { x, y };
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
     {
@@ -198,6 +199,11 @@ ActionType Input::GetUserAction() const
         return STATUS;
     }
 
+}
+/////////////////////////////////
+Point Input::GetClickedPoint() const
+{
+    return clicked_point;
 }
 /////////////////////////////////
 

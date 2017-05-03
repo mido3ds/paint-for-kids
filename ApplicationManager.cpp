@@ -111,18 +111,23 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 	figs.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) const
+CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p) // TODO: test
 {
     // reverse iterator, to iterate in figs from end to beginning 
     for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
     {
         // if a figure is found return a pointer to it.
-        if ((*r_itr)->PointCheck({x, y}))
+        if ((*r_itr)->PointCheck(p))
             return *r_itr;
     }
 
     // (x,y) does not belong to any figure
     return nullptr;
+}
+
+CFigure* ApplicationManager::GetFigure(int x, int y) const
+{
+    return ApplicationManager::GetFigure(figs, { x, y });
 }
 ////////////////////////////////////////////////////////////////////////////////////
 

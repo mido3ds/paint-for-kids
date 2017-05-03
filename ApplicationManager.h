@@ -75,10 +75,11 @@ public:
 
     void AddFigure(CFigure* fig_p); // Adds a new figure to the figs
     CFigure* DetectFigure(string fig_name); // make new figure from its name
-    CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	int GetNumFigures() const;
-	int GetNumSelected() const;
-	void SetNumSelected(int n_selected); //Change number of selected figures
+    CFigure* GetFigure(int x, int y) const; // return figure at that point, for this->figs
+    static CFigure* GetFigure(deque<CFigure*> figs, Point p); // Search for a figure given a point inside the figure and the list
+    int GetNumFigures() const;
+    int GetNumSelected() const;
+    void SetNumSelected(int n_selected); //Change number of selected figures
     void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 	void DeleteAllFigures(); // clear deque and deletes figures
     deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode

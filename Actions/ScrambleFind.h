@@ -18,12 +18,13 @@ public:
     virtual void Undo();
 
     void UpdateInterface(); // redraws the figures
-    void ShuffleFigures(); // randomized r_figs positions
-    deque<CFigure*>::iterator RandomFigure(); // get iterator to random figure from left
+    void ShuffleFigures(); // randomized right_figs positions
+    CFigure* RandomFigure(); // random figure from left
+    CFigure* GetFigure(Point p); // given a point, get its figure from left_figs
 
 private:
-    deque<CFigure*> l_figs; // figures in the left
-    deque<CFigure*> r_figs; // figures in the right
+    deque<CFigure*> right_figs; // figures in the left
+    deque<CFigure*> left_figs; // figures in the right
 
     Output* out_p = nullptr;
     Input* in_p = nullptr;
