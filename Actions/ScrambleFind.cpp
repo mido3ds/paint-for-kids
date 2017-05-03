@@ -39,7 +39,7 @@ void ScrambleFind::ReadActionParameters() // prepare game
     for (auto& fig : right_figs)
     {
         fig->RandomizePosition();
-        fig->MoveToRightSide();
+        //fig->MoveToRightSide();
         fig->Resize(0.5);
     }
 }
@@ -54,12 +54,12 @@ void ScrambleFind::Execute() // game mainloop
     // gameloop
     while (right_figs.size() > 0) 
     {
-        // redraw
-        UpdateInterface();
-
         // choose figure
         fig1 = ChooseRandomFigure();
-        fig1->SetDrawClr(UI.HighlightColor);
+	    fig1->SetDrawClr(UI.HighlightColor);
+
+        // draw
+        UpdateInterface();
 
         while (fig2 == nullptr) 
         {
@@ -80,19 +80,25 @@ void ScrambleFind::Execute() // game mainloop
                 if (fig1->GetId() == fig2->GetId())
                 {
                     // erase them from figs
-					right_figs.erase(find(right_figs.begin(), right_figs.end(), fig1));
-					left_figs.erase(find(left_figs.begin(), left_figs.end(), fig1));
+					left_figs.erase(find(left_figs.begin(), left_figs.end(), fig1));  // erase fig1
+					right_figs.erase(find(right_figs.begin(), right_figs.end(), fig2)); // erase fig2
 
                     delete fig1;
                     delete fig2;
 
-                    fig1 = fig2 = nullptr;
-
                     valid_count++;
+
+					fig2 = nullptr;
+
+					break;
                 }
-                else
+				else
+				{
                     invalid_count++;
-                    
+					fig2 = nullptr;
+				}
+
+
             }
         }
 
@@ -132,8 +138,8 @@ CFigure* ScrambleFind::GetFigureFromRight(Point p)
 
 CFigure* ScrambleFind::ChooseRandomFigure()
 {
-    // TODO
-	return nullptr;
+	static int i = 0;
+	return left_figs[i++];
 }
 
 void ScrambleFind::UpdateMessage(int invalid, int valid)
