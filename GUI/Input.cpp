@@ -6,7 +6,7 @@ Input::Input(window* pW)
 	wind_p = pW; // point to the passed window
 }
 
-clicktype Input::GetPointClicked(int& x, int& y) const
+clicktype Input::GetClickPoint(int& x, int& y) const
 {
 	clicktype click;
 	do
@@ -201,9 +201,9 @@ ActionType Input::GetUserAction()
 
 }
 /////////////////////////////////
-Point Input::GetClickedPoint() const
+Point Input::GetLastClickedPoint() const
 {
-    return clicked_point;
+    return last_click;
 }
 /////////////////////////////////
 

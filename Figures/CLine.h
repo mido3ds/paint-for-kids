@@ -28,6 +28,8 @@ public:
 
 	virtual void PrintInfo(Output* out_p);
 
+	void SetPoints(Point p1, Point p2);
+
 private:
 	Point p1, p2;
 };

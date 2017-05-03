@@ -12,7 +12,7 @@ void ExitAction::ReadActionParameters()
     Input* in_p = manager_p->GetInput();
 
     out_p->PrintMessage("Exitting: click at any point to exit");
-    in_p->GetPointClicked(x, y);
+    in_p->GetClickPoint(x, y);
 }
 
 //Execute the action

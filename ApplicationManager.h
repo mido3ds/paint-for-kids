@@ -76,7 +76,7 @@ public:
     void AddFigure(CFigure* fig_p); // Adds a new figure to the figs
     CFigure* DetectFigure(string fig_name); // make new figure from its name
     CFigure* GetFigure(int x, int y) const; // return figure at that point, for this->figs
-    static CFigure* GetFigure(deque<CFigure*> figs, Point p); // Search for a figure given a point inside the figure and the list
+    static CFigure* GetFigure(const deque<CFigure*>& figs, Point p); // Search for a figure given a point inside the figure and the list
     int GetNumFigures() const;
     int GetNumSelected() const;
     void SetNumSelected(int n_selected); //Change number of selected figures

@@ -207,6 +207,12 @@ void CLine::PrintInfo(Output* out_p)
 	out_p->PrintMessage("Line... ID:" + to_string(this->GetId()) + " Start:(" + to_string(p1.x) + "," + to_string(p1.y) + ") End:(" + to_string(p2.x) + "," + to_string(p2.y) + ")");
 }
 
+void CLine::SetPoints(Point p1, Point p2)
+{
+	this->p1 = p1;
+	this->p2 = p2;
+}
+
 void CLine::MoveToLeftSide()
 {
 	Point center = CalcCenter();

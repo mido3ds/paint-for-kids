@@ -1,16 +1,15 @@
 #include "ScrambleFind.h"
 
 ScrambleFind::ScrambleFind(ApplicationManager* app_p)
-    : Action(app_p, false)
+    : Action(app_p, false),
 
-	,left_figs(manager_p->GetCopyOfFigures())
-	,right_figs(manager_p->GetCopyOfFigures())
+	left_figs(manager_p->GetCopyOfFigures()),
+	right_figs(manager_p->GetCopyOfFigures()),
 
-    ,middle_line({ UI.width / 2 - 3, 50 }, { UI.width / 2 + 3, UI.StatusBarY }, info)
-
-    ,out_p(manager_p->GetOutput())
-	,in_p(manager_p->GetInput())
+    out_p(manager_p->GetOutput()),
+	in_p(manager_p->GetInput())
 {
+	middle_line.SetPoints({ UI.width / 2 - 3, 50 }, { UI.width / 2 + 3, UI.StatusBarY });
     middle_line.SetBorderWidth(3);
 }
 
@@ -64,11 +63,11 @@ void ScrambleFind::Execute() // game mainloop
 
         while (fig2 == nullptr) 
         {
-            UpdateMessage(invalid_count, valid_count)l
+			UpdateMessage(invalid_count, valid_count);
 
             // get action
             act = in_p->GetUserAction();
-            clicked_point = in_p->GetClickedPoint();
+            clicked_point = in_p->GetLastClickedPoint();
             if (act == EXIT || act == SCRAMBLE || act == TO_DRAW)
                 goto finish;
 
@@ -81,8 +80,8 @@ void ScrambleFind::Execute() // game mainloop
                 if (fig1->GetId() == fig2->GetId())
                 {
                     // erase them from figs
-                    right_figs.erase(right_figs.find(fig1));
-                    left_figs.erase(left_figs.find(fig1));
+					right_figs.erase(find(right_figs.begin(), right_figs.end(), fig1));
+					left_figs.erase(find(left_figs.begin(), left_figs.end(), fig1));
 
                     delete fig1;
                     delete fig2;
@@ -100,9 +99,10 @@ void ScrambleFind::Execute() // game mainloop
     }
 
     // diplay a final grade 
-    finish:
-        double final_grade = (valid_count) / static_cast<double>(invalid_count + valid_count)
-        out_p->PrintMessage("final grade is " + to_string(final_grade));
+finish:
+
+	double final_grade = (valid_count) / static_cast<double>(invalid_count + valid_count);
+    out_p->PrintMessage("final grade is " + to_string(final_grade));
 }
 
 void ScrambleFind::Undo()
@@ -118,29 +118,30 @@ void ScrambleFind::UpdateInterface()
 
     // draw left figures
     for (auto& fig : right_figs)
-        fig->Draw();
+        fig->Draw(out_p);
     
     // draw right figures
     for (auto& fig : left_figs)
-        fig->Draw();
+        fig->Draw(out_p);
 }
 
 CFigure* ScrambleFind::GetFigureFromRight(Point p)
 {
-    return ApplicationManager::GetFigure(right_figs, clicked_point);
+    return ApplicationManager::GetFigure(right_figs, p);
 }
 
 CFigure* ScrambleFind::ChooseRandomFigure()
 {
     // TODO
+	return nullptr;
 }
 
 void ScrambleFind::UpdateMessage(int invalid, int valid)
 {
     out_p->ClearStatusBar();
     out_p->PrintMessage(
-        "Valid trials: " + to_string(valid_count) + " Invalid trials: " 
-        + to_string(invalid_count) 
+        "Valid trials: " + to_string(valid) + " Invalid trials: " 
+        + to_string(invalid) 
         + "   .....  Click on highlighted figure"
     );
 }

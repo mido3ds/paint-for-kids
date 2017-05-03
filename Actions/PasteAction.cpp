@@ -11,7 +11,7 @@ void PasteAction::ReadActionParameters()
     Input* in_p = manager_p->GetInput();
 
     out_p->PrintMessage("Please Click The Point You Want To Paste Selected Figure/s At");
-    in_p->GetPointClicked(p.x, p.y);
+    in_p->GetClickPoint(p.x, p.y);
     out_p->ClearStatusBar();
 }
 
