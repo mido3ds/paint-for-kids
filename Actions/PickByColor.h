@@ -5,6 +5,7 @@
 #include "../ApplicationManager.h"
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
+#include "../CMUgraphicsLib/colors.h"
 
 class PickByColor :public Action {
 
@@ -17,7 +18,22 @@ public:
 
 	virtual void Undo();
 
+	//int GetNumSameColor(color c);
 
+	
+
+private:
+	deque<CFigure *> figures;
+	color c;
+	bool isfilled;
+
+	int GetNumFigsSameColor(color C, bool isfilled);
+
+	void DeleteCorrect(int id);
+
+	void DrawColorCircle(color c);
+
+	bool correct(CFigure *fig);
 };
 
 

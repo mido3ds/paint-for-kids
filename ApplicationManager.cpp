@@ -87,8 +87,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 	case HIDE:
 		return new PickAction(this);
 	case PICK_COLOR:
-		out_p->PrintMessage("Picking By Color");		// Just For Testing
-		return nullptr;
+		return new PickByColor(this);
 	case PICK_TYPE:
 		out_p->PrintMessage("Picking By Type");		// Just For Testing
 		return nullptr;
@@ -130,21 +129,32 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
-    //If a figure is found return a pointer to it.
-    //if this point (x,y) does not belong to any figure return NULL
-    Point p;
-    p.x = x;
-    p.y = y;
-    unsigned int max_z = 0, id = 0;
+	// reverse iterator, to iterate in figs from end to beginning 
+	for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin(); r_itr != figs.rend(); r_itr++)
+	{
+		// if a figure is found return a pointer to it.
+		if ((*r_itr)->PointCheck({ x, y }))
+			return *r_itr;
+	}
 
-    for (auto& fig : figs) {
-        if (fig->PointCheck(p) && fig->z_index >= max_z) {
-            max_z = fig->z_index;
-            id = fig->GetId();
-        }
-    }
-    return GetFigure(id);
-    return nullptr;
+	// (x,y) does not belong to any figure
+	return nullptr;
+
+
+}
+CFigure * ApplicationManager::GetFigure(deque<CFigure*> figures, int x, int y) const
+{
+	// reverse iterator, to iterate in figs from end to beginning 
+	for (deque<CFigure*>::const_reverse_iterator r_itr = figures.rbegin(); r_itr != figures.rend(); r_itr++)
+	{
+		// if a figure is found return a pointer to it.
+		if ((*r_itr)->PointCheck({ x, y }))
+			return *r_itr;
+	}
+
+	// (x,y) does not belong to any figure
+	return nullptr;
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -189,13 +199,13 @@ void ApplicationManager::UpdateInterface()
 
 	for (auto& fig : figs)
 		fig->Draw(out_p); //Call Draw function (virtual member fn)
+}
+void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
+{
+	out_p->ClearDrawArea();
 
-	/*if (bar == 1)
-		out_p->CreateFigItems();
-	else if (bar == 2)
-		out_p->CreateFigActions();*/
-
-	/*bar = 0;*/
+	for (auto& fig : figures)
+		fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -516,14 +526,24 @@ void ApplicationManager::DeleteAllFigures()
 		delete fig;
 	figs.clear();
 }
-vector<color> ApplicationManager::GetColors()
+deque<CFigure*> ApplicationManager::CopyFigs()
 {
-	vector <color> colors;
+	deque <CFigure *> figures;
 	for (auto &fig : figs) {
-		colors.push_back(fig->fill_clr);
+		figures.push_back(fig);
 	}
-	return colors;
+	/*if (figures)*/
+		return figures;
+	//return nullptr;
 }
+//vector<color> ApplicationManager::GetColors()
+//{
+//	vector <color> colors;
+//	for (auto &fig : figs) {
+//		colors.push_back(fig->fill_clr);
+//	}
+//	return colors;
+//}
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
