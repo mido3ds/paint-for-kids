@@ -17,6 +17,8 @@ public:
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual void MoveToLeftSide();
+    virtual void MoveToRightSide();
+    virtual void RandomizePosition();
     virtual CFigure* Copy();
 
 	virtual Point CalcCenter();

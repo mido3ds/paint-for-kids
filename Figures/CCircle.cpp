@@ -154,3 +154,13 @@ void CCircle::MoveToLeftSide()
 {
 	p1.x /= 2;
 }
+
+void CCircle::MoveToRightSide()
+{
+	p1.x *= 2;
+}
+
+void CCircle::RandomizePosition()
+{
+	// TODO
+}

@@ -111,7 +111,7 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 	figs.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p) // TODO: test
+CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p)
 {
     // reverse iterator, to iterate in figs from end to beginning 
     for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
@@ -166,7 +166,7 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface()
+void ApplicationManager::UpdateInterface() const
 {
 	out_p->ClearDrawArea();
 

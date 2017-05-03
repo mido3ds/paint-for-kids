@@ -39,9 +39,10 @@ public:
     virtual bool IsRotate() = 0; // TODO: rename to IsRotated
 	virtual void Resize(double resize_factor) = 0;
     virtual void MoveToLeftSide() = 0; // side for ScrambleAndFind mode
+    virtual void MoveToRightSide() = 0; // side for ScrambleAndFind mode
+    virtual void RandomizePosition() = 0; // put object in random valid postion, no change to size
 
-
-	virtual void PrintInfo(Output* out_p) = 0;	// on the status bar
+    virtual void PrintInfo(Output* out_p) = 0; // on the status bar
 
 protected:
     unsigned int id; // Each figure has an id
