@@ -32,7 +32,7 @@ void ZoomOutAction::ReadActionParameters()
 
 	out_p->PrintMessage("ZoomOut: Click at the point you want to zoom");
 
-	in_p->GetPointClicked(zoom_point.x, zoom_point.y);
+	in_p->GetClickPoint(zoom_point.x, zoom_point.y);
 	out_p->ClearStatusBar();
 }
 

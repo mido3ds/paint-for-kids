@@ -13,7 +13,7 @@ void MoveAction::ReadActionParameters()
 
     if (manager_p->GetNumSelected() > 0) {
         out_p->PrintMessage("Please Click The Point You Want To MoveAction Selected Figure/s At");
-        in_p->GetPointClicked(p.x, p.y);
+        in_p->GetClickPoint(p.x, p.y);
         out_p->ClearStatusBar();
     } else
         out_p->PrintMessage("No Selected Figures To MoveAction");
@@ -30,7 +30,7 @@ void MoveAction::Execute()
 void MoveAction::Undo()
 {
     if (moveActiond) {
-        manager_p->ReturnMoved(old);
+        manager_p->MoveSelectedBack(old);
         moveActiond = false;
     }
 }

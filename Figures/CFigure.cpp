@@ -22,12 +22,12 @@ bool CFigure::IsSelected() const
 	return selected;
 }
 
-void CFigure::SetDrawClr(color draw_clr)
+void CFigure::SetDrawColor(color draw_clr)
 {
 	this->draw_clr = draw_clr;
 }
 
-void CFigure::SetFillClr(color filling_clr)
+void CFigure::SetFillColor(color filling_clr)
 {
 	is_filled = (filling_clr != WHITE);
 	fill_clr = filling_clr;
@@ -51,12 +51,12 @@ unsigned int CFigure::GetId() const
 	return id;
 }
 
-color CFigure::GetDrawClr() const
+color CFigure::GetDrawColor() const
 {
 	return draw_clr;
 }
 
-color CFigure::GetFillClr() const
+color CFigure::GetFillColor() const
 {
 	return fill_clr;
 }

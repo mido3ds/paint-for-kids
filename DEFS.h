@@ -6,6 +6,8 @@ some global constants and definitions to be used in the project.
 
 #include "CMUgraphicsLib/CMUgraphics.h" // color
 
+#define SECOND 1000 // second is 1000 milliseconds
+
 enum ActionType //The actions supported (you can add more if needed)
 {
     DRAW_FIG_ITM,

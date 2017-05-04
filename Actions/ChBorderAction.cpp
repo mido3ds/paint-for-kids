@@ -16,7 +16,7 @@ void ChBorderAction::ReadActionParameters()
     w = stoi(in_p->GetString(out_p));
     out_p->PrintMessage("Please Choose Your Favorite Color To Change Border Color");
     out_p->CreateColorBar();
-    in_p->GetPointClicked(x, y);
+    in_p->GetClickPoint(x, y);
     lastC = C;
     C = in_p->PickColor(x, y);
     out_p->ClearStatusBar();

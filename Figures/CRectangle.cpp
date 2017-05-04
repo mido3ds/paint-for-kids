@@ -19,7 +19,7 @@ void CRectangle::Draw(Output* out_p) const
 
 void CRectangle::Rotate(int deg)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	Point temp1 = p1;
 	Point temp2 = p2;
 	Point temp3;
@@ -89,11 +89,11 @@ void CRectangle::Rotate(int deg)
 		break;
 	}
 }
-void CRectangle::Rotated(bool r)
+void CRectangle::SetRotated(bool r)
 {
 	rotate = r;
 }
-bool CRectangle::IsRotate()
+bool CRectangle::IsRotated()
 {
 	return rotate;
 }
@@ -145,14 +145,14 @@ void CRectangle::Load(ifstream& in_file)
 
 void CRectangle::Resize(double resize_factor)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
 	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
 }
 
-Point CRectangle::CalcCenter()
+Point CRectangle::CalculateCenter()
 {
 	Point c;
 	c.x = (p1.x + p2.x) / 2;
@@ -233,7 +233,7 @@ void CRectangle::PrintInfo(Output* out_p)
 
 void CRectangle::MoveToLeftSide()
 {
-	Point center = CalcCenter();
+	Point center = CalculateCenter();
 
 	// get difference between center and points
 	int def1 = p1.x - center.x;
@@ -244,4 +244,24 @@ void CRectangle::MoveToLeftSide()
 	// remake the points from the previous centere
 	p1.x = center.x + def1;
 	p2.x = center.x + def2;
+}
+
+void CRectangle::MoveToRightSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+
+	center.x *= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+}
+
+void CRectangle::RandomizePosition()
+{
+	// TODO
 }

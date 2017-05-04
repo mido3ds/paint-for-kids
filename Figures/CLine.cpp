@@ -19,7 +19,7 @@ void CLine::Draw(Output* out_p) const
 
 void CLine::Rotate(int deg)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	Point temp1 = p1;
 	Point temp2 = p2;
 	Point temp3;
@@ -90,12 +90,12 @@ void CLine::Rotate(int deg)
 	}
 }
 
-void CLine::Rotated(bool r)
+void CLine::SetRotated(bool r)
 {
 	rotate = r;
 }
 
-bool CLine::IsRotate()
+bool CLine::IsRotated()
 {
 	return rotate;
 }
@@ -182,14 +182,14 @@ CFigure* CLine::Copy()
 
 void CLine::Resize(double resize_factor)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
 	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
 }
 
-Point CLine::CalcCenter()
+Point CLine::CalculateCenter()
 {
 	Point c;
 	c.x = (p1.x + p2.x) / 2;
@@ -207,9 +207,15 @@ void CLine::PrintInfo(Output* out_p)
 	out_p->PrintMessage("Line... ID:" + to_string(this->GetId()) + " Start:(" + to_string(p1.x) + "," + to_string(p1.y) + ") End:(" + to_string(p2.x) + "," + to_string(p2.y) + ")");
 }
 
+void CLine::SetPoints(Point p1, Point p2)
+{
+	this->p1 = p1;
+	this->p2 = p2;
+}
+
 void CLine::MoveToLeftSide()
 {
-	Point center = CalcCenter();
+	Point center = CalculateCenter();
 
 	// get difference between center and points
 	int def1 = p1.x - center.x;
@@ -220,4 +226,24 @@ void CLine::MoveToLeftSide()
 	// remake the points from the previous centere
 	p1.x = center.x + def1;
 	p2.x = center.x + def2;
+}
+
+void CLine::MoveToRightSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+
+	center.x *= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+}
+
+void CLine::RandomizePosition()
+{
+	// TODO
 }
