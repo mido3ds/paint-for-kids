@@ -20,12 +20,12 @@ public:
     virtual void Draw(Output* out_p) const = 0;
     virtual bool PointCheck(Point p) const = 0;
 
-    void SetDrawClr(color draw_clr); // changes the figure's drawing color
-    void SetFillClr(color filling_clr); // changes the figure's filling color
+    void SetDrawColor(color draw_clr); // changes the figure's drawing color
+    void SetFillColor(color filling_clr); // changes the figure's filling color
     void SetBorderWidth(int BW); // Changes Border Width
 
-    color GetDrawClr() const; // TODO: rename every clr to color
-    color GetFillClr() const;
+    color GetDrawColor() const;
+    color GetFillColor() const;
     int GetBorderWidth() const;
     bool IsFilled() const;
 
@@ -34,9 +34,9 @@ public:
     virtual CFigure* Copy() = 0;
     virtual void Save(ofstream& out_file) = 0;
     virtual void Load(ifstream& in_file) = 0;
-    virtual Point CalcCenter() = 0;
-    virtual void Rotated(bool r) = 0; // TODO: rename to SetRotated
-    virtual bool IsRotate() = 0; // TODO: rename to IsRotated
+    virtual Point CalculateCenter() = 0;
+    virtual void SetRotated(bool r) = 0;
+    virtual bool IsRotated() = 0; 
 	virtual void Resize(double resize_factor) = 0;
     virtual void MoveToLeftSide() = 0; // side for ScrambleAndFind mode
     virtual void MoveToRightSide() = 0; // side for ScrambleAndFind mode

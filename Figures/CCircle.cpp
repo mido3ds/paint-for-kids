@@ -15,7 +15,7 @@ CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 	p2 = GetSecondPointFromRadius(radius);
 }
 
-bool CCircle::IsRotate()
+bool CCircle::IsRotated()
 {
 	return rotate;
 }
@@ -26,7 +26,7 @@ void CCircle::Resize(double resize_factor)
 	p2.y = (int(resize_factor * (p2.y - p1.y)))  +  p1.y;
 }
 
-Point CCircle::CalcCenter()
+Point CCircle::CalculateCenter()
 {
 	return p1;
 }
@@ -55,7 +55,7 @@ void CCircle::Rotate(int deg)
 {
 }
 
-void CCircle::Rotated(bool r)
+void CCircle::SetRotated(bool r)
 {
 	rotate = r;
 }

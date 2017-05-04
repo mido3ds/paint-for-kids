@@ -17,7 +17,7 @@ public:
     virtual void Undo();
 
     void UpdateInterface(); // redraws the figures
-    void UpdateMessage(int invalid, int valid, bool is_final=false)); // make mesage and prints it with needed info
+    void UpdateMessage(int invalid, int valid, bool is_final=false); // make mesage and prints it with needed info
     CFigure* ChooseRandomFigure(); // random figure from left
 
 private:

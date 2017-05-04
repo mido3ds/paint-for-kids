@@ -11,8 +11,8 @@ public:
     virtual void Draw(Output* out_p) const;
     virtual bool PointCheck(Point p) const;
     virtual void Rotate(int deg);
-    virtual void Rotated(bool r);
-    virtual bool IsRotate();
+    virtual void SetRotated(bool r);
+    virtual bool IsRotated();
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
@@ -21,7 +21,7 @@ public:
     virtual void RandomizePosition();
     virtual CFigure* Copy();
 
-	virtual Point CalcCenter();
+	virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
 
 	bool OutOfRange(Point p1, Point p2);

@@ -25,7 +25,7 @@ void SelectAction::Execute()
 
     if (selected != nullptr && !selected->IsSelected()) {
 		selected->SetSelected(true);
-		originaldraw = selected->GetDrawClr();
+		originaldraw = selected->GetDrawColor();
 
 		manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
         manager_p->PrintSelectedSize();

@@ -8,6 +8,7 @@
 #include <deque> // double-ended-queue; to insert at beginning and end
 #include <vector>
 #include <cmath>
+#include <ctime>
 
 // actions
 #include "Actions/AddCircAction.h"
@@ -60,7 +61,7 @@ public:
 	~ApplicationManager();
     /*  ------------------------------- DEPRECATED ------------------------------- */ 
 
-    void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
+    void MoveSelectedBack(Point p); // no return --bad name-- + it calls other function --redundant--
 
     /*  ------------------------------- Actions ------------------------------- */ 
 
@@ -93,7 +94,7 @@ public:
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    deque<CFigure*> DeleteSelected();
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
@@ -113,7 +114,7 @@ public:
     /*  ------------------------------- clipboard ------------------------------- */ 
 
     bool PasteClipboard(Point p);
-    void SetClipboard();    // TODO why two methods ?
+    void FillClipboardWithSelected(); 
     void SetClipboard(deque<CFigure*> clip);
     deque<CFigure*> GetClipboard();
 

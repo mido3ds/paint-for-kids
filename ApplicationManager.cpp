@@ -301,8 +301,8 @@ void ApplicationManager::RotateSelected(int deg)
 	for (auto& fig : figs) {
 		if (fig->IsSelected()) {
 			fig->Rotate(deg);
-			if (fig->IsRotate()) {
-				fig->Rotated(false);
+			if (fig->IsRotated()) {
+				fig->SetRotated(false);
 			}
 			else {
 				out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
@@ -317,7 +317,7 @@ bool ApplicationManager::ChangeSelectedFillColor(color c)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->SetFillClr(c);
+            fig->SetFillColor(c);
 
             flag = true;
         }
@@ -332,7 +332,7 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->SetDrawClr(C);
+            fig->SetDrawColor(C);
             fig->SetBorderWidth(W);
 
             flag = true;
@@ -416,9 +416,9 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            if ((fig->CalcCenter()).x <= minx && (fig->CalcCenter()).y <= miny) {
-                minx = (fig->CalcCenter()).x;
-                miny = (fig->CalcCenter()).y;
+            if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) {
+                minx = (fig->CalculateCenter()).x;
+                miny = (fig->CalculateCenter()).y;
             }
         }
     }
@@ -443,7 +443,7 @@ bool ApplicationManager::PasteClipboard(Point p)
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
     for (auto& fig : clipboard) {
-        Point c = fig->CalcCenter();
+        Point c = fig->CalculateCenter();
         if (c.x <= minx && c.y <= miny) {
             minx = c.x;
             miny = c.y;
@@ -463,12 +463,12 @@ bool ApplicationManager::PasteClipboard(Point p)
     return a;
 }
 
-void ApplicationManager::ReturnMoved(Point p)
+void ApplicationManager::MoveSelectedBack(Point p)
 {
     MoveSelected(p); //p is the old center of moved figures
 }
 
-void ApplicationManager::SetClipboard()
+void ApplicationManager::FillClipboardWithSelected()
 {
     clipboard.clear();
     CFigure* copy;
@@ -494,7 +494,6 @@ deque<CFigure*> ApplicationManager::GetClipboard()
 
 deque<CFigure*> ApplicationManager::DeleteSelected()
 {
-    // TODO: why is this returning vec? it should do one thing
     deque<int> vec;
     deque<CFigure*> deleted;
     for (auto& fig : figs) {

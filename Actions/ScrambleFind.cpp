@@ -39,24 +39,25 @@ void ScrambleFind::ReadActionParameters() // prepare game
     for (auto& fig : right_figs)
     {
         fig->RandomizePosition();
-        fig->MoveToRightSide();
+        //fig->MoveToRightSide(); // debugging
         fig->Resize(0.5);
     }
 
     // some action :D
     out_p->PrintMessage(
         "Welcome in Scramble & Find, Game of the Century!"
-        "               "
+        "					   "
         "Please wait, Loading ..."
     );
-    usleep(SECOND * 3);
+
+	Sleep(2 * SECOND);
 }
 
 void ScrambleFind::Execute() // game mainloop
 {
 	ActionType act = ActionType::EMPTY;
 	int invalid_count = 0, valid_count = 0;
-    bool finish = false, valid_choice;
+    bool finish = false, valid_choice = false;
     CFigure *fig1 = nullptr, *fig2 = nullptr;
     Point clicked_point;
 
@@ -64,23 +65,28 @@ void ScrambleFind::Execute() // game mainloop
     while (right_figs.size() > 0 && !finish) 
     {
         fig1 = ChooseRandomFigure();
-	    fig1->SetDrawClr(UI.HighlightColor);
+	    fig1->SetDrawColor(UI.HighlightColor);
 
         // draw
         UpdateInterface();
 
-        while (!valid choice) 
+        while (!valid_choice) 
         {
 			UpdateMessage(invalid_count, valid_count);
 
             // get action
             act = in_p->GetUserAction();
             clicked_point = in_p->GetLastClickedPoint();
-            if (act == EXIT || act == SCRAMBLE || act == TO_DRAW)
+            if (act == SCRAMBLE)
             {
                 finish = true;
                 break;
             }
+			else if (act == EXIT || act == TO_DRAW)
+			{
+				manager_p->ExecuteAction(act);
+				return;
+			}
 
             // get clicked figure
             fig2 = ApplicationManager::GetFigure(right_figs, clicked_point);
@@ -140,12 +146,27 @@ CFigure* ScrambleFind::ChooseRandomFigure()
     //     return nullptr;
 
     // for debugging
-    return left_figs[0];
+    return left_figs[left_figs.size() - 1];
 }
 
 void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
 {
+	int final_grade;
+
     if (is_final)
+    {
+        // diplay a final grade 
+		if ((valid + invalid) != 0)
+			final_grade = (valid) / static_cast<double>(invalid + valid) * 100;
+		else
+			final_grade = 0;
+
+        out_p->PrintMessage("Final grade = " + to_string(final_grade) + "%");
+		out_p->ClearDrawArea();
+
+		Sleep(4 * SECOND);
+    }
+    else
     {
         out_p->ClearStatusBar();
         out_p->PrintMessage(
@@ -153,11 +174,5 @@ void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
             + to_string(invalid) 
             + "                   Click on highlighted figure"
         );
-    }
-    else
-    {
-        // diplay a final grade 
-        double final_grade = (valid) / static_cast<double>(invalid + valid);
-        out_p->PrintMessage("final grade is " + to_string(final_grade) + " %");
     }
 }
