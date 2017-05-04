@@ -37,6 +37,13 @@
         "__split_buffer": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "xmemory0": "cpp"
+        "xmemory0": "cpp",
+        "__tree": "cpp",
+        "bitset": "cpp",
+        "iterator": "cpp",
+        "stack": "cpp",
+        "utility": "cpp",
+        "algorithm": "cpp",
+        "ios": "cpp"
     }
 }

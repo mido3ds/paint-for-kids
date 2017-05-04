@@ -9,7 +9,7 @@ void PickByColor::ReadActionParameters()
 	Input *in_p = manager_p->GetInput();
 	Output *out_p = manager_p->GetOutput();
 	out_p->PrintMessage("Picking With Color");
-	figures = manager_p->CopyFigs();				// Coping All Figues
+	figures = manager_p->GetCopyOfFigures();				// Coping All Figues
 	manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 }
 
@@ -18,17 +18,16 @@ void PickByColor::Execute()
 	Input *in_p = manager_p->GetInput();
 	Output *out_p = manager_p->GetOutput();
 	CFigure *fig;
-	int x, y;
+	Point p;
 	int numOfSameColor = 0;
 	int numOfFigs = manager_p->GetNumFigures();		// Number Of All Figures
 	while (numOfFigs > 0) {
-
-		in_p->GetPointClicked(x, y);		// Getting The First Piont To Git The First Figure
-		fig = manager_p->GetFigure(figures, x, y);	// Getting The First Figure
+		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
+		fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
 		if (fig)		// If The Piont Is In Figure
 		{
-			c = fig->fill_clr;
-			isfilled = fig->is_filled;
+			c = fig->GetFillColor();
+			isfilled = fig->IsFilled();
 			if (isfilled)
 			{
 				// If Is Filled Then Draw The Color In Status Bar
@@ -51,8 +50,8 @@ void PickByColor::Execute()
 		while (numOfSameColor > 0)
 		{
 
-			in_p->GetPointClicked(x, y);
-			fig = manager_p->GetFigure(x, y);	// Getting The First Figure
+			in_p->GetClickPoint(p.x, p.y);
+			fig = manager_p->GetFigure(p.x, p.y);	// Getting The First Figure
 			if (fig) {
 				if (isfilled)
 				{
@@ -96,7 +95,7 @@ int PickByColor::GetNumFigsSameColor(color C , bool isfilled)
 	for (auto &figure : figures) {
 		if (isfilled)
 		{
-			if (figure->fill_clr.ucBlue == C.ucBlue && figure->fill_clr.ucGreen == C.ucGreen && figure->fill_clr.ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
+			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
 				num++;
 		}
 		else
@@ -123,21 +122,20 @@ void PickByColor::DrawColorCircle(color c)
 	Output *out_p = manager_p->GetOutput();
 	p1.y = UI.StatusBarY + (UI.StatusBarHeight / 2) - 10;
 	p1.x = 250;
-	p2.x = p1.x;
-	p2.y = p1.y - 15;
+	int raduis = 15;
 	GfxInfo info;
 	info.is_filled = true;
 	info.border_width = 1;
 	info.draw_clr = c;
 	info.fill_clr = c;
-	out_p->DrawCircle(p1, p2, info, false);
+	out_p->DrawCircle(p1, raduis, info, false);
 }
 
 bool PickByColor::correct(CFigure * fig)
 {
-	if (fig->is_filled = isfilled)
+	if (fig->IsFilled() == isfilled)
 	{
-		if (fig->fill_clr.ucBlue == c.ucBlue && fig->fill_clr.ucGreen == c.ucGreen && fig->fill_clr.ucRed == c.ucRed)
+		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
 		{
 			return true;
 		}

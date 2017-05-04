@@ -7,6 +7,9 @@ ApplicationManager::ApplicationManager()
     out_p = new Output;
     in_p = out_p->CreateInput();
     num_selected = 0;
+
+    // make the seed of the pseudo-random generator
+    srand(time(0));
 }
 
 //==================================================================================//
@@ -80,21 +83,8 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UnSelectAction(this);
     case CUT:
         return new CutAction(this);
-
-	case HIDE:
-		return new PickAction(this);
-	case PICK_COLOR:
-		return new PickByColor(this);
-	case PICK_TYPE:
-		out_p->PrintMessage("Picking By Type");		// Just For Testing
-		return nullptr;
-	case PICK_AREA:
-		out_p->PrintMessage("Picking By Area");		// Just For Testing
-		return nullptr;
-	case PICK_COL_TYP:
-		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
-		return nullptr;
-
+	case SCRAMBLE:
+		return new ScrambleFind(this);
     default:
         return nullptr;
     }
@@ -124,33 +114,23 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 	figs.push_back(fig_p);
 }
 ////////////////////////////////////////////////////////////////////////////////////
+CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p)
+{
+    // reverse iterator, to iterate in figs from end to beginning 
+    for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
+    {
+        // if a figure is found return a pointer to it.
+        if ((*r_itr)->PointCheck(p))
+            return *r_itr;
+    }
+
+    // (x,y) does not belong to any figure
+    return nullptr;
+}
+
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
-	// reverse iterator, to iterate in figs from end to beginning 
-	for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin(); r_itr != figs.rend(); r_itr++)
-	{
-		// if a figure is found return a pointer to it.
-		if ((*r_itr)->PointCheck({ x, y }))
-			return *r_itr;
-	}
-
-	// (x,y) does not belong to any figure
-	return nullptr;
-
-
-}
-CFigure * ApplicationManager::GetFigure(deque<CFigure*> figures, int x, int y) const
-{
-	// reverse iterator, to iterate in figs from end to beginning 
-	for (deque<CFigure*>::const_reverse_iterator r_itr = figures.rbegin(); r_itr != figures.rend(); r_itr++)
-	{
-		// if a figure is found return a pointer to it.
-		if ((*r_itr)->PointCheck({ x, y }))
-			return *r_itr;
-	}
-
-	// (x,y) does not belong to any figure
-	return nullptr;
+    return ApplicationManager::GetFigure(figs, { x, y });
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -189,7 +169,7 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface()
+void ApplicationManager::UpdateInterface() const
 {
 	out_p->ClearDrawArea();
 
@@ -203,6 +183,7 @@ void ApplicationManager::UpdateInterface()
 
 	out_p->ClearStatusBar();
 }
+
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
 {
 	out_p->ClearDrawArea();
@@ -328,8 +309,8 @@ void ApplicationManager::RotateSelected(int deg)
 	for (auto& fig : figs) {
 		if (fig->IsSelected()) {
 			fig->Rotate(deg);
-			if (fig->IsRotate()) {
-				fig->Rotated(false);
+			if (fig->IsRotated()) {
+				fig->SetRotated(false);
 			}
 			else {
 				out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
@@ -344,7 +325,7 @@ bool ApplicationManager::ChangeSelectedFillColor(color c)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->SetFillClr(c);
+            fig->SetFillColor(c);
 
             flag = true;
         }
@@ -359,7 +340,7 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->SetDrawClr(C);
+            fig->SetDrawColor(C);
             fig->SetBorderWidth(W);
 
             flag = true;
@@ -443,9 +424,9 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
 
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            if ((fig->CalcCenter()).x <= minx && (fig->CalcCenter()).y <= miny) {
-                minx = (fig->CalcCenter()).x;
-                miny = (fig->CalcCenter()).y;
+            if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) {
+                minx = (fig->CalculateCenter()).x;
+                miny = (fig->CalculateCenter()).y;
             }
         }
     }
@@ -470,7 +451,7 @@ bool ApplicationManager::PasteClipboard(Point p)
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
     for (auto& fig : clipboard) {
-        Point c = fig->CalcCenter();
+        Point c = fig->CalculateCenter();
         if (c.x <= minx && c.y <= miny) {
             minx = c.x;
             miny = c.y;
@@ -490,12 +471,12 @@ bool ApplicationManager::PasteClipboard(Point p)
     return a;
 }
 
-void ApplicationManager::ReturnMoved(Point p)
+void ApplicationManager::MoveSelectedBack(Point p)
 {
     MoveSelected(p); //p is the old center of moved figures
 }
 
-void ApplicationManager::SetClipboard()
+void ApplicationManager::FillClipboardWithSelected()
 {
     clipboard.clear();
     CFigure* copy;
@@ -521,7 +502,6 @@ deque<CFigure*> ApplicationManager::GetClipboard()
 
 deque<CFigure*> ApplicationManager::DeleteSelected()
 {
-    // TODO: why is this returning vec? it should do one thing
     deque<int> vec;
     deque<CFigure*> deleted;
     for (auto& fig : figs) {
@@ -545,24 +525,6 @@ void ApplicationManager::DeleteAllFigures()
 		delete fig;
 	figs.clear();
 }
-deque<CFigure*> ApplicationManager::CopyFigs()
-{
-	deque <CFigure *> figures;
-	for (auto &fig : figs) {
-		figures.push_back(fig);
-	}
-	/*if (figures)*/
-		return figures;
-	//return nullptr;
-}
-//vector<color> ApplicationManager::GetColors()
-//{
-//	vector <color> colors;
-//	for (auto &fig : figs) {
-//		colors.push_back(fig->fill_clr);
-//	}
-//	return colors;
-//}
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
@@ -574,6 +536,17 @@ void ApplicationManager::Redo()
     history.Redo();
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+
+deque<CFigure*> ApplicationManager::GetCopyOfFigures()
+{
+    deque<CFigure*> result;
+
+    for (auto& fig : figs)
+        result.push_back(fig->Copy());
+
+    return result;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()

@@ -22,7 +22,7 @@ void CTrngl::Draw(Output* out_p) const
 
 void CTrngl::Rotate(int deg)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	Point temp1 = p1;
 	Point temp2 = p2;
 	Point temp3 = p3;
@@ -112,19 +112,19 @@ void CTrngl::Rotate(int deg)
 	}
 }
 
-void CTrngl::Rotated(bool r)
+void CTrngl::SetRotated(bool r)
 {
 	rotate = r;
 }
 
-bool CTrngl::IsRotate()
+bool CTrngl::IsRotated()
 {
 	return rotate;
 }
 
 void CTrngl::Resize(double resize_factor)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
@@ -184,7 +184,7 @@ void CTrngl::Load(ifstream& in_file)
 		>> border_width;
 }
 
-Point CTrngl::CalcCenter()
+Point CTrngl::CalculateCenter()
 {
 	/*From basic geometry the center of the triangle is the intersection
 	point of it's midians so the center would be the intersection point
@@ -252,4 +252,43 @@ CFigure* CTrngl::Copy()
 void CTrngl::PrintInfo(Output* out_p)
 {
 	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
+}
+
+void CTrngl::MoveToLeftSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+	int def3 = p3.x - center.x;
+
+	center.x /= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+	p3.x = center.x + def3;
+}
+
+void CTrngl::MoveToRightSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+	int def3 = p3.x - center.x;
+
+	center.x *= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+	p3.x = center.x + def3;
+}
+
+void CTrngl::RandomizePosition()
+{
+	// TODO
 }

@@ -6,7 +6,7 @@ Input::Input(window* pW)
 	wind_p = pW; // point to the passed window
 }
 
-clicktype Input::GetPointClicked(int& x, int& y) const
+clicktype Input::GetClickPoint(int& x, int& y) const
 {
 	clicktype click;
 	do
@@ -47,10 +47,11 @@ color Input::PickColor(int ix, int iy)
 
 // This function reads the position where the user clicks to determine the
 // desired action
-ActionType Input::GetUserAction() const
+ActionType Input::GetUserAction()
 {
     int x, y;
     wind_p->WaitMouseClick(x, y); // Get the coordinates of the user click
+    last_click = { x, y };
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
     {
@@ -188,25 +189,6 @@ ActionType Input::GetUserAction() const
                 return EMPTY; // A click on empty place in desgin toolbar
             }
         }
-		if (wind_p->ispickbar) {
-			if (y >= UI.TToolBarY && y < UI.TToolBarY + UI.TToolBarHeight) {
-
-				int ClickedItemOrder = (x / UI.MenuItemWidth);
-
-				switch (ClickedItemOrder) {
-				case ITM_PICK_COLOR:
-					return PICK_COLOR;
-				case ITM_PICK_TYPE:
-					return PICK_TYPE;
-				case ITM_PICK_AREA:
-					return PICK_AREA;
-				case ITM_PICK_COL_TYP:
-					return PICK_COL_TYP;
-				default:
-					return EMPTY;
-				}
-			}
-		}
 
         //[2] User clicks on the drawing area
         if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight && x >= 0) {
@@ -217,6 +199,11 @@ ActionType Input::GetUserAction() const
         return STATUS;
     }
 
+}
+/////////////////////////////////
+Point Input::GetLastClickedPoint() const
+{
+    return last_click;
 }
 /////////////////////////////////
 

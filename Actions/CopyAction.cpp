@@ -13,7 +13,7 @@ void CopyAction::Execute()
 {
     if (manager_p->GetNumSelected() > 0) {
         clipboard = manager_p->GetClipboard();
-        manager_p->SetClipboard();
+        manager_p->FillClipboardWithSelected();
         copied = true;
     }
 }

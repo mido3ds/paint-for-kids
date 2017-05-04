@@ -8,6 +8,7 @@
 #include <deque> // double-ended-queue; to insert at beginning and end
 #include <vector>
 #include <cmath>
+#include <ctime>
 
 // actions
 #include "Actions/AddCircAction.h"
@@ -39,6 +40,7 @@
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
 #include "Actions/DrawFigItems.h"
+#include "Actions/ScrambleFind.h"
 #include "Actions/PickAction.h"
 #include "Actions/PickByColor.h"
 
@@ -61,7 +63,7 @@ public:
 	~ApplicationManager();
     /*  ------------------------------- DEPRECATED ------------------------------- */ 
 
-    void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
+    void MoveSelectedBack(Point p); // no return --bad name-- + it calls other function --redundant--
 
     /*  ------------------------------- Actions ------------------------------- */ 
 
@@ -76,19 +78,14 @@ public:
 
     void AddFigure(CFigure* fig_p); // Adds a new figure to the figs
     CFigure* DetectFigure(string fig_name); // make new figure from its name
-
-    CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	CFigure* GetFigure(deque <CFigure *> figures, int x, int y) const;
-
-	int GetNumFigures() const;
-	int GetNumSelected() const;
-	void SetNumSelected(int n_selected); //Change number of selected figures
+    CFigure* GetFigure(int x, int y) const; // return figure at that point, for this->figs
+    static CFigure* GetFigure(const deque<CFigure*>& figs, Point p); // Search for a figure given a point inside the figure and the list
+    int GetNumFigures() const;
+    int GetNumSelected() const;
+    void SetNumSelected(int n_selected); //Change number of selected figures
     void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 	void DeleteAllFigures(); // clear deque and deletes figures
-
-	deque <CFigure *> CopyFigs();
-
-	// vector<color> GetColors();
+    deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode
 
 	bool DeselectAll();
     bool ChangeSelectedFillColor(color c);
@@ -99,7 +96,7 @@ public:
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    deque<CFigure*> DeleteSelected();
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
@@ -110,7 +107,7 @@ public:
 
     /*  ------------------------------- Interface ------------------------------- */ 
 
-    void UpdateInterface(); //Redraws all the drawing window // TODO: make it const method
+    void UpdateInterface() const; //Redraws all the drawing window
 	void UpdateInterface(deque <CFigure *> figures);
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
@@ -118,7 +115,7 @@ public:
     /*  ------------------------------- clipboard ------------------------------- */ 
 
     bool PasteClipboard(Point p);
-    void SetClipboard();    // TODO why two methods ?
+    void FillClipboardWithSelected(); 
     void SetClipboard(deque<CFigure*> clip);
     deque<CFigure*> GetClipboard();
 
