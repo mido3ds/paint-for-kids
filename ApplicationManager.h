@@ -39,6 +39,8 @@
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
 #include "Actions/DrawFigItems.h"
+#include "Actions/PickAction.h"
+#include "Actions/PickByColor.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -74,12 +76,17 @@ public:
 
     void AddFigure(CFigure* fig_p); // Adds a new figure to the figs
     CFigure* DetectFigure(string fig_name); // make new figure from its name
+
     CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure* GetFigure(deque <CFigure *> figures, int x, int y) const;
+
 	int GetNumFigures() const;
 	int GetNumSelected() const;
 	void SetNumSelected(int n_selected); //Change number of selected figures
     void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 	void DeleteAllFigures(); // clear deque and deletes figures
+
+	deque <CFigure *> CopyFigs();
 
 	bool DeselectAll();
     bool ChangeSelectedFillColor(color c);
@@ -90,7 +97,7 @@ public:
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()   My Note : In High Level Languge It's True
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
@@ -102,10 +109,9 @@ public:
     /*  ------------------------------- Interface ------------------------------- */ 
 
     void UpdateInterface(); //Redraws all the drawing window // TODO: make it const method
+	void UpdateInterface(deque <CFigure *> figures);
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
-    int GetZoom() const; //Return value of zoom
-    Point GetManagerZoomPoint() const; //Return zooming point if there was zooming
 
     /*  ------------------------------- clipboard ------------------------------- */ 
 

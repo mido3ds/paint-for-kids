@@ -147,10 +147,13 @@
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\PasteAction.cpp" />
+    <ClCompile Include="Actions\PickAction.cpp" />
+    <ClCompile Include="Actions\PickByColor.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\ScrambleFind.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ToPlayModeAction.cpp" />
@@ -225,10 +228,13 @@
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PasteAction.h" />
+    <ClInclude Include="Actions\PickAction.h" />
+    <ClInclude Include="Actions\PickByColor.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\ScrambleFind.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ToDrawModeAction.h" />
     <ClInclude Include="Actions\ToPlayModeAction.h" />

@@ -171,7 +171,38 @@ void Output::CreateFigActions() const
 	for (int i = 0; i < FIG_ACT_COUNT; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
+void Output::CreateBorderWidth() const
+{
 
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->isborderwidth = true;
+
+	string MenuItemImages[4];
+	MenuItemImages[0] = "images\\MenuItems\\very_small.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\small.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\mid.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\big.jpg";
+
+	for (int i = 0; i < 4; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+void Output::CreatePickBar() const
+{
+
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->ispickbar = true;
+
+	string MenuItemImages[PICK_ITM_COUNT];
+	MenuItemImages[ITM_PICK_COLOR] = "images\\MenuItems\\ByColor.jpg";
+	MenuItemImages[ITM_PICK_TYPE] = "images\\MenuItems\\Type2.jpg";
+	MenuItemImages[ITM_PICK_AREA] = "images\\MenuItems\\Area.jpg";
+	MenuItemImages[ITM_PICK_COL_TYP] = "images\\MenuItems\\Type&Color.jpg";
+
+	for (int i = 0; i < PICK_ITM_COUNT; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
 void Output::CreateColorBar() const
 {
 	UI.TToolBarWidth = UI.width;
@@ -219,8 +250,10 @@ void Output::ClearTToolBar() const
 	wind_p->isfigactions = false;
 	wind_p->isfigitems = false;
 	wind_p->iscolorbar = false;
-	wind_p->SetBrush(UI.BkGrndColor);
-	wind_p->SetPen(UI.BkGrndColor);
+	wind_p->isborderwidth = false;
+	wind_p->ispickbar = false;
+	wind_p->SetBrush(WHITE);
+	wind_p->SetPen(WHITE);
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
 	//ClearDrawArea();
 }
@@ -242,7 +275,6 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 	bool selected) const
 {
-
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
 
@@ -266,15 +298,12 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 	wind_p->DrawRectangle(pf1.x, pf1.y, pf2.x, pf2.y, style);
 }
 
-void Output::DrawCircle(Point p1, Point p2, GfxInfo circ_gfx_info,
+void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 	bool selected) const
 {
-
 	Point pf1 = TranslatePoint(p1);
-	Point pf2 = TranslatePoint(p2);
+	radius = TranslateRadius(pf1, radius);
 
-	int radius = sqrt(pow((pf2.y - pf1.y), 2) + pow((pf2.x - pf1.x), 2));
-	
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; // CFigure should be drawn highlighted
@@ -318,7 +347,6 @@ void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
 void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 	bool selected) const
 {
-
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
 	Point pf3 = TranslatePoint(p3);
@@ -350,9 +378,6 @@ void Output::CreateDrawArea() const
 
 void Output::CreatePlayArea() const
 {
-	wind_p->SetBrush(WHITE);
-	wind_p->SetPen(BLACK);
-
 	wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -429,10 +454,24 @@ Point Output::TranslatePoint(const Point& g_point) const
 	the new point after zooming the following piece of code check the pointer
 	to know which figure to draw calcuate the new points of the shape then
 	draw it*/
-	return{
+	return {
 		static_cast<int>(pow(2, zoom) * (g_point.x - zoom_point.x)) + zoom_point.x,
 		static_cast<int>(pow(2, zoom) * (g_point.y - zoom_point.y)) + zoom_point.y
 	};
+}
+
+int Output::TranslateRadius(const Point& f_point, int radius) const
+{
+	// calculates second point from given point, gets it translated
+	Point s_point = TranslatePoint({
+		f_point.x + radius,
+		f_point.y
+	});
+
+	// then returns the zoomed radius from those two points
+	return static_cast<int>(
+		sqrt(pow((s_point.y - f_point.y), 2) + pow((s_point.x - f_point.x), 2))
+	);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }

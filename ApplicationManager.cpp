@@ -81,6 +81,20 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case CUT:
         return new CutAction(this);
 
+	case HIDE:
+		return new PickAction(this);
+	case PICK_COLOR:
+		return new PickByColor(this);
+	case PICK_TYPE:
+		out_p->PrintMessage("Picking By Type");		// Just For Testing
+		return nullptr;
+	case PICK_AREA:
+		out_p->PrintMessage("Picking By Area");		// Just For Testing
+		return nullptr;
+	case PICK_COL_TYP:
+		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
+		return nullptr;
+
     default:
         return nullptr;
     }
@@ -122,6 +136,20 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 
     // (x,y) does not belong to any figure
     return nullptr;
+
+}
+CFigure * ApplicationManager::GetFigure(deque<CFigure*> figures, int x, int y) const
+{
+	// reverse iterator, to iterate in figs from end to beginning 
+	for (deque<CFigure*>::const_reverse_iterator r_itr = figures.rbegin(); r_itr != figures.rend(); r_itr++)
+	{
+		// if a figure is found return a pointer to it.
+		if ((*r_itr)->PointCheck({ x, y }))
+			return *r_itr;
+	}
+
+	// (x,y) does not belong to any figure
+	return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -173,6 +201,14 @@ void ApplicationManager::UpdateInterface()
 		out_p->CreatePlayToolBar();
 
 	out_p->ClearStatusBar();
+}
+
+void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
+{
+	out_p->ClearDrawArea();
+
+	for (auto& fig : figures)
+		fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -509,6 +545,24 @@ void ApplicationManager::DeleteAllFigures()
 		delete fig;
 	figs.clear();
 }
+deque<CFigure*> ApplicationManager::CopyFigs()
+{
+	deque <CFigure *> figures;
+	for (auto &fig : figs) {
+		figures.push_back(fig);
+	}
+	/*if (figures)*/
+		return figures;
+	//return nullptr;
+}
+//vector<color> ApplicationManager::GetColors()
+//{
+//	vector <color> colors;
+//	for (auto &fig : figs) {
+//		colors.push_back(fig->fill_clr);
+//	}
+//	return colors;
+//}
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
