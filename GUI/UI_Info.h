@@ -75,17 +75,6 @@ enum PlayMenuItem // The items of the Play menu (you should add more items)
 
 };
 
-enum PickMenuItem
-{
-	ITM_PICK_COLOR,
-	ITM_PICK_TYPE,
-	ITM_PICK_AREA,
-	ITM_PICK_COL_TYP,
-
-	PICK_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
-
-};
-
 // This line to prevent "redefinition error"
 __declspec(selectany)
 

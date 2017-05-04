@@ -142,8 +142,6 @@ private:
 	  bool isfigitems = false;
 	  bool isfigactions = false;
 	  bool iscolorbar = false;
-	  bool isborderwidth = false;
-	  bool ispickbar = false;
  
     // Create a new window! iWindWidth and iWindHeight will change the size of 
     // the window created. iWindXPos and iWindYPos is the position the window

@@ -12,13 +12,10 @@ CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 	this->p1 = p1;
 	this->radius = radius;
 
-	p2 = {
-		p1.x + radius,
-		p1.y
-	};
+	p2 = GetSecondPointFromRadius(radius);
 }
 
-bool CCircle::IsRotate()
+bool CCircle::IsRotated()
 {
 	return rotate;
 }
@@ -29,7 +26,7 @@ void CCircle::Resize(double resize_factor)
 	p2.y = (int(resize_factor * (p2.y - p1.y)))  +  p1.y;
 }
 
-Point CCircle::CalcCenter()
+Point CCircle::CalculateCenter()
 {
 	return p1;
 }
@@ -51,14 +48,14 @@ Point CCircle::GetSecondPointFromRadius(double rad)
 
 void CCircle::Draw(Output* out_p) const
 {
-	out_p->DrawCircle(p1, p2, *this, selected);
+	out_p->DrawCircle(p1, radius, *this, selected);
 }
 
 void CCircle::Rotate(int deg)
 {
 }
 
-void CCircle::Rotated(bool r)
+void CCircle::SetRotated(bool r)
 {
 	rotate = r;
 }
@@ -112,9 +109,8 @@ void CCircle::Load(ifstream& in_file)
 
 bool CCircle::PointCheck(Point p) const
 {
-    double RadiusSquare = pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2);
-    double NewDistance = pow(p.x - p1.x, 2) + pow(p.y - p1.y, 2);
-
+    float RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
+    float NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
     return (NewDistance <= RadiusSquare);
 }
 
@@ -152,4 +148,19 @@ CFigure* CCircle::Copy()
 void CCircle::PrintInfo(Output* out_p)
 {
 	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(radius));
+}
+
+void CCircle::MoveToLeftSide()
+{
+	p1.x /= 2;
+}
+
+void CCircle::MoveToRightSide()
+{
+	p1.x *= 2;
+}
+
+void CCircle::RandomizePosition()
+{
+	// TODO
 }

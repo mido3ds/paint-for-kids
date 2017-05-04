@@ -14,17 +14,17 @@ void AddTrnglAction::ReadActionParameters()
     out_p->PrintMessage("New triangle: Click at first point");
 
     //Read 1st corner and store in point p1
-	in_p->GetPointClicked(p1.x, p1.y);
+	in_p->GetClickPoint(p1.x, p1.y);
 
     out_p->PrintMessage("New triangle: Click at second corner");
 
     //Read 2nd corner and store in point p2
-	in_p->GetPointClicked(p2.x, p2.y);
+	in_p->GetClickPoint(p2.x, p2.y);
 
     out_p->PrintMessage("New triangle: Click at third corner");
 
     //Read 2nd corner and store in point p2
-	in_p->GetPointClicked(p3.x, p3.y);
+	in_p->GetClickPoint(p3.x, p3.y);
     
 	p1.x = (p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
 	p1.y = (p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
