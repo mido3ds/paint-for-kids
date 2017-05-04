@@ -16,7 +16,10 @@ public:
     void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
     void CreateFigItems() const;
     void CreateFigActions() const;
+	void CreateBorderWidth() const;
+
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
+	void CreatePickBar() const;
 
 	void CreateStatusBar() const;
 	void CreateColorBar() const;
@@ -32,7 +35,7 @@ public:
     void ClearTToolBar() const;
 
 	// -- Figures Drawing functions
-	void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
+	void DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 		bool selected) const;
 
 	void DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,

@@ -171,6 +171,38 @@ void Output::CreateFigActions() const
 	for (int i = 0; i < FIG_ACT_COUNT; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
+void Output::CreateBorderWidth() const
+{
+
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->isborderwidth = true;
+
+	string MenuItemImages[4];
+	MenuItemImages[0] = "images\\MenuItems\\very_small.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\small.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\mid.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\big.jpg";
+
+	for (int i = 0; i < 4; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+void Output::CreatePickBar() const
+{
+
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->ispickbar = true;
+
+	string MenuItemImages[PICK_ITM_COUNT];
+	MenuItemImages[ITM_PICK_COLOR] = "images\\MenuItems\\ByColor.jpg";
+	MenuItemImages[ITM_PICK_TYPE] = "images\\MenuItems\\Type2.jpg";
+	MenuItemImages[ITM_PICK_AREA] = "images\\MenuItems\\Area.jpg";
+	MenuItemImages[ITM_PICK_COL_TYP] = "images\\MenuItems\\Type&Color.jpg";
+
+	for (int i = 0; i < PICK_ITM_COUNT; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
 
 void Output::CreateColorBar() const
 {
