@@ -7,6 +7,9 @@ ApplicationManager::ApplicationManager()
     out_p = new Output;
     in_p = out_p->CreateInput();
     num_selected = 0;
+
+    // make the seed of the pseudo-random generator
+    srand(time(0));
 }
 
 //==================================================================================//

@@ -138,8 +138,13 @@ CFigure* ScrambleFind::GetFigureFromRight(Point p)
 
 CFigure* ScrambleFind::ChooseRandomFigure()
 {
-	static int i = 0;
-	return left_figs[i++];
+    // if (left_figs.size() != 0)
+    //     return left_figs[rand() % left_figs.size()];
+    // else 
+    //     return nullptr;
+
+    // for debugging
+    return left_figs[0];
 }
 
 void ScrambleFind::UpdateMessage(int invalid, int valid)
