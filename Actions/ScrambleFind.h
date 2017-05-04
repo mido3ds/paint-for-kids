@@ -14,13 +14,11 @@ public:
 
     virtual void ReadActionParameters();
     virtual void Execute();
-
     virtual void Undo();
 
     void UpdateInterface(); // redraws the figures
     void UpdateMessage(int invalid, int valid); // make mesage and prints it with needed info
     CFigure* ChooseRandomFigure(); // random figure from left
-    CFigure* GetFigureFromRight(Point p); // given a point, get its figure from left_figs
 
 private:
     deque<CFigure*> right_figs; // figures in the left
