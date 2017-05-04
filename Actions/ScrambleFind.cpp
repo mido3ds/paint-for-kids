@@ -39,9 +39,17 @@ void ScrambleFind::ReadActionParameters() // prepare game
     for (auto& fig : right_figs)
     {
         fig->RandomizePosition();
-        //fig->MoveToRightSide();
+        fig->MoveToRightSide();
         fig->Resize(0.5);
     }
+
+    // some action :D
+    out_p->PrintMessage(
+        "Welcome in Scramble & Find, Game of the Century!"
+        "               "
+        "Please wait, Loading ..."
+    );
+    usleep(SECOND * 3);
 }
 
 void ScrambleFind::Execute() // game mainloop
@@ -100,9 +108,8 @@ void ScrambleFind::Execute() // game mainloop
         valid_choice = false;
     }
 
-    // diplay a final grade 
-	double final_grade = (valid_count) / static_cast<double>(invalid_count + valid_count);
-    out_p->PrintMessage("final grade is " + to_string(final_grade) + " %");
+    // final message
+    UpdateMessage(invalid_count, valid_count, true);
 }
 
 void ScrambleFind::Undo()
@@ -136,12 +143,21 @@ CFigure* ScrambleFind::ChooseRandomFigure()
     return left_figs[0];
 }
 
-void ScrambleFind::UpdateMessage(int invalid, int valid)
+void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
 {
-    out_p->ClearStatusBar();
-    out_p->PrintMessage(
-        "Valid trials: " + to_string(valid) + " Invalid trials: " 
-        + to_string(invalid) 
-        + "   .....  Click on highlighted figure"
-    );
+    if (is_final)
+    {
+        out_p->ClearStatusBar();
+        out_p->PrintMessage(
+            "Valid trials: " + to_string(valid) + " Invalid trials: " 
+            + to_string(invalid) 
+            + "                   Click on highlighted figure"
+        );
+    }
+    else
+    {
+        // diplay a final grade 
+        double final_grade = (valid) / static_cast<double>(invalid + valid);
+        out_p->PrintMessage("final grade is " + to_string(final_grade) + " %");
+    }
 }
