@@ -9,7 +9,7 @@ public:
 	CLine(Point p1, Point p2, GfxInfo line_gfx_info);
 
     virtual void Draw(Output* out_p) const;
-    virtual bool PointCheck(Point p) const;
+    virtual bool IsPointInside(Point p) const;
     virtual void Rotate(int deg);
     virtual void SetRotated(bool r);
     virtual bool IsRotated();
@@ -24,7 +24,7 @@ public:
 	virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
 
-	bool OutOfRange(Point p1, Point p2);
+	bool IsOutOfRange(Point p1, Point p2);
 
 	virtual void PrintInfo(Output* out_p);
 
