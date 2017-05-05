@@ -514,7 +514,7 @@ deque<CFigure*> ApplicationManager::GetClipboard()
     return clipboard;
 }
 
-deque<CFigure*> ApplicationManager::DeleteSelected()
+deque<CFigure*> ApplicationManager::EraseSelected()
 {
     deque<int> vec;
     deque<CFigure*> deleted;

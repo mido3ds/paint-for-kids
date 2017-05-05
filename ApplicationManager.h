@@ -96,7 +96,7 @@ public:
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected();
+    deque<CFigure*> EraseSelected(); // erases selected and returns them 
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
