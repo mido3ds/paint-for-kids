@@ -231,9 +231,6 @@
     <ClCompile Include="Actions\UndoAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\UnSelectAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\ZoomInAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -244,6 +241,9 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\PickByColor.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UnselectAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -422,9 +422,6 @@
     <ClInclude Include="Actions\UndoAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\UnSelectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\ZoomInAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -435,6 +432,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UnselectAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
