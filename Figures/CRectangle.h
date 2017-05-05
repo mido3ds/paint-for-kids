@@ -23,6 +23,8 @@ public:
     virtual void RandomizePosition();
     virtual CFigure* Copy();
 
+	virtual string GetType();
+
 	virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
 
@@ -32,6 +34,7 @@ public:
 
 private:
 	Point p1, p2;
+	const string type = "Rectangle";
 };
 
 #endif

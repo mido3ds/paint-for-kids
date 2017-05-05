@@ -246,6 +246,9 @@
     <ClCompile Include="Actions\UnselectAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\PickByType.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -435,6 +438,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\UnselectAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByType.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

@@ -23,6 +23,8 @@ public:
     virtual bool IsRotated();
     int GetRadius() const;
 
+	virtual string GetType();
+
     virtual Point CalculateCenter();
 
 	virtual void Resize(double resize_factor);
@@ -34,6 +36,7 @@ public:
 private:
 	Point p1, p2;
     int radius;
+	const string type = "Circle";
 
 	// given radius and this point, return another point
 	// another point is (p.x, p.y + rad)

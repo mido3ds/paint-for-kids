@@ -25,12 +25,15 @@ public:
     virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
 
+	virtual string GetType();
+
 	bool IsOutOfRange(Point p1, Point p2, Point p3);
 
 	virtual void PrintInfo(Output* out_p);
 
 private:
 	Point p1, p2, p3;
+	const string type = "Triangle";
 };
 
 #endif /* __CTrngl_h__ */
