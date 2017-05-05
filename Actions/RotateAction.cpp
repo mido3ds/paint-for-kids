@@ -12,7 +12,6 @@ void RotateAction::ReadActionParameters()
     out_p->PrintMessage("Enter One Of These Angles To RotateAction [90 || 180 || 270] ");
     deg = stoi(in_p->GetString(out_p));
     out_p->ClearStatusBar();
-    out_p->ClearTToolBar();
 }
 
 void RotateAction::Execute()

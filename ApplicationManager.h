@@ -2,12 +2,13 @@
 #define APPLICATION_MANAGER_H
 
 // std 
-#include <iostream> // cerr, TODO: use boost::log instead
+#include <iostream> // cerr
 #include <fstream> // fstream
 #include <string>
-#include <deque> // brother of vector
+#include <deque>
 #include <vector>
 #include <cmath>
+#include <ctime>
 
 // actions
 #include "Actions/AddCircAction.h"
@@ -20,7 +21,8 @@
 #include "Actions/CopyAction.h"
 #include "Actions/CutAction.h"
 #include "Actions/DeleteAction.h"
-#include "Actions/DownAction.h"
+#include "Actions/SendDownAction.h"
+#include "Actions/SendUpAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/MoveAction.h"
@@ -32,11 +34,16 @@
 #include "Actions/SelectAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
-#include "Actions/UnSelectAction.h"
+#include "Actions/UnselectAction.h"
 #include "Actions/UndoAction.h"
-#include "Actions/UpAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
+#include "Actions/DrawFigActions.h"
+#include "Actions/DrawFigItems.h"
+#include "Actions/ScrambleFind.h"
+#include "Actions/PickAction.h"
+#include "Actions/PickByColor.h"
+#include "Actions/PickByType.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -55,19 +62,13 @@ class ApplicationManager {
 public:
 	ApplicationManager();
 	~ApplicationManager();
-    /*  ------------------------------- DEPRECATED ------------------------------- */ 
-    // !!
-    // TODO: to be removed, redundant or breaks classes resposibilities
-    deque<CFigure*>* GetFigures(); //Search for a figure given it's index in figure list // why gives other classes my private members?
-    void ExecuteAction(Action* action); //Takes already created action and excute it // duplicate
-    void ReturnMoved(Point p); // no return --bad name-- + it calls other function --redundant--
-    // !!
 
     /*  ------------------------------- Actions ------------------------------- */ 
 
     ActionType GetUserAction() const; // Reads the input command from the user and returns the corresponding action type
     Action* DetectAction(ActionType act_type); // return action object from action enum
     void ExecuteAction(ActionType); // execute given action 
+
     void Undo();
     void Redo();
 
@@ -75,44 +76,45 @@ public:
 
     void AddFigure(CFigure* fig_p); // Adds a new figure to the figs
     CFigure* DetectFigure(string fig_name); // make new figure from its name
-    CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	int GetNumFigures() const;
-	int GetNumSelected() const;
-	void SetNumSelected(int n_selected); //Change number of selected figures
+    CFigure* GetFigure(int x, int y) const; // return figure at that point, for this->figs
+    static CFigure* GetFigure(const deque<CFigure*>& figs, Point p); // Search for a figure given a point inside the figure and the list
+    int GetNumFigures() const;
+    int GetNumSelected() const;
+    void SetNumSelected(int n_selected); //Change number of selected figures
     void DeleteFigure(unsigned int id); // delete a figure given its stored id 
 	void DeleteAllFigures(); // clear deque and deletes figures
+    deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode
 
-	bool DeselectAll();
-    bool ChangeSelectedFillColor(color c);
-    bool ChangeSelectedBorder(int W, color C);
+	bool UnselectAll();
+    bool SetSelectedFillColor(color c);
+    bool SetSelectedBorder(int W, color C);
     void SendSelecteDown();
     void SendSelectedUp();
     void RotateSelected(int deg);
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected(); // TODO: it should be void DeleteSelected()
+    deque<CFigure*> EraseSelected(); // erases selected and returns them 
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
     /*  ------------------------------- File ------------------------------- */ 
 
-    // TODO solve issue of not saving pen width in file
     void SaveAll(ofstream& out_file); // call save for figures
     void LoadAll(ifstream& in_file);  // call load for figures
+    bool IsSaved() const; // if figures are saved or not 
 
     /*  ------------------------------- Interface ------------------------------- */ 
 
-    void UpdateInterface(); //Redraws all the drawing window // TODO: make it const method
+    void UpdateInterface() const; //Redraws all the drawing window
+	void UpdateInterface(deque <CFigure *> figures);
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
-    int GetZoom() const; //Return value of zoom
-    Point GetManagerZoomPoint() const; //Return zooming point if there was zooming
 
     /*  ------------------------------- clipboard ------------------------------- */ 
 
     bool PasteClipboard(Point p);
-    void SetClipboard();    // TODO why two methods ?
+    void FillClipboardWithSelected(); 
     void SetClipboard(deque<CFigure*> clip);
     deque<CFigure*> GetClipboard();
 
@@ -122,14 +124,15 @@ private:
     deque<CFigure*>::iterator 
         GetFigureIter(unsigned int id);  // return iterator to the figure if found, otherwise figs.end()
     
-    // TODO: make it deque
     deque<CFigure*> figs;
-    deque<CFigure*> moved_figs;
+    
     deque<CFigure*> clipboard; 
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
-    int bar = 0;
 	int num_selected = 0;
+
+    bool figs_is_saved;  // whether figs has been saved or not
+
     Input* in_p;
     Output* out_p;
 };

@@ -10,8 +10,8 @@ void LoadAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
 
-	// check to save if figures > 0
-	if (manager_p->GetNumFigures() > 0)
+	// check to save if not 
+	if (!manager_p->IsSaved())
 	{
 		out_p->PrintMessage("Do you need to save this graph before loading new? y/n");
 		string input = in_p->GetString(out_p);
@@ -27,6 +27,7 @@ void LoadAction::ReadActionParameters()
 
     if (!in_file.is_open()) {
         out_p->PrintMessage("Cant open file!");
+		cerr << "unsuccessfull loading, something went wrong\n";
     } else {
         successfull = true;
     }

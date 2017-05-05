@@ -15,8 +15,8 @@ public:
 
 private:
     deque<CFigure*> clipboard; //to store old clipboard
-    deque<CFigure*> cutAction;
-    bool cutActioned = false;
+    deque<CFigure*> cut;
+    bool cuted = false;
 };
 
 #endif

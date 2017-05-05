@@ -1,6 +1,7 @@
 {
     "files.associations": {
         ".xonshrc": "shellscript",
+        "*.txt": "plaintext",
         "*.tcc": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
@@ -30,9 +31,19 @@
         "xlocnum": "cpp",
         "deque": "cpp",
         "initializer_list": "cpp",
-        "deque": "cpp",
         "xstring": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "__split_buffer": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "xmemory0": "cpp",
+        "__tree": "cpp",
+        "bitset": "cpp",
+        "iterator": "cpp",
+        "stack": "cpp",
+        "utility": "cpp",
+        "algorithm": "cpp",
+        "ios": "cpp"
     }
 }

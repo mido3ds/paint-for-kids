@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -24,7 +24,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -140,26 +140,33 @@
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
-    <ClCompile Include="Actions\DownAction.cpp" />
+    <ClCompile Include="Actions\DrawFigActions.cpp" />
+    <ClCompile Include="Actions\DrawFigItems.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\PasteAction.cpp" />
+    <ClCompile Include="Actions\PickAction.cpp" />
+    <ClCompile Include="Actions\PickByColor.cpp" />
+    <ClCompile Include="Actions\PickByType.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\ScrambleFind.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\SendDownAction.cpp" />
+    <ClCompile Include="Actions\SendUpAction.cpp" />
     <ClCompile Include="Actions\ToDrawModeAction.cpp" />
     <ClCompile Include="Actions\ToPlayModeAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
-    <ClCompile Include="Actions\UnSelectAction.cpp" />
-    <ClCompile Include="Actions\UpAction.cpp" />
+    <ClCompile Include="Actions\UnselectAction.cpp" />
     <ClCompile Include="Actions\ZoomInAction.cpp" />
     <ClCompile Include="Actions\ZoomOutAction.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
+    <ClCompile Include="CMUgraphicsLib\colors.cpp" />
     <ClCompile Include="CMUgraphicsLib\image.cpp" />
     <ClCompile Include="CMUgraphicsLib\jpegload.c" />
     <ClCompile Include="CMUgraphicsLib\keyqueue.cpp" />
@@ -215,21 +222,27 @@
     <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
-    <ClInclude Include="Actions\DownAction.h" />
+    <ClInclude Include="Actions\DrawFigActions.h" />
+    <ClInclude Include="Actions\DrawFigItems.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PasteAction.h" />
+    <ClInclude Include="Actions\PickAction.h" />
+    <ClInclude Include="Actions\PickByColor.h" />
+    <ClInclude Include="Actions\PickByType.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\ScrambleFind.h" />
     <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\SendDownAction.h" />
+    <ClInclude Include="Actions\SendUpAction.h" />
     <ClInclude Include="Actions\ToDrawModeAction.h" />
     <ClInclude Include="Actions\ToPlayModeAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
-    <ClInclude Include="Actions\UnSelectAction.h" />
-    <ClInclude Include="Actions\UpAction.h" />
+    <ClInclude Include="Actions\UnselectAction.h" />
     <ClInclude Include="Actions\ZoomInAction.h" />
     <ClInclude Include="Actions\ZoomOutAction.h" />
     <ClInclude Include="ApplicationManager.h" />

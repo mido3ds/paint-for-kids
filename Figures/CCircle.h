@@ -7,29 +7,37 @@
 class CCircle : public CFigure {
 public:
 	CCircle();
-	CCircle(Point p1, Point p2, GfxInfo circ_gfx_info);
+	CCircle(Point p1, int radius, GfxInfo circ_gfx_info);
 
     virtual void Draw(Output* out_p) const;
-    virtual bool PointCheck(Point p) const;
+    virtual bool IsPointInside(Point p) const;
     virtual void Rotate(int deg);
-    virtual void Rotated(bool r);
+    virtual void SetRotated(bool r);
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
+    virtual void MoveToLeftSide();
+    virtual void MoveToRightSide();
+    virtual void RandomizePosition();
     virtual CFigure* Copy();
-    double GetRadius();
-    virtual bool IsRotate();
+    virtual bool IsRotated();
+    int GetRadius() const;
 
-    virtual Point CalcCenter();
+	virtual string GetType();
+
+    virtual Point CalculateCenter();
 
 	virtual void Resize(double resize_factor);
 
-	bool OutOfRange(Point p1);
+	bool IsOutOfRange(Point p1);
+
 	virtual void PrintInfo(Output* out_p) ;
-	// TODO: make it one point and the radius, then del GetRadius and GetSecon....
-	Point p1, p2;
 
 private:
+	Point p1, p2;
+    int radius;
+	const string type = "Circle";
+
 	// given radius and this point, return another point
 	// another point is (p.x, p.y + rad)
 	Point GetSecondPointFromRadius(double rad);

@@ -1,20 +1,20 @@
-#include "UnSelectAction.h"
+#include "UnselectAction.h"
 
-UnSelectAction::UnSelectAction(ApplicationManager* app_p)
-    : Action(app_p)
+UnselectAction::UnselectAction(ApplicationManager* app_p)
+    : Action(app_p, false)
 {
 }
 
-void UnSelectAction::ReadActionParameters()
+void UnselectAction::ReadActionParameters()
 {
     Input* in_p = manager_p->GetInput();
     Output* out_p = manager_p->GetOutput();
 	out_p->PrintMessage("Click on select figure you want to deselect to deselect all click on a blank area");
-    in_p->GetPointClicked(p.x, p.y);
+    in_p->GetClickPoint(p.x, p.y);
 	out_p->ClearStatusBar();
 }
 
-void UnSelectAction::Execute()
+void UnselectAction::Execute()
 {
 	Output* out_p = manager_p->GetOutput();
 
@@ -24,13 +24,9 @@ void UnSelectAction::Execute()
 		manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 	}
 	else 
-		manager_p->DeselectAll();
+		manager_p->UnselectAll();
 }
 
-void UnSelectAction::Undo()
+void UnselectAction::Undo()
 {
-    if (figure != nullptr && !figure->IsSelected()) {
-        figure->SetSelected(true);
-		manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
-    }
 }

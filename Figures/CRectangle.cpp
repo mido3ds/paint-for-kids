@@ -19,7 +19,7 @@ void CRectangle::Draw(Output* out_p) const
 
 void CRectangle::Rotate(int deg)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	Point temp1 = p1;
 	Point temp2 = p2;
 	Point temp3;
@@ -38,12 +38,12 @@ void CRectangle::Rotate(int deg)
 		temp4.x += c.x;
 		temp3.y += c.y;
 		temp4.y += c.y;
-		if (OutOfRange(temp3, temp4)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 		}
@@ -53,11 +53,11 @@ void CRectangle::Rotate(int deg)
 		temp2.x = (2 * c.x) - temp2.x;
 		temp1.y = (2 * c.y) - temp1.y;
 		temp2.y = (2 * c.y) - temp2.y;
-		if (OutOfRange(temp1, temp2)) {
-			rotate = false;
+		if (IsOutOfRange(temp1, temp2)) {
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp1;
 			p2 = temp2;
 		}
@@ -75,12 +75,12 @@ void CRectangle::Rotate(int deg)
 		temp4.x += c.x;
 		temp3.y += c.y;
 		temp4.y += c.y;
-		if (OutOfRange(temp3, temp4)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 		}
@@ -89,13 +89,13 @@ void CRectangle::Rotate(int deg)
 		break;
 	}
 }
-void CRectangle::Rotated(bool r)
+void CRectangle::SetRotated(bool r)
 {
-	rotate = r;
+	is_rotated = r;
 }
-bool CRectangle::IsRotate()
+bool CRectangle::IsRotated()
 {
-	return rotate;
+	return is_rotated;
 }
         
 void CRectangle::Save(ofstream& out_file)
@@ -145,14 +145,14 @@ void CRectangle::Load(ifstream& in_file)
 
 void CRectangle::Resize(double resize_factor)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
 	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
 }
 
-Point CRectangle::CalcCenter()
+Point CRectangle::CalculateCenter()
 {
 	Point c;
 	c.x = (p1.x + p2.x) / 2;
@@ -160,7 +160,7 @@ Point CRectangle::CalcCenter()
 	return c;
 }
 
-bool CRectangle::PointCheck(Point p) const
+bool CRectangle::IsPointInside(Point p) const
 {
     /*Point p3, p4;
     p3.x = p2.x;
@@ -195,7 +195,7 @@ bool CRectangle::Move(int x, int y)
     tp1.y = p1.y + y;
     tp2.x = p2.x + x;
     tp2.y = p2.y + y;
-    if (!OutOfRange(tp1, tp2)) {
+    if (!IsOutOfRange(tp1, tp2)) {
         p1 = tp1;
         p2 = tp2;
         return true;
@@ -210,14 +210,21 @@ CFigure* CRectangle::Copy()
     c.draw_clr = this->draw_clr;
     c.fill_clr = this->fill_clr;
     c.is_filled = this->is_filled;
-    c.z_index = this->z_index;
+
     CFigure* copy = new CRectangle(p1, p2, c);
+
 	copy->SetSelected(this->IsSelected());
 	copy->SetId(this->GetId());
+	
     return copy;
 }
 
-bool CRectangle::OutOfRange(Point p1, Point p2)
+string CRectangle::GetType()
+{
+	return type;
+}
+
+bool CRectangle::IsOutOfRange(Point p1, Point p2)
 {
 	return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width);
 }
@@ -226,5 +233,40 @@ void CRectangle::PrintInfo(Output* out_p)
 {
 	int width = abs(p1.x-p2.x);
 	int height = abs(p1.y - p2.y);
-		out_p->PrintMessage("Rectangle... ID:" + to_string(this->GetId()) + " Height: "+to_string(height)+" Width: "+to_string(width));
+	out_p->PrintMessage("Rectangle... ID:" + to_string(this->GetId()) + " Height: "+to_string(height)+" Width: "+to_string(width));
+}
+
+void CRectangle::MoveToLeftSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+
+	center.x /= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+}
+
+void CRectangle::MoveToRightSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+
+	center.x *= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+}
+
+void CRectangle::RandomizePosition()
+{
+	// TODO
 }

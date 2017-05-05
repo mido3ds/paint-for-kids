@@ -15,7 +15,7 @@ void DeleteAction::ReadActionParameters()
 void DeleteAction::Execute()
 {
     if (manager_p->GetNumSelected() > 0) {
-        clipboard = manager_p->DeleteSelected();
+        clipboard = manager_p->EraseSelected();
         deleted = true;
     }
 }

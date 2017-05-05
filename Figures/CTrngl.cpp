@@ -1,3 +1,4 @@
+
 #include "CTrngl.h"
 
 CTrngl::CTrngl()
@@ -22,7 +23,7 @@ void CTrngl::Draw(Output* out_p) const
 
 void CTrngl::Rotate(int deg)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	Point temp1 = p1;
 	Point temp2 = p2;
 	Point temp3 = p3;
@@ -49,12 +50,12 @@ void CTrngl::Rotate(int deg)
 		temp3.y += c.y;
 		temp4.y += c.y;
 		temp6.y += c.y;
-		if (OutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 			p3 = temp6;
@@ -67,11 +68,11 @@ void CTrngl::Rotate(int deg)
 		temp1.y = (2 * c.y) - temp1.y;
 		temp2.y = (2 * c.y) - temp2.y;
 		temp3.y = (2 * c.y) - temp3.y;
-		if (OutOfRange(temp1, temp2, temp3)) {
-			rotate = false;
+		if (IsOutOfRange(temp1, temp2, temp3)) {
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp1;
 			p2 = temp2;
 			p3 = temp3;
@@ -96,12 +97,12 @@ void CTrngl::Rotate(int deg)
 		temp3.y += c.y;
 		temp4.y += c.y;
 		temp6.y += c.y;
-		if (OutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 			p3 = temp6;
@@ -112,25 +113,30 @@ void CTrngl::Rotate(int deg)
 	}
 }
 
-void CTrngl::Rotated(bool r)
+void CTrngl::SetRotated(bool r)
 {
-	rotate = r;
+	is_rotated = r;
 }
 
-bool CTrngl::IsRotate()
+bool CTrngl::IsRotated()
 {
-	return rotate;
+	return is_rotated;
 }
 
 void CTrngl::Resize(double resize_factor)
 {
-	Point c = CalcCenter();
+	Point c = CalculateCenter();
 	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
 	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
 	p3.x = (int(resize_factor * (p3.x - c.x))) + c.x;
 	p3.y = (int(resize_factor * (p3.y - c.y))) + c.y;
+}
+
+string CTrngl::GetType()
+{
+	return type;
 }
 
 void CTrngl::Save(ofstream& out_file)
@@ -184,7 +190,7 @@ void CTrngl::Load(ifstream& in_file)
 		>> border_width;
 }
 
-Point CTrngl::CalcCenter()
+Point CTrngl::CalculateCenter()
 {
 	/*From basic geometry the center of the triangle is the intersection
 	point of it's midians so the center would be the intersection point
@@ -202,17 +208,17 @@ Point CTrngl::CalcCenter()
 	return c;
 }
 
-bool CTrngl::OutOfRange(Point p1, Point p2, Point p3)
+bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
 {
     return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width || p3.y < UI.ToolBarHeight || p3.y > UI.height - UI.StatusBarHeight || p3.x < 0 || p3.x > UI.width);
 }
 
-bool CTrngl::PointCheck(Point p) const
+bool CTrngl::IsPointInside(Point p) const
 {
-    double A1 = Trigonometry::Area(p, p1, p2);
-    double A2 = Trigonometry::Area(p, p2, p3);
-    double A3 = Trigonometry::Area(p, p1, p3);
-    double A = Trigonometry::Area(p1, p2, p3);
+	double A1 = Trigonometry::Area(p, p1, p2);
+	double A2 = Trigonometry::Area(p, p2, p3);
+	double A3 = Trigonometry::Area(p, p1, p3);
+	double A = Trigonometry::Area(p1, p2, p3);
 	double B = A1 + A2 + A3;
 	double scale = 0.1;
 	A = (int)(A / scale)*scale;
@@ -229,7 +235,7 @@ bool CTrngl::Move(int x, int y)
     tp2.y = p2.y + y;
     tp3.x = p3.x + x;
     tp3.y = p3.y + y;
-    if (!OutOfRange(tp1, tp2, tp3)) {
+    if (!IsOutOfRange(tp1, tp2, tp3)) {
         p1 = tp1;
         p2 = tp2;
         p3 = tp3;
@@ -245,8 +251,9 @@ CFigure* CTrngl::Copy()
     c.draw_clr = this->draw_clr;
     c.fill_clr = this->fill_clr;
     c.is_filled = this->is_filled;
-    c.z_index = this->z_index;
+	
     CFigure* copy = new CTrngl(p1, p2, p3, c);
+
 	copy->SetSelected(this->IsSelected());
 	copy->SetId(this->GetId());
     return copy;
@@ -254,5 +261,44 @@ CFigure* CTrngl::Copy()
 
 void CTrngl::PrintInfo(Output* out_p)
 {
-	out_p->PrintMessage("Triangle... ID: "+to_string(this->GetId())+" Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
+	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
+}
+
+void CTrngl::MoveToLeftSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+	int def3 = p3.x - center.x;
+
+	center.x /= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+	p3.x = center.x + def3;
+}
+
+void CTrngl::MoveToRightSide()
+{
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	int def1 = p1.x - center.x;
+	int def2 = p2.x - center.x;
+	int def3 = p3.x - center.x;
+
+	center.x *= 2;
+
+	// remake the points from the previous centere
+	p1.x = center.x + def1;
+	p2.x = center.x + def2;
+	p3.x = center.x + def3;
+}
+
+void CTrngl::RandomizePosition()
+{
+	// TODO
 }

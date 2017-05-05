@@ -6,6 +6,8 @@ some global constants and definitions to be used in the project.
 
 #include "CMUgraphicsLib/CMUgraphics.h" // color
 
+#define SECOND 1000 // second is 1000 milliseconds
+
 enum ActionType //The actions supported (you can add more if needed)
 {
     DRAW_FIG_ITM,
@@ -36,6 +38,12 @@ enum ActionType //The actions supported (you can add more if needed)
     SCRAMBLE,
     UNDO,
     REDO,
+
+	PICK_COLOR,
+	PICK_TYPE,
+	PICK_AREA,
+	PICK_COL_TYP,
+
     EXIT, //Exit the application
 
 	DRAWING_AREA, //A click on the drawing area
@@ -55,15 +63,12 @@ struct Point // To be used for figures points
     Point(): x(0), y(0) {}
 };
 
-class GfxInfo // Graphical info of each figure (you may add more members)
+struct GfxInfo // Graphical info of each figure (you may add more members)
 {
-public:
 	color draw_clr = BLACK; // Draw color of the figure
 	color fill_clr = WHITE; // Fill color of the figure
 	bool is_filled = false; // CFigure Filled or not
 	int border_width = 1; // Width of figure borders
-
-    int z_index = 0; // level of object on window, default to 0 // TODO: remove z_index
 };
 
 #endif
