@@ -61,9 +61,6 @@ class ApplicationManager {
 public:
 	ApplicationManager();
 	~ApplicationManager();
-    /*  ------------------------------- DEPRECATED ------------------------------- */ 
-
-    void MoveSelectedBack(Point p); // no return --bad name-- + it calls other function --redundant--
 
     /*  ------------------------------- Actions ------------------------------- */ 
 

@@ -485,11 +485,6 @@ bool ApplicationManager::PasteClipboard(Point p)
     return a;
 }
 
-void ApplicationManager::MoveSelectedBack(Point p)
-{
-    MoveSelected(p); //p is the old center of moved figures
-}
-
 void ApplicationManager::FillClipboardWithSelected()
 {
     clipboard.clear();
