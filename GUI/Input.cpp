@@ -9,10 +9,7 @@ Input::Input(window* pW)
 clicktype Input::GetClickPoint(int& x, int& y) const
 {
 	clicktype click;
-	do
-	{
-		click = wind_p->WaitMouseClick(x, y); // Wait for mouse click
-	} while (y <= UI.ToolBarHeight || y >= UI.StatusBarY);
+	click = wind_p->WaitMouseClick(x, y); // Wait for mouse click
 	return click;
 }
 

@@ -10,7 +10,7 @@ void PickByColor::ReadActionParameters()
 	Output *out_p = manager_p->GetOutput();
 	out_p->PrintMessage("Picking With Color");
 	figures = manager_p->GetCopyOfFigures();				// Coping All Figues
-	manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
+	//manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 }
 
 void PickByColor::Execute()
@@ -19,10 +19,28 @@ void PickByColor::Execute()
 	Output *out_p = manager_p->GetOutput();
 	CFigure *fig;
 	Point p;
+	manager_p->UpdateInterface(figures);
 	int numOfSameColor = 0;
 	int numOfFigs = manager_p->GetNumFigures();		// Number Of All Figures
 	while (numOfFigs > 0) {
+		out_p->CreateRestartGame();				// Restart And Exit Game Bar
 		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
+		if (p.y > 0 && p.y < UI.ToolBarHeight)
+		{
+			int IconClicked = p.x / UI.MenuItemWidth;
+			switch (IconClicked)
+			{
+			case 0:
+				figures = manager_p->GetCopyOfFigures();
+				PickByColor::Execute();
+				break;
+			case 1:
+				out_p->CreatePlayToolBar();
+				return;
+			default:
+				break;
+			}
+		}
 		fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
 		if (fig)		// If The Piont Is In Figure
 		{
@@ -51,7 +69,23 @@ void PickByColor::Execute()
 		{
 
 			in_p->GetClickPoint(p.x, p.y);
-			fig = manager_p->GetFigure(p.x, p.y);	// Getting The First Figure
+			if (p.y > 0 && p.y < UI.ToolBarHeight)
+			{
+				int IconClicked = p.x / UI.MenuItemWidth;
+				switch (IconClicked)
+				{
+				case 0:
+					figures = manager_p->GetCopyOfFigures();
+					PickByColor::Execute();
+					break;
+				case 1:
+					out_p->CreatePlayToolBar();
+					return;
+				default:
+					break;
+				}
+			}
+			fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
 			if (fig) {
 				if (isfilled)
 				{
@@ -98,7 +132,7 @@ int PickByColor::GetNumFigsSameColor(color C , bool isfilled)
 			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
 				num++;
 		}
-		else
+		else if (figure->IsFilled() == isfilled)
 			num++;
 	}
 	return num;

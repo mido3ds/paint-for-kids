@@ -204,6 +204,18 @@ void Output::CreatePickBar() const
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
 
+void Output::CreateRestartGame() const
+{
+	ClearToolBar();
+	
+	string MenuItemImages[2];
+	MenuItemImages[0] = "images\\MenuItems\\restart.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\exitgame.jpg";
+
+	for (int i = 0; i < 2; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.ToolBarY, UI.MenuItemWidth, UI.ToolBarHeight);
+}
+
 void Output::CreateColorBar() const
 {
 	UI.TToolBarWidth = UI.width;

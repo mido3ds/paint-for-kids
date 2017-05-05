@@ -18,10 +18,6 @@ public:
 
 	virtual void Undo();
 
-	//int GetNumSameColor(color c);
-
-	
-
 private:
 	deque<CFigure *> figures;
 	color c;

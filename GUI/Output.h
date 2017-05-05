@@ -20,6 +20,7 @@ public:
 
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
 	void CreatePickBar() const;
+	void CreateRestartGame() const;
 
 	void CreateStatusBar() const;
 	void CreateColorBar() const;
