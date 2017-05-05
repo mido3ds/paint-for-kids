@@ -10,7 +10,6 @@ void PickByColor::ReadActionParameters()
 	Output *out_p = manager_p->GetOutput();
 	out_p->PrintMessage("Picking With Color");
 	figures = manager_p->GetCopyOfFigures();				// Coping All Figues
-	//manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 }
 
 void PickByColor::Execute()
@@ -24,6 +23,7 @@ void PickByColor::Execute()
 	manager_p->UpdateInterface(figures);
 	int numOfSameColor = 0;
 	int numOfFigs = manager_p->GetNumFigures();		// Number Of All Figures
+
 	while (numOfFigs > 0) {
 		out_p->CreateRestartGame();				// Restart And Exit Game Bar
 

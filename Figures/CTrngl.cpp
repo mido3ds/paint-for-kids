@@ -133,6 +133,11 @@ void CTrngl::Resize(double resize_factor)
 	p3.y = (int(resize_factor * (p3.y - c.y))) + c.y;
 }
 
+string CTrngl::GetType()
+{
+	return type;
+}
+
 void CTrngl::Save(ofstream& out_file)
 {
 	out_file << "TRIANGLE" << ' '

@@ -180,6 +180,11 @@ CFigure* CLine::Copy()
     return copy;
 }
 
+string CLine::GetType()
+{
+	return type;
+}
+
 void CLine::Resize(double resize_factor)
 {
 	Point c = CalculateCenter();

@@ -219,6 +219,11 @@ CFigure* CRectangle::Copy()
     return copy;
 }
 
+string CRectangle::GetType()
+{
+	return type;
+}
+
 bool CRectangle::IsOutOfRange(Point p1, Point p2)
 {
 	return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width);

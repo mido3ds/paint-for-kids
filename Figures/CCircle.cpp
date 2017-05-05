@@ -36,6 +36,11 @@ int CCircle::GetRadius() const
 	return radius;
 }
 
+string CCircle::GetType()
+{
+	return type;
+}
+
 bool CCircle::IsOutOfRange(Point p1)
 {
 	return (p1.x - radius < UI.DrawAreaX || p1.x  +  radius > UI.DrawAreaX  +  UI.DrawAreaWidth || p1.y - radius < UI.DrawAreaY || p1.y  +  radius > UI.DrawAreaY  +  UI.DrawAreaHeight);

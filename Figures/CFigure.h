@@ -17,6 +17,8 @@ public:
 	void SetId(unsigned int id);
 	unsigned int GetId() const;
 
+	virtual string GetType() = 0;
+
     virtual void Draw(Output* out_p) const = 0;
     virtual bool IsPointInside(Point p) const = 0;
 

@@ -103,8 +103,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 	case PICK_COLOR:
 		return new PickByColor(this);
 	case PICK_TYPE:
-		out_p->PrintMessage("Picking By Type");		// Just For Testing
-		return nullptr;
+		return new PickByType(this);
 	case PICK_AREA:
 		out_p->PrintMessage("Picking By Area");		// Just For Testing
 		return nullptr;

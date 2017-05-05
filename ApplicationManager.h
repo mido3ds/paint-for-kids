@@ -43,6 +43,7 @@
 #include "Actions/ScrambleFind.h"
 #include "Actions/PickAction.h"
 #include "Actions/PickByColor.h"
+#include "Actions/PickByType.h"
 
 // figures
 #include "Figures/CCircle.h"
