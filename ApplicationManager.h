@@ -2,10 +2,10 @@
 #define APPLICATION_MANAGER_H
 
 // std 
-#include <iostream> // cerr, TODO: redirect cerr to a log file
+#include <iostream> // cerr
 #include <fstream> // fstream
 #include <string>
-#include <deque> // double-ended-queue; to insert at beginning and end
+#include <deque>
 #include <vector>
 #include <cmath>
 #include <ctime>

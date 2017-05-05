@@ -6,13 +6,23 @@ ApplicationManager::ApplicationManager()
     //Create Input and output
     out_p = new Output;
     in_p = out_p->CreateInput();
+
     num_selected = 0;
 
     // make the seed of the pseudo-random generator
-    srand(time(0));
+	time_t rawtime = time(0);
+    srand(rawtime);
 
     // at beginning, figs is saved, as we dont have any yet
     figs_is_saved = true;
+
+	// open log file, and redirect cerr,clog to it
+	freopen("log.txt", "a", stderr);
+
+	cerr << "\n***********************\n"
+		<< "Application started at " << ctime(&rawtime)
+		<< "this is a log file, for debugging\n"
+		<< "***********************\n";
 }
 
 //==================================================================================//
