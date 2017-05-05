@@ -22,6 +22,7 @@
 #include "Actions/CutAction.h"
 #include "Actions/DeleteAction.h"
 #include "Actions/SendDownAction.h"
+#include "Actions/SendUpAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/MoveAction.h"
@@ -35,12 +36,13 @@
 #include "Actions/ToPlayModeAction.h"
 #include "Actions/UnselectAction.h"
 #include "Actions/UndoAction.h"
-#include "Actions/SendUpAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
 #include "Actions/DrawFigItems.h"
 #include "Actions/ScrambleFind.h"
+#include "Actions/PickAction.h"
+#include "Actions/PickByColor.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -106,10 +108,9 @@ public:
     /*  ------------------------------- Interface ------------------------------- */ 
 
     void UpdateInterface() const; //Redraws all the drawing window
+	void UpdateInterface(deque <CFigure *> figures);
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output
-    int GetZoom() const; //Return value of zoom
-    Point GetManagerZoomPoint() const; //Return zooming point if there was zooming
 
     /*  ------------------------------- clipboard ------------------------------- */ 
 

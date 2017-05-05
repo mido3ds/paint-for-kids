@@ -85,6 +85,20 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new CutAction(this);
 	case SCRAMBLE:
 		return new ScrambleFind(this);
+
+	case HIDE:
+		return new PickAction(this);
+	case PICK_COLOR:
+		return new PickByColor(this);
+	case PICK_TYPE:
+		out_p->PrintMessage("Picking By Type");		// Just For Testing
+		return nullptr;
+	case PICK_AREA:
+		out_p->PrintMessage("Picking By Area");		// Just For Testing
+		return nullptr;
+	case PICK_COL_TYP:
+		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
+		return nullptr;
     default:
         return nullptr;
     }
@@ -182,6 +196,14 @@ void ApplicationManager::UpdateInterface() const
 		out_p->CreatePlayToolBar();
 
 	out_p->ClearStatusBar();
+}
+
+void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
+{
+	out_p->ClearDrawArea();
+
+	for (auto& fig : figures)
+		fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
