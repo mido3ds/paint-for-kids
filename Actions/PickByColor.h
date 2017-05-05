@@ -30,6 +30,7 @@ private:
 	void DrawColorCircle(color c);
 
 	bool correct(CFigure *fig);
+
 };
 
 

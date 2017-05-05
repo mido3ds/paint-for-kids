@@ -19,22 +19,28 @@ void PickByColor::Execute()
 	Output *out_p = manager_p->GetOutput();
 	CFigure *fig;
 	Point p;
+	float correct = 0;
+	float wrong = 0;
 	manager_p->UpdateInterface(figures);
 	int numOfSameColor = 0;
 	int numOfFigs = manager_p->GetNumFigures();		// Number Of All Figures
 	while (numOfFigs > 0) {
 		out_p->CreateRestartGame();				// Restart And Exit Game Bar
+
+		out_p->PrintMessage("Choose Your First Figure");
+
 		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
-		if (p.y > 0 && p.y < UI.ToolBarHeight)
+
+		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:
-				figures = manager_p->GetCopyOfFigures();
+			case 0:						// If Restart Begien From The Executing The Action Again
+				figures = manager_p->GetCopyOfFigures();	
 				PickByColor::Execute();
 				break;
-			case 1:
+			case 1:						// If Exit return To Play Mode
 				out_p->CreatePlayToolBar();
 				return;
 			default:
@@ -46,14 +52,16 @@ void PickByColor::Execute()
 		{
 			c = fig->GetFillColor();
 			isfilled = fig->IsFilled();
+			correct++;
 			if (isfilled)
 			{
+				
 				// If Is Filled Then Draw The Color In Status Bar
-				out_p->PrintMessage("Select All Figure Of This Color");
+				out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 				DrawColorCircle(c);
 			}
 			else {
-				out_p->PrintMessage("Select All None Filled Figures");
+				out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 			}
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
 			numOfSameColor = GetNumFigsSameColor(c, isfilled);					// Reducing The Number Of Same Color Figs If Correct
@@ -61,7 +69,7 @@ void PickByColor::Execute()
 			manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 		}
 		else {
-			out_p->PrintMessage("No Figure In This Area, Try Agian");
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 			continue;
 		}
 
@@ -90,32 +98,42 @@ void PickByColor::Execute()
 				if (isfilled)
 				{
 					// If Is Filled Then Draw The Color In Status Bar
-					out_p->PrintMessage("Select All Figure Of This Color");
+					out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 					DrawColorCircle(c);
 				}
 				else {
-					out_p->PrintMessage("Select All None Filled Figures");
+					out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 				}
-				if (correct(fig))
+				if (PickByColor::correct(fig))
 				{
 					DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
 					numOfSameColor--;
 					numOfFigs--;
 					manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
-					out_p->PrintMessage("Correct, Very Good, Keep Going");
+					correct++;
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 					Sleep(400);
 				}
 				else {
-					out_p->PrintMessage("Wrong Answer, Try Agian");
+					wrong++;
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 					Sleep(400);
 				}
 			}
 			else {
-				out_p->PrintMessage("Wrong Answer, Try Agian");
+				wrong++;
+				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
 				Sleep(400);
 			}
 		}
 
+	}
+	if (correct == 0 && wrong == 0) {
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+	}
+	else {
+		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)));
+		Sleep(1000);
 	}
 }
 
