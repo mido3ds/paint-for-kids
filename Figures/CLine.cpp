@@ -38,12 +38,12 @@ void CLine::Rotate(int deg)
 		temp4.x += c.x;
 		temp3.y += c.y;
 		temp4.y += c.y;
-		if (OutOfRange(temp3, temp4)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 		}
@@ -53,11 +53,11 @@ void CLine::Rotate(int deg)
 		temp2.x = (2 * c.x) - temp2.x;
 		temp1.y = (2 * c.y) - temp1.y;
 		temp2.y = (2 * c.y) - temp2.y;
-		if (OutOfRange(temp1, temp2)) {
-			rotate = false;
+		if (IsOutOfRange(temp1, temp2)) {
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp1;
 			p2 = temp2;
 		}
@@ -75,12 +75,12 @@ void CLine::Rotate(int deg)
 		temp4.x += c.x;
 		temp3.y += c.y;
 		temp4.y += c.y;
-		if (OutOfRange(temp3, temp4)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 		}
@@ -92,12 +92,12 @@ void CLine::Rotate(int deg)
 
 void CLine::SetRotated(bool r)
 {
-	rotate = r;
+	is_rotated = r;
 }
 
 bool CLine::IsRotated()
 {
-	return rotate;
+	return is_rotated;
 }
 
 void CLine::Save(ofstream& out_file)
@@ -137,7 +137,7 @@ void CLine::Load(ifstream& in_file)
 		>> border_width;
 }
 
-bool CLine::PointCheck(Point p) const
+bool CLine::IsPointInside(Point p) const
 {
 	double d1 = sqrt(pow(p.x - p1.x, 2) + pow(p.y - p1.y, 2));
 	double d2 = sqrt(pow(p.x - p2.x, 2) + pow(p.y - p2.y, 2));
@@ -156,7 +156,7 @@ bool CLine::Move(int x, int y)
     tp1.y = p1.y + y;
     tp2.x = p2.x + x;
     tp2.y = p2.y + y;
-    if (!OutOfRange(tp1, tp2)) {
+    if (!IsOutOfRange(tp1, tp2)) {
         p1 = tp1;
         p2 = tp2;
         return true;
@@ -197,7 +197,7 @@ Point CLine::CalculateCenter()
 	return c;
 }
 
-bool CLine::OutOfRange(Point p1, Point p2)
+bool CLine::IsOutOfRange(Point p1, Point p2)
 {
 	return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width);
 }

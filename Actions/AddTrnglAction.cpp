@@ -37,9 +37,9 @@ void AddTrnglAction::ReadActionParameters()
 
     gfx.is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
-    gfx.draw_clr = out_p->GetCrntDrawColor();
-    gfx.fill_clr = out_p->GetCrntFillColor();
-    gfx.border_width = out_p->GetCrntPenWidth();
+    gfx.draw_clr = out_p->GetDrawColor();
+    gfx.fill_clr = out_p->GetFillColor();
+    gfx.border_width = out_p->GetPenWidth();
 
     out_p->ClearStatusBar();
 
@@ -51,7 +51,7 @@ void AddTrnglAction::Execute()
 {
     trngl = new CTrngl(p1, p2, p3, gfx);
     trngl->SetId(id);
-    if (!trngl->OutOfRange(p1, p2, p3)) {
+    if (!trngl->IsOutOfRange(p1, p2, p3)) {
         manager_p->AddFigure(trngl);
     } else {
         manager_p->GetOutput()->PrintMessage("The Triangle Is Out Of Range");

@@ -21,7 +21,7 @@
 #include "Actions/CopyAction.h"
 #include "Actions/CutAction.h"
 #include "Actions/DeleteAction.h"
-#include "Actions/DownAction.h"
+#include "Actions/SendDownAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/MoveAction.h"
@@ -33,9 +33,9 @@
 #include "Actions/SelectAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
-#include "Actions/UnSelectAction.h"
+#include "Actions/UnselectAction.h"
 #include "Actions/UndoAction.h"
-#include "Actions/UpAction.h"
+#include "Actions/SendUpAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
@@ -85,9 +85,9 @@ public:
 	void DeleteAllFigures(); // clear deque and deletes figures
     deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode
 
-	bool DeselectAll();
-    bool ChangeSelectedFillColor(color c);
-    bool ChangeSelectedBorder(int W, color C);
+	bool UnselectAll();
+    bool SetSelectedFillColor(color c);
+    bool SetSelectedBorder(int W, color C);
     void SendSelecteDown();
     void SendSelectedUp();
     void RotateSelected(int deg);

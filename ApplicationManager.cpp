@@ -60,9 +60,9 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case CHNG_DRAW_CLR:
         return new ChBorderAction(this);
     case SEND_BACK:
-        return new DownAction(this);
+        return new SendDownAction(this);
     case BRNG_FRNT:
-        return new UpAction(this);
+        return new SendUpAction(this);
     case ROTATE:
         return new RotateAction(this);
     case CTR:
@@ -80,7 +80,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case SELECT:
         return new SelectAction(this);
     case DESELECT:
-        return new UnSelectAction(this);
+        return new UnselectAction(this);
     case CUT:
         return new CutAction(this);
 	case SCRAMBLE:
@@ -120,7 +120,7 @@ CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p)
     for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
     {
         // if a figure is found return a pointer to it.
-        if ((*r_itr)->PointCheck(p))
+        if ((*r_itr)->IsPointInside(p))
             return *r_itr;
     }
 
@@ -311,7 +311,7 @@ void ApplicationManager::RotateSelected(int deg)
 	}
 }
 
-bool ApplicationManager::ChangeSelectedFillColor(color c)
+bool ApplicationManager::SetSelectedFillColor(color c)
 {
     bool flag = false;
 
@@ -326,7 +326,7 @@ bool ApplicationManager::ChangeSelectedFillColor(color c)
     return flag;
 }
 
-bool ApplicationManager::ChangeSelectedBorder(int W, color C)
+bool ApplicationManager::SetSelectedBorder(int W, color C)
 {
     bool flag = false;
 
@@ -342,7 +342,7 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
     return flag;
 }
 
-bool ApplicationManager::DeselectAll()
+bool ApplicationManager::UnselectAll()
 {
 	bool found_selected = false;
 	for (auto& fig : figs)

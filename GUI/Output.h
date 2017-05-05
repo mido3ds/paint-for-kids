@@ -46,18 +46,18 @@ public:
 
 	void PrintMessage(string msg) const; // on Status bar
 
-	color GetCrntDrawColor() const;
-	color GetCrntFillColor() const;
-	int GetCrntPenWidth() const;
+	color GetDrawColor() const;
+	color GetFillColor() const;
+	int GetPenWidth() const;
 	int GetZoom() const; //Return zoom
 	Point GetZoomPoint() const; //Return manager_zoom_point
 
 	void SetZoom(int z);
 	void SetZoomPoint(Point z_point);
-	void SetCrntDrawColor(color given_clr);
-	void SetCrntFillColor(color given_clr);
+	void SetDrawColor(color given_clr);
+	void SetFillColor(color given_clr);
 	void SetBkGrndColor(color given_clr);
-	void SetCrntPenWidth(int new_width);
+	void SetPenWidth(int new_width);
 
 private:
 	window* wind_p; // Pointer to the Graphics Window

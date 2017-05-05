@@ -22,16 +22,16 @@ void ChFillColorAction::ReadActionParameters()
 
 void ChFillColorAction::Execute()
 {
-    if (!manager_p->ChangeSelectedFillColor(C)) {
+    if (!manager_p->SetSelectedFillColor(C)) {
         Output* out_p = manager_p->GetOutput();
-        out_p->SetCrntFillColor(C);
+        out_p->SetFillColor(C);
     }
 }
 
 void ChFillColorAction::Undo()
 {
-    if (!manager_p->ChangeSelectedFillColor(lastC)) {
+    if (!manager_p->SetSelectedFillColor(lastC)) {
         Output* out_p = manager_p->GetOutput();
-        out_p->SetCrntFillColor(lastC);
+        out_p->SetFillColor(lastC);
     }
 }
