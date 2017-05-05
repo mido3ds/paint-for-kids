@@ -8,9 +8,9 @@
 #include "Action.h"
 #include "SelectAction.h"
 
-class UnSelectAction : public Action {
+class UnselectAction : public Action {
 public:
-    UnSelectAction(ApplicationManager* app_p);
+    UnselectAction(ApplicationManager* app_p);
     virtual void ReadActionParameters();
 
     virtual void Execute();

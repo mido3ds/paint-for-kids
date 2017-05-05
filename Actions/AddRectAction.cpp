@@ -29,9 +29,9 @@ void AddRectAction::ReadActionParameters()
 
     gfx.is_filled = false; //default is not filled
     //get drawing, filling colors and pen width from the interface
-    gfx.draw_clr = out_p->GetCrntDrawColor();
-    gfx.fill_clr = out_p->GetCrntFillColor();
-    gfx.border_width = out_p->GetCrntPenWidth();
+    gfx.draw_clr = out_p->GetDrawColor();
+    gfx.fill_clr = out_p->GetFillColor();
+    gfx.border_width = out_p->GetPenWidth();
 
     out_p->ClearStatusBar();
 
@@ -44,7 +44,7 @@ void AddRectAction::Execute()
     //Add the lineangle to the list of figures
     rect = new CRectangle(p1, p2, gfx);
     rect->SetId(id);
-    if (!rect->OutOfRange(p1, p2)) {
+    if (!rect->IsOutOfRange(p1, p2)) {
         manager_p->AddFigure(rect);
     } else {
         manager_p->GetOutput()->PrintMessage("The Rectangle Is Out Of Range");

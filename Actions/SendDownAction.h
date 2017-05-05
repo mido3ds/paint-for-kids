@@ -8,9 +8,10 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class DownAction : public Action {
+class SendDownAction : public Action 
+{
 public:
-    DownAction(ApplicationManager* app_p);
+    SendDownAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
 

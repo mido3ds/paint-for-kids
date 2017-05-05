@@ -10,7 +10,7 @@ void ChBorderAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
     int x, y;
-    w = out_p->GetCrntPenWidth();
+    w = out_p->GetPenWidth();
     out_p->PrintMessage("Please Enter the Border Width If You Don't Want To Change It Type 3");
     lastW = w;
 	out_p->CreateBorderWidth();
@@ -48,18 +48,18 @@ void ChBorderAction::ReadActionParameters()
 
 void ChBorderAction::Execute()
 {
-    if (!manager_p->ChangeSelectedBorder(w, C)) {
+    if (!manager_p->SetSelectedBorder(w, C)) {
         Output* out_p = manager_p->GetOutput();
-        out_p->SetCrntPenWidth(w);
-        out_p->SetCrntDrawColor(C);
+        out_p->SetPenWidth(w);
+        out_p->SetDrawColor(C);
     }
 }
 
 void ChBorderAction::Undo()
 {
-    if (!manager_p->ChangeSelectedBorder(lastW, lastC)) {
+    if (!manager_p->SetSelectedBorder(lastW, lastC)) {
         Output* out_p = manager_p->GetOutput();
-        out_p->SetCrntPenWidth(lastW);
-        out_p->SetCrntDrawColor(lastC);
+        out_p->SetPenWidth(lastW);
+        out_p->SetDrawColor(lastC);
     }
 }

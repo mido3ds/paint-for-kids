@@ -1,11 +1,11 @@
-#include "UnSelectAction.h"
+#include "UnselectAction.h"
 
-UnSelectAction::UnSelectAction(ApplicationManager* app_p)
+UnselectAction::UnselectAction(ApplicationManager* app_p)
     : Action(app_p, false)
 {
 }
 
-void UnSelectAction::ReadActionParameters()
+void UnselectAction::ReadActionParameters()
 {
     Input* in_p = manager_p->GetInput();
     Output* out_p = manager_p->GetOutput();
@@ -14,7 +14,7 @@ void UnSelectAction::ReadActionParameters()
 	out_p->ClearStatusBar();
 }
 
-void UnSelectAction::Execute()
+void UnselectAction::Execute()
 {
 	Output* out_p = manager_p->GetOutput();
 
@@ -24,9 +24,9 @@ void UnSelectAction::Execute()
 		manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 	}
 	else 
-		manager_p->DeselectAll();
+		manager_p->UnselectAll();
 }
 
-void UnSelectAction::Undo()
+void UnselectAction::Undo()
 {
 }

@@ -49,12 +49,12 @@ void CTrngl::Rotate(int deg)
 		temp3.y += c.y;
 		temp4.y += c.y;
 		temp6.y += c.y;
-		if (OutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 			p3 = temp6;
@@ -67,11 +67,11 @@ void CTrngl::Rotate(int deg)
 		temp1.y = (2 * c.y) - temp1.y;
 		temp2.y = (2 * c.y) - temp2.y;
 		temp3.y = (2 * c.y) - temp3.y;
-		if (OutOfRange(temp1, temp2, temp3)) {
-			rotate = false;
+		if (IsOutOfRange(temp1, temp2, temp3)) {
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp1;
 			p2 = temp2;
 			p3 = temp3;
@@ -96,12 +96,12 @@ void CTrngl::Rotate(int deg)
 		temp3.y += c.y;
 		temp4.y += c.y;
 		temp6.y += c.y;
-		if (OutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
+		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
 		{
-			rotate = false;
+			is_rotated = false;
 		}
 		else {
-			rotate = true;
+			is_rotated = true;
 			p1 = temp3;
 			p2 = temp4;
 			p3 = temp6;
@@ -114,12 +114,12 @@ void CTrngl::Rotate(int deg)
 
 void CTrngl::SetRotated(bool r)
 {
-	rotate = r;
+	is_rotated = r;
 }
 
 bool CTrngl::IsRotated()
 {
-	return rotate;
+	return is_rotated;
 }
 
 void CTrngl::Resize(double resize_factor)
@@ -202,12 +202,12 @@ Point CTrngl::CalculateCenter()
 	return c;
 }
 
-bool CTrngl::OutOfRange(Point p1, Point p2, Point p3)
+bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
 {
     return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width || p3.y < UI.ToolBarHeight || p3.y > UI.height - UI.StatusBarHeight || p3.x < 0 || p3.x > UI.width);
 }
 
-bool CTrngl::PointCheck(Point p) const
+bool CTrngl::IsPointInside(Point p) const
 {
     double A1 = Trigonometry::Area(p, p1, p2);
     double A2 = Trigonometry::Area(p, p2, p3);
@@ -225,7 +225,7 @@ bool CTrngl::Move(int x, int y)
     tp2.y = p2.y + y;
     tp3.x = p3.x + x;
     tp3.y = p3.y + y;
-    if (!OutOfRange(tp1, tp2, tp3)) {
+    if (!IsOutOfRange(tp1, tp2, tp3)) {
         p1 = tp1;
         p2 = tp2;
         p3 = tp3;

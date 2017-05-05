@@ -6,10 +6,23 @@ ApplicationManager::ApplicationManager()
     //Create Input and output
     out_p = new Output;
     in_p = out_p->CreateInput();
+
     num_selected = 0;
 
     // make the seed of the pseudo-random generator
-    srand(time(0));
+	time_t rawtime = time(0);
+    srand(rawtime);
+
+    // at beginning, figs is saved, as we dont have any yet
+    figs_is_saved = true;
+
+	// open log file, and redirect cerr,clog to it
+	freopen("log.txt", "a", stderr);
+
+	cerr << "\n***********************\n"
+		<< "Application started at " << ctime(&rawtime)
+		<< "this is a log file, for debugging\n"
+		<< "***********************\n";
 }
 
 //==================================================================================//
@@ -60,9 +73,9 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case CHNG_DRAW_CLR:
         return new ChBorderAction(this);
     case SEND_BACK:
-        return new DownAction(this);
+        return new SendDownAction(this);
     case BRNG_FRNT:
-        return new UpAction(this);
+        return new SendUpAction(this);
     case ROTATE:
         return new RotateAction(this);
     case CTR:
@@ -80,12 +93,11 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
     case SELECT:
         return new SelectAction(this);
     case DESELECT:
-        return new UnSelectAction(this);
+        return new UnselectAction(this);
     case CUT:
         return new CutAction(this);
 	case SCRAMBLE:
 		return new ScrambleFind(this);
-
 	case HIDE:
 		return new PickAction(this);
 	case PICK_COLOR:
@@ -99,6 +111,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 	case PICK_COL_TYP:
 		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
 		return nullptr;
+        
     default:
         return nullptr;
     }
@@ -115,7 +128,12 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 
         // try to add action, else delete it
         if (!history.AddAction(act_p))
+        {
             delete act_p;
+
+            // action must have changed figs
+            figs_is_saved = false; 
+        }
     }
 }
 //==================================================================================//
@@ -134,7 +152,7 @@ CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p)
     for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
     {
         // if a figure is found return a pointer to it.
-        if ((*r_itr)->PointCheck(p))
+        if ((*r_itr)->IsPointInside(p))
             return *r_itr;
     }
 
@@ -237,6 +255,8 @@ void ApplicationManager::SaveAll(ofstream& out_file)
 
     for (auto& fig : figs)
         fig->Save(out_file);
+
+    figs_is_saved = true;
 }
 // iterate through lines and make the apropriate figure
 // call load for the figure
@@ -267,6 +287,14 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 
 		figs.push_back(fig);
 	}
+
+    figs_is_saved = true;
+}
+
+bool ApplicationManager::IsSaved() const
+{
+    // why consider saved if figs is empty? because if empty so no need to say you should save it
+    return figs_is_saved || figs.empty(); 
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -333,7 +361,7 @@ void ApplicationManager::RotateSelected(int deg)
 	}
 }
 
-bool ApplicationManager::ChangeSelectedFillColor(color c)
+bool ApplicationManager::SetSelectedFillColor(color c)
 {
     bool flag = false;
 
@@ -348,7 +376,7 @@ bool ApplicationManager::ChangeSelectedFillColor(color c)
     return flag;
 }
 
-bool ApplicationManager::ChangeSelectedBorder(int W, color C)
+bool ApplicationManager::SetSelectedBorder(int W, color C)
 {
     bool flag = false;
 
@@ -364,7 +392,7 @@ bool ApplicationManager::ChangeSelectedBorder(int W, color C)
     return flag;
 }
 
-bool ApplicationManager::DeselectAll()
+bool ApplicationManager::UnselectAll()
 {
 	bool found_selected = false;
 	for (auto& fig : figs)
@@ -485,11 +513,6 @@ bool ApplicationManager::PasteClipboard(Point p)
     return a;
 }
 
-void ApplicationManager::MoveSelectedBack(Point p)
-{
-    MoveSelected(p); //p is the old center of moved figures
-}
-
 void ApplicationManager::FillClipboardWithSelected()
 {
     clipboard.clear();
@@ -514,7 +537,7 @@ deque<CFigure*> ApplicationManager::GetClipboard()
     return clipboard;
 }
 
-deque<CFigure*> ApplicationManager::DeleteSelected()
+deque<CFigure*> ApplicationManager::EraseSelected()
 {
     deque<int> vec;
     deque<CFigure*> deleted;

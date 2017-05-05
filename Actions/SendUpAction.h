@@ -8,9 +8,9 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class UpAction : public Action {
+class SendUpAction : public Action {
 public:
-    UpAction(ApplicationManager* app_p);
+    SendUpAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
 

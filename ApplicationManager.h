@@ -2,10 +2,10 @@
 #define APPLICATION_MANAGER_H
 
 // std 
-#include <iostream> // cerr, TODO: redirect cerr to a log file
+#include <iostream> // cerr
 #include <fstream> // fstream
 #include <string>
-#include <deque> // double-ended-queue; to insert at beginning and end
+#include <deque>
 #include <vector>
 #include <cmath>
 #include <ctime>
@@ -21,7 +21,8 @@
 #include "Actions/CopyAction.h"
 #include "Actions/CutAction.h"
 #include "Actions/DeleteAction.h"
-#include "Actions/DownAction.h"
+#include "Actions/SendDownAction.h"
+#include "Actions/SendUpAction.h"
 #include "Actions/ExitAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/MoveAction.h"
@@ -33,9 +34,8 @@
 #include "Actions/SelectAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
-#include "Actions/UnSelectAction.h"
+#include "Actions/UnselectAction.h"
 #include "Actions/UndoAction.h"
-#include "Actions/UpAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/DrawFigActions.h"
@@ -61,9 +61,6 @@ class ApplicationManager {
 public:
 	ApplicationManager();
 	~ApplicationManager();
-    /*  ------------------------------- DEPRECATED ------------------------------- */ 
-
-    void MoveSelectedBack(Point p); // no return --bad name-- + it calls other function --redundant--
 
     /*  ------------------------------- Actions ------------------------------- */ 
 
@@ -87,16 +84,16 @@ public:
 	void DeleteAllFigures(); // clear deque and deletes figures
     deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode
 
-	bool DeselectAll();
-    bool ChangeSelectedFillColor(color c);
-    bool ChangeSelectedBorder(int W, color C);
+	bool UnselectAll();
+    bool SetSelectedFillColor(color c);
+    bool SetSelectedBorder(int W, color C);
     void SendSelecteDown();
     void SendSelectedUp();
     void RotateSelected(int deg);
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     Point MoveSelected(Point p);
-    deque<CFigure*> DeleteSelected();
+    deque<CFigure*> EraseSelected(); // erases selected and returns them 
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
 
@@ -104,6 +101,7 @@ public:
 
     void SaveAll(ofstream& out_file); // call save for figures
     void LoadAll(ifstream& in_file);  // call load for figures
+    bool IsSaved() const; // if figures are saved or not 
 
     /*  ------------------------------- Interface ------------------------------- */ 
 
@@ -131,6 +129,8 @@ private:
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
 	int num_selected = 0;
+
+    bool figs_is_saved;  // whether figs has been saved or not
 
     Input* in_p;
     Output* out_p;

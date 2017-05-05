@@ -30,7 +30,7 @@ void MoveAction::Execute()
 void MoveAction::Undo()
 {
     if (moveActiond) {
-        manager_p->MoveSelectedBack(old);
+        manager_p->MoveSelected(old);
         moveActiond = false;
     }
 }

@@ -393,17 +393,17 @@ void Output::CreatePlayArea() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::GetCrntDrawColor() const // get current drwawing color
+color Output::GetDrawColor() const // get current drwawing color
 {
 	return UI.DrawColor;
 }
 
-color Output::GetCrntFillColor() const // get current filling color
+color Output::GetFillColor() const // get current filling color
 {
 	return UI.FillColor;
 }
 
-int Output::GetCrntPenWidth() const // get current pen width
+int Output::GetPenWidth() const // get current pen width
 {
 	return UI.PenWidth;
 }
@@ -430,17 +430,17 @@ void Output::SetZoomPoint(Point z_point)
 	zoom_point = z_point;
 }
 
-void Output::SetCrntDrawColor(color given_clr)
+void Output::SetDrawColor(color given_clr)
 {
 	UI.DrawColor = given_clr;
 }
 
-void Output::SetCrntFillColor(color given_clr)
+void Output::SetFillColor(color given_clr)
 {
 	UI.FillColor = given_clr;
 }
 
-void Output::SetCrntPenWidth(int new_width)
+void Output::SetPenWidth(int new_width)
 {
 	if (new_width < 0)
 	{
