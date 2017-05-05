@@ -213,7 +213,11 @@ bool CTrngl::PointCheck(Point p) const
     double A2 = Trigonometry::Area(p, p2, p3);
     double A3 = Trigonometry::Area(p, p1, p3);
     double A = Trigonometry::Area(p1, p2, p3);
-    return (A == A1 + A2 + A3);
+	double B = A1 + A2 + A3;
+	double scale = 0.1;
+	A = (int)(A / scale)*scale;
+	B = (int)(B / scale)*scale;
+	return (A == B);
 }
 
 bool CTrngl::Move(int x, int y)

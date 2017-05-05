@@ -7,8 +7,8 @@ Output::Output()
 
 	UI.width = 1350;
 	UI.height = 700;
-	UI.wx = 90;
-	UI.wy = 90;
+	UI.wx = 5;
+	UI.wy = 5;
 
 	// ToolBar Parameters
 	UI.ToolBarHeight = 50;

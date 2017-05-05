@@ -118,7 +118,7 @@ bool CCircle::Move(int x, int y)
     tp1.y = p1.y + y;
     tp2.x = p2.x + x;
     tp2.y = p2.y + y;
-    if (!OutOfRange(p1)) {
+    if (!OutOfRange(tp1)) {
         p1 = tp1;
         p2 = tp2;
         return true;

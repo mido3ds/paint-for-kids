@@ -432,14 +432,28 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     }
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
-
+	bool out_of_range = false;
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
-            fig->Move(x, y);
-			fig->SetSelected(true);
-            moved_figs.push_back(fig);
+			if (!fig->Move(x, y))
+			{
+				out_p->PrintMessage("Error........Figures will be out of range if moved");
+				out_of_range = true;
+				break;
+			}
+			//fig->SetSelected(true);
+			else  moved_figs.push_back(fig);
         }
     }
+	if (out_of_range)
+	{
+		for (int i = 0;i < moved_figs.size();i++)
+		{
+			moved_figs[i]->Move(-x, -y);
+		}
+		moved_figs.clear();
+
+	}
     p.x = minx;
     p.y = miny;
     return p;

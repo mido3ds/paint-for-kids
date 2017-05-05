@@ -23,6 +23,8 @@ private:
     Point p;
     //color originalfill;
     color originaldraw;
+	Output* out_p;
+	Input* in_p;
 };
 
 #endif /* __SelectAction_h__ */
