@@ -101,6 +101,7 @@ public:
 
     void SaveAll(ofstream& out_file); // call save for figures
     void LoadAll(ifstream& in_file);  // call load for figures
+    bool IsSaved() const; // if figures are saved or not 
 
     /*  ------------------------------- Interface ------------------------------- */ 
 
@@ -128,6 +129,8 @@ private:
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
 	int num_selected = 0;
+
+    bool figs_is_saved;  // whether figs has been saved or not
 
     Input* in_p;
     Output* out_p;

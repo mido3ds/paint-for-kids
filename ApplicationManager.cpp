@@ -10,6 +10,9 @@ ApplicationManager::ApplicationManager()
 
     // make the seed of the pseudo-random generator
     srand(time(0));
+
+    // at beginning, figs is saved, as we dont have any yet
+    figs_is_saved = true;
 }
 
 //==================================================================================//
@@ -85,7 +88,6 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new CutAction(this);
 	case SCRAMBLE:
 		return new ScrambleFind(this);
-
 	case HIDE:
 		return new PickAction(this);
 	case PICK_COLOR:
@@ -99,6 +101,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 	case PICK_COL_TYP:
 		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
 		return nullptr;
+        
     default:
         return nullptr;
     }
@@ -115,7 +118,12 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 
         // try to add action, else delete it
         if (!history.AddAction(act_p))
+        {
             delete act_p;
+
+            // action must have changed figs
+            figs_is_saved = false; 
+        }
     }
 }
 //==================================================================================//
@@ -237,6 +245,8 @@ void ApplicationManager::SaveAll(ofstream& out_file)
 
     for (auto& fig : figs)
         fig->Save(out_file);
+
+    figs_is_saved = true;
 }
 // iterate through lines and make the apropriate figure
 // call load for the figure
@@ -267,6 +277,14 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 
 		figs.push_back(fig);
 	}
+
+    figs_is_saved = true;
+}
+
+bool ApplicationManager::IsSaved() const
+{
+    // why consider saved if figs is empty? because if empty so no need to say you should save it
+    return figs_is_saved || figs.empty(); 
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
