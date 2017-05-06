@@ -1,3 +1,4 @@
+
 #include "Input.h"
 #include "Output.h"
 
@@ -224,3 +225,4 @@ Point Input::GetLastClickedPoint() const
 /////////////////////////////////
 
 Input::~Input() {}
+

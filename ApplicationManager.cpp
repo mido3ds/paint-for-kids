@@ -212,7 +212,7 @@ void ApplicationManager::UpdateInterface() const
 	else
 		out_p->CreatePlayToolBar();
 
-	out_p->ClearStatusBar();
+	//out_p->ClearStatusBar();
 }
 
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
@@ -457,9 +457,9 @@ void ApplicationManager::PrintSelectedSize()
 	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
-Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P when pasting
+Point ApplicationManager::MoveSelected(Point p) 
 {
-
+	deque<CFigure*> moved_figs;
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
 
@@ -473,14 +473,28 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
     }
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
+	bool out_range = false;
+	for (auto& fig : figs) {
+		if (fig->IsSelected()) {
+			if (!fig->Move(x, y))
+			{
+				out_p->PrintMessage("Error........Figures will be out of range if moved");
+				out_range = true;
+				break;
+			}
+			//fig->SetSelected(true);
+			else  moved_figs.push_back(fig);
+		}
+	}
+	if (out_range)
+	{
+		for (int i = 0;i < moved_figs.size();i++)
+		{
+			moved_figs[i]->Move(-x, -y);
+		}
+		moved_figs.clear();
 
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
-            fig->Move(x, y);
-			fig->SetSelected(true);
-            moved_figs.push_back(fig);
-        }
-    }
+	}
     p.x = minx;
     p.y = miny;
     return p;
@@ -488,7 +502,7 @@ Point ApplicationManager::MoveSelected(Point p) //list is M when moving and P wh
 
 bool ApplicationManager::PasteClipboard(Point p)
 {
-
+	deque<CFigure*> moved_figs;
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
     for (auto& fig : clipboard) {
@@ -498,18 +512,32 @@ bool ApplicationManager::PasteClipboard(Point p)
             miny = c.y;
         }
     }
-    bool a = true;
+    bool out_range = false;
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
     for (auto& fig : clipboard) {
-        if (!fig->Move(x, y))
-            a = false;
+		if (!fig->Move(x, y))
+		{
+			out_range = true;
+			break;
+		}
 		CFigure*copy = fig->Copy();
 		copy->SetId(GenerateNextId());
         AddFigure(copy);
+		moved_figs.push_back(fig);
 		fig->SetId(copy->GetId());
     }
-    return a;
+	if (out_range)
+	{
+		out_p->PrintMessage("Error........Figures will be out of range if pasted");
+		for (auto& fig : moved_figs)
+		{
+			fig->Move(-x, -y);
+			DeleteFigure(fig->GetId());
+		}
+		moved_figs.clear();
+	}
+    return !out_range;
 }
 
 void ApplicationManager::FillClipboardWithSelected()
@@ -591,4 +619,5 @@ ApplicationManager::~ApplicationManager()
 
     delete in_p;
     delete out_p;
+
 }

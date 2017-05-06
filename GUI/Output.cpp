@@ -1,3 +1,5 @@
+
+
 #include "Output.h"
 
 Output::Output()
@@ -486,3 +488,4 @@ int Output::TranslateRadius(const Point& f_point, int radius) const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }
+

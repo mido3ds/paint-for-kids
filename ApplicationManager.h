@@ -125,7 +125,7 @@ private:
         GetFigureIter(unsigned int id);  // return iterator to the figure if found, otherwise figs.end()
     
     deque<CFigure*> figs;
-    deque<CFigure*> moved_figs;
+    
     deque<CFigure*> clipboard; 
 
     unsigned int next_fig_id = 0;  // saves last given id for a shape
