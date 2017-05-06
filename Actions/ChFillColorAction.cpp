@@ -25,6 +25,7 @@ void ChFillColorAction::Execute()
     if (!manager_p->SetSelectedFillColor(C)) {
         Output* out_p = manager_p->GetOutput();
         out_p->SetFillColor(C);
+		UI.IsFilled = true;
     }
 }
 

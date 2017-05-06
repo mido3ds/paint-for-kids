@@ -170,7 +170,7 @@ void PickByColor::DeleteCorrect(int id)
 
 void PickByColor::DrawColorCircle(color c)
 {
-	Point p1, p2;
+	Point p1;
 	Output *out_p = manager_p->GetOutput();
 	p1.y = UI.StatusBarY + (UI.StatusBarHeight / 2) - 10;
 	p1.x = 250;

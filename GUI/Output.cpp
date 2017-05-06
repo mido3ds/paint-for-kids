@@ -101,6 +101,18 @@ void Output::ClearStatusBar() const
 	wind_p->SetPen(UI.StatusBarColor, 1);
 	wind_p->SetBrush(UI.StatusBarColor);
 	wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
+	if (UI.IsFilled == true && UI.InterfaceMode == MODE_DRAW) {
+		Point p1;
+		p1.y = UI.StatusBarY + (UI.StatusBarHeight / 2) - 10;
+		p1.x = UI.width - 35;
+		int raduis = 15;
+		GfxInfo info;
+		info.is_filled = true;
+		info.border_width = 1;
+		info.draw_clr = UI.DrawColor;
+		info.fill_clr = UI.FillColor;
+		DrawCircle(p1, raduis, info, false);
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
