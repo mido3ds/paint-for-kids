@@ -139,6 +139,11 @@ string CTrngl::GetType()
 	return type;
 }
 
+double CTrngl::GetArea()
+{
+	return Trigonometry::Area(p1, p2, p3);
+}
+
 void CTrngl::Save(ofstream& out_file)
 {
 	out_file << "TRIANGLE" << ' '
