@@ -24,7 +24,7 @@ public:
     int GetRadius() const;
 
 	virtual string GetType();
-
+	virtual double GetArea();
     virtual Point CalculateCenter();
 
 	virtual void Resize(double resize_factor);

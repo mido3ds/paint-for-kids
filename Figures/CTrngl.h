@@ -26,7 +26,7 @@ public:
 	virtual void Resize(double resize_factor);
 
 	virtual string GetType();
-
+	virtual double GetArea();
 	bool IsOutOfRange(Point p1, Point p2, Point p3);
 
 	virtual void PrintInfo(Output* out_p);

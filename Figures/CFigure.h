@@ -19,6 +19,8 @@ public:
 
 	virtual string GetType() = 0;
 
+	virtual double GetArea() = 0;
+
     virtual void Draw(Output* out_p) const = 0;
     virtual bool IsPointInside(Point p) const = 0;
 

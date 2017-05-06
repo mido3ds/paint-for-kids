@@ -185,6 +185,12 @@ string CLine::GetType()
 	return type;
 }
 
+double CLine::GetArea()
+{
+	double length = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+	return length;
+}
+
 void CLine::Resize(double resize_factor)
 {
 	Point c = CalculateCenter();

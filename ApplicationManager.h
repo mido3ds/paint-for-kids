@@ -44,6 +44,8 @@
 #include "Actions/PickAction.h"
 #include "Actions/PickByColor.h"
 #include "Actions/PickByType.h"
+#include "Actions/PickByArea.h"
+#include "Actions/PickByTypeAndColor.h"
 
 // figures
 #include "Figures/CCircle.h"
