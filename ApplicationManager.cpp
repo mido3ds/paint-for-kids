@@ -82,7 +82,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new UnSelectAction(this);
     case CUT:
         return new CutAction(this);
-	case HIDE:
+	/*case HIDE:
 		return new PickAction(this);
 	case PICK_COLOR:
 		return new PickByColor(this);
@@ -94,7 +94,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 		return nullptr;
 	case PICK_COL_TYP:
 		out_p->PrintMessage("Picking By Color And Type");		// Just For Testing
-		return nullptr;
+		return nullptr;*/
 	case SCRAMBLE:
 		return new ScrambleFind(this);
     default:
@@ -196,13 +196,13 @@ void ApplicationManager::UpdateInterface() const
 	out_p->ClearStatusBar();
 }
 
-void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
-{
-	out_p->ClearDrawArea();
-
-	for (auto& fig : figures)
-		fig->Draw(out_p); //Call Draw function (virtual member fn)
-}
+//void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
+//{
+//	out_p->ClearDrawArea();
+//
+//	for (auto& fig : figures)
+//		fig->Draw(out_p); //Call Draw function (virtual member fn)
+//}
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const

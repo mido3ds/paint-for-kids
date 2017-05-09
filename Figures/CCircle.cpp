@@ -157,10 +157,14 @@ void CCircle::MoveToLeftSide()
 
 void CCircle::MoveToRightSide()
 {
-	p1.x *= 2;
+	p1.x = p1.x / 2 + UI.width / 2;
 }
 
 void CCircle::RandomizePosition()
 {
-	// TODO
+	do
+	{
+		p1.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
+		p1.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;
+	} while (OutOfRightRange(p1) || OutOfRightRange({p1.x - radius, p1.y}));
 }

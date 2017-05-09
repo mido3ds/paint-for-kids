@@ -4,6 +4,7 @@
 #include "../DEFS.h"
 #include "../GUI/Output.h"
 #include <fstream>
+#include <ctime>
 
 class CFigure : protected GfxInfo 
 {
@@ -28,6 +29,7 @@ public:
     color GetFillColor() const;
     int GetBorderWidth() const;
     bool IsFilled() const;
+	bool OutOfRightRange(const Point& p) const;
 
     virtual void Rotate(int deg) = 0;
     virtual bool Move(int x, int y) = 0;
@@ -41,7 +43,6 @@ public:
     virtual void MoveToLeftSide() = 0; // side for ScrambleAndFind mode
     virtual void MoveToRightSide() = 0; // side for ScrambleAndFind mode
     virtual void RandomizePosition() = 0; // put object in random valid postion, no change to size
-
     virtual void PrintInfo(Output* out_p) = 0; // on the status bar
 
 protected:
