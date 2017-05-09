@@ -1,3 +1,5 @@
+
+
 #include "Output.h"
 
 Output::Output()
@@ -99,6 +101,18 @@ void Output::ClearStatusBar() const
 	wind_p->SetPen(UI.StatusBarColor, 1);
 	wind_p->SetBrush(UI.StatusBarColor);
 	wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
+	if (UI.IsFilled == true && UI.InterfaceMode == MODE_DRAW) {
+		Point p1;
+		p1.y = UI.StatusBarY + (UI.StatusBarHeight / 2) - 10;
+		p1.x = UI.width - 35;
+		int raduis = 15;
+		GfxInfo info;
+		info.is_filled = true;
+		info.border_width = 1;
+		info.draw_clr = UI.DrawColor;
+		info.fill_clr = UI.FillColor;
+		DrawCircle(p1, raduis, info, false);
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -170,6 +184,50 @@ void Output::CreateFigActions() const
 
 	for (int i = 0; i < FIG_ACT_COUNT; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+void Output::CreateBorderWidth() const
+{
+
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->isborderwidth = true;
+
+	string MenuItemImages[4];
+	MenuItemImages[0] = "images\\MenuItems\\very_small.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\small.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\mid.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\big.jpg";
+
+	for (int i = 0; i < 4; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+void Output::CreatePickBar() const
+{
+
+	ClearTToolBar();
+	UI.TToolBarWidth = 200;
+	wind_p->ispickbar = true;
+
+	string MenuItemImages[PICK_ITM_COUNT];
+	MenuItemImages[ITM_PICK_COLOR] = "images\\MenuItems\\ByColor.jpg";
+	MenuItemImages[ITM_PICK_TYPE] = "images\\MenuItems\\Type2.jpg";
+	MenuItemImages[ITM_PICK_AREA] = "images\\MenuItems\\Area.jpg";
+	MenuItemImages[ITM_PICK_COL_TYP] = "images\\MenuItems\\Type&Color.jpg";
+
+	for (int i = 0; i < PICK_ITM_COUNT; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+
+void Output::CreateRestartGame() const
+{
+	ClearToolBar();
+	
+	string MenuItemImages[2];
+	MenuItemImages[0] = "images\\MenuItems\\restart.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\exitgame.jpg";
+
+	for (int i = 0; i < 2; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.ToolBarY, UI.MenuItemWidth, UI.ToolBarHeight);
 }
 
 void Output::CreateColorBar() const
@@ -349,17 +407,17 @@ void Output::CreatePlayArea() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::GetCrntDrawColor() const // get current drwawing color
+color Output::GetDrawColor() const // get current drwawing color
 {
 	return UI.DrawColor;
 }
 
-color Output::GetCrntFillColor() const // get current filling color
+color Output::GetFillColor() const // get current filling color
 {
 	return UI.FillColor;
 }
 
-int Output::GetCrntPenWidth() const // get current pen width
+int Output::GetPenWidth() const // get current pen width
 {
 	return UI.PenWidth;
 }
@@ -386,17 +444,17 @@ void Output::SetZoomPoint(Point z_point)
 	zoom_point = z_point;
 }
 
-void Output::SetCrntDrawColor(color given_clr)
+void Output::SetDrawColor(color given_clr)
 {
 	UI.DrawColor = given_clr;
 }
 
-void Output::SetCrntFillColor(color given_clr)
+void Output::SetFillColor(color given_clr)
 {
 	UI.FillColor = given_clr;
 }
 
-void Output::SetCrntPenWidth(int new_width)
+void Output::SetPenWidth(int new_width)
 {
 	if (new_width < 0)
 	{
@@ -442,3 +500,4 @@ int Output::TranslateRadius(const Point& f_point, int radius) const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }
+

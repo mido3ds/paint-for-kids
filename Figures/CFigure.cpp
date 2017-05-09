@@ -34,7 +34,7 @@ void CFigure::SetDrawColor(color draw_clr)
 
 void CFigure::SetFillColor(color filling_clr)
 {
-	is_filled = (filling_clr != WHITE);
+	is_filled = (filling_clr != UI.BkGrndColor);
 	fill_clr = filling_clr;
 }
 

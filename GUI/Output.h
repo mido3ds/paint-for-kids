@@ -16,7 +16,11 @@ public:
     void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
     void CreateFigItems() const;
     void CreateFigActions() const;
+	void CreateBorderWidth() const;
+
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
+	void CreatePickBar() const;
+	void CreateRestartGame() const;
 
 	void CreateStatusBar() const;
 	void CreateColorBar() const;
@@ -32,7 +36,7 @@ public:
     void ClearTToolBar() const;
 
 	// -- Figures Drawing functions
-	void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
+	void DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 		bool selected) const;
 
 	void DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
@@ -46,18 +50,18 @@ public:
 
 	void PrintMessage(string msg) const; // on Status bar
 
-	color GetCrntDrawColor() const;
-	color GetCrntFillColor() const;
-	int GetCrntPenWidth() const;
+	color GetDrawColor() const;
+	color GetFillColor() const;
+	int GetPenWidth() const;
 	int GetZoom() const; //Return zoom
 	Point GetZoomPoint() const; //Return manager_zoom_point
 
 	void SetZoom(int z);
 	void SetZoomPoint(Point z_point);
-	void SetCrntDrawColor(color given_clr);
-	void SetCrntFillColor(color given_clr);
+	void SetDrawColor(color given_clr);
+	void SetFillColor(color given_clr);
 	void SetBkGrndColor(color given_clr);
-	void SetCrntPenWidth(int new_width);
+	void SetPenWidth(int new_width);
 
 private:
 	window* wind_p; // Pointer to the Graphics Window
@@ -69,4 +73,5 @@ private:
 	Point zoom_point;
 };
 
+>>>>>>> 8d9d79207c2490a45c53ba9a57f77c5819994a83
 #endif

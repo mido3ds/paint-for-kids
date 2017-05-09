@@ -27,11 +27,11 @@ void AddLineAction::ReadActionParameters()
 	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
 	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
 
-    gfx.is_filled = false; //default is not filled
+    gfx.is_filled = UI.IsFilled; //default is not filled
     //get drawing, filling colors and pen width from the interface
-    gfx.draw_clr = out_p->GetCrntDrawColor();
-    gfx.fill_clr = out_p->GetCrntFillColor();
-    gfx.border_width = out_p->GetCrntPenWidth();
+    gfx.draw_clr = out_p->GetDrawColor();
+    gfx.fill_clr = out_p->GetFillColor();
+    gfx.border_width = out_p->GetPenWidth();
 
     out_p->ClearStatusBar();
 
@@ -44,7 +44,7 @@ void AddLineAction::Execute()
     //Add the lineangle to the list of figures
     line = new CLine(p1, p2, gfx);
     line->SetId(id);
-    if (!line->OutOfRange(p1, p2)) {
+    if (!line->IsOutOfRange(p1, p2)) {
         manager_p->AddFigure(line);
     } else {
         manager_p->GetOutput()->PrintMessage("The Line Is Out Of Range");

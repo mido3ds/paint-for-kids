@@ -27,12 +27,12 @@ void AddCircAction::ReadActionParameters()
 	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
 	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
 
-    gfx.is_filled = false; //default is not filled
+    gfx.is_filled = UI.IsFilled; //default is not filled
 
     //get drawing, filling colors and pen width from the interface
-    gfx.draw_clr = out_p->GetCrntDrawColor();
-    gfx.fill_clr = out_p->GetCrntFillColor();
-    gfx.border_width = out_p->GetCrntPenWidth();
+    gfx.draw_clr = out_p->GetDrawColor();
+    gfx.fill_clr = out_p->GetFillColor();
+    gfx.border_width = out_p->GetPenWidth();
 
     out_p->ClearStatusBar();
 
@@ -48,7 +48,7 @@ void AddCircAction::Execute()
 {
     circ = new CCircle(p1, radius, gfx);
     circ->SetId(id);
-    if (!circ->OutOfRange(p1)) {
+    if (!circ->IsOutOfRange(p1)) {
         manager_p->AddFigure(circ);
     } else {
         manager_p->GetOutput()->PrintMessage("The Circle Is Out Of Range");

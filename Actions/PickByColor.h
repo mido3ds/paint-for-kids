@@ -18,10 +18,6 @@ public:
 
 	virtual void Undo();
 
-	//int GetNumSameColor(color c);
-
-	
-
 private:
 	deque<CFigure *> figures;
 	color c;
@@ -34,6 +30,7 @@ private:
 	void DrawColorCircle(color c);
 
 	bool correct(CFigure *fig);
+
 };
 
 

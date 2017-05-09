@@ -17,7 +17,7 @@ CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 
 bool CCircle::IsRotated()
 {
-	return rotate;
+	return is_rotated;
 }
 
 void CCircle::Resize(double resize_factor)
@@ -36,7 +36,17 @@ int CCircle::GetRadius() const
 	return radius;
 }
 
-bool CCircle::OutOfRange(Point p1)
+string CCircle::GetType()
+{
+	return type;
+}
+
+double CCircle::GetArea()
+{
+	return 3.14*GetRadius()*GetRadius();
+}
+
+bool CCircle::IsOutOfRange(Point p1)
 {
 	return (p1.x - radius < UI.DrawAreaX || p1.x  +  radius > UI.DrawAreaX  +  UI.DrawAreaWidth || p1.y - radius < UI.DrawAreaY || p1.y  +  radius > UI.DrawAreaY  +  UI.DrawAreaHeight);
 }
@@ -57,7 +67,7 @@ void CCircle::Rotate(int deg)
 
 void CCircle::SetRotated(bool r)
 {
-	rotate = r;
+	is_rotated = r;
 }
 
 
@@ -107,7 +117,7 @@ void CCircle::Load(ifstream& in_file)
     p2 = GetSecondPointFromRadius(rad);
 }
 
-bool CCircle::PointCheck(Point p) const
+bool CCircle::IsPointInside(Point p) const
 {
     float RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
     float NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
@@ -121,7 +131,7 @@ bool CCircle::Move(int x, int y)
     tp1.y = p1.y  +  y;
     tp2.x = p2.x  +  x;
     tp2.y = p2.y  +  y;
-    if (!OutOfRange(p1)) {
+    if (!IsOutOfRange(p1)) {
         p1 = tp1;
         p2 = tp2;
         return true;

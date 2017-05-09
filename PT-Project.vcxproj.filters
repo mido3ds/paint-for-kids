@@ -125,6 +125,31 @@
     </ClCompile>
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GUI\Input.cpp">
+      <Filter>GUI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Output.cpp">
+      <Filter>GUI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CCircle.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CFigure.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CLine.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CRectangle.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CTrngl.cpp">
+      <Filter>Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="HistoryManager.cpp" />
+    <ClCompile Include="CMUgraphicsLib\colors.cpp">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\AddCircAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -155,7 +180,10 @@
     <ClCompile Include="Actions\DeleteAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\DownAction.cpp">
+    <ClCompile Include="Actions\DrawFigActions.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\DrawFigItems.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ExitAction.cpp">
@@ -182,7 +210,16 @@
     <ClCompile Include="Actions\SaveAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ScrambleFind.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\SelectAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SendDownAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SendUpAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ToDrawModeAction.cpp">
@@ -194,50 +231,28 @@
     <ClCompile Include="Actions\UndoAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\UnSelectAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\UpAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\ZoomInAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ZoomOutAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Input.cpp">
-      <Filter>GUI Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI\Output.cpp">
-      <Filter>GUI Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CCircle.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CFigure.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CLine.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CRectangle.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CTrngl.cpp">
-      <Filter>Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="HistoryManager.cpp" />
-    <ClCompile Include="Actions\DrawFigActions.cpp">
+    <ClCompile Include="Actions\PickAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\DrawFigItems.cpp">
+    <ClCompile Include="Actions\PickByColor.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\colors.cpp">
-      <Filter>CMUgraphicsLib</Filter>
+    <ClCompile Include="Actions\UnselectAction.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ScrambleFind.cpp">
+    <ClCompile Include="Actions\PickByType.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByArea.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByTypeAndColor.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -304,6 +319,34 @@
     </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="ApplicationManager.h" />
+    <ClInclude Include="GUI\Input.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Output.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\UI_Info.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CCircle.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CFigure.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CLine.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CRectangle.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CTrngl.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="HistoryManager.h" />
+    <ClInclude Include="Figures\Trigonometry.h">
+      <Filter>Figures</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\Action.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -337,7 +380,10 @@
     <ClInclude Include="Actions\DeleteAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\DownAction.h">
+    <ClInclude Include="Actions\DrawFigActions.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\DrawFigItems.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ExitAction.h">
@@ -364,7 +410,16 @@
     <ClInclude Include="Actions\SaveAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ScrambleFind.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\SelectAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SendDownAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SendUpAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ToDrawModeAction.h">
@@ -376,53 +431,28 @@
     <ClInclude Include="Actions\UndoAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\UnSelectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\UpAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\ZoomInAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ZoomOutAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\Input.h">
-      <Filter>GUI Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\Output.h">
-      <Filter>GUI Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\UI_Info.h">
-      <Filter>GUI Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CCircle.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CFigure.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CLine.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CRectangle.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CTrngl.h">
-      <Filter>Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="HistoryManager.h" />
-    <ClInclude Include="Actions\DrawFigActions.h">
+    <ClInclude Include="Actions\PickByColor.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\DrawFigItems.h">
+    <ClInclude Include="Actions\PickAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\Trigonometry.h">
-      <Filter>Figures</Filter>
+    <ClInclude Include="Actions\UnselectAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ScrambleFind.h">
+    <ClInclude Include="Actions\PickByType.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByArea.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByTypeAndColor.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

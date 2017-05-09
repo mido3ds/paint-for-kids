@@ -10,7 +10,7 @@ public:
 	CCircle(Point p1, int radius, GfxInfo circ_gfx_info);
 
     virtual void Draw(Output* out_p) const;
-    virtual bool PointCheck(Point p) const;
+    virtual bool IsPointInside(Point p) const;
     virtual void Rotate(int deg);
     virtual void SetRotated(bool r);
     virtual void Save(ofstream& out_file);
@@ -23,17 +23,20 @@ public:
     virtual bool IsRotated();
     int GetRadius() const;
 
+	virtual string GetType();
+	virtual double GetArea();
     virtual Point CalculateCenter();
 
 	virtual void Resize(double resize_factor);
 
-	bool OutOfRange(Point p1);
+	bool IsOutOfRange(Point p1);
 
 	virtual void PrintInfo(Output* out_p) ;
 
 private:
 	Point p1, p2;
     int radius;
+	const string type = "Circle";
 
 	// given radius and this point, return another point
 	// another point is (p.x, p.y + rad)

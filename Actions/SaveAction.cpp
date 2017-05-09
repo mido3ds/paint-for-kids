@@ -18,6 +18,7 @@ void SaveAction::ReadActionParameters()
 
     if (!out_file.is_open()) {
         out_p->PrintMessage("Cant open file!");
+		cerr << "unsuccessfull saving, something went wrong\n";
     } else {
         successfull = true;
     }
