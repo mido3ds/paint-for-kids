@@ -5,11 +5,20 @@
 #include "../GUI/Output.h"
 #include <fstream>
 
+enum class PointState 
+{
+	CORNER, 
+	INSIDE, 
+	OUTSIDE
+};
+
 class CFigure : protected GfxInfo 
 {
 public:
 	CFigure();
 	CFigure(const GfxInfo& figure_gfx_info);
+
+    virtual void Draw(Output* out_p) const = 0;
 
 	void SetSelected(bool s);
 	bool IsSelected() const;
@@ -18,16 +27,15 @@ public:
 	unsigned int GetId() const;
 
 	virtual string GetType() = 0;
-
 	virtual double GetArea() = 0;
 
-    virtual void Draw(Output* out_p) const = 0;
-    virtual bool IsPointInside(Point p) const = 0;
+    virtual bool IsPointInside(const Point& p) const = 0;
     virtual bool IsPointCorner(const Point& p) const = 0;
+    PointState GetPointState(const Point& p) const; // whether point corner, inside, outside
 
     void SetDrawColor(color draw_clr);
     void SetFillColor(color filling_clr); 
-    void SetBorderWidth(int BW); 
+    void SetBorderWidth(int border_width); 
 
     color GetDrawColor() const;
     color GetFillColor() const;
@@ -53,9 +61,6 @@ public:
     virtual Point CalculateCenter() = 0;
     virtual void ChangeCenter(const Point& p) = 0; // changing center -> changes coordinates, only if point is valid
 
-    enum PointState {CORNER, INSIDE, OUTSIDE};
-    PointState GetPointState(const Point& p); // whether point corner, inside, outside
-    
     virtual void PrintInfo(Output* out_p) = 0; // on the status bar
 
 protected:
