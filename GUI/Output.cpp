@@ -1,5 +1,3 @@
-
-
 #include "Output.h"
 
 Output::Output()
@@ -61,8 +59,8 @@ Output::Output()
 					 // Create the output window
 	wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
-	// Change the title
 	wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
+	wind_p->SetWaitClose(false);
 
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -498,6 +496,10 @@ int Output::TranslateRadius(const Point& f_point, int radius) const
 		sqrt(pow((s_point.y - f_point.y), 2) + pow((s_point.x - f_point.x), 2))
 	);
 }
+
+void Output::UpdateBuffer() const
+{
+	wind_p->UpdateBuffer();
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }
-

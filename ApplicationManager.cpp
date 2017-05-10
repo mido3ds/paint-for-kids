@@ -209,8 +209,6 @@ void ApplicationManager::UpdateInterface() const
 		out_p->CreateDrawToolBar();
 	else
 		out_p->CreatePlayToolBar();
-
-	//out_p->ClearStatusBar();
 }
 
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
