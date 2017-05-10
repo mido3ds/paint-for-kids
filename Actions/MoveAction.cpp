@@ -22,15 +22,21 @@ void MoveAction::ReadActionParameters()
 void MoveAction::Execute()
 {
     if (manager_p->GetNumSelected() > 0) {
-        old = manager_p->MoveSelected(p);
-        moveActiond = true;
+        manager_p->MoveSelected(p, moved_figs,old);
+        moved = true;
     }
 }
 
 void MoveAction::Undo()
 {
-    if (moveActiond) {
-        manager_p->MoveSelected(old);
-        moveActiond = false;
+    if (moved) {
+		int x = old.x - p.x;
+		int y = old.y - p.y;
+		for (int i = 0;i < moved_figs.size();i++)
+		{
+			moved_figs[i]->Move(x, y);
+		}
+		moved_figs.clear();
+        moved = false;
     }
 }

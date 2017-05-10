@@ -249,6 +249,12 @@
     <ClCompile Include="Actions\PickByType.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\PickByArea.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByTypeAndColor.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -441,6 +447,12 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickByType.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByArea.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByTypeAndColor.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

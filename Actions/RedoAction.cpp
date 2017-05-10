@@ -7,6 +7,8 @@ RedoAction::RedoAction(ApplicationManager* app_p)
 
 void RedoAction::ReadActionParameters()
 {
+	Output *out_p = manager_p->GetOutput();
+	out_p->ClearStatusBar();
 }
 
 void RedoAction::Execute()

@@ -7,6 +7,8 @@ SendUpAction::SendUpAction(ApplicationManager* app_p)
 
 void SendUpAction::ReadActionParameters()
 {
+	Output *out_p = manager_p->GetOutput();
+	out_p->ClearStatusBar();
 }
 
 void SendUpAction::Execute()
