@@ -46,7 +46,11 @@ color Input::PickColor(int ix, int iy)
 ActionType Input::GetUserAction()
 {
     int x, y;
-    wind_p->WaitMouseClick(x, y); // Get the coordinates of the user click
+
+	wind_p->FlushMouseQueue();
+	while (wind_p->GetButtonState(LEFT_BUTTON, x, y) != BUTTON_DOWN);
+	wind_p->FlushMouseQueue();
+
     last_click = { x, y };
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
@@ -155,14 +159,11 @@ ActionType Input::GetUserAction()
         //[2] User clicks on the drawing area
         if (y >= UI.DrawAreaY && y < UI.DrawAreaY + UI.DrawAreaHeight) {
 			// check dragging by waiting x seconds 
-			double x = .25;
+			double x = .40;
 			Sleep(x * SECOND);
 
 			if (IsMouseDown())
-			{
-				cout << "you are draggin me!!\n"; // test
 				return DRAGGING;
-			}
 			else
 				return DRAWING_AREA;
         }
