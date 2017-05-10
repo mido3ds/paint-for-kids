@@ -618,5 +618,4 @@ ApplicationManager::~ApplicationManager()
     delete in_p;
     delete out_p;
 
->>>>>>> 8d9d79207c2490a45c53ba9a57f77c5819994a83
 }

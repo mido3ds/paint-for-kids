@@ -24,6 +24,7 @@ void CCircle::Resize(double resize_factor)
 {
 	p2.x = (int(resize_factor * (p2.x - p1.x)))  +  p1.x;
 	p2.y = (int(resize_factor * (p2.y - p1.y)))  +  p1.y;
+	radius /= 2;
 }
 
 Point CCircle::CalculateCenter()
@@ -172,9 +173,28 @@ void CCircle::MoveToRightSide()
 
 void CCircle::RandomizePosition()
 {
+	Point left;
+	Point right;
+	Point up;
+	Point down;
+
 	do
 	{
 		p1.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
 		p1.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;
-	} while (OutOfRightRange(p1) || OutOfRightRange({p1.x - radius, p1.y}));
+
+		left.x = p1.x - radius;
+		left.y = p1.y;
+
+		right.x = p1.x + radius;
+		right.y = p1.y;
+
+		down.x = p1.x;
+		down.y = p1.y + radius;
+
+		up.x = p1.x;
+		up.y = p1.y - radius;
+
+	} while (OutOfRightRange(p1) || OutOfRightRange(left) || OutOfRightRange(right) || OutOfRightRange(up) || OutOfRightRange(down));
+
 }

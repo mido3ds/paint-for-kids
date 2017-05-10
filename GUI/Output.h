@@ -73,5 +73,4 @@ private:
 	Point zoom_point;
 };
 
->>>>>>> 8d9d79207c2490a45c53ba9a57f77c5819994a83
 #endif

@@ -10,7 +10,7 @@ ScrambleFind::ScrambleFind(ApplicationManager* app_p)
 	in_p(manager_p->GetInput())
 {
 	middle_line.SetPoints({ UI.width / 2 - 3, 50 }, { UI.width / 2 + 3, UI.StatusBarY });
-    middle_line.SetBorderWidth(3);
+	middle_line.SetBorderWidth(3);
 }
 
 ScrambleFind::~ScrambleFind()

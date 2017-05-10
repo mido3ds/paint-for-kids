@@ -327,7 +327,9 @@ void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 	bool selected) const
 {
 	Point pf1 = TranslatePoint(p1);
-	radius = TranslateRadius(pf1, radius);
+	//radius = TranslateRadius(pf1, radius);
+
+	radius *= pow(2, zoom);
 
 	color DrawingClr;
 	if (selected)

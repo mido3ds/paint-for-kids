@@ -7,6 +7,12 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
+#include "../Figures/CFigure.h"
+#include "../Figures/CLine.h"
+#include "../Figures/CCircle.h"
+#include "../Figures/CTrngl.h"
+#include "../Figures/CRectangle.h"
+
 class ScrambleFind : public Action {
 public:
     ScrambleFind(ApplicationManager* app_p);
