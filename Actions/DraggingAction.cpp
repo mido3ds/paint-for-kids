@@ -59,6 +59,7 @@ void DraggingAction::Undo()
 
 void DraggingAction::ResizeByDragging()
 {
+    // TODO
     // Point& corner_p = fig->GetCornerPoint(p);
     // while (still_clicking())
     // {
@@ -72,6 +73,7 @@ void DraggingAction::ResizeByDragging()
 
 void DraggingAction::MoveByDragging()
 {
+    // TODO
     // while (still_clicking())
     // {
     //     p = GetCurrentMousePos();
