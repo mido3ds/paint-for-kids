@@ -9,9 +9,7 @@ Input::Input(window* pW)
 
 clicktype Input::GetClickPoint(int& x, int& y) const
 {
-	clicktype click;
-	click = wind_p->WaitMouseClick(x, y); // Wait for mouse click
-	return click;
+    return wind_p->WaitMouseClick(x, y);
 }
 
 string Input::GetString(Output* pO) const

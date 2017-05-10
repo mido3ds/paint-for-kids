@@ -13,8 +13,15 @@ public:
 
     virtual void ReadActionParameters();
     virtual void Execute();
-
     virtual void Undo();
+
+    void ResizeByDragging();
+    void MoveByDragging();
+
+private:
+    Input* in_p;
+    Point p;
+    CFigure* fig;
 };
 
 #endif /* __DraggingAction_h__ */

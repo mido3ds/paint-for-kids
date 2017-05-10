@@ -12,32 +12,72 @@ void DraggingAction::ReadActionParameters()
 void DraggingAction::Execute()
 {
     /* PSUEDO-CODE
-        bool dragging = true;
+        dragging = true;
 
-        p = get_click_point();
-        fig = DetectFigure();
+        p = get_click_point()
+        fig = get_figure()
         if (fig == null)
             return;
 
-        Point& side_point = fig.GetClickedPoint(p);
-        while (dragging)
-        {
-            if (not clicking)
-            {
+        if fig.IsCorner(p):
+            p_to_update = fig.GetCornerPoint(p)
+        else if fig.IsInside(p):
+            p_to_update = fig.GetCenter(p)
+        else: // outside
+            return;
+            
+        while dragging:
+            if not clicking:
                 dragging = false;
-            }
-            else 
-            {
-                side_point = p;
-            }
+            else:
+                p_to_update = p;
 
             mang_p->UpdateInterface();
-        }
     */
+    in_p = manager_p->GetInput();
+    p = in_p->GetLastClickedPoint();
 
-    
+    fig = manager_p->GetFigure(p.x, p.y);
+    if (fig == nullptr) // not found
+        return;
+
+    // loops depending on point relative position to fig
+    switch (fig->GetPointState(p))  
+    {
+        case PointState::CORNER:
+            ResizeByDragging();
+			break;
+        case PointState::INSIDE:
+            MoveByDragging();
+			break;
+    }
 }
 
 void DraggingAction::Undo()
 {
+}
+
+void DraggingAction::ResizeByDragging()
+{
+    // Point& corner_p = fig->GetCornerPoint(p);
+    // while (still_clicking())
+    // {
+    //     p = GetCurrentMousePos();
+
+    //     corner_p = p;
+
+    //     manager_p->UpdateInterface();
+    // }
+}
+
+void DraggingAction::MoveByDragging()
+{
+    // while (still_clicking())
+    // {
+    //     p = GetCurrentMousePos();
+
+    //     fig->ChangeCenter(p);
+
+    //     manager_p->UpdateInterface();
+    // }
 }
