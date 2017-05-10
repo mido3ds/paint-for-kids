@@ -23,6 +23,7 @@ public:
     virtual void RandomizePosition();
     virtual void ChangeCenter(const Point& p);
     virtual bool IsPointCorner(const Point& p) const;
+    virtual Point& GetCornerPoint(const Point& p);
     virtual CFigure* Copy();
 
 	virtual string GetType();

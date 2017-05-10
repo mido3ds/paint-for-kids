@@ -22,6 +22,9 @@ public:
     ActionType GetUserAction(); // Read the user click and map to an action
     Point GetLastClickedPoint() const; // return last stored point that user clicked on
 
+	Point GetMouseCoord() const; // current coordinates, regardless of clicking or not
+	bool IsMouseDown(button btn_state=LEFT_BUTTON) const;  // button maybe LEFT_BUTTON or RIGHT_BUTTON
+
 private:
 	window* wind_p; // Pointer to the Graphics Window
 	Point last_click;

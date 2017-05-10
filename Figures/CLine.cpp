@@ -269,3 +269,9 @@ bool CLine::IsPointCorner(const Point& p) const
 	// TODO
 	return true;
 }
+
+Point& CLine::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
+}

@@ -288,3 +288,9 @@ bool CRectangle::IsPointCorner(const Point& p) const
 	// TODO
 	return true;
 }
+
+Point& CRectangle::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
+}

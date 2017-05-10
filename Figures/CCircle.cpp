@@ -1,4 +1,3 @@
-
 #include "CCircle.h"
 
 CCircle::CCircle()
@@ -185,4 +184,10 @@ bool CCircle::IsPointCorner(const Point& p) const
 {
 	// TODO
 	return true;
+}
+
+Point& CCircle::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
 }

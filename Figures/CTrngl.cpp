@@ -1,4 +1,3 @@
-
 #include "CTrngl.h"
 
 CTrngl::CTrngl()
@@ -317,4 +316,10 @@ bool CTrngl::IsPointCorner(const Point& p) const
 {
 	// TODO
 	return true;
+}
+
+Point& CTrngl::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
 }

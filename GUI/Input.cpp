@@ -154,7 +154,17 @@ ActionType Input::GetUserAction()
 
         //[2] User clicks on the drawing area
         if (y >= UI.DrawAreaY && y < UI.DrawAreaY + UI.DrawAreaHeight) {
-            return DRAWING_AREA;
+			// check dragging by waiting x seconds 
+			double x = .25;
+			Sleep(x * SECOND);
+
+			if (IsMouseDown())
+			{
+				cout << "you are draggin me!!\n"; // test
+				return DRAGGING;
+			}
+			else
+				return DRAWING_AREA;
         }
 
         //[3] User clicks on the status bar
@@ -207,10 +217,6 @@ ActionType Input::GetUserAction()
 
         //[2] User clicks on the drawing area
         if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight && x >= 0) {
-            // Sleep(x   * SECOND);
-            // if (still click down):
-            //  return DRAGGING;
-            
             return DRAWING_AREA;
         }
 
@@ -218,6 +224,19 @@ ActionType Input::GetUserAction()
         return STATUS;
     }
 
+}
+/////////////////////////////////
+bool Input::IsMouseDown(button btn_state) const
+{
+    int x, y;
+    return wind_p->GetButtonState(btn_state, x, y) == BUTTON_DOWN;
+}
+/////////////////////////////////
+Point Input::GetMouseCoord() const
+{
+    int x, y;
+    wind_p->GetMouseCoord(x, y);
+    return {x, y};
 }
 /////////////////////////////////
 Point Input::GetLastClickedPoint() const
