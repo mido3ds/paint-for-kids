@@ -1,5 +1,3 @@
-
-
 #include "Output.h"
 
 Output::Output()
@@ -61,8 +59,8 @@ Output::Output()
 					 // Create the output window
 	wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
-	// Change the title
 	wind_p->ChangeTitle("Paint for Kids - Programming Techniques Project");
+	wind_p->SetWaitClose(false);
 
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -101,6 +99,18 @@ void Output::ClearStatusBar() const
 	wind_p->SetPen(UI.StatusBarColor, 1);
 	wind_p->SetBrush(UI.StatusBarColor);
 	wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
+	if (UI.IsFilled == true && UI.InterfaceMode == MODE_DRAW) {
+		Point p1;
+		p1.y = UI.StatusBarY + (UI.StatusBarHeight / 2) - 10;
+		p1.x = UI.width - 35;
+		int raduis = 15;
+		GfxInfo info;
+		info.is_filled = true;
+		info.border_width = 1;
+		info.draw_clr = UI.DrawColor;
+		info.fill_clr = UI.FillColor;
+		DrawCircle(p1, raduis, info, false);
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -486,6 +496,10 @@ int Output::TranslateRadius(const Point& f_point, int radius) const
 		sqrt(pow((s_point.y - f_point.y), 2) + pow((s_point.x - f_point.x), 2))
 	);
 }
+
+void Output::UpdateBuffer() const
+{
+	wind_p->UpdateBuffer();
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }
-

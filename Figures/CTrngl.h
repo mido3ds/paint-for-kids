@@ -11,7 +11,7 @@ public:
 	CTrngl(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info);
 
     virtual void Draw(Output* out_p) const;
-    virtual bool IsPointInside(Point p) const;
+    virtual bool IsPointInside(const Point& p) const;
     virtual void Rotate(int deg);
     virtual void SetRotated(bool r);
     virtual bool IsRotated();
@@ -21,6 +21,9 @@ public:
     virtual void MoveToLeftSide();
     virtual void MoveToRightSide();
     virtual void RandomizePosition();
+    virtual void ChangeCenter(const Point& p);
+    virtual bool IsPointCorner(const Point& p) const;
+    virtual Point& GetCornerPoint(const Point& p);
     virtual CFigure* Copy();
     virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);

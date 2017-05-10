@@ -1,4 +1,3 @@
-
 #include "CTrngl.h"
 
 CTrngl::CTrngl()
@@ -218,7 +217,7 @@ bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
     return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width || p3.y < UI.ToolBarHeight || p3.y > UI.height - UI.StatusBarHeight || p3.x < 0 || p3.x > UI.width);
 }
 
-bool CTrngl::IsPointInside(Point p) const
+bool CTrngl::IsPointInside(const Point& p) const
 {
 	double A1 = Trigonometry::Area(p, p1, p2);
 	double A2 = Trigonometry::Area(p, p2, p3);
@@ -306,4 +305,21 @@ void CTrngl::MoveToRightSide()
 void CTrngl::RandomizePosition()
 {
 	// TODO
+}
+
+void CTrngl::ChangeCenter(const Point& p)
+{
+	// TODO
+}
+
+bool CTrngl::IsPointCorner(const Point& p) const
+{
+	// TODO
+	return true;
+}
+
+Point& CTrngl::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
 }

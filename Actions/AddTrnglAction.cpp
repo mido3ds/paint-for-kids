@@ -35,7 +35,7 @@ void AddTrnglAction::ReadActionParameters()
 	p3.x = (p3.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
 	p3.y = (p3.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
 
-    gfx.is_filled = false; //default is not filled
+    gfx.is_filled = UI.IsFilled; //default is not filled
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetDrawColor();
     gfx.fill_clr = out_p->GetFillColor();

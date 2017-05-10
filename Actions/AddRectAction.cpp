@@ -27,7 +27,7 @@ void AddRectAction::ReadActionParameters()
 	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
 	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
 
-    gfx.is_filled = false; //default is not filled
+    gfx.is_filled = UI.IsFilled; //default is not filled
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetDrawColor();
     gfx.fill_clr = out_p->GetFillColor();

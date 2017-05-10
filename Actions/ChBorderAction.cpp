@@ -28,10 +28,10 @@ void ChBorderAction::ReadActionParameters()
 		w = 3;
 		break;
 	case 2:
-		w = 6;
+		w = 10;
 		break;
 	case 3:
-		w = 10;
+		w = 15;
 		break;
 	default:
 		w = 3;

@@ -18,7 +18,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -140,6 +140,7 @@
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
+    <ClCompile Include="Actions\DraggingAction.cpp" />
     <ClCompile Include="Actions\DrawFigActions.cpp" />
     <ClCompile Include="Actions\DrawFigItems.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
+    <ClInclude Include="Actions\DraggingAction.h" />
     <ClInclude Include="Actions\DrawFigActions.h" />
     <ClInclude Include="Actions\DrawFigItems.h" />
     <ClInclude Include="Actions\ExitAction.h" />
