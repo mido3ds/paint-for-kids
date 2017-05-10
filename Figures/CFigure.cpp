@@ -70,3 +70,13 @@ bool CFigure::IsFilled() const
 {
 	return is_filled;
 }
+
+PointState GetPointState(const Point& p)
+{
+	if (IsPointCorner(p))
+		return CORNER;
+	else if (IsPointInside(p))
+		return INSIDE;
+	else
+		return OUTSIDE;
+}

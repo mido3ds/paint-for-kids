@@ -19,6 +19,8 @@ public:
     virtual void MoveToLeftSide();
     virtual void MoveToRightSide();
     virtual void RandomizePosition();
+    virtual void ChangeCenter(const Point& p);
+    virtual bool IsPointCorner(const Point& p) const;
     virtual CFigure* Copy();
     virtual bool IsRotated();
     int GetRadius() const;

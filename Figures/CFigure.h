@@ -23,10 +23,11 @@ public:
 
     virtual void Draw(Output* out_p) const = 0;
     virtual bool IsPointInside(Point p) const = 0;
+    virtual bool IsPointCorner(const Point& p) const = 0;
 
-    void SetDrawColor(color draw_clr); // changes the figure's drawing color
-    void SetFillColor(color filling_clr); // changes the figure's filling color
-    void SetBorderWidth(int BW); // Changes Border Width
+    void SetDrawColor(color draw_clr);
+    void SetFillColor(color filling_clr); 
+    void SetBorderWidth(int BW); 
 
     color GetDrawColor() const;
     color GetFillColor() const;
@@ -41,14 +42,19 @@ public:
     virtual void Load(ifstream& in_file) = 0;
 
     virtual CFigure* Copy() = 0;
-    virtual Point CalculateCenter() = 0;
 
     virtual void RandomizePosition() = 0; // put object in random valid postion, no change to size
 	virtual void Resize(double resize_factor) = 0;
 
     virtual bool Move(int x, int y) = 0;
-    virtual void MoveToLeftSide() = 0; // side for ScrambleAndFind mode
-    virtual void MoveToRightSide() = 0; // side for ScrambleAndFind mode
+    virtual void MoveToLeftSide() = 0;
+    virtual void MoveToRightSide() = 0;
+
+    virtual Point CalculateCenter() = 0;
+    virtual void ChangeCenter(const Point& p) = 0; // changing center -> changes coordinates, only if point is valid
+
+    enum PointState {CORNER, INSIDE, OUTSIDE};
+    PointState GetPointState(const Point& p); // whether point corner, inside, outside
     
     virtual void PrintInfo(Output* out_p) = 0; // on the status bar
 

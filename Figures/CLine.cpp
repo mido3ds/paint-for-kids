@@ -258,3 +258,13 @@ void CLine::RandomizePosition()
 {
 	// TODO
 }
+
+void ChangeCenter(const Point& p)
+{
+	// TODO
+}
+
+bool IsPointCorner(const Point& p) const
+{
+	// TODO
+}
