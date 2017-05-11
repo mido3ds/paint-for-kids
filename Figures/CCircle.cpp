@@ -118,7 +118,7 @@ void CCircle::Load(ifstream& in_file)
     p2 = GetSecondPointFromRadius(rad);
 }
 
-bool CCircle::IsPointInside(Point p) const
+bool CCircle::IsPointInside(const Point& p) const
 {
     float RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
     float NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
@@ -196,5 +196,21 @@ void CCircle::RandomizePosition()
 		up.y = p1.y - radius;
 
 	} while (OutOfRightRange(p1) || OutOfRightRange(left) || OutOfRightRange(right) || OutOfRightRange(up) || OutOfRightRange(down));
+}
 
+void CCircle::ChangeCenter(const Point& p)
+{
+	// TODO
+}
+
+bool CCircle::IsPointCorner(const Point& p) const
+{
+	// TODO
+	return true;
+}
+
+Point& CCircle::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
 }

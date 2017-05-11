@@ -137,7 +137,7 @@ void CLine::Load(ifstream& in_file)
 		>> border_width;
 }
 
-bool CLine::IsPointInside(Point p) const
+bool CLine::IsPointInside(const Point& p) const
 {
 	double d1 = sqrt(pow(p.x - p1.x, 2) + pow(p.y - p1.y, 2));
 	double d2 = sqrt(pow(p.x - p2.x, 2) + pow(p.y - p2.y, 2));
@@ -269,5 +269,22 @@ void CLine::RandomizePosition()
 		p1 = center + def1;
 		p2 = center + def2;
 		i++;
-	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
+	} while (OutOfRightRange(p1) || OutOfRightRange(p2));\
+}
+
+void CLine::ChangeCenter(const Point& p)
+{
+	// TODO
+}
+
+bool CLine::IsPointCorner(const Point& p) const
+{
+	// TODO
+	return true;
+}
+
+Point& CLine::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
 }

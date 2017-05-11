@@ -217,7 +217,7 @@ bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
     return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width || p3.y < UI.ToolBarHeight || p3.y > UI.height - UI.StatusBarHeight || p3.x < 0 || p3.x > UI.width);
 }
 
-bool CTrngl::IsPointInside(Point p) const
+bool CTrngl::IsPointInside(const Point& p) const
 {
 	double A1 = Trigonometry::Area(p, p1, p2);
 	double A2 = Trigonometry::Area(p, p2, p3);
@@ -294,7 +294,7 @@ void CTrngl::MoveToRightSide()
 	int def2 = p2.x - center.x;
 	int def3 = p3.x - center.x;
 
-	center.x = center.x / 2 + UI.width / 2;
+	center.x *= 2;
 
 	// remake the points from the previous centere
 	p1.x = center.x + def1;
@@ -304,18 +304,22 @@ void CTrngl::MoveToRightSide()
 
 void CTrngl::RandomizePosition()
 {
-	Point center = CalculateCenter();
+	// TODO
+}
 
-	// get difference between center and points
-	Point def1(p1.x - center.x, p1.y - center.y);
-	Point def2(p2.x - center.x, p2.y - center.y);
-	Point def3(p3.x - center.x, p3.y - center.y);
-	do
-	{
-		center.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
-		center.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;
-		p1 = center + def1;
-		p2 = center + def2;
-		p3 = center + def3;
-	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
+void CTrngl::ChangeCenter(const Point& p)
+{
+	// TODO
+}
+
+bool CTrngl::IsPointCorner(const Point& p) const
+{
+	// TODO
+	return true;
+}
+
+Point& CTrngl::GetCornerPoint(const Point& p)
+{
+	// TODO
+	return p1;
 }

@@ -114,28 +114,6 @@ private:
 	// Keyboard and mouse input queues
 	mqueue mqueInput;
 	kqueue kqueInput;
-
-    // The current state of the left and right buttons
-    /*buttonstate bsLeft;
-    buttonstate bsRight;
-
-    // Kludge to solve problems with the stupid way Win32 messaging system works
-    inline void ProcessMessage();  
-
-    // Keep track of current drawing state to prevent unneccessay API calls
-   	void ChangeDrawStyle(drawstyle dsNewStyle);
-   	void SetFontStyle();
-    // Function to be a good neighboor and put things back the way they were
-   	void RestoreDrawStyle();
-   	void RestoreFontStyle();
-
-    // Allow the windowinput class to muck with our data structures (needed to properly
-    // handle input)
-    friend class windowinput;
-
-    // Prevent inadvertent copying... 
-    void operator=(window &); 
-    window(window &);*/
     
   public:
 

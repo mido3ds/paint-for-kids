@@ -28,6 +28,8 @@ public:
 	void CreateDrawArea() const;
 	void CreatePlayArea() const;
 
+	void UpdateBuffer() const;
+
 	Input* CreateInput() const; // creates a pointer to the Input object
 
     void ClearStatusBar() const;
