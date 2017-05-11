@@ -1,6 +1,7 @@
-
 #include "Input.h"
 #include "Output.h"
+
+#include <chrono>
 
 Input::Input(window* pW)
 {
@@ -9,7 +10,8 @@ Input::Input(window* pW)
 
 clicktype Input::GetClickPoint(int& x, int& y) const
 {
-    return wind_p->WaitMouseClick(x, y);
+	while(wind_p->GetMouseClick(x, y) == NO_CLICK);
+	return LEFT_CLICK; // TODO: remove return value
 }
 
 string Input::GetString(Output* pO) const
@@ -45,11 +47,37 @@ color Input::PickColor(int ix, int iy)
 // desired action
 ActionType Input::GetUserAction()
 {
-    int x, y;
+    int x , y;
+	GetClickPoint(x, y);
 
-	wind_p->FlushMouseQueue();
-	while (wind_p->GetButtonState(LEFT_BUTTON, x, y) != BUTTON_DOWN);
-	wind_p->FlushMouseQueue();
+	// TODO: dragging code
+	/*bool bDragging = false;
+	auto start = chrono::system_clock::now(), end = chrono::system_clock::now();
+	chrono::duration<double> duration = end - start;
+	buttonstate bs = BUTTON_UP;
+	while (duration.count() < 1 || bs == BUTTON_UP)
+	{
+		if (bDragging == false) {
+			if ((bs = wind_p->GetButtonState(LEFT_BUTTON, x, y)) == BUTTON_DOWN) {
+				bDragging = true;
+				cout << "you are dragging\n";
+			}
+		}
+		else {
+			if ((bs = wind_p->GetButtonState(LEFT_BUTTON, x, y)) == BUTTON_UP) {
+				bDragging = false;
+			}
+			else {
+				cout << "you are still drgging \n\n";
+			}
+
+		}
+
+		end = chrono::system_clock::now();
+		duration = end - start;
+	}
+	if (bDragging)
+		return DRAGGING;*/
 
     last_click = { x, y };
 
@@ -159,10 +187,8 @@ ActionType Input::GetUserAction()
         //[2] User clicks on the drawing area
         if (y >= UI.DrawAreaY && y < UI.DrawAreaY + UI.DrawAreaHeight) {
 			// check dragging by waiting x seconds 
-			double x = .40;
-			Sleep(x * SECOND);
 
-			if (IsMouseDown())
+			if (wind_p->GetButtonState(button::LEFT_BUTTON, x , y) == buttonstate::BUTTON_DOWN)
 				return DRAGGING;
 			else
 				return DRAWING_AREA;

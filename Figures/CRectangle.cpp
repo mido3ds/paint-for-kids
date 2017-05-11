@@ -282,8 +282,8 @@ void CRectangle::RandomizePosition()
 	Point def2(p2.x - center.x, p2.y - center.y);
 	do
 	{
-		center.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
-		center.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;
+		center.x = rand() % (((UI.width - 5) - ((UI.width / 2) + 5)) + 1) + ((UI.width / 2) + 5);
+		center.y = rand() % (((UI.StatusBarY - 5) - 55) + 1) + 55;
 		p1 = center + def1;
 		p2 = center + def2;
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2));

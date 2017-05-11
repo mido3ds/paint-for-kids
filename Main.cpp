@@ -8,6 +8,7 @@ int main()
 	do 
 	{
 		action = app.GetUserAction();
+		cout << action << endl;
 		app.ExecuteAction(action);
 
 		app.UpdateInterface();

@@ -38,7 +38,6 @@ void ScrambleFind::ReadActionParameters() // prepare game
 	
     for (auto& fig : right_figs)
     {
-        fig->MoveToRightSide(); // debugging
         fig->Resize(0.5);
 		fig->RandomizePosition();
     }

@@ -304,7 +304,22 @@ void CTrngl::MoveToRightSide()
 
 void CTrngl::RandomizePosition()
 {
-	// TODO
+
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	Point def1(p1.x - center.x, p1.y - center.y);
+	Point def2(p2.x - center.x, p2.y - center.y);
+	Point def3(p3.x - center.x, p3.y - center.y);
+	do
+	{
+		center.x = rand() % (((UI.width - 5) - ((UI.width / 2) + 5)) + 1) + ((UI.width / 2) + 5);
+		center.y = rand() % (((UI.StatusBarY - 5) - 55) + 1) + 55;
+		p1 = center + def1;
+		p2 = center + def2;
+		p3 = center + def3;
+	} while (OutOfRightRange(p1) || OutOfRightRange(p2) || OutOfRightRange(p3));
+
 }
 
 void CTrngl::ChangeCenter(const Point& p)

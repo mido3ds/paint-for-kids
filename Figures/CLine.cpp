@@ -264,8 +264,11 @@ void CLine::RandomizePosition()
 	int i = 0;
 	do
 	{
-		center.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
-		center.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;
+		/*center.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
+		center.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;*/
+		center.x = rand() % (((UI.width - 5) - ((UI.width / 2) + 5)) + 1) + ((UI.width / 2) + 5);
+		center.y = rand() % (((UI.StatusBarY - 5) - 55) + 1) + 55;
+
 		p1 = center + def1;
 		p2 = center + def2;
 		i++;

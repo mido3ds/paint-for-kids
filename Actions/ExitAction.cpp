@@ -25,9 +25,6 @@ void ExitAction::Execute()
         if (input == "y" || input == "Y")
             manager_p->ExecuteAction(SAVE);
     }
-
-    // it will exit automatically from the main function
-    // look at do-while at Main.cpp
 }
 
 void ExitAction::Undo()

@@ -180,8 +180,8 @@ void CCircle::RandomizePosition()
 
 	do
 	{
-		p1.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
-		p1.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;
+		p1.x = rand() % (((UI.width-5) - ((UI.width / 2)+5)) + 1) + ((UI.width / 2)+5);
+		p1.y = rand() % (((UI.StatusBarY-5) - 55) + 1) + 55;
 
 		left.x = p1.x - radius;
 		left.y = p1.y;
