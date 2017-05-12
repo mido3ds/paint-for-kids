@@ -1,4 +1,3 @@
-
 #include "Input.h"
 #include "Output.h"
 
@@ -7,10 +6,10 @@ Input::Input(window* pW)
 	wind_p = pW; // point to the passed window
 }
 
-clicktype Input::GetClickPoint(int& x, int& y) const
+clicktype Input::GetClick(int& x, int& y) const
 {
     clicktype clk_type;
-    while ((clk_type = wind_p->GetMouseClick(x, y)) != clicktype::NO_CLICK);
+    while ((clk_type = wind_p->GetMouseClick(x, y)) == clicktype::NO_CLICK);
     return clk_type;
 }
 
@@ -18,36 +17,37 @@ string Input::GetString(Output* pO) const
 {
 	string Label;
 	char Key;
-	while (1) {
+	while (1)
+	{
 		wind_p->WaitKeyPress(Key);
+
 		if (Key == 27) // ESCAPE key is pressed
 			return ""; // returns nothing as user has cancelled label
 		if (Key == 13) // ENTER key is pressed
 			return Label;
 		if (Key == 8) // BackSpace is pressed
-		{
 			if (Label.size() != 0) // only resize it if label is not empty
 				Label.resize(Label.size() - 1);
-		}
 		else
 			Label += Key;
+
 		pO->PrintMessage(Label);
 	}
 }
 
-color Input::PickColor(int ix, int iy)
+color Input::GetColor(int ix, int iy)
 {
-	if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) {
+	if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) 
 		return WHITE;
-	}
+	
 	return wind_p->GetColor(ix, iy);
 }
 
-// This function reads the position where the user clicks to determine the
-// desired action
+// from click point, return the desired action
 ActionType Input::GetUserAction()
 {
-    GetClickPoint(last_click.x, last_click.y);
+    while(GetClick(last_click.x, last_click.y) != clicktype::LEFT_CLICK);
+	int x = last_click.x, y = last_click.y;
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
     {
@@ -103,17 +103,18 @@ ActionType Input::GetUserAction()
 
                 int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
 
-                switch (ClickedItemOrder) {
-                case ITM_LINE:
-                    return DRAW_LINE;
-                case ITM_RECT:
-                    return DRAW_RECT;
-                case ITM_TRI:
-                    return DRAW_TRI;
-                case ITM_CIRC:
-                    return DRAW_CIRC;
-                default:
-                    return EMPTY;
+                switch (ClickedItemOrder) 
+				{
+					case ITM_LINE:
+						return DRAW_LINE;
+					case ITM_RECT:
+						return DRAW_RECT;
+					case ITM_TRI:
+						return DRAW_TRI;
+					case ITM_CIRC:
+						return DRAW_CIRC;
+					default:
+						return EMPTY;
                 }
             }
         }
@@ -122,27 +123,28 @@ ActionType Input::GetUserAction()
 
                 int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
 
-                switch (ClickedItemOrder) {
-                case ITM_DEL:
-                    return DEL;
-                case ITM_MOVE:
-                    return MOVE;
-                case ITM_RESIZE:
-                    return RESIZE;
-                case ITM_ROTATE:
-                    return ROTATE;
-                case ITM_SEND_BACK:
-                    return SEND_BACK;
-                case ITM_BRING_FRONT:
-                    return BRNG_FRNT;
-                case ITM_CUT:
-                    return CUT;
-                case ITM_COPY:
-                    return COPY;
-                case ITM_PASTE:
-                    return PASTE;
-                default:
-                    return EMPTY;
+                switch (ClickedItemOrder) 
+				{
+					case ITM_DEL:
+						return DEL;
+					case ITM_MOVE:
+						return MOVE;
+					case ITM_RESIZE:
+						return RESIZE;
+					case ITM_ROTATE:
+						return ROTATE;
+					case ITM_SEND_BACK:
+						return SEND_BACK;
+					case ITM_BRING_FRONT:
+						return BRNG_FRNT;
+					case ITM_CUT:
+						return CUT;
+					case ITM_COPY:
+						return COPY;
+					case ITM_PASTE:
+						return PASTE;
+					default:
+						return EMPTY;
                 }
             }
         }
@@ -153,13 +155,13 @@ ActionType Input::GetUserAction()
         }
 
         //[2] User clicks on the drawing area
-        if (last_click.y >= UI.DrawAreaY && last_click.y < UI.DrawAreaY + UI.DrawAreaHeight) {
+        if (last_click.y >= UI.DrawAreaY && last_click.y < UI.DrawAreaY + UI.DrawAreaHeight)
 			return DRAWING_AREA;
-        }
 
         //[3] User clicks on the status bar
         return STATUS;
-    } else // GUI is in PLAY mode
+    } 
+	else // GUI is in PLAY mode
     {
         //[1] If user clicks on the Toolbar
         if (last_click.y >= 0 && last_click.y < UI.ToolBarHeight) {
@@ -181,8 +183,8 @@ ActionType Input::GetUserAction()
             case ITM_EXIT_PLAY:
                 return EXIT;
                 
-            default:
-                return EMPTY; // A click on empty place in desgin toolbar
+				default:
+					return EMPTY; // A click on empty place in desgin toolbar
             }
         }
 		if (wind_p->ispickbar) {
@@ -190,25 +192,25 @@ ActionType Input::GetUserAction()
 
 				int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
 
-				switch (ClickedItemOrder) {
-				case ITM_PICK_COLOR:
-					return PICK_COLOR;
-				case ITM_PICK_TYPE:
-					return PICK_TYPE;
-				case ITM_PICK_AREA:
-					return PICK_AREA;
-				case ITM_PICK_COL_TYP:
-					return PICK_COL_TYP;
-				default:
-					return EMPTY;
+				switch (ClickedItemOrder) 
+				{
+					case ITM_PICK_COLOR:
+						return PICK_COLOR;
+					case ITM_PICK_TYPE:
+						return PICK_TYPE;
+					case ITM_PICK_AREA:
+						return PICK_AREA;
+					case ITM_PICK_COL_TYP:
+						return PICK_COL_TYP;
+					default:
+						return EMPTY;
 				}
 			}
 		}
 
         //[2] User clicks on the drawing area
-        if (last_click.y >= UI.ToolBarHeight && last_click.y < UI.height - UI.StatusBarHeight && last_click.x >= 0) {
+        if (last_click.y >= UI.ToolBarHeight && last_click.y < UI.height - UI.StatusBarHeight && last_click.x >= 0)
             return DRAWING_AREA;
-        }
 
         //[3] User clicks on the status bar
         return STATUS;
@@ -216,7 +218,7 @@ ActionType Input::GetUserAction()
 
 }
 /////////////////////////////////
-bool Input::IsMouseDown(button btn_state) const
+bool Input::IsMouseDown(button btn_state = LEFT_BUTTON) const
 {
     int x, y;
     return wind_p->GetButtonState(btn_state, x, y) == BUTTON_DOWN;

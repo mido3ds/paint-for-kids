@@ -1,11 +1,10 @@
 #include "CCircle.h"
 
 CCircle::CCircle()
-	: p1(0, 0)
-	, p2(0, 0)
-	, radius(0)
+	:radius(0)
 {
 }
+
 CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 	: CFigure(circ_gfx_info)
 {

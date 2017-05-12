@@ -16,7 +16,7 @@ void ToPlayModeAction::Execute()
 
     out_p->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
     out_p->CreatePlayToolBar();
-    out_p->CreatePlayArea();
+    out_p->CreateDrawArea();
 }
 
 void ToPlayModeAction::Undo()

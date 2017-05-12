@@ -28,21 +28,22 @@ void PickByType::Execute()
 		
 		out_p->CreateRestartGame();
 		out_p->PrintMessage("Choose Your First Figure");
-		in_p->GetClickPoint(p.x, p.y);
+		in_p->GetClick(p.x, p.y);
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				figures = manager_p->GetCopyOfFigures();
-				PickByType::Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					figures = manager_p->GetCopyOfFigures();
+					PickByType::Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 		fig = manager_p->GetFigure(figures, p);
@@ -78,21 +79,22 @@ void PickByType::Execute()
 
 		while (numOfSameType > 0) {
 
-			in_p->GetClickPoint(p.x, p.y);
+			in_p->GetClick(p.x, p.y);
 			if (p.y > 0 && p.y < UI.ToolBarHeight)
 			{
 				int IconClicked = p.x / UI.MenuItemWidth;
 				switch (IconClicked)
 				{
-				case 0:
-					figures = manager_p->GetCopyOfFigures();
-					PickByType::Execute();
-					break;
-				case 1:
-					out_p->CreatePlayToolBar();
-					return;
-				default:
-					break;
+					case 0:
+						figures = manager_p->GetCopyOfFigures();
+						PickByType::Execute();
+						break;
+					case 1:
+						out_p->CreatePlayToolBar();
+						return;
+
+					default:
+						break;
 				}
 			}
 			fig = ApplicationManager::GetFigure(figures, p);

@@ -140,7 +140,6 @@
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
-    <ClCompile Include="Actions\DraggingAction.cpp" />
     <ClCompile Include="Actions\DrawFigActions.cpp" />
     <ClCompile Include="Actions\DrawFigItems.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
@@ -225,7 +224,6 @@
     <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
-    <ClInclude Include="Actions\DraggingAction.h" />
     <ClInclude Include="Actions\DrawFigActions.h" />
     <ClInclude Include="Actions\DrawFigItems.h" />
     <ClInclude Include="Actions\ExitAction.h" />

@@ -10,7 +10,7 @@ void UnselectAction::ReadActionParameters()
     Input* in_p = manager_p->GetInput();
     Output* out_p = manager_p->GetOutput();
 	out_p->PrintMessage("Click on select figure you want to deselect to deselect all click on a blank area");
-    in_p->GetClickPoint(p.x, p.y);
+    in_p->GetClick(p.x, p.y);
 	out_p->ClearStatusBar();
 }
 
