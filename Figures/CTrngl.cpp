@@ -163,7 +163,7 @@ bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
 
 bool CTrngl::IsPointInside(const Point& p) const
 {
-	double A1 = Trigonometry::Area(p, p1, p2);
+	/*double A1 = Trigonometry::Area(p, p1, p2);
 	double A2 = Trigonometry::Area(p, p2, p3);
 	double A3 = Trigonometry::Area(p, p1, p3);
 	double A = Trigonometry::Area(p1, p2, p3);
@@ -171,7 +171,11 @@ bool CTrngl::IsPointInside(const Point& p) const
 	double scale = 0.1;
 	A = (int)(A / scale)*scale;
 	B = (int)(B / scale)*scale;
-	return (A == B);
+	return (A == B);*/
+	if ((SameSide(p, p1, p2, p3) && SameSide(p, p2, p1, p3) && SameSide(p, p3, p1, p2)))
+		return true;
+	else
+		return false;
 }
 
 bool CTrngl::Move(int x, int y)
@@ -210,6 +214,24 @@ CFigure* CTrngl::Copy()
 void CTrngl::PrintInfo(Output* out_p)
 {
 	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
+}
+
+double CTrngl::CrossProduct(Point p1, Point p2) const
+{
+	return ((p1.x * p2.y) - (p1.y * p2.x));
+}
+
+bool CTrngl::SameSide(Point p1, Point p2, Point a, Point b) const
+{
+	Point ba = Point((b.x - a.x), (b.y - a.y));
+	Point p1a = Point((p1.x - a.x), (p1.y - a.y));
+	Point p2a = Point((p2.x - a.x), (p2.y - a.y));
+	double cp1 = CrossProduct(ba, p1a);
+	double cp2 = CrossProduct(ba, p2a);
+	double cp12 = cp1 * cp2;
+	if (cp12 >= 0)
+		return true;
+	return false;
 }
 
 void CTrngl::MoveToLeftSide()

@@ -30,6 +30,8 @@ public:
 
 	virtual void PrintInfo(Output* out_p);
 
+	double CrossProduct(Point p1, Point p2) const;
+	bool SameSide(Point p1, Point p2, Point a, Point b) const;
 private:
 	Point p1, p2, p3;
 	const string type = "Triangle";
