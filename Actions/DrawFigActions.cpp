@@ -11,6 +11,7 @@ void DrawFigActions::ReadActionParameters()
 	out_p->ClearStatusBar();
 	out_p->CreateFigActions();
 	act = in_p->GetUserAction();
+	out_p->ClearTempToolbar();
 }
 
 void DrawFigActions::Execute()

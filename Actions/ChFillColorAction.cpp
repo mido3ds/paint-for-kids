@@ -18,6 +18,7 @@ void ChFillColorAction::ReadActionParameters()
     C = in_p->GetColor(x, y);
     out_p->ClearDrawArea();
     out_p->ClearStatusBar();
+	out_p->ClearTempToolbar();
 }
 
 void ChFillColorAction::Execute()

@@ -44,6 +44,7 @@ void ChBorderAction::ReadActionParameters()
     C = in_p->GetColor(x, y);
     out_p->ClearStatusBar();
     out_p->ClearDrawArea();
+	out_p->ClearTempToolbar();
 }
 
 void ChBorderAction::Execute()

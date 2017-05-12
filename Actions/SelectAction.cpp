@@ -40,13 +40,15 @@ void SelectAction::Execute()
 		}
 		else {
 			manager_p->UnselectAll();
+			out_p->PrintMessage("Unselect All Figures");
 		}
 	}
 	else {
-		manager_p->UnselectAll();
+		
 		selected = manager_p->GetFigure(p.x, p.y);
 		if (selected) {
 			if (!selected->IsSelected()) {
+				manager_p->UnselectAll();
 				selected->SetSelected(true);
 				originaldraw = selected->GetDrawColor();		//Why This???
 				manager_p->SetNumSelected(1);
@@ -58,6 +60,10 @@ void SelectAction::Execute()
 				manager_p->SetNumSelected(0);
 				manager_p->PrintSelectedSize();
 			}
+		}
+		else {
+			manager_p->UnselectAll();
+			out_p->PrintMessage("Unselect All Figures");
 		}
 	}
 }

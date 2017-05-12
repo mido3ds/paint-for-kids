@@ -17,6 +17,7 @@ void ChBGColorAction::ReadActionParameters()
     lastC = C;
     C = in_p->GetColor(x, y);
     out_p->ClearStatusBar();
+	out_p->ClearTempToolbar();
 }
 
 void ChBGColorAction::Execute()

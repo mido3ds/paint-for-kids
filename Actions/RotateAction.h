@@ -16,7 +16,7 @@ public:
     virtual void Undo();
 
 private:
-    int deg;
+    int deg = 90;
 };
 
 #endif // !_ROTATE_
