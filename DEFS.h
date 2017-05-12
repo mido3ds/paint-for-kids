@@ -60,6 +60,10 @@ struct Point // To be used for figures points
 
     Point(int a, int b): x(a), y(b) {}
     Point(): x(0), y(0) {}
+
+	Point &operator- (const Point &p) {
+		return Point((this->x - p.x), (this->y - p.y));
+	}
 };
 
 struct GfxInfo // Graphical info of each figure (you may add more members)

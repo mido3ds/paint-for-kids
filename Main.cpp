@@ -5,14 +5,11 @@ int main()
 	ActionType action;
 	ApplicationManager app;
 
-	do 
-	{
+	do {
 		action = app.GetUserAction();
 		app.ExecuteAction(action);
-
 		app.UpdateInterface();
-	} 
-	while (action != EXIT);
+	} while (action != EXIT);
 
 	return 0;
 }

@@ -51,20 +51,20 @@ void PickByType::Execute()
 		if (fig) {
 
 			correct++;
-			if (fig->GetType() == "Circle") {
-				out_p->PrintMessage("Pick All Circles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			if (dynamic_cast<CCircle *> (fig)) {
+				out_p->PrintMessage("Pick All Circles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				type = "Circle";
 			} 
-			else if (fig->GetType() == "Triangle") {
-				out_p->PrintMessage("Pick All Triangles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			else if (dynamic_cast<CTrngl *> (fig)) {
+				out_p->PrintMessage("Pick All Triangles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				type = "Triangle";
 			}
-			else if(fig->GetType() == "Line") {
-				out_p->PrintMessage("Pick All Lines            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			else if(dynamic_cast<CLine *> (fig)) {
+				out_p->PrintMessage("Pick All Lines            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				type = "Line";
 			}
-			else if(fig->GetType() == "Rectangle") {
-				out_p->PrintMessage("Pick All Rectangles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			else if(dynamic_cast<CRectangle *> (fig)) {
+				out_p->PrintMessage("Pick All Rectangles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				type = "Rectangle";
 			}
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
@@ -73,7 +73,7 @@ void PickByType::Execute()
 			manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 		}
 		else {
-			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 			continue;
 		}
 
@@ -108,13 +108,13 @@ void PickByType::Execute()
 					numOfSameType--;
 					numOfFigs--;
 					manager_p->UpdateInterface(figures);
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					Sleep(400);
 				}
 				else {
 					// Wrong Figure
 					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 					Sleep(400);
 				}
 
@@ -122,7 +122,7 @@ void PickByType::Execute()
 			else {
 
 				wrong++;
-				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 				Sleep(400);
 
 			}
@@ -131,10 +131,10 @@ void PickByType::Execute()
 
 	}
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
 	}
 	else {
-		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)));
+		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)), ORANGE);
 		Sleep(1000);
 	}
 }
