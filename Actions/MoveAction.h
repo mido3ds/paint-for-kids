@@ -20,7 +20,8 @@ public:
 private:
     Point p; //new center
     Point old; //old center
-    bool moveActiond = false;
+    bool moved = false;
+	deque<CFigure*> moved_figs;
 };
 
 #endif

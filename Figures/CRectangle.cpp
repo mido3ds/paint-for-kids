@@ -160,7 +160,7 @@ Point CRectangle::CalculateCenter()
 	return c;
 }
 
-bool CRectangle::IsPointInside(Point p) const
+bool CRectangle::IsPointInside(const Point& p) const
 {
     /*Point p3, p4;
     p3.x = p2.x;
@@ -252,21 +252,6 @@ void CRectangle::MoveToLeftSide()
 	int def2 = p2.x - center.x;
 
 	center.x /= 2;
-
-	// remake the points from the previous centere
-	p1.x = center.x + def1;
-	p2.x = center.x + def2;
-}
-
-void CRectangle::MoveToRightSide()
-{
-	Point center = CalculateCenter();
-
-	// get difference between center and points
-	int def1 = p1.x - center.x;
-	int def2 = p2.x - center.x;
-
-	center.x *= 2;
 
 	// remake the points from the previous centere
 	p1.x = center.x + def1;

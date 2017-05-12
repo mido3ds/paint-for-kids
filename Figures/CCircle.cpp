@@ -1,4 +1,3 @@
-
 #include "CCircle.h"
 
 CCircle::CCircle()
@@ -118,7 +117,7 @@ void CCircle::Load(ifstream& in_file)
     p2 = GetSecondPointFromRadius(rad);
 }
 
-bool CCircle::IsPointInside(Point p) const
+bool CCircle::IsPointInside(const Point& p) const
 {
     float RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
     float NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
@@ -164,11 +163,6 @@ void CCircle::PrintInfo(Output* out_p)
 void CCircle::MoveToLeftSide()
 {
 	p1.x /= 2;
-}
-
-void CCircle::MoveToRightSide()
-{
-	p1.x *= 2;
 }
 
 void CCircle::RandomizePosition()

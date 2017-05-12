@@ -11,7 +11,7 @@ public:
 	CRectangle(Point, Point, GfxInfo figure_gfx_info);
 
     virtual void Draw(Output* out_p) const;
-    virtual bool IsPointInside(Point p) const;
+    virtual bool IsPointInside(const Point& p) const;
     virtual void Rotate(int deg);
     virtual void SetRotated(bool r);
     virtual bool IsRotated();
@@ -19,7 +19,6 @@ public:
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual void MoveToLeftSide();
-    virtual void MoveToRightSide();
     virtual void RandomizePosition();
     virtual CFigure* Copy();
 

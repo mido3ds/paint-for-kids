@@ -209,8 +209,6 @@ void ApplicationManager::UpdateInterface() const
 		out_p->CreateDrawToolBar();
 	else
 		out_p->CreatePlayToolBar();
-
-	//out_p->ClearStatusBar();
 }
 
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
@@ -455,9 +453,9 @@ void ApplicationManager::PrintSelectedSize()
 	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
-Point ApplicationManager::MoveSelected(Point p) 
+void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old)
 {
-	deque<CFigure*> moved_figs;
+	
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
 
@@ -471,31 +469,29 @@ Point ApplicationManager::MoveSelected(Point p)
     }
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
-	bool out_range = false;
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			if (!fig->Move(x, y))
-			{
-				out_p->PrintMessage("Error........Figures will be out of range if moved");
-				out_range = true;
-				break;
+	
+		bool out_range = false;
+		for (auto& fig : figs) {
+			if (fig->IsSelected()) {
+				if (!fig->Move(x, y))
+				{
+					out_p->PrintMessage("Error........Figures will be out of range if moved");
+					out_range = true;
+					break;
+				}
+				else  moved_figs.push_back(fig);
 			}
-			//fig->SetSelected(true);
-			else  moved_figs.push_back(fig);
 		}
-	}
-	if (out_range)
-	{
-		for (int i = 0;i < moved_figs.size();i++)
+		if (out_range)
 		{
-			moved_figs[i]->Move(-x, -y);
-		}
-		moved_figs.clear();
+			for (int i = 0;i < moved_figs.size();i++)
+			{
+				moved_figs[i]->Move(-x, -y);
+			}
+			moved_figs.clear();
 
-	}
-    p.x = minx;
-    p.y = miny;
-    return p;
+		}
+		old = Point(minx, miny);
 }
 
 bool ApplicationManager::PasteClipboard(Point p)

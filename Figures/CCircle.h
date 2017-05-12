@@ -10,14 +10,13 @@ public:
 	CCircle(Point p1, int radius, GfxInfo circ_gfx_info);
 
     virtual void Draw(Output* out_p) const;
-    virtual bool IsPointInside(Point p) const;
+    virtual bool IsPointInside(const Point& p) const;
     virtual void Rotate(int deg);
     virtual void SetRotated(bool r);
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual void MoveToLeftSide();
-    virtual void MoveToRightSide();
     virtual void RandomizePosition();
     virtual CFigure* Copy();
     virtual bool IsRotated();
