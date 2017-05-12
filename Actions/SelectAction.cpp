@@ -11,29 +11,60 @@ void SelectAction::ReadActionParameters()
 {
 	out_p = manager_p->GetOutput();
 	in_p = manager_p->GetInput();
-	out_p->PrintMessage("Please Click On The Figure/s You Want To Select When Finished Click on Select Icon..");
+	//out_p->PrintMessage("Please Click On The Figure/s You Want To Select When Finished Click on Select Icon..");
 }
 
 void SelectAction::Execute()
 {
-	in_p->GetClickPoint(p.x, p.y);
-	p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
-	p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
-	while (!(p.y < UI.ToolBarHeight && p.y > UI.ToolBarY && p.x > ITM_SELECT*UI.MenuItemWidth && p.x < ITM_SELECT*UI.MenuItemWidth + UI.MenuItemWidth))
+	p = in_p->GetLastClickedPoint();
+	p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
+	p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	if (manager_p->GetMultiSelect())
 	{
-
+		// If The Mode Is Multi Select Mode
 		selected = manager_p->GetFigure(p.x, p.y);
 
-		if (selected != nullptr && !selected->IsSelected()) {
-			selected->SetSelected(true);
-			originaldraw = selected->GetDrawColor();
-			manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
-			manager_p->PrintSelectedSize();
-			manager_p->UpdateInterface();
+		if (selected) {
+			if (!selected->IsSelected()) {
+				selected->SetSelected(true);
+				originaldraw = selected->GetDrawColor();		//Why This???
+				manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
+				manager_p->PrintSelectedSize();
+			}
+			else {
+				selected->SetSelected(false);
+				originaldraw = selected->GetDrawColor();		//Why This???
+				manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
+				manager_p->PrintSelectedSize();
+			}
 		}
-		in_p->GetClickPoint(p.x, p.y);
-		p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
-		p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
+		else {
+			manager_p->UnselectAll();
+			out_p->PrintMessage("Unselect All Figures");
+		}
+	}
+	else {
+		
+		selected = manager_p->GetFigure(p.x, p.y);
+		if (selected) {
+			if (!selected->IsSelected()) {
+				manager_p->UnselectAll();
+				selected->SetSelected(true);
+				originaldraw = selected->GetDrawColor();		//Why This???
+				manager_p->SetNumSelected(1);
+				manager_p->PrintSelectedSize();
+			}
+			else {
+				selected->SetSelected(false);
+				originaldraw = selected->GetDrawColor();		//Why This???
+				manager_p->SetNumSelected(0);
+				manager_p->PrintSelectedSize();
+			}
+		}
+		else {
+			manager_p->UnselectAll();
+			out_p->PrintMessage("Unselect All Figures");
+		}
 	}
 }
 

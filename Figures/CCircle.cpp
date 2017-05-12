@@ -1,11 +1,10 @@
 #include "CCircle.h"
 
 CCircle::CCircle()
-	: p1(0, 0)
-	, p2(0, 0)
-	, radius(0)
+	:radius(0)
 {
 }
+
 CCircle::CCircle(Point p1, int radius, GfxInfo circ_gfx_info)
 	: CFigure(circ_gfx_info)
 {
@@ -165,29 +164,7 @@ void CCircle::MoveToLeftSide()
 	p1.x /= 2;
 }
 
-void CCircle::MoveToRightSide()
-{
-	p1.x *= 2;
-}
-
 void CCircle::RandomizePosition()
 {
 	// TODO
-}
-
-void CCircle::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CCircle::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CCircle::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
 }

@@ -32,10 +32,8 @@
 #include "Actions/RotateAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/SelectAction.h"
-#include "Actions/DraggingAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
-#include "Actions/UnselectAction.h"
 #include "Actions/UndoAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
@@ -47,6 +45,7 @@
 #include "Actions/PickByType.h"
 #include "Actions/PickByArea.h"
 #include "Actions/PickByTypeAndColor.h"
+#include "Actions/MultiSelect.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -121,6 +120,10 @@ public:
     void SetClipboard(deque<CFigure*> clip);
     deque<CFigure*> GetClipboard();
 
+	/*  ------------------------------- MultiSelect ------------------------------- */
+	bool GetMultiSelect();
+	void ToggleMultiSelect();
+
 private:
     HistoryManager history;
     CFigure* GetFigure(unsigned int id) const;
@@ -135,6 +138,8 @@ private:
 	int num_selected = 0;
 
     bool figs_is_saved;  // whether figs has been saved or not
+
+	bool multi_select = false;
 	
     Input* in_p;
     Output* out_p;

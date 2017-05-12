@@ -30,31 +30,40 @@ void PickByTypeAndColor::Execute()
 
 		out_p->PrintMessage("Choose Your First Figure");
 
-		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
+		in_p->GetClick(p.x, p.y);		// Getting The First Piont To Git The First Figure
 
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				ReadActionParameters();
-				Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					ReadActionParameters();
+					Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 
 		fig = manager_p->GetFigure(figures, p);
 		if (fig)
 		{
-			c = fig->GetFillColor();
+			if (fig->GetType() == "Line") {
+				// If The Figure Is A Line Then Its Color Is Its Draw Color Not Fill Color
+				c = fig->GetDrawColor();
+				isfilled = true;
+			}
+			else {
+				// If The Figure Is Something Else Then We Take Its Fill color
+				c = fig->GetFillColor();
+				isfilled = fig->IsFilled();
+			}
 			type = fig->GetType();
-			isfilled = fig->IsFilled();
 			correct++;
 			PrintPickInfo(type,c,correct,wrong);
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
@@ -69,21 +78,22 @@ void PickByTypeAndColor::Execute()
 		}
 		while (numOfSameTypeAndColor > 0)
 		{
-			in_p->GetClickPoint(p.x, p.y);
+			in_p->GetClick(p.x, p.y);
 			if (p.y > 0 && p.y < UI.ToolBarHeight)
 			{
 				int IconClicked = p.x / UI.MenuItemWidth;
 				switch (IconClicked)
 				{
-				case 0:
-					ReadActionParameters();
-					Execute();
-					break;
-				case 1:
-					out_p->CreatePlayToolBar();
-					return;
-				default:
-					break;
+					case 0:
+						ReadActionParameters();
+						Execute();
+						break;
+					case 1:
+						out_p->CreatePlayToolBar();
+						return;
+
+					default:
+						break;
 				}
 			}
 			fig = manager_p->GetFigure(figures, p);
@@ -136,7 +146,12 @@ int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (isfilled && figure->GetType() == type)
+		if (figure->GetType() == "Line" && figure->GetType() == type) {
+			if (figure->GetDrawColor().ucBlue == C.ucBlue && figure->GetDrawColor().ucGreen == C.ucGreen && figure->GetDrawColor().ucRed == C.ucRed) {
+				num++;
+			}
+		}
+		else if (isfilled && figure->GetType() == type)
 		{
 			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
 				num++;
@@ -149,14 +164,13 @@ int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string
 
 void PickByTypeAndColor::DeleteCorrect(int id)
 {
-	for (auto itr = figures.begin(); itr != figures.end(); itr++) {
+	for (auto itr = figures.begin(); itr != figures.end(); itr++) 
 		if ((*itr)->GetId() == id)
 		{
 			delete *itr;
 			figures.erase(itr);
 			return;
 		}
-	}
 }
 
 void PickByTypeAndColor::DrawColorCircle(color c)
@@ -176,13 +190,15 @@ void PickByTypeAndColor::DrawColorCircle(color c)
 
 bool PickByTypeAndColor::Correct(CFigure * fig)
 {
-	if (fig->IsFilled() == isfilled && fig->GetType() == type)
-	{
-		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
-		{
+	if (fig->GetType() == "Line") {
+		if (fig->GetDrawColor().ucBlue == c.ucBlue && fig->GetDrawColor().ucGreen == c.ucGreen && fig->GetDrawColor().ucRed == c.ucRed) {
 			return true;
 		}
 	}
+	else if (fig->IsFilled() == isfilled && fig->GetType() == type)
+		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
+			return true;
+
 	return false;
 }
 

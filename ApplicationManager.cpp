@@ -37,82 +37,81 @@ ActionType ApplicationManager::GetUserAction() const
 // According to Action Type, return the corresponding action object
 Action* ApplicationManager::DetectAction(ActionType act_type)
 {
-    switch (act_type) {
-    case DRAW_FIG_ITM:
-        return new DrawFigItems(this);
-    case DRAW_RECT:
-        return new AddRectAction(this);
-    case DRAW_CIRC:
-        return new AddCircAction(this);
-    case DRAW_TRI:
-        return new AddTrnglAction(this);
-    case DRAW_LINE:
-        return new AddLineAction(this);
-    case ZOOM_IN:
-        return new ZoomInAction(this);
-    case ZOOM_OUT:
-        return new ZoomOutAction(this);
-    case EXIT:
-        return new ExitAction(this);
-    case TO_PLAY:
-        return new ToPlayModeAction(this);
-    case TO_DRAW:
-        return new ToDrawModeAction(this);
-    case SAVE:
-        return new SaveAction(this);
-    case LOAD:
-        return new LoadAction(this);
-    case UNDO:
-        return new UndoAction(this);
-    case REDO:
-        return new RedoAction(this);
-    case CHNG_FILL_CLR:
-        return new ChFillColorAction(this);
-    case CHNG_BK_CLR:
-        return new ChBGColorAction(this);
-    case CHNG_DRAW_CLR:
-        return new ChBorderAction(this);
-    case SEND_BACK:
-        return new SendDownAction(this);
-    case BRNG_FRNT:
-        return new SendUpAction(this);
-    case ROTATE:
-        return new RotateAction(this);
-    case CTR:
-        return new DrawFigActions(this);
-    case DEL:
-        return new DeleteAction(this);
-    case MOVE:
-        return new MoveAction(this);
-    case RESIZE:
-        return new ResizeAction(this);
-    case COPY:
-        return new CopyAction(this);
-    case PASTE:
-        return new PasteAction(this);
-    case SELECT:
-        return new SelectAction(this);
-    case DESELECT:
-        return new UnselectAction(this);
-	case DRAGGING:
-		return new DraggingAction(this);
-    case CUT:
-        return new CutAction(this);
-	case SCRAMBLE:
-		return new ScrambleFind(this);
-	case HIDE:
-		return new PickAction(this);
-	case PICK_COLOR:
-		return new PickByColor(this);
-	case PICK_TYPE:
-		return new PickByType(this);
-	case PICK_AREA:
-		return new PickByArea(this);
-	case PICK_COL_TYP:
-		return new PickByTypeAndColor(this);
+    switch (act_type) 
+	{
+		case DRAW_FIG_ITM:
+			return new DrawFigItems(this);
+		case DRAW_RECT:
+			return new AddRectAction(this);
+		case DRAW_CIRC:
+			return new AddCircAction(this);
+		case DRAW_TRI:
+			return new AddTrnglAction(this);
+		case DRAW_LINE:
+			return new AddLineAction(this);
+		case ZOOM_IN:
+			return new ZoomInAction(this);
+		case ZOOM_OUT:
+			return new ZoomOutAction(this);
+		case EXIT:
+			return new ExitAction(this);
+		case TO_PLAY:
+			return new ToPlayModeAction(this);
+		case TO_DRAW:
+			return new ToDrawModeAction(this);
+		case SAVE:
+			return new SaveAction(this);
+		case LOAD:
+			return new LoadAction(this);
+		case UNDO:
+			return new UndoAction(this);
+		case REDO:
+			return new RedoAction(this);
+		case CHNG_FILL_CLR:
+			return new ChFillColorAction(this);
+		case CHNG_BK_CLR:
+			return new ChBGColorAction(this);
+		case CHNG_DRAW_CLR:
+			return new ChBorderAction(this);
+		case SEND_BACK:
+			return new SendDownAction(this);
+		case BRNG_FRNT:
+			return new SendUpAction(this);
+		case ROTATE:
+			return new RotateAction(this);
+		case CTR:
+			return new DrawFigActions(this);
+		case DEL:
+			return new DeleteAction(this);
+		case MOVE:
+			return new MoveAction(this);
+		case RESIZE:
+			return new ResizeAction(this);
+		case COPY:
+			return new CopyAction(this);
+		case PASTE:
+			return new PasteAction(this);
+		case SELECT:
+			return new MultiSelect(this);
+		case CUT:
+			return new CutAction(this);
+		case SCRAMBLE:
+			return new ScrambleFind(this);
+		case HIDE:
+			return new PickAction(this);
+		case PICK_COLOR:
+			return new PickByColor(this);
+		case PICK_TYPE:
+			return new PickByType(this);
+		case PICK_AREA:
+			return new PickByArea(this);
+		case PICK_COL_TYP:
+			return new PickByTypeAndColor(this);
+		case DRAWING_AREA:
+			return new SelectAction(this);
         
-    default:
-        return nullptr;
+		default:
+			return nullptr;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +192,9 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 		return new CTrngl();
 	if (fig_name == "LINE")
 		return new CLine();
+
 	cerr << "Detect figure has been given unknown fig_name as a parameter, fig_name = " << fig_name;
+	return nullptr;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -303,12 +304,13 @@ unsigned int ApplicationManager::GenerateNextId()
 void ApplicationManager::DeleteFigure(unsigned int id)
 {
     auto itr = GetFigureIter(id);
-    if (itr != figs.end()) {
+    if (itr != figs.end()) 
+	{
         delete (*itr);
         figs.erase(itr);
-    } else {
+	}
+    else 
         cerr << "Cant delete figure, figure not found, id = " << id << endl;
-    }
 }
 
 CFigure* ApplicationManager::GetFigure(unsigned int id) const
@@ -486,12 +488,10 @@ void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point
 		}
 		if (out_range)
 		{
-			for (int i = 0;i < moved_figs.size();i++)
-			{
+			for (int i = 0; i < moved_figs.size(); i++)
 				moved_figs[i]->Move(-x, -y);
-			}
-			moved_figs.clear();
 
+			moved_figs.clear();
 		}
 		old = Point(minx, miny);
 }
@@ -560,21 +560,34 @@ deque<CFigure*> ApplicationManager::GetClipboard()
     return clipboard;
 }
 
+bool ApplicationManager::GetMultiSelect()
+{
+	return this->multi_select;
+}
+
+void ApplicationManager::ToggleMultiSelect()
+{
+	this->multi_select = !(this->multi_select);
+}
+
 deque<CFigure*> ApplicationManager::EraseSelected()
 {
     deque<int> vec;
     deque<CFigure*> deleted;
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
+    for (auto& fig : figs) 
+        if (fig->IsSelected()) 
+		{
             vec.push_back(fig->GetId());
 			CFigure*copy = fig->Copy();
             deleted.push_back(copy);
         }
-    }
-    for (int i = 0; i < vec.size(); i++) {
+
+    for (int i = 0; i < vec.size(); i++) 
+	{
         DeleteFigure(vec[i]);
 		num_selected--;
     }
+
     return deleted;
 }
 ////////////////////////////////////////////////////////////////////////////////////

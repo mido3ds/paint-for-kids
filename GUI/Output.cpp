@@ -63,7 +63,7 @@ Output::Output()
 	wind_p->SetWaitClose(false);
 
 	CreateDrawToolBar();
-	CreateStatusBar();
+	ClearStatusBar();
 }
 
 Input* Output::CreateInput() const
@@ -84,13 +84,6 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	pW->SetPen(UI.BkGrndColor, 1);
 	pW->DrawRectangle(UI.DrawAreaX, UI.DrawAreaY, UI.DrawAreaX + UI.DrawAreaWidth, UI.DrawAreaY + UI.DrawAreaHeight);
 	return pW;
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-void Output::CreateStatusBar() const
-{
-	wind_p->SetPen(UI.StatusBarColor, 1);
-	wind_p->SetBrush(UI.StatusBarColor);
-	wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
@@ -117,7 +110,7 @@ void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
 
-	ClearToolBar();
+	ClearToolbar();
 
 	// You can draw the tool bar icons in any way you want.
 	// Below is one possible way
@@ -128,7 +121,6 @@ void Output::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_FIG] = "images\\MenuItems\\borderPen.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
-	MenuItemImages[ITM_DESELECT] = "images\\MenuItems\\deselect.jpg";
 	MenuItemImages[ITM_CHDC] = "images\\MenuItems\\border.jpg";
 	MenuItemImages[ITM_CHFC] = "images\\MenuItems\\color_picker.jpg";
 	MenuItemImages[ITM_CHBGC] = "images\\MenuItems\\paint_bucket.jpg";
@@ -150,7 +142,7 @@ void Output::CreateDrawToolBar() const
 void Output::CreateFigItems() const
 {
 	
-	ClearTToolBar();
+	ClearTempToolbar();
 	UI.TToolBarWidth = 200;
 	wind_p->isfigitems = true;
 
@@ -166,7 +158,7 @@ void Output::CreateFigItems() const
 void Output::CreateFigActions() const
 {
 	UI.TToolBarWidth = 450;
-	ClearTToolBar();
+	ClearTempToolbar();
 	wind_p->isfigactions = true;
 
 	string MenuItemImages[FIG_ACT_COUNT];
@@ -183,10 +175,9 @@ void Output::CreateFigActions() const
 	for (int i = 0; i < FIG_ACT_COUNT; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
-void Output::CreateBorderWidth() const
+void Output::CreateBorderToolbar() const
 {
-
-	ClearTToolBar();
+	ClearTempToolbar();
 	UI.TToolBarWidth = 200;
 	wind_p->isborderwidth = true;
 
@@ -202,7 +193,7 @@ void Output::CreateBorderWidth() const
 void Output::CreatePickBar() const
 {
 
-	ClearTToolBar();
+	ClearTempToolbar();
 	UI.TToolBarWidth = 200;
 	wind_p->ispickbar = true;
 
@@ -218,7 +209,7 @@ void Output::CreatePickBar() const
 
 void Output::CreateRestartGame() const
 {
-	ClearToolBar();
+	ClearToolbar();
 	
 	string MenuItemImages[2];
 	MenuItemImages[0] = "images\\MenuItems\\restart.jpg";
@@ -240,7 +231,7 @@ void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
 
-	ClearToolBar();
+	ClearToolbar();
 
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[ITM_PICK_HIDE] = "images\\MenuItems\\find.jpg";
@@ -263,14 +254,14 @@ void Output::ClearDrawArea() const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::ClearToolBar() const
+void Output::ClearToolbar() const
 {
 	wind_p->SetBrush(AGRAY);
 	wind_p->SetPen(AGRAY);
 	wind_p->DrawRectangle(UI.ToolBarX, UI.ToolBarY, UI.ToolBarX + UI.ToolBarWidth, UI.ToolBarY + UI.ToolBarHeight);
 }
 
-void Output::ClearTToolBar() const
+void Output::ClearTempToolbar() const
 {
 	wind_p->isfigactions = false;
 	wind_p->isfigitems = false;
@@ -396,11 +387,6 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 
 void Output::CreateDrawArea() const
 {
-    CreatePlayArea();
-}
-
-void Output::CreatePlayArea() const
-{
 	wind_p->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -420,9 +406,9 @@ int Output::GetPenWidth() const // get current pen width
 	return UI.PenWidth;
 }
 
-int Output::GetZoom() const
+int Output::GetZoomScale() const
 {
-	return zoom;
+	return zoom_scale;
 }
 
 Point Output::GetZoomPoint() const
@@ -432,9 +418,9 @@ Point Output::GetZoomPoint() const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::SetZoom(int z)
+void Output::SetZoomScale(int z)
 {
-	zoom = z;
+	zoom_scale = z;
 }
 
 void Output::SetZoomPoint(Point z_point)
@@ -478,8 +464,8 @@ Point Output::TranslatePoint(const Point& g_point) const
 	to know which figure to draw calcuate the new points of the shape then
 	draw it*/
 	return {
-		static_cast<int>(pow(2, zoom) * (g_point.x - zoom_point.x)) + zoom_point.x,
-		static_cast<int>(pow(2, zoom) * (g_point.y - zoom_point.y)) + zoom_point.y
+		static_cast<int>(pow(2, zoom_scale) * (g_point.x - zoom_point.x)) + zoom_point.x,
+		static_cast<int>(pow(2, zoom_scale) * (g_point.y - zoom_point.y)) + zoom_point.y
 	};
 }
 
@@ -495,11 +481,6 @@ int Output::TranslateRadius(const Point& f_point, int radius) const
 	return static_cast<int>(
 		sqrt(pow((s_point.y - f_point.y), 2) + pow((s_point.x - f_point.x), 2))
 	);
-}
-
-void Output::UpdateBuffer() const
-{
-	wind_p->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }

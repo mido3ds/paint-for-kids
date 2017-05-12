@@ -13,10 +13,10 @@ void ChBorderAction::ReadActionParameters()
     w = out_p->GetPenWidth();
     out_p->PrintMessage("Please Enter the Border Width If You Don't Want To Change It Type 3");
     lastW = w;
-	out_p->CreateBorderWidth();
+	out_p->CreateBorderToolbar();
 	do {
 		out_p->PrintMessage("Choose The Prefered Border Width");
-		in_p->GetClickPoint(x, y);
+		in_p->GetClick(x, y);
 	} while (x < UI.TToolBarX || x > 4 * UI.MenuItemWidth || y < UI.TToolBarY || y > UI.TToolBarY + UI.TToolBarHeight);
 	int ClickedItemOrder = (x / UI.MenuItemWidth);
 	switch (ClickedItemOrder)
@@ -39,11 +39,12 @@ void ChBorderAction::ReadActionParameters()
 	}
     out_p->PrintMessage("Please Choose Your Favorite Color To Change Border Color");
     out_p->CreateColorBar();
-    in_p->GetClickPoint(x, y);
+    in_p->GetClick(x, y);
     lastC = C;
-    C = in_p->PickColor(x, y);
+    C = in_p->GetColor(x, y);
     out_p->ClearStatusBar();
     out_p->ClearDrawArea();
+	out_p->ClearTempToolbar();
 }
 
 void ChBorderAction::Execute()

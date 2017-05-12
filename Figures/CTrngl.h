@@ -19,11 +19,7 @@ public:
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual void MoveToLeftSide();
-    virtual void MoveToRightSide();
     virtual void RandomizePosition();
-    virtual void ChangeCenter(const Point& p);
-    virtual bool IsPointCorner(const Point& p) const;
-    virtual Point& GetCornerPoint(const Point& p);
     virtual CFigure* Copy();
     virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
@@ -34,6 +30,8 @@ public:
 
 	virtual void PrintInfo(Output* out_p);
 
+	double CrossProduct(Point p1, Point p2) const;
+	bool SameSide(Point p1, Point p2, Point a, Point b) const;
 private:
 	Point p1, p2, p3;
 	const string type = "Triangle";
