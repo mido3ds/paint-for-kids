@@ -27,20 +27,17 @@ void SelectAction::Execute()
 		if (selected) {
 			if (!selected->IsSelected()) {
 				selected->SetSelected(true);
-				originaldraw = selected->GetDrawColor();		//Why This???
 				manager_p->SetNumSelected(manager_p->GetNumSelected() + 1);
 				manager_p->PrintSelectedSize();
 			}
 			else {
 				selected->SetSelected(false);
-				originaldraw = selected->GetDrawColor();		//Why This???
 				manager_p->SetNumSelected(manager_p->GetNumSelected() - 1);
 				manager_p->PrintSelectedSize();
 			}
 		}
 		else {
 			manager_p->UnselectAll();
-			out_p->PrintMessage("Unselect All Figures");
 		}
 	}
 	else {
@@ -50,20 +47,17 @@ void SelectAction::Execute()
 			if (!selected->IsSelected()) {
 				manager_p->UnselectAll();
 				selected->SetSelected(true);
-				originaldraw = selected->GetDrawColor();		//Why This???
 				manager_p->SetNumSelected(1);
 				manager_p->PrintSelectedSize();
 			}
 			else {
 				selected->SetSelected(false);
-				originaldraw = selected->GetDrawColor();		//Why This???
 				manager_p->SetNumSelected(0);
 				manager_p->PrintSelectedSize();
 			}
 		}
 		else {
 			manager_p->UnselectAll();
-			out_p->PrintMessage("Unselect All Figures");
 		}
 	}
 }
@@ -73,4 +67,3 @@ void SelectAction::Execute()
 void SelectAction::Undo()
 {
 }
-
