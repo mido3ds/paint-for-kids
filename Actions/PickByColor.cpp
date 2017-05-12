@@ -51,8 +51,16 @@ void PickByColor::Execute()
 		fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
 		if (fig)		// If The Piont Is In Figure
 		{
-			c = fig->GetFillColor();
-			isfilled = fig->IsFilled();
+			if (fig->GetType() == "Line") {
+				// If The Figure Is A Line Then Its Color Is Its Draw Color Not Fill Color
+				c = fig->GetDrawColor();
+				isfilled = true;
+			}
+			else {
+				// If The Figure Is Something Else Then We Take Its Fill color
+				c = fig->GetFillColor();
+				isfilled = fig->IsFilled();
+			}
 			correct++;
 			if (isfilled)
 			{
@@ -147,7 +155,12 @@ int PickByColor::GetNumFigsSameColor(color C , bool isfilled)
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (isfilled)
+		if (figure->GetType() == "Line") {
+			if (figure->GetDrawColor().ucBlue == C.ucBlue && figure->GetDrawColor().ucGreen == C.ucGreen && figure->GetDrawColor().ucRed == C.ucRed) {
+				num++;
+			}
+		}
+		else if (isfilled)
 		{
 			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
 				num++;
@@ -187,7 +200,12 @@ void PickByColor::DrawColorCircle(color c)
 
 bool PickByColor::correct(CFigure * fig)
 {
-	if (fig->IsFilled() == isfilled)
+	if (fig->GetType() == "Line") {
+		if (fig->GetDrawColor().ucBlue == c.ucBlue && fig->GetDrawColor().ucGreen == c.ucGreen && fig->GetDrawColor().ucRed == c.ucRed) {
+			return true;
+		}
+	}
+	else if (fig->IsFilled() == isfilled)
 	{
 		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
 		{

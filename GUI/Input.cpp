@@ -218,7 +218,7 @@ ActionType Input::GetUserAction()
 
 }
 /////////////////////////////////
-bool Input::IsMouseDown(button btn_state = LEFT_BUTTON) const
+bool Input::IsMouseDown(button btn_state) const
 {
     int x, y;
     return wind_p->GetButtonState(btn_state, x, y) == BUTTON_DOWN;

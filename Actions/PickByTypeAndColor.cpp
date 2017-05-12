@@ -53,9 +53,17 @@ void PickByTypeAndColor::Execute()
 		fig = manager_p->GetFigure(figures, p);
 		if (fig)
 		{
-			c = fig->GetFillColor();
+			if (fig->GetType() == "Line") {
+				// If The Figure Is A Line Then Its Color Is Its Draw Color Not Fill Color
+				c = fig->GetDrawColor();
+				isfilled = true;
+			}
+			else {
+				// If The Figure Is Something Else Then We Take Its Fill color
+				c = fig->GetFillColor();
+				isfilled = fig->IsFilled();
+			}
 			type = fig->GetType();
-			isfilled = fig->IsFilled();
 			correct++;
 			PrintPickInfo(type,c,correct,wrong);
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
@@ -138,7 +146,12 @@ int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (isfilled && figure->GetType() == type)
+		if (figure->GetType() == "Line" && figure->GetType() == type) {
+			if (figure->GetDrawColor().ucBlue == C.ucBlue && figure->GetDrawColor().ucGreen == C.ucGreen && figure->GetDrawColor().ucRed == C.ucRed) {
+				num++;
+			}
+		}
+		else if (isfilled && figure->GetType() == type)
 		{
 			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
 				num++;
@@ -177,7 +190,12 @@ void PickByTypeAndColor::DrawColorCircle(color c)
 
 bool PickByTypeAndColor::Correct(CFigure * fig)
 {
-	if (fig->IsFilled() == isfilled && fig->GetType() == type)
+	if (fig->GetType() == "Line") {
+		if (fig->GetDrawColor().ucBlue == c.ucBlue && fig->GetDrawColor().ucGreen == c.ucGreen && fig->GetDrawColor().ucRed == c.ucRed) {
+			return true;
+		}
+	}
+	else if (fig->IsFilled() == isfilled && fig->GetType() == type)
 		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
 			return true;
 
