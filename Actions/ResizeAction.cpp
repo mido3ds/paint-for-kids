@@ -30,7 +30,8 @@ void ResizeAction::ReadActionParameters()
 	do
 	{
 		data = in_p->GetString(out_p);
-		resize_factor = strtod(data.c_str(), &val);
+		resize_factor =  strtod(data.c_str(), &val);
+		out_p->PrintMessage("resize factor is " + to_string(resize_factor));
 	} while (*val == data[0] || resize_factor <= 0);
 	out_p->ClearStatusBar();
 }

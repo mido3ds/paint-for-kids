@@ -33,8 +33,8 @@ public:
 
 
     virtual bool IsPointInside(const Point& p) const = 0;
-    virtual bool IsPointCorner(const Point& p) const = 0;
-    virtual Point& GetCornerPoint(const Point& p) = 0; // get nearest corner point
+//  virtual bool IsPointCorner(const Point& p) const = 0;
+//  virtual Point& GetCornerPoint(const Point& p) = 0; // get nearest corner point
 //  PointState GetPointState(const Point& p) const; // whether point corner, inside, outside
 
 
