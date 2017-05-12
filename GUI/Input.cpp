@@ -52,10 +52,10 @@ ActionType Input::GetUserAction()
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
     {
         //[1] If user clicks on the Toolbar
-        if (y >= UI.ToolBarY && y < UI.ToolBarY + UI.ToolBarHeight) {
+        if (last_click.y >= UI.ToolBarY && last_click.y < UI.ToolBarY + UI.ToolBarHeight) {
             // Check whick Menu item was clicked
             //==> This assumes that menu items are lined up horizontally <==
-            int ClickedItemOrder = (x / UI.MenuItemWidth);
+            int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
             // Divide x coord of the point clicked by the menu item width (int
             // division)
             // if division result is 0 ==> first item is clicked, if 1 ==> 2nd item
@@ -99,9 +99,9 @@ ActionType Input::GetUserAction()
         }
 
         if (wind_p->isfigitems) {
-            if (y >= UI.TToolBarY && y < UI.TToolBarY + UI.TToolBarHeight) {
+            if (last_click.y >= UI.TToolBarY && last_click.y < UI.TToolBarY + UI.TToolBarHeight) {
 
-                int ClickedItemOrder = (x / UI.MenuItemWidth);
+                int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
 
                 switch (ClickedItemOrder) {
                 case ITM_LINE:
@@ -118,9 +118,9 @@ ActionType Input::GetUserAction()
             }
         }
         if (wind_p->isfigactions) {
-            if (y >= UI.TToolBarY && y < y < UI.TToolBarY + UI.TToolBarHeight) {
+            if (last_click.y >= UI.TToolBarY && last_click.y < UI.TToolBarY + UI.TToolBarHeight) {
 
-                int ClickedItemOrder = (x / UI.MenuItemWidth);
+                int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
 
                 switch (ClickedItemOrder) {
                 case ITM_DEL:
@@ -147,13 +147,13 @@ ActionType Input::GetUserAction()
             }
         }
         if (wind_p->iscolorbar) {
-            if (y >= UI.TToolBarY && y < UI.TToolBarY + UI.TToolBarHeight) {
+            if (last_click.y >= UI.TToolBarY && last_click.y < UI.TToolBarY + UI.TToolBarHeight) {
                 return COLOR_BAR;
             }
         }
 
         //[2] User clicks on the drawing area
-        if (y >= UI.DrawAreaY && y < UI.DrawAreaY + UI.DrawAreaHeight) {
+        if (last_click.y >= UI.DrawAreaY && last_click.y < UI.DrawAreaY + UI.DrawAreaHeight) {
 			return DRAWING_AREA;
         }
 
@@ -162,10 +162,10 @@ ActionType Input::GetUserAction()
     } else // GUI is in PLAY mode
     {
         //[1] If user clicks on the Toolbar
-        if (y >= 0 && y < UI.ToolBarHeight) {
+        if (last_click.y >= 0 && last_click.y < UI.ToolBarHeight) {
             // Check whick Menu item was clicked
             //==> This assumes that menu items are lined up horizontally <==
-            int ClickedItemOrder = (x / UI.MenuItemWidth);
+            int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
             // Divide x coord of the point clicked by the menu item width (int
             // division)
             // if division result is 0 ==> first item is clicked, if 1 ==> 2nd item
@@ -186,9 +186,9 @@ ActionType Input::GetUserAction()
             }
         }
 		if (wind_p->ispickbar) {
-			if (y >= UI.TToolBarY && y < UI.TToolBarY + UI.TToolBarHeight) {
+			if (last_click.y >= UI.TToolBarY && last_click.y < UI.TToolBarY + UI.TToolBarHeight) {
 
-				int ClickedItemOrder = (x / UI.MenuItemWidth);
+				int ClickedItemOrder = (last_click.x / UI.MenuItemWidth);
 
 				switch (ClickedItemOrder) {
 				case ITM_PICK_COLOR:
@@ -206,7 +206,7 @@ ActionType Input::GetUserAction()
 		}
 
         //[2] User clicks on the drawing area
-        if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight && x >= 0) {
+        if (last_click.y >= UI.ToolBarHeight && last_click.y < UI.height - UI.StatusBarHeight && last_click.x >= 0) {
             return DRAWING_AREA;
         }
 
