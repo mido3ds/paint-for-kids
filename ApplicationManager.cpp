@@ -92,9 +92,7 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 		case PASTE:
 			return new PasteAction(this);
 		case SELECT:
-			return new SelectAction(this);
-		case DESELECT:
-			return new UnselectAction(this);
+			return new MultiSelect(this);
 		case CUT:
 			return new CutAction(this);
 		case SCRAMBLE:
@@ -109,6 +107,8 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 			return new PickByArea(this);
 		case PICK_COL_TYP:
 			return new PickByTypeAndColor(this);
+		case DRAWING_AREA:
+			return new SelectAction(this);
         
 		default:
 			return nullptr;
@@ -558,6 +558,16 @@ void ApplicationManager::SetClipboard(deque<CFigure*> clip)
 deque<CFigure*> ApplicationManager::GetClipboard()
 {
     return clipboard;
+}
+
+bool ApplicationManager::GetMultiSelect()
+{
+	return this->multi_select;
+}
+
+void ApplicationManager::ToggleMultiSelect()
+{
+	this->multi_select = !(this->multi_select);
 }
 
 deque<CFigure*> ApplicationManager::EraseSelected()

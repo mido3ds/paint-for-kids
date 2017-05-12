@@ -243,9 +243,6 @@
     <ClCompile Include="Actions\PickByColor.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\UnselectAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\PickByType.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -253,6 +250,9 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\PickByTypeAndColor.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\MultiSelect.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -443,9 +443,6 @@
     <ClInclude Include="Actions\PickAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\UnselectAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\PickByType.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -453,6 +450,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickByTypeAndColor.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\MultiSelect.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

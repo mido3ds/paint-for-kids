@@ -70,8 +70,6 @@ ActionType Input::GetUserAction()
                 return CHNG_BK_CLR;
             case ITM_SELECT:
                 return SELECT;
-			case ITM_DESELECT:
-				return DESELECT;
             case ITM_CHDC:
                 return CHNG_DRAW_CLR;
             case ITM_CHFC:
@@ -207,10 +205,6 @@ ActionType Input::GetUserAction()
 				}
 			}
 		}
-
-        //[2] User clicks on the drawing area
-        if (last_click.y >= UI.ToolBarHeight && last_click.y < UI.height - UI.StatusBarHeight && last_click.x >= 0)
-            return DRAWING_AREA;
 
         //[3] User clicks on the status bar
         return STATUS;

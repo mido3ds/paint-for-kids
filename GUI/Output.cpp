@@ -121,7 +121,6 @@ void Output::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_FIG] = "images\\MenuItems\\borderPen.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
-	MenuItemImages[ITM_DESELECT] = "images\\MenuItems\\deselect.jpg";
 	MenuItemImages[ITM_CHDC] = "images\\MenuItems\\border.jpg";
 	MenuItemImages[ITM_CHFC] = "images\\MenuItems\\color_picker.jpg";
 	MenuItemImages[ITM_CHBGC] = "images\\MenuItems\\paint_bucket.jpg";
