@@ -141,9 +141,8 @@ void Output::CreateDrawToolBar() const
 
 void Output::CreateFigItems() const
 {
-	
-	ClearTempToolbar();
 	UI.TToolBarWidth = 200;
+	ClearTempToolbar();
 	wind_p->isfigitems = true;
 
 	string MenuItemImages[FIG_ITM_COUNT];
@@ -266,10 +265,11 @@ void Output::ClearTempToolbar() const
 	wind_p->isfigactions = false;
 	wind_p->isfigitems = false;
 	wind_p->iscolorbar = false;
-	wind_p->SetBrush(WHITE);
-	wind_p->SetPen(WHITE);
+
+	wind_p->SetBrush(UI.BkGrndColor);
+	wind_p->SetPen(UI.BkGrndColor);
+
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
-	//ClearDrawArea();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
