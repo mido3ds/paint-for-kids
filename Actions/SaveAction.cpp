@@ -43,8 +43,7 @@ string SaveAction::GetFileName()
 
     OPENFILENAME ofn;
 
-    const int MAX_PATH = 100;
-    char szFileName[MAX_PATH] = ""; // TODO: make it string 
+    char szFileName[MAX_PATH] = ""; 
 
     ZeroMemory(&ofn, sizeof(ofn));
 
