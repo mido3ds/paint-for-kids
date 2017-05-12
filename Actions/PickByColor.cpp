@@ -51,7 +51,7 @@ void PickByColor::Execute()
 		fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
 		if (fig)		// If The Piont Is In Figure
 		{
-			if (fig->GetType() == "Line") {
+			if (dynamic_cast<CLine *> (fig)) {
 				// If The Figure Is A Line Then Its Color Is Its Draw Color Not Fill Color
 				c = fig->GetDrawColor();
 				isfilled = true;
@@ -66,11 +66,11 @@ void PickByColor::Execute()
 			{
 				
 				// If Is Filled Then Draw The Color In Status Bar
-				out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				DrawColorCircle(c);
 			}
 			else {
-				out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 			}
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
 			numOfSameColor = GetNumFigsSameColor(c, isfilled);					// Reducing The Number Of Same Color Figs If Correct
@@ -78,7 +78,7 @@ void PickByColor::Execute()
 			manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 		}
 		else {
-			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 			continue;
 		}
 
@@ -108,11 +108,11 @@ void PickByColor::Execute()
 				if (isfilled)
 				{
 					// If Is Filled Then Draw The Color In Status Bar
-					out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					DrawColorCircle(c);
 				}
 				else {
-					out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				}
 				if (PickByColor::correct(fig))
 				{
@@ -121,28 +121,28 @@ void PickByColor::Execute()
 					numOfFigs--;
 					manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 					correct++;
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					Sleep(400);
 				}
 				else {
 					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 					Sleep(400);
 				}
 			}
 			else {
 				wrong++;
-				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 				Sleep(400);
 			}
 		}
 
 	}
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
 	}
 	else {
-		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)));
+		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)), ORANGE);
 		Sleep(1000);
 	}
 }
@@ -155,14 +155,14 @@ int PickByColor::GetNumFigsSameColor(color C , bool isfilled)
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (figure->GetType() == "Line") {
-			if (figure->GetDrawColor().ucBlue == C.ucBlue && figure->GetDrawColor().ucGreen == C.ucGreen && figure->GetDrawColor().ucRed == C.ucRed) {
+		if (dynamic_cast<CLine *> (figure)) {
+			if (figure->GetDrawColor() == C) {
 				num++;
 			}
 		}
 		else if (isfilled)
 		{
-			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
+			if (figure->GetFillColor() == C)
 				num++;
 		}
 		else if (figure->IsFilled() == isfilled)
@@ -200,14 +200,14 @@ void PickByColor::DrawColorCircle(color c)
 
 bool PickByColor::correct(CFigure * fig)
 {
-	if (fig->GetType() == "Line") {
-		if (fig->GetDrawColor().ucBlue == c.ucBlue && fig->GetDrawColor().ucGreen == c.ucGreen && fig->GetDrawColor().ucRed == c.ucRed) {
+	if (dynamic_cast<CLine *> (fig)) {
+		if (fig->GetDrawColor() == c) {
 			return true;
 		}
 	}
 	else if (fig->IsFilled() == isfilled)
 	{
-		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
+		if (fig->GetFillColor() == c)
 		{
 			return true;
 		}

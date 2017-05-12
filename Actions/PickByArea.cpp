@@ -33,7 +33,7 @@ void PickByArea::Execute()
 	while (numOfFigs > 0)
 	{
 		out_p->CreateRestartGame();
-		out_p->PrintMessage("Pick Figures From Bigger To Smaller            Correct Answers: " +to_string(correct)+"      Wrong Answers: "+ to_string(wrong));
+		out_p->PrintMessage("Pick Figures From Bigger To Smaller            Correct Answers: " +to_string(correct)+"      Wrong Answers: "+ to_string(wrong), GREEN);
 		in_p->GetClick(p.x, p.y);
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
@@ -61,14 +61,14 @@ void PickByArea::Execute()
 					correct++;
 					DeleteCorrect(fig->GetId());
 					manager_p->UpdateInterface(figures);
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					numOfFigs--;
 					Sleep(1000);
 				}
 				else
 				{
 					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 					Sleep(1000);
 				}
 			
@@ -76,15 +76,15 @@ void PickByArea::Execute()
 		}
 		else
 		{
-			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 			continue;
 		}
 	}
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
 	}
 	else {
-		out_p->PrintMessage("Your Grade Is: " + std::to_string((correct * 100) / (correct + wrong) ));
+		out_p->PrintMessage("Your Grade Is: " + std::to_string((correct * 100) / (correct + wrong) ), ORANGE);
 		Sleep(1000);
 	}
 }

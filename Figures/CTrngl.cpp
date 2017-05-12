@@ -163,15 +163,6 @@ bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
 
 bool CTrngl::IsPointInside(const Point& p) const
 {
-	/*double A1 = Trigonometry::Area(p, p1, p2);
-	double A2 = Trigonometry::Area(p, p2, p3);
-	double A3 = Trigonometry::Area(p, p1, p3);
-	double A = Trigonometry::Area(p1, p2, p3);
-	double B = A1 + A2 + A3;
-	double scale = 0.1;
-	A = (int)(A / scale)*scale;
-	B = (int)(B / scale)*scale;
-	return (A == B);*/
 	if ((SameSide(p, p1, p2, p3) && SameSide(p, p2, p1, p3) && SameSide(p, p3, p1, p2)))
 		return true;
 	else
@@ -223,11 +214,8 @@ double CTrngl::CrossProduct(Point p1, Point p2) const
 
 bool CTrngl::SameSide(Point p1, Point p2, Point a, Point b) const
 {
-	Point ba = Point((b.x - a.x), (b.y - a.y));
-	Point p1a = Point((p1.x - a.x), (p1.y - a.y));
-	Point p2a = Point((p2.x - a.x), (p2.y - a.y));
-	double cp1 = CrossProduct(ba, p1a);
-	double cp2 = CrossProduct(ba, p2a);
+	double cp1 = CrossProduct(b - a, p1 - a);
+	double cp2 = CrossProduct(b - a, p2 - a);
 	double cp12 = cp1 * cp2;
 	if (cp12 >= 0)
 		return true;

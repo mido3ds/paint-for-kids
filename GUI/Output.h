@@ -40,7 +40,7 @@ public:
 	void DrawLine(Point p1, Point p2, GfxInfo line_gfx_info, bool selected) const;
 	void DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info, bool selected) const;
 
-	void PrintMessage(string msg) const; // on Status bar
+	void PrintMessage(string msg, color msgc = WHITE) const; // on Status bar
 
 	color GetDrawColor() const;
 	color GetFillColor() const;

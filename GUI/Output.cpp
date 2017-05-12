@@ -273,11 +273,11 @@ void Output::ClearTempToolbar() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintMessage(string msg) const // Prints a message on status bar
+void Output::PrintMessage(string msg, color msgc) const // Prints a message on status bar
 {
 	ClearStatusBar(); // First clear the status bar
 
-	wind_p->SetPen(UI.MsgColor, 50);
+	wind_p->SetPen(msgc, 50);
 	wind_p->SetFont(20, PLAIN, BY_NAME, "Arial");
 	wind_p->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
 }
