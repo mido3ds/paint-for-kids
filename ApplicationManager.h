@@ -96,7 +96,7 @@ public:
     void RotateSelected(int deg);
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
-    Point MoveSelected(Point p);
+    void MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old);
     deque<CFigure*> EraseSelected(); // erases selected and returns them 
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
@@ -135,7 +135,7 @@ private:
 	int num_selected = 0;
 
     bool figs_is_saved;  // whether figs has been saved or not
-
+	
     Input* in_p;
     Output* out_p;
 };
