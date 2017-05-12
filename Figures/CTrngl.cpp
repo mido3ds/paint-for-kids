@@ -285,41 +285,7 @@ void CTrngl::MoveToLeftSide()
 	p3.x = center.x + def3;
 }
 
-void CTrngl::MoveToRightSide()
-{
-	Point center = CalculateCenter();
-
-	// get difference between center and points
-	int def1 = p1.x - center.x;
-	int def2 = p2.x - center.x;
-	int def3 = p3.x - center.x;
-
-	center.x *= 2;
-
-	// remake the points from the previous centere
-	p1.x = center.x + def1;
-	p2.x = center.x + def2;
-	p3.x = center.x + def3;
-}
-
 void CTrngl::RandomizePosition()
 {
 	// TODO
-}
-
-void CTrngl::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CTrngl::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CTrngl::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
 }

@@ -94,8 +94,6 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
         return new SelectAction(this);
     case DESELECT:
         return new UnselectAction(this);
-	case DRAGGING:
-		return new DraggingAction(this);
     case CUT:
         return new CutAction(this);
 	case SCRAMBLE:

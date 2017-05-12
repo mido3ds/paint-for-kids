@@ -165,29 +165,7 @@ void CCircle::MoveToLeftSide()
 	p1.x /= 2;
 }
 
-void CCircle::MoveToRightSide()
-{
-	p1.x *= 2;
-}
-
 void CCircle::RandomizePosition()
 {
 	// TODO
-}
-
-void CCircle::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CCircle::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CCircle::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
 }

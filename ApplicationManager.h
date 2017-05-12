@@ -32,7 +32,6 @@
 #include "Actions/RotateAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/SelectAction.h"
-#include "Actions/DraggingAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
 #include "Actions/UnselectAction.h"

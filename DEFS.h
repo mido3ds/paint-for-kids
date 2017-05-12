@@ -38,7 +38,6 @@ enum ActionType //The actions supported (you can add more if needed)
     SCRAMBLE,
     UNDO,
     REDO,
-    DRAGGING,
 
 	PICK_COLOR,
 	PICK_TYPE,

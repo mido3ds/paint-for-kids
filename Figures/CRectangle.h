@@ -19,11 +19,7 @@ public:
     virtual void Load(ifstream& in_file);
     virtual bool Move(int x, int y);
     virtual void MoveToLeftSide();
-    virtual void MoveToRightSide();
     virtual void RandomizePosition();
-    virtual void ChangeCenter(const Point& p);
-    virtual bool IsPointCorner(const Point& p) const;
-    virtual Point& GetCornerPoint(const Point& p);
     virtual CFigure* Copy();
 
 	virtual string GetType();

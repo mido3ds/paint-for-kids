@@ -9,7 +9,9 @@ Input::Input(window* pW)
 
 clicktype Input::GetClickPoint(int& x, int& y) const
 {
-    return wind_p->WaitMouseClick(x, y);
+    clicktype clk_type;
+    while ((clk_type = wind_p->GetMouseClick(x, y)) != clicktype::NO_CLICK);
+    return clk_type;
 }
 
 string Input::GetString(Output* pO) const
@@ -45,13 +47,7 @@ color Input::PickColor(int ix, int iy)
 // desired action
 ActionType Input::GetUserAction()
 {
-    int x, y;
-
-	wind_p->FlushMouseQueue();
-	while (wind_p->GetButtonState(LEFT_BUTTON, x, y) != BUTTON_DOWN);
-	wind_p->FlushMouseQueue();
-
-    last_click = { x, y };
+    GetClickPoint(last_click.x, last_click.y);
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
     {
@@ -158,14 +154,7 @@ ActionType Input::GetUserAction()
 
         //[2] User clicks on the drawing area
         if (y >= UI.DrawAreaY && y < UI.DrawAreaY + UI.DrawAreaHeight) {
-			// check dragging by waiting x seconds 
-			double x = .40;
-			Sleep(x * SECOND);
-
-			if (IsMouseDown())
-				return DRAGGING;
-			else
-				return DRAWING_AREA;
+			return DRAWING_AREA;
         }
 
         //[3] User clicks on the status bar
@@ -245,6 +234,4 @@ Point Input::GetLastClickedPoint() const
     return last_click;
 }
 /////////////////////////////////
-
 Input::~Input() {}
-
