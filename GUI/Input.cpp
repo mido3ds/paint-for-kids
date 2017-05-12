@@ -6,7 +6,7 @@ Input::Input(window* pW)
 	wind_p = pW; // point to the passed window
 }
 
-clicktype Input::GetClickPoint(int& x, int& y) const
+clicktype Input::GetClick(int& x, int& y) const
 {
     clicktype clk_type;
     while ((clk_type = wind_p->GetMouseClick(x, y)) == clicktype::NO_CLICK);
@@ -35,7 +35,7 @@ string Input::GetString(Output* pO) const
 	}
 }
 
-color Input::PickColor(int ix, int iy)
+color Input::GetColor(int ix, int iy)
 {
 	if (ix < UI.TToolBarX && ix > UI.TToolBarY + UI.TToolBarWidth && iy < UI.TToolBarY && iy > UI.TToolBarY + UI.TToolBarHeight) 
 		return WHITE;
@@ -46,7 +46,7 @@ color Input::PickColor(int ix, int iy)
 // from click point, return the desired action
 ActionType Input::GetUserAction()
 {
-    GetClickPoint(last_click.x, last_click.y);
+    while(GetClick(last_click.x, last_click.y) != clicktype::LEFT_CLICK);
 	int x = last_click.x, y = last_click.y;
 
     if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode

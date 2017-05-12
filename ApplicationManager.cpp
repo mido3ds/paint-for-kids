@@ -304,12 +304,13 @@ unsigned int ApplicationManager::GenerateNextId()
 void ApplicationManager::DeleteFigure(unsigned int id)
 {
     auto itr = GetFigureIter(id);
-    if (itr != figs.end()) {
+    if (itr != figs.end()) 
+	{
         delete (*itr);
         figs.erase(itr);
-    } else {
+	}
+    else 
         cerr << "Cant delete figure, figure not found, id = " << id << endl;
-    }
 }
 
 CFigure* ApplicationManager::GetFigure(unsigned int id) const

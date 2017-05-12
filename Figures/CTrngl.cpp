@@ -1,9 +1,6 @@
 #include "CTrngl.h"
 
 CTrngl::CTrngl()
-	: p1(0, 0)
-	, p2(0, 0)
-	, p3(0, 0)
 {
 }
 

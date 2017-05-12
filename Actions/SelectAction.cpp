@@ -16,9 +16,9 @@ void SelectAction::ReadActionParameters()
 
 void SelectAction::Execute()
 {
-	in_p->GetClickPoint(p.x, p.y);
-	p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
-	p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
+	in_p->GetClick(p.x, p.y);
+	p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
+	p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
 	while (!(p.y < UI.ToolBarHeight && p.y > UI.ToolBarY && p.x > ITM_SELECT*UI.MenuItemWidth && p.x < ITM_SELECT*UI.MenuItemWidth + UI.MenuItemWidth))
 	{
 
@@ -31,9 +31,9 @@ void SelectAction::Execute()
 			manager_p->PrintSelectedSize();
 			manager_p->UpdateInterface();
 		}
-		in_p->GetClickPoint(p.x, p.y);
-		p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
-		p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
+		in_p->GetClick(p.x, p.y);
+		p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
+		p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
 	}
 }
 

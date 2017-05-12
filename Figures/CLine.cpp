@@ -1,10 +1,9 @@
 #include "CLine.h"
 
 CLine::CLine()
-	: p1(0, 0)
-	, p2(0, 0)
 {
 }
+
 CLine::CLine(Point p1, Point p2, GfxInfo line_gfx_info)
 	: CFigure(line_gfx_info)
 {

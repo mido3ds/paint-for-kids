@@ -13,9 +13,9 @@ void ChBGColorAction::ReadActionParameters()
     int x, y;
     out_p->PrintMessage("Choose Your Favourite Color");
     out_p->CreateColorBar();
-    in_p->GetClickPoint(x, y);
+    in_p->GetClick(x, y);
     lastC = C;
-    C = in_p->PickColor(x, y);
+    C = in_p->GetColor(x, y);
     out_p->ClearStatusBar();
 }
 

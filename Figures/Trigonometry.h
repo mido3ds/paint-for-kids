@@ -3,7 +3,8 @@
 #include "../DEFS.h"
 #include <cmath>
 
-class Trigonometry {
+class Trigonometry 
+{
 public:
 	static double Area(Point p1, Point p2, Point p3)
 	{

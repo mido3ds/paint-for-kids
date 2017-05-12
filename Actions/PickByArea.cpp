@@ -34,7 +34,7 @@ void PickByArea::Execute()
 	{
 		out_p->CreateRestartGame();
 		out_p->PrintMessage("Pick Figures From Bigger To Smaller            Correct Answers: " +to_string(correct)+"      Wrong Answers: "+ to_string(wrong));
-		in_p->GetClickPoint(p.x, p.y);
+		in_p->GetClick(p.x, p.y);
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;

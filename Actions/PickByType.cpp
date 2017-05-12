@@ -28,7 +28,7 @@ void PickByType::Execute()
 		
 		out_p->CreateRestartGame();
 		out_p->PrintMessage("Choose Your First Figure");
-		in_p->GetClickPoint(p.x, p.y);
+		in_p->GetClick(p.x, p.y);
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
@@ -79,7 +79,7 @@ void PickByType::Execute()
 
 		while (numOfSameType > 0) {
 
-			in_p->GetClickPoint(p.x, p.y);
+			in_p->GetClick(p.x, p.y);
 			if (p.y > 0 && p.y < UI.ToolBarHeight)
 			{
 				int IconClicked = p.x / UI.MenuItemWidth;

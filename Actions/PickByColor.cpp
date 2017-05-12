@@ -29,7 +29,7 @@ void PickByColor::Execute()
 
 		out_p->PrintMessage("Choose Your First Figure");
 
-		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
+		in_p->GetClick(p.x, p.y);		// Getting The First Piont To Git The First Figure
 
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
@@ -77,7 +77,7 @@ void PickByColor::Execute()
 		while (numOfSameColor > 0)
 		{
 
-			in_p->GetClickPoint(p.x, p.y);
+			in_p->GetClick(p.x, p.y);
 			if (p.y > 0 && p.y < UI.ToolBarHeight)
 			{
 				int IconClicked = p.x / UI.MenuItemWidth;
