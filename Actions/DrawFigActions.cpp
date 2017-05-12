@@ -1,6 +1,7 @@
 #include "DrawFigActions.h"
 
-DrawFigActions::DrawFigActions(ApplicationManager * app_p) :Action(app_p, false)
+DrawFigActions::DrawFigActions(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 

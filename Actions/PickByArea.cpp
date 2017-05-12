@@ -1,6 +1,7 @@
 #include "PickByArea.h"
 
-PickByArea::PickByArea(ApplicationManager *app_p) :Action(app_p,false)
+PickByArea::PickByArea(ApplicationManager *app_p) 
+	: Action(app_p,false)
 {
 }
 

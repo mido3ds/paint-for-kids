@@ -1,6 +1,7 @@
 #include "PickByType.h"
 
-PickByType::PickByType(ApplicationManager * app_p) :Action(app_p)
+PickByType::PickByType(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 

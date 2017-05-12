@@ -1,6 +1,7 @@
 #include "PickAction.h"
 
-PickAction::PickAction(ApplicationManager * app_p) :Action(app_p)
+PickAction::PickAction(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 

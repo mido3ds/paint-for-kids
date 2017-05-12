@@ -1,7 +1,8 @@
 #include "PickByTypeAndColor.h"
 
 
-PickByTypeAndColor::PickByTypeAndColor(ApplicationManager * app_p) :Action(app_p,false)
+PickByTypeAndColor::PickByTypeAndColor(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 
