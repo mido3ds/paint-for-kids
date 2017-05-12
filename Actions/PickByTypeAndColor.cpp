@@ -37,15 +37,16 @@ void PickByTypeAndColor::Execute()
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				ReadActionParameters();
-				Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					ReadActionParameters();
+					Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 
@@ -75,15 +76,16 @@ void PickByTypeAndColor::Execute()
 				int IconClicked = p.x / UI.MenuItemWidth;
 				switch (IconClicked)
 				{
-				case 0:
-					ReadActionParameters();
-					Execute();
-					break;
-				case 1:
-					out_p->CreatePlayToolBar();
-					return;
-				default:
-					break;
+					case 0:
+						ReadActionParameters();
+						Execute();
+						break;
+					case 1:
+						out_p->CreatePlayToolBar();
+						return;
+
+					default:
+						break;
 				}
 			}
 			fig = manager_p->GetFigure(figures, p);
@@ -149,14 +151,13 @@ int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string
 
 void PickByTypeAndColor::DeleteCorrect(int id)
 {
-	for (auto itr = figures.begin(); itr != figures.end(); itr++) {
+	for (auto itr = figures.begin(); itr != figures.end(); itr++) 
 		if ((*itr)->GetId() == id)
 		{
 			delete *itr;
 			figures.erase(itr);
 			return;
 		}
-	}
 }
 
 void PickByTypeAndColor::DrawColorCircle(color c)
@@ -177,12 +178,9 @@ void PickByTypeAndColor::DrawColorCircle(color c)
 bool PickByTypeAndColor::Correct(CFigure * fig)
 {
 	if (fig->IsFilled() == isfilled && fig->GetType() == type)
-	{
 		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
-		{
 			return true;
-		}
-	}
+
 	return false;
 }
 

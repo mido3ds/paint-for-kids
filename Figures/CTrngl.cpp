@@ -30,85 +30,86 @@ void CTrngl::Rotate(int deg)
 	Point temp4;
 	Point temp6;
 	switch (deg) {
-	case 90:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp5.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp5.y -= c.y;
-		temp3.x = temp1.y * -1;
-		temp3.y = temp1.x;
-		temp4.x = temp2.y * -1;
-		temp4.y = temp2.x;
-		temp6.x = temp5.y * -1;
-		temp6.y = temp5.x;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp6.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		temp6.y += c.y;
-		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-			p3 = temp6;
-		}
-		break;
-	case 180:
-		temp1.x = (2 * c.x) - temp1.x;
-		temp2.x = (2 * c.x) - temp2.x;
-		temp3.x = (2 * c.x) - temp3.x;
-		temp1.y = (2 * c.y) - temp1.y;
-		temp2.y = (2 * c.y) - temp2.y;
-		temp3.y = (2 * c.y) - temp3.y;
-		if (IsOutOfRange(temp1, temp2, temp3)) {
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp1;
-			p2 = temp2;
-			p3 = temp3;
-		}
-		break;
-	case 270:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp5.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp5.y -= c.y;
-		temp3.x = temp1.y;
-		temp3.y = temp1.x * -1;
-		temp4.x = temp2.y;
-		temp4.y = temp2.x * -1;
-		temp6.x = temp5.y;
-		temp6.y = temp5.x * -1;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp6.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		temp6.y += c.y;
-		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-			p3 = temp6;
-		}
-		break;
-	default:
-		break;
+		case 90:
+			temp1.x -= c.x;
+			temp2.x -= c.x;
+			temp5.x -= c.x;
+			temp1.y -= c.y;
+			temp2.y -= c.y;
+			temp5.y -= c.y;
+			temp3.x = temp1.y * -1;
+			temp3.y = temp1.x;
+			temp4.x = temp2.y * -1;
+			temp4.y = temp2.x;
+			temp6.x = temp5.y * -1;
+			temp6.y = temp5.x;
+			temp3.x += c.x;
+			temp4.x += c.x;
+			temp6.x += c.x;
+			temp3.y += c.y;
+			temp4.y += c.y;
+			temp6.y += c.y;
+			if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
+			{
+				is_rotated = false;
+			}
+			else {
+				is_rotated = true;
+				p1 = temp3;
+				p2 = temp4;
+				p3 = temp6;
+			}
+			break;
+		case 180:
+			temp1.x = (2 * c.x) - temp1.x;
+			temp2.x = (2 * c.x) - temp2.x;
+			temp3.x = (2 * c.x) - temp3.x;
+			temp1.y = (2 * c.y) - temp1.y;
+			temp2.y = (2 * c.y) - temp2.y;
+			temp3.y = (2 * c.y) - temp3.y;
+			if (IsOutOfRange(temp1, temp2, temp3)) {
+				is_rotated = false;
+			}
+			else {
+				is_rotated = true;
+				p1 = temp1;
+				p2 = temp2;
+				p3 = temp3;
+			}
+			break;
+		case 270:
+			temp1.x -= c.x;
+			temp2.x -= c.x;
+			temp5.x -= c.x;
+			temp1.y -= c.y;
+			temp2.y -= c.y;
+			temp5.y -= c.y;
+			temp3.x = temp1.y;
+			temp3.y = temp1.x * -1;
+			temp4.x = temp2.y;
+			temp4.y = temp2.x * -1;
+			temp6.x = temp5.y;
+			temp6.y = temp5.x * -1;
+			temp3.x += c.x;
+			temp4.x += c.x;
+			temp6.x += c.x;
+			temp3.y += c.y;
+			temp4.y += c.y;
+			temp6.y += c.y;
+			if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
+			{
+				is_rotated = false;
+			}
+			else {
+				is_rotated = true;
+				p1 = temp3;
+				p2 = temp4;
+				p3 = temp6;
+			}
+			break;
+
+		default:
+			break;
 	}
 }
 

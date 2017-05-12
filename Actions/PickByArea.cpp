@@ -7,9 +7,11 @@ PickByArea::PickByArea(ApplicationManager *app_p) :Action(app_p,false)
 void PickByArea::ReadActionParameters()
 {
 	Output *out_p = manager_p->GetOutput();
+
 	out_p->PrintMessage("Picking With Area ....");
-	Sleep(1000);
 	figures = manager_p->GetCopyOfFigures();
+
+	Sleep(SECOND);
 }
 
 void PickByArea::Execute()
@@ -38,15 +40,16 @@ void PickByArea::Execute()
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				ReadActionParameters();
-				Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					ReadActionParameters();
+					Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 		fig=manager_p->GetFigure(figures, p);
@@ -97,12 +100,11 @@ PickByArea::~PickByArea()
 
 void PickByArea::DeleteCorrect(int id)
 {
-	for (auto itr = figures.begin(); itr != figures.end(); itr++) {
+	for (auto itr = figures.begin(); itr != figures.end(); itr++) 
 		if ((*itr)->GetId() == id)
 		{
 			delete *itr;
 			figures.erase(itr);
 			return;
 		}
-	}
 }

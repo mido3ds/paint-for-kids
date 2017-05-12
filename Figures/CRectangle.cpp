@@ -25,68 +25,69 @@ void CRectangle::Rotate(int deg)
 	Point temp3;
 	Point temp4;
 	switch (deg) {
-	case 90:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp3.x = temp1.y * -1;
-		temp3.y = temp1.x;
-		temp4.x = temp2.y * -1;
-		temp4.y = temp2.x;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-		}
-		break;
-	case 180:
-		temp1.x = (2 * c.x) - temp1.x;
-		temp2.x = (2 * c.x) - temp2.x;
-		temp1.y = (2 * c.y) - temp1.y;
-		temp2.y = (2 * c.y) - temp2.y;
-		if (IsOutOfRange(temp1, temp2)) {
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp1;
-			p2 = temp2;
-		}
-		break;
-	case 270:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp3.x = temp1.y;
-		temp3.y = temp1.x * -1;
-		temp4.x = temp2.y;
-		temp4.y = temp2.x * -1;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-		}
-		break;
-	default:
-		break;
+		case 90:
+			temp1.x -= c.x;
+			temp2.x -= c.x;
+			temp1.y -= c.y;
+			temp2.y -= c.y;
+			temp3.x = temp1.y * -1;
+			temp3.y = temp1.x;
+			temp4.x = temp2.y * -1;
+			temp4.y = temp2.x;
+			temp3.x += c.x;
+			temp4.x += c.x;
+			temp3.y += c.y;
+			temp4.y += c.y;
+			if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
+			{
+				is_rotated = false;
+			}
+			else {
+				is_rotated = true;
+				p1 = temp3;
+				p2 = temp4;
+			}
+			break;
+		case 180:
+			temp1.x = (2 * c.x) - temp1.x;
+			temp2.x = (2 * c.x) - temp2.x;
+			temp1.y = (2 * c.y) - temp1.y;
+			temp2.y = (2 * c.y) - temp2.y;
+			if (IsOutOfRange(temp1, temp2)) {
+				is_rotated = false;
+			}
+			else {
+				is_rotated = true;
+				p1 = temp1;
+				p2 = temp2;
+			}
+			break;
+		case 270:
+			temp1.x -= c.x;
+			temp2.x -= c.x;
+			temp1.y -= c.y;
+			temp2.y -= c.y;
+			temp3.x = temp1.y;
+			temp3.y = temp1.x * -1;
+			temp4.x = temp2.y;
+			temp4.y = temp2.x * -1;
+			temp3.x += c.x;
+			temp4.x += c.x;
+			temp3.y += c.y;
+			temp4.y += c.y;
+			if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
+			{
+				is_rotated = false;
+			}
+			else {
+				is_rotated = true;
+				p1 = temp3;
+				p2 = temp4;
+			}
+			break;
+
+		default:
+			break;
 	}
 }
 void CRectangle::SetRotated(bool r)

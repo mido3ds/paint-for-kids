@@ -36,15 +36,16 @@ void PickByColor::Execute()
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				figures = manager_p->GetCopyOfFigures();	
-				PickByColor::Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					figures = manager_p->GetCopyOfFigures();	
+					PickByColor::Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 		fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
@@ -82,15 +83,16 @@ void PickByColor::Execute()
 				int IconClicked = p.x / UI.MenuItemWidth;
 				switch (IconClicked)
 				{
-				case 0:
-					figures = manager_p->GetCopyOfFigures();
-					PickByColor::Execute();
-					break;
-				case 1:
-					out_p->CreatePlayToolBar();
-					return;
-				default:
-					break;
+					case 0:
+						figures = manager_p->GetCopyOfFigures();
+						PickByColor::Execute();
+						break;
+					case 1:
+						out_p->CreatePlayToolBar();
+						return;
+
+					default:
+						break;
 				}
 			}
 			fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
