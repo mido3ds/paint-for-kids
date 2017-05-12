@@ -19,9 +19,9 @@ void LoadAction::ReadActionParameters()
 			manager_p->ExecuteAction(SAVE);
 	}
 
-    out_p->PrintMessage("File name to load: ");
-
-    string file_name = in_p->GetString(out_p);
+    string file_name = GetFileName();
+    if (file_name == "")
+        return;
 
     in_file.open(file_name, ofstream::in);
 
@@ -46,4 +46,29 @@ void LoadAction::Execute()
 
 void LoadAction::Undo()
 {
+}
+
+string LoadAction::GetFileName()
+{
+    // using WIN_API to open dialogue, see [http://www.winprog.org/tutorial/app_two.html] 
+
+    OPENFILENAME ofn;
+
+    const int MAX_PATH = 100;
+    char szFileName[MAX_PATH] = ""; // TODO: make it string 
+
+    ZeroMemory(&ofn, sizeof(ofn));
+
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = NULL;
+    ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+    ofn.lpstrFile = szFileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = "txt";
+
+    if (GetOpenFileName(&ofn))
+        return string(szFileName);
+    else
+        return "";
 }
