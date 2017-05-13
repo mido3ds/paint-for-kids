@@ -29,6 +29,7 @@ public:
 
 private:
 	Point zoom_point;
+	Point pre_zoom_point;
 };
 
 #endif  /* __ZoomOutAction_h__ */

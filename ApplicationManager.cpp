@@ -135,6 +135,16 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 		}
 	}
 }
+
+bool ApplicationManager::IsRunning() const
+{
+	return !exit_signal;
+}
+
+void ApplicationManager::Exit()
+{
+	exit_signal = true;
+}
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -211,6 +221,8 @@ void ApplicationManager::UpdateInterface() const
 		out_p->CreateDrawToolBar();
 	else
 		out_p->CreatePlayToolBar();
+
+	out_p->ClearStatusBar(false);
 }
 
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)

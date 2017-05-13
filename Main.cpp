@@ -8,12 +8,11 @@ int main()
 	do 
 	{
 		action = app.GetUserAction();
-		cout << action << endl;
 		app.ExecuteAction(action);
 
 		app.UpdateInterface();
 	} 
-	while (action != EXIT);
+	while (app.IsRunning());
 
 	return 0;
 }

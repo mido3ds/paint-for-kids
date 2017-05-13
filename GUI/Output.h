@@ -17,11 +17,12 @@ public:
     void CreateFigItems() const;
     void CreateFigActions() const;
 	void CreateBorderWidth() const;
+	void CreateResize() const;
 
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
 	void CreatePickBar() const;
 	void CreateRestartGame() const;
-
+	
 	void CreateStatusBar() const;
 	void CreateColorBar() const;
 
@@ -32,7 +33,7 @@ public:
 
 	Input* CreateInput() const; // creates a pointer to the Input object
 
-    void ClearStatusBar() const;
+    void ClearStatusBar(bool clear_msg=true);
     void ClearDrawArea() const;
     void ClearToolBar() const;
     void ClearTToolBar() const;
@@ -50,7 +51,7 @@ public:
 	void DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 		bool selected) const; // Draw a  tringle
 
-	void PrintMessage(string msg) const; // on Status bar
+	void PrintMessage(string msg, bool save_msg=false); // on Status bar
 
 	color GetDrawColor() const;
 	color GetFillColor() const;
@@ -68,11 +69,16 @@ public:
 private:
 	window* wind_p; // Pointer to the Graphics Window
 
-	Point TranslatePoint(const Point&) const; // returns zoomed point
-	int TranslateRadius(const Point&, int) const; // returns zoomed radius 
-
+	Point TranslatePoint(const Point& p) const; // returns zoomed point
+	int AdjustBorder(const int& border) const;
+	int AdjustBorder15(const int& border) const;
+	int AdjustBorder10(const int& border) const;
+	int AdjustBorder3(const int& border) const;
+	int AdjustBorder1(const int& border) const;
 	int zoom = 0;
 	Point zoom_point;
+
+	string last_printed_msg;
 };
 
 #endif

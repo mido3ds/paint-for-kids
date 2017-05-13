@@ -25,6 +25,8 @@ void ExitAction::Execute()
         if (input == "y" || input == "Y")
             manager_p->ExecuteAction(SAVE);
     }
+
+	manager_p->Exit();
 }
 
 void ExitAction::Undo()

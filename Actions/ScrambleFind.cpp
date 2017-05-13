@@ -49,7 +49,7 @@ void ScrambleFind::ReadActionParameters() // prepare game
         "Please wait, Loading ..."
     );
 
-	Sleep(2 * SECOND);
+	Sleep(SECOND);
 }
 
 void ScrambleFind::Execute() // game mainloop
@@ -83,8 +83,8 @@ void ScrambleFind::Execute() // game mainloop
             }
 			else if (act == EXIT || act == TO_DRAW)
 			{
-				manager_p->ExecuteAction(act);
-				return;
+				finish = true;
+				break;
 			}
 
             // get clicked figure
@@ -115,6 +115,9 @@ void ScrambleFind::Execute() // game mainloop
 
     // final message
     UpdateMessage(invalid_count, valid_count, true);
+
+	if (act == TO_DRAW || act == EXIT)
+		manager_p->ExecuteAction(act);
 }
 
 void ScrambleFind::Undo()
@@ -135,6 +138,8 @@ void ScrambleFind::UpdateInterface()
     // draw right figures
     for (auto& fig : left_figs)
         fig->Draw(out_p);
+
+
 }
 
 CFigure* ScrambleFind::ChooseRandomFigure()
@@ -163,7 +168,7 @@ void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
         out_p->PrintMessage("Final grade = " + to_string(final_grade) + "%");
 		out_p->ClearDrawArea();
 
-		Sleep(4 * SECOND);
+		Sleep(2 * SECOND);
     }
     else
     {
