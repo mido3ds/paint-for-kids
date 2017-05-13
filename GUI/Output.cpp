@@ -267,7 +267,6 @@ void Output::ClearTempToolbar() const
 	wind_p->SetBrush(UI.BkGrndColor);
 	wind_p->SetPen(UI.BkGrndColor);
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
-	//ClearDrawArea();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
