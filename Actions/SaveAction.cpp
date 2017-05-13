@@ -8,11 +8,10 @@ SaveAction::SaveAction(ApplicationManager* app_p)
 void SaveAction::ReadActionParameters()
 {
     Output* out_p = manager_p->GetOutput();
-    Input* in_p = manager_p->GetInput();
 
-    out_p->PrintMessage("File name to save at: ");
-
-    string file_name = in_p->GetString(out_p);
+    string file_name = GetFileName();
+    if (file_name == "")
+        return;
 
     out_file.open(file_name, ofstream::out);
 
@@ -36,4 +35,28 @@ void SaveAction::Execute()
 
 void SaveAction::Undo()
 {
+}
+
+string SaveAction::GetFileName()
+{
+    // using WIN_API to open dialogue, see [http://www.winprog.org/tutorial/app_two.html] 
+
+    OPENFILENAME ofn;
+
+    char szFileName[MAX_PATH] = ""; 
+
+    ZeroMemory(&ofn, sizeof(ofn));
+
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = NULL;
+    ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+    ofn.lpstrFile = szFileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = "txt";
+
+    if (GetSaveFileName(&ofn))
+        return string(szFileName);
+    else
+        return "";
 }

@@ -1,6 +1,7 @@
 #include "MultiSelect.h"
 
-MultiSelect::MultiSelect(ApplicationManager * app_p):Action(app_p)
+MultiSelect::MultiSelect(ApplicationManager * app_p) 
+	: Action(app_p)
 {
 }
 

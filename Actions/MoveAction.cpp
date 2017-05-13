@@ -12,11 +12,11 @@ void MoveAction::ReadActionParameters()
     Input* in_p = manager_p->GetInput();
 
     if (manager_p->GetNumSelected() > 0) {
-        out_p->PrintMessage("Please Click The Point You Want To MoveAction Selected Figure/s At");
+        out_p->PrintMessage("Please Click The Point You Want To Move Selected Figure/s To");
         in_p->GetClick(p.x, p.y);
         out_p->ClearStatusBar();
     } else
-        out_p->PrintMessage("No Selected Figures To MoveAction");
+        out_p->PrintMessage("No Selected Figures To Move");
 }
 
 void MoveAction::Execute()

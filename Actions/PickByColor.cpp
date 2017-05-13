@@ -1,6 +1,7 @@
 #include "PickByColor.h"
 
-PickByColor::PickByColor(ApplicationManager * app_p) :Action(app_p)
+PickByColor::PickByColor(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 

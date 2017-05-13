@@ -1,6 +1,7 @@
 #include "DrawFigItems.h"
 
-DrawFigItems::DrawFigItems(ApplicationManager * app_p) :Action(app_p, false)
+DrawFigItems::DrawFigItems(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 
