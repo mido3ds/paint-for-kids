@@ -1,10 +1,9 @@
 #include "CLine.h"
 
 CLine::CLine()
-	: p1(0, 0)
-	, p2(0, 0)
 {
 }
+
 CLine::CLine(Point p1, Point p2, GfxInfo line_gfx_info)
 	: CFigure(line_gfx_info)
 {
@@ -24,69 +23,26 @@ void CLine::Rotate(int deg)
 	Point temp2 = p2;
 	Point temp3;
 	Point temp4;
-	switch (deg) {
-	case 90:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp3.x = temp1.y * -1;
-		temp3.y = temp1.x;
-		temp4.x = temp2.y * -1;
-		temp4.y = temp2.x;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-		}
-		break;
-	case 180:
-		temp1.x = (2 * c.x) - temp1.x;
-		temp2.x = (2 * c.x) - temp2.x;
-		temp1.y = (2 * c.y) - temp1.y;
-		temp2.y = (2 * c.y) - temp2.y;
-		if (IsOutOfRange(temp1, temp2)) {
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp1;
-			p2 = temp2;
-		}
-		break;
-	case 270:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp3.x = temp1.y;
-		temp3.y = temp1.x * -1;
-		temp4.x = temp2.y;
-		temp4.y = temp2.x * -1;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		if (IsOutOfRange(temp3, temp4)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-		}
-		break;
-	default:
-		break;
+	temp1.x -= c.x;
+	temp2.x -= c.x;
+	temp1.y -= c.y;
+	temp2.y -= c.y;
+	temp3.x = temp1.y * -1;
+	temp3.y = temp1.x;
+	temp4.x = temp2.y * -1;
+	temp4.y = temp2.x;
+	temp3.x += c.x;
+	temp4.x += c.x;
+	temp3.y += c.y;
+	temp4.y += c.y;
+	if (IsOutOfRange(temp3, temp4))
+	{
+		is_rotated = false;
+	}
+	else {
+		is_rotated = true;
+		p1 = temp3;
+		p2 = temp4;
 	}
 }
 
@@ -210,7 +166,7 @@ Point CLine::CalculateCenter()
 
 bool CLine::IsOutOfRange(Point p1, Point p2)
 {
-	return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width);
+	return (p1.y < UI.DrawAreaY || p1.y > UI.DrawAreaY + UI.DrawAreaHeight || p1.x < UI.DrawAreaX || p1.x > UI.DrawAreaX + UI.DrawAreaWidth || p2.y < UI.DrawAreaY || p2.y > UI.DrawAreaY + UI.DrawAreaHeight || p2.x < UI.DrawAreaX || p2.x > UI.DrawAreaX + UI.DrawAreaWidth);
 }
 
 void CLine::PrintInfo(Output* out_p)
@@ -239,21 +195,6 @@ void CLine::MoveToLeftSide()
 	p2.x = center.x + def2;
 }
 
-void CLine::MoveToRightSide()
-{
-	Point center = CalculateCenter();
-
-	// get difference between center and points
-	int def1 = p1.x - center.x;
-	int def2 = p2.x - center.x;
-
-	center.x = center.x / 2 + UI.width / 2;
-
-	// remake the points from the previous centere
-	p1.x = center.x + def1;
-	p2.x = center.x + def2;
-}
-
 void CLine::RandomizePosition()
 {
 	Point center = CalculateCenter();
@@ -264,8 +205,6 @@ void CLine::RandomizePosition()
 	int i = 0;
 	do
 	{
-		/*center.x = rand() % ((UI.width - (UI.width / 2)) + 1) + (UI.width / 2);
-		center.y = rand() % ((UI.StatusBarY - 50) + 1) + 50;*/
 		center.x = rand() % (((UI.width - 5) - ((UI.width / 2) + 5)) + 1) + ((UI.width / 2) + 5);
 		center.y = rand() % (((UI.StatusBarY - 5) - 55) + 1) + 55;
 

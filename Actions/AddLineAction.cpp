@@ -14,18 +14,18 @@ void AddLineAction::ReadActionParameters()
     out_p->PrintMessage("New Line: Click at first point");
 
     //Read 1st corner and store in point p1
-	in_p->GetClickPoint(p1.x, p1.y);
+	in_p->GetClick(p1.x, p1.y);
 
     out_p->PrintMessage("New Line: Click at second corner");
 
     //Read 2nd corner and store in point p2
-	in_p->GetClickPoint(p2.x, p2.y);
+	in_p->GetClick(p2.x, p2.y);
 
-	p1.x = (p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
-	p1.y = (p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
+	p1.x = (p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
+	p1.y = (p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
 
-	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().x;
-	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoom()) + out_p->GetZoomPoint().y;
+	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
+	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
 
     gfx.is_filled = UI.IsFilled; //default is not filled
     //get drawing, filling colors and pen width from the interface

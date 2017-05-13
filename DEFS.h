@@ -21,7 +21,6 @@ enum ActionType //The actions supported (you can add more if needed)
     DEL, //Delete a figure(s)
     MOVE, //Move a figure(s)
     SELECT,
-	DESELECT,
     CTR, // Figure Actions Control
     RESIZE, //Resize a figure(s)
     ROTATE, //Rotate a figure(s)
@@ -38,7 +37,6 @@ enum ActionType //The actions supported (you can add more if needed)
     SCRAMBLE,
     UNDO,
     REDO,
-    DRAGGING,
 
 	PICK_COLOR,
 	PICK_TYPE,
@@ -73,6 +71,10 @@ struct Point // To be used for figures points
 	bool operator<(const Point& p) const
 	{
 		return ((this->x > p.x) && (this->y > p.y)) ? false : true;
+	}
+	Point &operator- (const Point &p)
+	{
+		return Point((this->x - p.x), (this->y - p.y));
 	}
 };
 

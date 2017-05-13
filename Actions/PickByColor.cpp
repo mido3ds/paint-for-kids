@@ -1,6 +1,7 @@
 #include "PickByColor.h"
 
-PickByColor::PickByColor(ApplicationManager * app_p) :Action(app_p)
+PickByColor::PickByColor(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 
@@ -29,39 +30,48 @@ void PickByColor::Execute()
 
 		out_p->PrintMessage("Choose Your First Figure");
 
-		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
+		in_p->GetClick(p.x, p.y);		// Getting The First Piont To Git The First Figure
 
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				figures = manager_p->GetCopyOfFigures();	
-				PickByColor::Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					figures = manager_p->GetCopyOfFigures();	
+					PickByColor::Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 		fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
 		if (fig)		// If The Piont Is In Figure
 		{
-			c = fig->GetFillColor();
-			isfilled = fig->IsFilled();
+			if (dynamic_cast<CLine *> (fig)) {
+				// If The Figure Is A Line Then Its Color Is Its Draw Color Not Fill Color
+				c = fig->GetDrawColor();
+				isfilled = true;
+			}
+			else {
+				// If The Figure Is Something Else Then We Take Its Fill color
+				c = fig->GetFillColor();
+				isfilled = fig->IsFilled();
+			}
 			correct++;
 			if (isfilled)
 			{
 				
 				// If Is Filled Then Draw The Color In Status Bar
-				out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				DrawColorCircle(c);
 			}
 			else {
-				out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 			}
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
 			numOfSameColor = GetNumFigsSameColor(c, isfilled);					// Reducing The Number Of Same Color Figs If Correct
@@ -69,28 +79,29 @@ void PickByColor::Execute()
 			manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 		}
 		else {
-			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 			continue;
 		}
 
 		while (numOfSameColor > 0)
 		{
 
-			in_p->GetClickPoint(p.x, p.y);
+			in_p->GetClick(p.x, p.y);
 			if (p.y > 0 && p.y < UI.ToolBarHeight)
 			{
 				int IconClicked = p.x / UI.MenuItemWidth;
 				switch (IconClicked)
 				{
-				case 0:
-					figures = manager_p->GetCopyOfFigures();
-					PickByColor::Execute();
-					break;
-				case 1:
-					out_p->CreatePlayToolBar();
-					return;
-				default:
-					break;
+					case 0:
+						figures = manager_p->GetCopyOfFigures();
+						PickByColor::Execute();
+						break;
+					case 1:
+						out_p->CreatePlayToolBar();
+						return;
+
+					default:
+						break;
 				}
 			}
 			fig = ApplicationManager::GetFigure(figures, p);	// Getting The First Figure
@@ -98,11 +109,11 @@ void PickByColor::Execute()
 				if (isfilled)
 				{
 					// If Is Filled Then Draw The Color In Status Bar
-					out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Select All Figure Of This Color            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					DrawColorCircle(c);
 				}
 				else {
-					out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Select All None Filled Figures            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 				}
 				if (PickByColor::correct(fig))
 				{
@@ -111,28 +122,28 @@ void PickByColor::Execute()
 					numOfFigs--;
 					manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 					correct++;
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					Sleep(400);
 				}
 				else {
 					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 					Sleep(400);
 				}
 			}
 			else {
 				wrong++;
-				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 				Sleep(400);
 			}
 		}
 
 	}
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
 	}
 	else {
-		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)));
+		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)), ORANGE);
 		Sleep(1000);
 	}
 }
@@ -145,9 +156,14 @@ int PickByColor::GetNumFigsSameColor(color C , bool isfilled)
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (isfilled)
+		if (dynamic_cast<CLine *> (figure)) {
+			if (figure->GetDrawColor() == C) {
+				num++;
+			}
+		}
+		else if (isfilled)
 		{
-			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
+			if (figure->GetFillColor() == C)
 				num++;
 		}
 		else if (figure->IsFilled() == isfilled)
@@ -185,9 +201,14 @@ void PickByColor::DrawColorCircle(color c)
 
 bool PickByColor::correct(CFigure * fig)
 {
-	if (fig->IsFilled() == isfilled)
+	if (dynamic_cast<CLine *> (fig)) {
+		if (fig->GetDrawColor() == c) {
+			return true;
+		}
+	}
+	else if (fig->IsFilled() == isfilled)
 	{
-		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
+		if (fig->GetFillColor() == c)
 		{
 			return true;
 		}

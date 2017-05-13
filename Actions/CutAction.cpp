@@ -7,6 +7,8 @@ CutAction::CutAction(ApplicationManager* app_p)
 
 void CutAction::ReadActionParameters()
 {
+	Output* out_p = manager_p->GetOutput();
+	out_p->ClearStatusBar();
 }
 
 void CutAction::Execute()

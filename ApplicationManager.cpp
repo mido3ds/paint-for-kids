@@ -3,18 +3,18 @@
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-	//Create Input and output
-	out_p = new Output;
-	in_p = out_p->CreateInput();
+    //Create Input and output
+    out_p = new Output;
+    in_p = out_p->CreateInput();
 
-	num_selected = 0;
+    num_selected = 0;
 
-	// make the seed of the pseudo-random generator
+    // make the seed of the pseudo-random generator
 	time_t rawtime = time(0);
-	srand(rawtime);
+    srand(rawtime);
 
-	// at beginning, figs is saved, as we dont have any yet
-	figs_is_saved = true;
+    // at beginning, figs is saved, as we dont have any yet
+    figs_is_saved = true;
 
 	// open log file, and redirect cerr,clog to it
 	freopen("log.txt", "a", stderr);
@@ -37,113 +37,102 @@ ActionType ApplicationManager::GetUserAction() const
 // According to Action Type, return the corresponding action object
 Action* ApplicationManager::DetectAction(ActionType act_type)
 {
-	switch (act_type) {
-	case DRAW_FIG_ITM:
-		return new DrawFigItems(this);
-	case DRAW_RECT:
-		return new AddRectAction(this);
-	case DRAW_CIRC:
-		return new AddCircAction(this);
-	case DRAW_TRI:
-		return new AddTrnglAction(this);
-	case DRAW_LINE:
-		return new AddLineAction(this);
-	case ZOOM_IN:
-		return new ZoomInAction(this);
-	case ZOOM_OUT:
-		return new ZoomOutAction(this);
-	case EXIT:
-		return new ExitAction(this);
-	case TO_PLAY:
-		return new ToPlayModeAction(this);
-	case TO_DRAW:
-		return new ToDrawModeAction(this);
-	case SAVE:
-		return new SaveAction(this);
-	case LOAD:
-		return new LoadAction(this);
-	case UNDO:
-		return new UndoAction(this);
-	case REDO:
-		return new RedoAction(this);
-	case CHNG_FILL_CLR:
-		return new ChFillColorAction(this);
-	case CHNG_BK_CLR:
-		return new ChBGColorAction(this);
-	case CHNG_DRAW_CLR:
-		return new ChBorderAction(this);
-	case SEND_BACK:
-		return new SendDownAction(this);
-	case BRNG_FRNT:
-		return new SendUpAction(this);
-	case ROTATE:
-		return new RotateAction(this);
-	case CTR:
-		return new DrawFigActions(this);
-	case DEL:
-		return new DeleteAction(this);
-	case MOVE:
-		return new MoveAction(this);
-	case RESIZE:
-		return new ResizeAction(this);
-	case COPY:
-		return new CopyAction(this);
-	case PASTE:
-		return new PasteAction(this);
-	case SELECT:
-		return new SelectAction(this);
-	case DESELECT:
-		return new UnselectAction(this);
-	case DRAGGING:
-		return new DraggingAction(this);
-	case CUT:
-		return new CutAction(this);
-	case SCRAMBLE:
-		return new ScrambleFind(this);
-	case HIDE:
-		return new PickAction(this);
-	case PICK_COLOR:
-		return new PickByColor(this);
-	case PICK_TYPE:
-		return new PickByType(this);
-	case PICK_AREA:
-		return new PickByArea(this);
-	case PICK_COL_TYP:
-		return new PickByTypeAndColor(this);
-
-	default:
-		return nullptr;
-	}
+    switch (act_type) 
+	{
+		case DRAW_FIG_ITM:
+			return new DrawFigItems(this);
+		case DRAW_RECT:
+			return new AddRectAction(this);
+		case DRAW_CIRC:
+			return new AddCircAction(this);
+		case DRAW_TRI:
+			return new AddTrnglAction(this);
+		case DRAW_LINE:
+			return new AddLineAction(this);
+		case ZOOM_IN:
+			return new ZoomInAction(this);
+		case ZOOM_OUT:
+			return new ZoomOutAction(this);
+		case EXIT:
+			return new ExitAction(this);
+		case TO_PLAY:
+			return new ToPlayModeAction(this);
+		case TO_DRAW:
+			return new ToDrawModeAction(this);
+		case SAVE:
+			return new SaveAction(this);
+		case LOAD:
+			return new LoadAction(this);
+		case UNDO:
+			return new UndoAction(this);
+		case REDO:
+			return new RedoAction(this);
+		case CHNG_FILL_CLR:
+			return new ChFillColorAction(this);
+		case CHNG_BK_CLR:
+			return new ChBGColorAction(this);
+		case CHNG_DRAW_CLR:
+			return new ChBorderAction(this);
+		case SEND_BACK:
+			return new SendDownAction(this);
+		case BRNG_FRNT:
+			return new SendUpAction(this);
+		case ROTATE:
+			return new RotateAction(this);
+		case CTR:
+			return new DrawFigActions(this);
+		case DEL:
+			return new DeleteAction(this);
+		case MOVE:
+			return new MoveAction(this);
+		case RESIZE:
+			return new ResizeAction(this);
+		case COPY:
+			return new CopyAction(this);
+		case PASTE:
+			return new PasteAction(this);
+		case SELECT:
+			return new MultiSelect(this);
+		case CUT:
+			return new CutAction(this);
+		case SCRAMBLE:
+			return new ScrambleFind(this);
+		case HIDE:
+			return new PickAction(this);
+		case PICK_COLOR:
+			return new PickByColor(this);
+		case PICK_TYPE:
+			return new PickByType(this);
+		case PICK_AREA:
+			return new PickByArea(this);
+		case PICK_COL_TYP:
+			return new PickByTypeAndColor(this);
+		case DRAWING_AREA:
+			return new SelectAction(this);
+        
+		default:
+			return nullptr;
+    }
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // gets action parameters and executes it
 void ApplicationManager::ExecuteAction(ActionType act_type)
 {
-	Action* act_p = DetectAction(act_type);
+    Action* act_p = DetectAction(act_type);
 
-	if (act_p != nullptr) {
-		act_p->ReadActionParameters();
-		act_p->Execute();
+    if (act_p != nullptr) {
+        act_p->ReadActionParameters();
+        act_p->Execute();
 
-		// try to add action, else delete it
-		if (!history.AddAction(act_p))
-		{
-			delete act_p;
+        // try to add action, else delete it
+        if (!history.AddAction(act_p))
+        {
+            delete act_p;
 
-			// action must have changed figs
-			figs_is_saved = false;
-		}
-	}
-}
-
-bool ApplicationManager::IsRunning() const
-{
-	return !exit_signal;
-}
-
-void ApplicationManager::Exit()
-{
-	exit_signal = true;
+            // action must have changed figs
+            figs_is_saved = false; 
+        }
+    }
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -157,21 +146,21 @@ void ApplicationManager::AddFigure(CFigure* fig_p)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(const deque<CFigure*>& figs, Point p)
 {
-	// reverse iterator, to iterate in figs from end to beginning 
-	for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin(); r_itr != figs.rend(); r_itr++)
-	{
-		// if a figure is found return a pointer to it.
-		if ((*r_itr)->IsPointInside(p))
-			return *r_itr;
-	}
+    // reverse iterator, to iterate in figs from end to beginning 
+    for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin();r_itr != figs.rend(); r_itr++)
+    {
+        // if a figure is found return a pointer to it.
+        if ((*r_itr)->IsPointInside(p))
+            return *r_itr;
+    }
 
-	// (x,y) does not belong to any figure
-	return nullptr;
+    // (x,y) does not belong to any figure
+    return nullptr;
 }
 
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
-	return ApplicationManager::GetFigure(figs, { x, y });
+    return ApplicationManager::GetFigure(figs, { x, y });
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -203,7 +192,9 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 		return new CTrngl();
 	if (fig_name == "LINE")
 		return new CLine();
+
 	cerr << "Detect figure has been given unknown fig_name as a parameter, fig_name = " << fig_name;
+	return nullptr;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -221,8 +212,6 @@ void ApplicationManager::UpdateInterface() const
 		out_p->CreateDrawToolBar();
 	else
 		out_p->CreatePlayToolBar();
-
-	out_p->ClearStatusBar(false);
 }
 
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
@@ -241,7 +230,7 @@ Input* ApplicationManager::GetInput() const
 //Return a pointer to the output
 Output* ApplicationManager::GetOutput() const
 {
-	return out_p;
+    return out_p;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -249,31 +238,31 @@ Output* ApplicationManager::GetOutput() const
 // call save for each one
 void ApplicationManager::SaveAll(ofstream& out_file)
 {
-	out_file << UI.DrawColor.ucRed << ' '
-		<< UI.DrawColor.ucGreen << ' '
-		<< UI.DrawColor.ucBlue << ' '
+    out_file << UI.DrawColor.ucRed << ' '
+             << UI.DrawColor.ucGreen << ' '
+             << UI.DrawColor.ucBlue << ' '
 
-		<< UI.FillColor.ucRed << ' '
-		<< UI.FillColor.ucGreen << ' '
-		<< UI.FillColor.ucBlue << ' '
+             << UI.FillColor.ucRed << ' '
+             << UI.FillColor.ucGreen << ' '
+             << UI.FillColor.ucBlue << ' '
 
-		<< UI.BkGrndColor.ucRed << ' '
-		<< UI.BkGrndColor.ucGreen << ' '
-		<< UI.BkGrndColor.ucBlue << '\n';
-	out_file << figs.size() << '\n';
+             << UI.BkGrndColor.ucRed << ' '
+             << UI.BkGrndColor.ucGreen << ' '
+             << UI.BkGrndColor.ucBlue << '\n';
+    out_file << figs.size() << '\n';
 
-	for (auto& fig : figs)
-		fig->Save(out_file);
+    for (auto& fig : figs)
+        fig->Save(out_file);
 
-	figs_is_saved = true;
+    figs_is_saved = true;
 }
 // iterate through lines and make the apropriate figure
 // call load for the figure
 void ApplicationManager::LoadAll(ifstream& in_file)
 {
-	int size = 0;
-	string fig_name;
-	CFigure* fig = nullptr;
+    int size = 0;
+    string fig_name;
+    CFigure* fig = nullptr;
 
 	in_file >> UI.DrawColor.ucRed
 		>> UI.DrawColor.ucGreen
@@ -297,31 +286,31 @@ void ApplicationManager::LoadAll(ifstream& in_file)
 		figs.push_back(fig);
 	}
 
-	figs_is_saved = true;
+    figs_is_saved = true;
 }
 
 bool ApplicationManager::IsSaved() const
 {
-	// why consider saved if figs is empty? because if empty so no need to say you should save it
-	return figs_is_saved || figs.empty();
+    // why consider saved if figs is empty? because if empty so no need to say you should save it
+    return figs_is_saved || figs.empty(); 
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
 unsigned int ApplicationManager::GenerateNextId()
 {
-	return next_fig_id++;
+    return next_fig_id++;
 }
 
 void ApplicationManager::DeleteFigure(unsigned int id)
 {
-	auto itr = GetFigureIter(id);
-	if (itr != figs.end()) {
-		delete (*itr);
-		figs.erase(itr);
+    auto itr = GetFigureIter(id);
+    if (itr != figs.end()) 
+	{
+        delete (*itr);
+        figs.erase(itr);
 	}
-	else {
-		cerr << "Cant delete figure, figure not found, id = " << id << endl;
-	}
+    else 
+        cerr << "Cant delete figure, figure not found, id = " << id << endl;
 }
 
 CFigure* ApplicationManager::GetFigure(unsigned int id) const
@@ -373,33 +362,33 @@ void ApplicationManager::RotateSelected(int deg)
 
 bool ApplicationManager::SetSelectedFillColor(color c)
 {
-	bool flag = false;
+    bool flag = false;
 
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			fig->SetFillColor(c);
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            fig->SetFillColor(c);
 
-			flag = true;
-		}
-	}
+            flag = true;
+        }
+    }
 
-	return flag;
+    return flag;
 }
 
 bool ApplicationManager::SetSelectedBorder(int W, color C)
 {
-	bool flag = false;
+    bool flag = false;
 
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			fig->SetDrawColor(C);
-			fig->SetBorderWidth(W);
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            fig->SetDrawColor(C);
+            fig->SetBorderWidth(W);
 
-			flag = true;
-		}
-	}
+            flag = true;
+        }
+    }
 
-	return flag;
+    return flag;
 }
 
 bool ApplicationManager::UnselectAll()
@@ -417,16 +406,16 @@ bool ApplicationManager::UnselectAll()
 void ApplicationManager::SendSelecteDown()
 {
 	vector<CFigure*> temp;
-	for (auto itr = figs.begin(); itr != figs.end();)
-	{
-		if ((*itr)->IsSelected())
-		{
-			temp.push_back(*itr);
-			itr = figs.erase(itr);
+    for (auto itr = figs.begin(); itr != figs.end();)
+    {
+        if ((*itr)->IsSelected())
+        {
+            temp.push_back(*itr);
+            itr = figs.erase(itr);
 			continue;
-		}
+        }
 		++itr;
-	}
+    }
 
 	for (auto& fig : temp)
 		figs.push_front(fig);
@@ -457,7 +446,7 @@ void ApplicationManager::PrintSelectedSize()
 		CFigure *selected;
 		for (auto& fig : figs)
 		{
-			if (fig->IsSelected())
+			if (fig->IsSelected()) 
 			{
 				selected = fig;
 				break;
@@ -468,65 +457,61 @@ void ApplicationManager::PrintSelectedSize()
 	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
 }
 
-Point ApplicationManager::MoveSelected(Point p)
+void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old)
 {
-	deque<CFigure*> moved_figs;
-	int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
-	int x = 0, y = 0;
+	
+    int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
+    int x = 0, y = 0;
 
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) {
-				minx = (fig->CalculateCenter()).x;
-				miny = (fig->CalculateCenter()).y;
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) {
+                minx = (fig->CalculateCenter()).x;
+                miny = (fig->CalculateCenter()).y;
+            }
+        }
+    }
+    x = p.x - minx;
+    y = p.y - miny; // difference between the new & old center of the first figure
+	
+		bool out_range = false;
+		for (auto& fig : figs) {
+			if (fig->IsSelected()) {
+				if (!fig->Move(x, y))
+				{
+					out_p->PrintMessage("Error........Figures will be out of range if moved");
+					out_range = true;
+					break;
+				}
+				else  moved_figs.push_back(fig);
 			}
 		}
-	}
-	x = p.x - minx;
-	y = p.y - miny; // difference between the new & old center of the first figure
-	bool out_range = false;
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			if (!fig->Move(x, y))
-			{
-				out_p->PrintMessage("Error........Figures will be out of range if moved");
-				out_range = true;
-				break;
-			}
-			//fig->SetSelected(true);
-			else  moved_figs.push_back(fig);
-		}
-	}
-	if (out_range)
-	{
-		for (int i = 0; i < moved_figs.size(); i++)
+		if (out_range)
 		{
-			moved_figs[i]->Move(-x, -y);
-		}
-		moved_figs.clear();
+			for (int i = 0; i < moved_figs.size(); i++)
+				moved_figs[i]->Move(-x, -y);
 
-	}
-	p.x = minx;
-	p.y = miny;
-	return p;
+			moved_figs.clear();
+		}
+		old = Point(minx, miny);
 }
 
 bool ApplicationManager::PasteClipboard(Point p)
 {
 	deque<CFigure*> moved_figs;
-	int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
-	int x = 0, y = 0;
-	for (auto& fig : clipboard) {
-		Point c = fig->CalculateCenter();
-		if (c.x <= minx && c.y <= miny) {
-			minx = c.x;
-			miny = c.y;
-		}
-	}
-	bool out_range = false;
-	x = p.x - minx;
-	y = p.y - miny; // difference between the new & old center of the first figure
-	for (auto& fig : clipboard) {
+    int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
+    int x = 0, y = 0;
+    for (auto& fig : clipboard) {
+        Point c = fig->CalculateCenter();
+        if (c.x <= minx && c.y <= miny) {
+            minx = c.x;
+            miny = c.y;
+        }
+    }
+    bool out_range = false;
+    x = p.x - minx;
+    y = p.y - miny; // difference between the new & old center of the first figure
+    for (auto& fig : clipboard) {
 		if (!fig->Move(x, y))
 		{
 			out_range = true;
@@ -534,10 +519,10 @@ bool ApplicationManager::PasteClipboard(Point p)
 		}
 		CFigure*copy = fig->Copy();
 		copy->SetId(GenerateNextId());
-		AddFigure(copy);
+        AddFigure(copy);
 		moved_figs.push_back(fig);
 		fig->SetId(copy->GetId());
-	}
+    }
 	if (out_range)
 	{
 		out_p->PrintMessage("Error........Figures will be out of range if pasted");
@@ -548,49 +533,62 @@ bool ApplicationManager::PasteClipboard(Point p)
 		}
 		moved_figs.clear();
 	}
-	return !out_range;
+    return !out_range;
 }
 
 void ApplicationManager::FillClipboardWithSelected()
 {
-	clipboard.clear();
-	CFigure* copy;
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			copy = fig->Copy();
-			copy->SetId(GenerateNextId());
+    clipboard.clear();
+    CFigure* copy;
+    for (auto& fig : figs) {
+        if (fig->IsSelected()) {
+            copy = fig->Copy();
+            copy->SetId(GenerateNextId());
 			copy->SetSelected(false);
-			clipboard.push_back(copy);
-		}
-	}
+            clipboard.push_back(copy);
+        }
+    }
 }
 
 void ApplicationManager::SetClipboard(deque<CFigure*> clip)
 {
-	clipboard = clip;
+    clipboard = clip;
 }
 
 deque<CFigure*> ApplicationManager::GetClipboard()
 {
-	return clipboard;
+    return clipboard;
+}
+
+bool ApplicationManager::GetMultiSelect()
+{
+	return this->multi_select;
+}
+
+void ApplicationManager::ToggleMultiSelect()
+{
+	this->multi_select = !(this->multi_select);
 }
 
 deque<CFigure*> ApplicationManager::EraseSelected()
 {
-	deque<int> vec;
-	deque<CFigure*> deleted;
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
-			vec.push_back(fig->GetId());
+    deque<int> vec;
+    deque<CFigure*> deleted;
+    for (auto& fig : figs) 
+        if (fig->IsSelected()) 
+		{
+            vec.push_back(fig->GetId());
 			CFigure*copy = fig->Copy();
-			deleted.push_back(copy);
-		}
-	}
-	for (int i = 0; i < vec.size(); i++) {
-		DeleteFigure(vec[i]);
+            deleted.push_back(copy);
+        }
+
+    for (int i = 0; i < vec.size(); i++) 
+	{
+        DeleteFigure(vec[i]);
 		num_selected--;
-	}
-	return deleted;
+    }
+
+    return deleted;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -603,24 +601,24 @@ void ApplicationManager::DeleteAllFigures()
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::Undo()
 {
-	history.Undo();
+    history.Undo();
 }
 
 void ApplicationManager::Redo()
 {
-	history.Redo();
+    history.Redo();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 deque<CFigure*> ApplicationManager::GetCopyOfFigures()
 {
-	deque<CFigure*> result;
+    deque<CFigure*> result;
 
-	for (auto& fig : figs)
-		result.push_back(fig->Copy());
+    for (auto& fig : figs)
+        result.push_back(fig->Copy());
 
-	return result;
+    return result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
@@ -628,7 +626,6 @@ ApplicationManager::~ApplicationManager()
 {
 	DeleteAllFigures();
 
-	delete in_p;
-	delete out_p;
-
+    delete in_p;
+    delete out_p;
 }

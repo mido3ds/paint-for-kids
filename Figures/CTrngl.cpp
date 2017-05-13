@@ -1,9 +1,6 @@
 #include "CTrngl.h"
 
 CTrngl::CTrngl()
-	: p1(0, 0)
-	, p2(0, 0)
-	, p3(0, 0)
 {
 }
 
@@ -29,86 +26,33 @@ void CTrngl::Rotate(int deg)
 	Point temp5 = p3;
 	Point temp4;
 	Point temp6;
-	switch (deg) {
-	case 90:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp5.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp5.y -= c.y;
-		temp3.x = temp1.y * -1;
-		temp3.y = temp1.x;
-		temp4.x = temp2.y * -1;
-		temp4.y = temp2.x;
-		temp6.x = temp5.y * -1;
-		temp6.y = temp5.x;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp6.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		temp6.y += c.y;
-		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-			p3 = temp6;
-		}
-		break;
-	case 180:
-		temp1.x = (2 * c.x) - temp1.x;
-		temp2.x = (2 * c.x) - temp2.x;
-		temp3.x = (2 * c.x) - temp3.x;
-		temp1.y = (2 * c.y) - temp1.y;
-		temp2.y = (2 * c.y) - temp2.y;
-		temp3.y = (2 * c.y) - temp3.y;
-		if (IsOutOfRange(temp1, temp2, temp3)) {
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp1;
-			p2 = temp2;
-			p3 = temp3;
-		}
-		break;
-	case 270:
-		temp1.x -= c.x;
-		temp2.x -= c.x;
-		temp5.x -= c.x;
-		temp1.y -= c.y;
-		temp2.y -= c.y;
-		temp5.y -= c.y;
-		temp3.x = temp1.y;
-		temp3.y = temp1.x * -1;
-		temp4.x = temp2.y;
-		temp4.y = temp2.x * -1;
-		temp6.x = temp5.y;
-		temp6.y = temp5.x * -1;
-		temp3.x += c.x;
-		temp4.x += c.x;
-		temp6.x += c.x;
-		temp3.y += c.y;
-		temp4.y += c.y;
-		temp6.y += c.y;
-		if (IsOutOfRange(temp3, temp4, temp6)) // To Be Edited With The New Layout
-		{
-			is_rotated = false;
-		}
-		else {
-			is_rotated = true;
-			p1 = temp3;
-			p2 = temp4;
-			p3 = temp6;
-		}
-		break;
-	default:
-		break;
+	temp1.x -= c.x;
+	temp2.x -= c.x;
+	temp5.x -= c.x;
+	temp1.y -= c.y;
+	temp2.y -= c.y;
+	temp5.y -= c.y;
+	temp3.x = temp1.y * -1;
+	temp3.y = temp1.x;
+	temp4.x = temp2.y * -1;
+	temp4.y = temp2.x;
+	temp6.x = temp5.y * -1;
+	temp6.y = temp5.x;
+	temp3.x += c.x;
+	temp4.x += c.x;
+	temp6.x += c.x;
+	temp3.y += c.y;
+	temp4.y += c.y;
+	temp6.y += c.y;
+	if (IsOutOfRange(temp3, temp4, temp6))
+	{
+		is_rotated = false;
+	}
+	else {
+		is_rotated = true;
+		p1 = temp3;
+		p2 = temp4;
+		p3 = temp6;
 	}
 }
 
@@ -214,20 +158,15 @@ Point CTrngl::CalculateCenter()
 
 bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
 {
-    return (p1.y < UI.ToolBarHeight || p1.y > UI.height - UI.StatusBarHeight || p1.x < 0 || p1.x > UI.width || p2.y < UI.ToolBarHeight || p2.y > UI.height - UI.StatusBarHeight || p2.x < 0 || p2.x > UI.width || p3.y < UI.ToolBarHeight || p3.y > UI.height - UI.StatusBarHeight || p3.x < 0 || p3.x > UI.width);
+    return (p1.y < UI.DrawAreaY || p1.y > UI.DrawAreaY + UI.DrawAreaHeight || p1.x < UI.DrawAreaX || p1.x > UI.DrawAreaX + UI.DrawAreaWidth || p2.y < UI.DrawAreaY || p2.y > UI.DrawAreaY + UI.DrawAreaHeight || p2.x < UI.DrawAreaX || p2.x > UI.DrawAreaX + UI.DrawAreaWidth || p3.y < UI.DrawAreaY || p3.y > UI.DrawAreaY + UI.DrawAreaHeight || p3.x < UI.DrawAreaX || p3.x > UI.DrawAreaX + UI.DrawAreaWidth);
 }
 
 bool CTrngl::IsPointInside(const Point& p) const
 {
-	double A1 = Trigonometry::Area(p, p1, p2);
-	double A2 = Trigonometry::Area(p, p2, p3);
-	double A3 = Trigonometry::Area(p, p1, p3);
-	double A = Trigonometry::Area(p1, p2, p3);
-	double B = A1 + A2 + A3;
-	double scale = 0.1;
-	A = (int)(A / scale)*scale;
-	B = (int)(B / scale)*scale;
-	return (A == B);
+	if ((SameSide(p, p1, p2, p3) && SameSide(p, p2, p1, p3) && SameSide(p, p3, p1, p2)))
+		return true;
+	else
+		return false;
 }
 
 bool CTrngl::Move(int x, int y)
@@ -268,6 +207,21 @@ void CTrngl::PrintInfo(Output* out_p)
 	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
 }
 
+double CTrngl::CrossProduct(Point p1, Point p2) const
+{
+	return ((p1.x * p2.y) - (p1.y * p2.x));
+}
+
+bool CTrngl::SameSide(Point p1, Point p2, Point a, Point b) const
+{
+	double cp1 = CrossProduct(b - a, p1 - a);
+	double cp2 = CrossProduct(b - a, p2 - a);
+	double cp12 = cp1 * cp2;
+	if (cp12 >= 0)
+		return true;
+	return false;
+}
+
 void CTrngl::MoveToLeftSide()
 {
 	Point center = CalculateCenter();
@@ -278,23 +232,6 @@ void CTrngl::MoveToLeftSide()
 	int def3 = p3.x - center.x;
 
 	center.x /= 2;
-
-	// remake the points from the previous centere
-	p1.x = center.x + def1;
-	p2.x = center.x + def2;
-	p3.x = center.x + def3;
-}
-
-void CTrngl::MoveToRightSide()
-{
-	Point center = CalculateCenter();
-
-	// get difference between center and points
-	int def1 = p1.x - center.x;
-	int def2 = p2.x - center.x;
-	int def3 = p3.x - center.x;
-
-	center.x *= 2;
 
 	// remake the points from the previous centere
 	p1.x = center.x + def1;

@@ -32,10 +32,8 @@
 #include "Actions/RotateAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/SelectAction.h"
-#include "Actions/DraggingAction.h"
 #include "Actions/ToDrawModeAction.h"
 #include "Actions/ToPlayModeAction.h"
-#include "Actions/UnselectAction.h"
 #include "Actions/UndoAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
@@ -47,6 +45,7 @@
 #include "Actions/PickByType.h"
 #include "Actions/PickByArea.h"
 #include "Actions/PickByTypeAndColor.h"
+#include "Actions/MultiSelect.h"
 
 // figures
 #include "Figures/CCircle.h"
@@ -98,7 +97,7 @@ public:
     void RotateSelected(int deg);
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
-    Point MoveSelected(Point p);
+    void MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old);
     deque<CFigure*> EraseSelected(); // erases selected and returns them 
 
     unsigned int GenerateNextId(); // returns next available id to assign to figure
@@ -123,6 +122,10 @@ public:
     void SetClipboard(deque<CFigure*> clip);
     deque<CFigure*> GetClipboard();
 
+	/*  ------------------------------- MultiSelect ------------------------------- */
+	bool GetMultiSelect();
+	void ToggleMultiSelect();
+
 private:
     HistoryManager history;
     CFigure* GetFigure(unsigned int id) const;
@@ -139,6 +142,8 @@ private:
     bool figs_is_saved;  // whether figs has been saved or not
 	bool exit_signal = false;
 
+	bool multi_select = false;
+	
     Input* in_p;
     Output* out_p;
 };

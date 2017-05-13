@@ -6,6 +6,8 @@ ResizeAction::ResizeAction(ApplicationManager* app_p)
 
 void ResizeAction::SetResizeFactor(double r_factor)
 {
+	Output *out_p = manager_p->GetOutput();
+	out_p->ClearStatusBar();
 	resize_factor = r_factor;
 }
 

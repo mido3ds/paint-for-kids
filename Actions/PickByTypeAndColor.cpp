@@ -1,7 +1,8 @@
 #include "PickByTypeAndColor.h"
 
 
-PickByTypeAndColor::PickByTypeAndColor(ApplicationManager * app_p) :Action(app_p,false)
+PickByTypeAndColor::PickByTypeAndColor(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 
@@ -30,31 +31,40 @@ void PickByTypeAndColor::Execute()
 
 		out_p->PrintMessage("Choose Your First Figure");
 
-		in_p->GetClickPoint(p.x, p.y);		// Getting The First Piont To Git The First Figure
+		in_p->GetClick(p.x, p.y);		// Getting The First Piont To Git The First Figure
 
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				ReadActionParameters();
-				Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					ReadActionParameters();
+					Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 
 		fig = manager_p->GetFigure(figures, p);
 		if (fig)
 		{
-			c = fig->GetFillColor();
+			if (dynamic_cast<CLine *> (fig)) {
+				// If The Figure Is A Line Then Its Color Is Its Draw Color Not Fill Color
+				c = fig->GetDrawColor();
+				isfilled = true;
+			}
+			else {
+				// If The Figure Is Something Else Then We Take Its Fill color
+				c = fig->GetFillColor();
+				isfilled = fig->IsFilled();
+			}
 			type = fig->GetType();
-			isfilled = fig->IsFilled();
 			correct++;
 			PrintPickInfo(type,c,correct,wrong);
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
@@ -64,26 +74,27 @@ void PickByTypeAndColor::Execute()
 		}
 		else
 		{
-			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 			continue;
 		}
 		while (numOfSameTypeAndColor > 0)
 		{
-			in_p->GetClickPoint(p.x, p.y);
+			in_p->GetClick(p.x, p.y);
 			if (p.y > 0 && p.y < UI.ToolBarHeight)
 			{
 				int IconClicked = p.x / UI.MenuItemWidth;
 				switch (IconClicked)
 				{
-				case 0:
-					ReadActionParameters();
-					Execute();
-					break;
-				case 1:
-					out_p->CreatePlayToolBar();
-					return;
-				default:
-					break;
+					case 0:
+						ReadActionParameters();
+						Execute();
+						break;
+					case 1:
+						out_p->CreatePlayToolBar();
+						return;
+
+					default:
+						break;
 				}
 			}
 			fig = manager_p->GetFigure(figures, p);
@@ -97,29 +108,29 @@ void PickByTypeAndColor::Execute()
 					numOfFigs--;
 					manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 					correct++;
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 					Sleep(1000);
 				}
 				else
 				{
 					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), RED);
 					Sleep(1000);
 				}
 			}
 			else
 			{
-				out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+				out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), RED);
 				continue;
 			}
 		}
 	}
 
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
 	}
 	else {
-		out_p->PrintMessage("Your Grade Is: " + std::to_string(((correct*100) / (correct + wrong))));
+		out_p->PrintMessage("Your Grade Is: " + std::to_string(((correct*100) / (correct + wrong))), ORANGE);
 		Sleep(1000);
 	}
 }
@@ -136,27 +147,34 @@ int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (isfilled && figure->GetType() == type)
-		{
-			if (figure->GetFillColor().ucBlue == C.ucBlue && figure->GetFillColor().ucGreen == C.ucGreen && figure->GetFillColor().ucRed == C.ucRed) // This Is Rediculous But I Have No Chiose
+		if (figure->GetType() == type) {
+			if (dynamic_cast<CLine *> (figure)) {
+				if (figure->GetDrawColor() == C) {
+					num++;
+				}
+			}
+			else if (isfilled)
+			{
+				if (figure->GetFillColor() == C)
+					num++;
+			}
+			else if (figure->IsFilled() == isfilled)
 				num++;
 		}
-		else if (figure->IsFilled() == isfilled && figure->GetType() == type)
-			num++;
+		
 	}
 	return num;
 }
 
 void PickByTypeAndColor::DeleteCorrect(int id)
 {
-	for (auto itr = figures.begin(); itr != figures.end(); itr++) {
+	for (auto itr = figures.begin(); itr != figures.end(); itr++) 
 		if ((*itr)->GetId() == id)
 		{
 			delete *itr;
 			figures.erase(itr);
 			return;
 		}
-	}
 }
 
 void PickByTypeAndColor::DrawColorCircle(color c)
@@ -176,13 +194,15 @@ void PickByTypeAndColor::DrawColorCircle(color c)
 
 bool PickByTypeAndColor::Correct(CFigure * fig)
 {
-	if (fig->IsFilled() == isfilled && fig->GetType() == type)
-	{
-		if (fig->GetFillColor().ucBlue == c.ucBlue && fig->GetFillColor().ucGreen == c.ucGreen && fig->GetFillColor().ucRed == c.ucRed)
-		{
+	if (dynamic_cast<CLine *> (fig)) {
+		if (fig->GetDrawColor() == c) {
 			return true;
 		}
 	}
+	else if (fig->IsFilled() == isfilled && fig->GetType() == type)
+		if (fig->GetFillColor() == c)
+			return true;
+
 	return false;
 }
 
@@ -192,45 +212,45 @@ void PickByTypeAndColor::PrintPickInfo(string type, color c, int correct, int wr
 	if (type == "Circle") {
 		if (isfilled)
 		{
-			out_p->PrintMessage("Pick All Circles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All Circles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 			DrawColorCircle(c);
 		}
 		else
 		{
-			out_p->PrintMessage("Pick All None Filled Circles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All None Filled Circles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
 	else if (type == "Triangle") {
 		if (isfilled)
 		{
-			out_p->PrintMessage("Pick All Triangles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All Triangles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 			DrawColorCircle(c);
 		}
 		else
 		{
-			out_p->PrintMessage("Pick All None Filled Triangles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All None Filled Triangles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
 	else if (type == "Line") {
 		if (isfilled)
 		{
-			out_p->PrintMessage("Pick All Lines Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All Lines Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 			DrawColorCircle(c);
 		}
 		else
 		{
-			out_p->PrintMessage("Pick All Lines           Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All Lines           Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
 	else if (type == "Rectangle") {
 		if (isfilled)
 		{
-			out_p->PrintMessage("Pick All Rectangles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All Rectangles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 			DrawColorCircle(c);
 		}
 		else
 		{
-			out_p->PrintMessage("Pick All None Filled Rectangles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong));
+			out_p->PrintMessage("Pick All None Filled Rectangles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
 }

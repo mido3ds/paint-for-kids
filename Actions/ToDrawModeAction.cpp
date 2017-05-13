@@ -7,6 +7,7 @@ ToDrawModeAction::ToDrawModeAction(ApplicationManager* app_p)
 
 void ToDrawModeAction::ReadActionParameters()
 {
+	
 }
 
 void ToDrawModeAction::Execute()

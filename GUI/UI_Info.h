@@ -1,11 +1,11 @@
+/*
+    User Interface information file.
+    This file contains info that is needed by Input and Output classes to handle the user interface
+*/
 #ifndef UI_INFO_H
 #define UI_INFO_H
 
 #include "../CMUgraphicsLib/CMUgraphics.h"
-
-// User Interface information file.
-// This file contains info that is needed by Input and Output classes to
-// handle the user interface
 
 enum GUI_MODE // Graphical user interface mode
 {
@@ -19,7 +19,6 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
     // If you want to change the menu items order, change the order here
     ITM_FIG,
     ITM_SELECT,
-	ITM_DESELECT,
     ITM_CHDC, // Change Draw Color
     ITM_CHFC, // Change Fill Color
     ITM_CHBGC,
@@ -39,7 +38,8 @@ enum DrawMenuItem // The items of the Draw menu (you should add more items)
 
 };
 
-enum FigureItems {
+enum FigureItems 
+{
     ITM_LINE, // Line
     ITM_RECT, // Recangle item in menu
     ITM_TRI, // Triangle
@@ -48,7 +48,8 @@ enum FigureItems {
     FIG_ITM_COUNT
 };
 
-enum FigureActions {
+enum FigureActions 
+{
     ITM_DEL, // Delete
     ITM_MOVE, // Move
     ITM_RESIZE, // Resize
@@ -64,15 +65,12 @@ enum FigureActions {
 
 enum PlayMenuItem // The items of the Play menu (you should add more items)
 {
-	// Note: Items are ordered here as they appear in menu
-	// If you want to change the menu items order, change the order here
 	ITM_PICK_HIDE,
 	ITM_SCR_FIND,
 	ITM_DRAW,
 	ITM_EXIT_PLAY,
 
 	PLAY_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
-
 };
 
 enum PickMenuItem
@@ -88,7 +86,6 @@ enum PickMenuItem
 
 // This line to prevent "redefinition error"
 __declspec(selectany)
-
 struct UI_Info // User Interface Info.
 {
     GUI_MODE InterfaceMode;
@@ -131,10 +128,9 @@ struct UI_Info // User Interface Info.
     color MsgColor; // Messages color
     color BkGrndColor; // Background color
     color StatusBarColor; // Status bar color
+    
     int PenWidth; // width of the pen that draws shapes
 	bool IsFilled = false;
-
-    /// Add more members if needed
 
 } UI; // create a global object UI
 

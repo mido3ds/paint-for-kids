@@ -14,13 +14,13 @@ public:
 	Input(window* pW); // Consturctor
 	~Input();
 
-	clicktype GetClickPoint(int& x, int& y) const; // Get coordinate where user clicks
-	string GetString(Output* pO) const; // Returns a string entered by the user
-
-    color PickColor(int ix, int iy);
-
     ActionType GetUserAction(); // Read the user click and map to an action
+
+	string GetString(Output* pO) const; // Returns a string entered by the user
+    color GetColor(int ix, int iy);
+
     Point GetLastClickedPoint() const; // return last stored point that user clicked on
+	clicktype GetClick(int& x, int& y) const; // Get coordinate where user clicks
 
 	Point GetMouseCoord() const; // current coordinates, regardless of clicking or not
 	bool IsMouseDown(button btn_state=LEFT_BUTTON) const;  // button maybe LEFT_BUTTON or RIGHT_BUTTON

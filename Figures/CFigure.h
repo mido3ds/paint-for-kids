@@ -31,9 +31,6 @@ public:
 	virtual double GetArea() = 0;
 
     virtual bool IsPointInside(const Point& p) const = 0;
-    virtual bool IsPointCorner(const Point& p) const = 0;
-    virtual Point& GetCornerPoint(const Point& p) = 0; // get nearest corner point
-    PointState GetPointState(const Point& p) const; // whether point corner, inside, outside
 
     void SetDrawColor(color draw_clr);
     void SetFillColor(color filling_clr); 
@@ -59,10 +56,8 @@ public:
 
     virtual bool Move(int x, int y) = 0;
     virtual void MoveToLeftSide() = 0;
-    virtual void MoveToRightSide() = 0;
 
     virtual Point CalculateCenter() = 0;
-    virtual void ChangeCenter(const Point& p) = 0; // changing center -> changes coordinates, only if point is valid
 
     virtual void PrintInfo(Output* out_p) = 0; // on the status bar
 

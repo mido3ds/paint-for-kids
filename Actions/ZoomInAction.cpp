@@ -22,8 +22,7 @@ void ZoomInAction::ReadActionParameters()
 
 	out_p->PrintMessage("ZoomIn: Click at the point you want to zoom");
 
-	//in_p->GetPointClicked(zoom_point.x, zoom_point.y);
-	in_p->GetClickPoint(zoom_point.x, zoom_point.y);
+	in_p->GetClick(zoom_point.x, zoom_point.y);
 	out_p->ClearStatusBar();
 }
 
@@ -33,13 +32,13 @@ void ZoomInAction::Execute()
 	Output* out_p = manager_p->GetOutput();
 
 	pre_zoom_point = out_p->GetZoomPoint();
-	out_p->SetZoom(out_p->GetZoom() + 1);
+	out_p->SetZoomScale(out_p->GetZoomScale() + 1);
 	out_p->SetZoomPoint(zoom_point);
 }
 
 void ZoomInAction::Undo()
 {
 	Output* out_p = manager_p->GetOutput();
-	out_p->SetZoom(out_p->GetZoom() - 1);
+	out_p->SetZoomScale(out_p->GetZoom() - 1);
 	out_p->SetZoomPoint(pre_zoom_point);
 }

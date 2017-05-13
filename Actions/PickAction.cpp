@@ -1,6 +1,7 @@
 #include "PickAction.h"
 
-PickAction::PickAction(ApplicationManager * app_p) :Action(app_p)
+PickAction::PickAction(ApplicationManager * app_p) 
+	: Action(app_p, false)
 {
 }
 
@@ -11,7 +12,7 @@ void PickAction::ReadActionParameters()
 	out_p->CreatePickBar();
 	out_p->PrintMessage("Pick & Hide Game .... To Start Choose A Mood To Play ");
 	act = in_p->GetUserAction();
-	out_p->ClearTToolBar();
+	out_p->ClearTempToolbar();
 }
 
 void PickAction::Execute()

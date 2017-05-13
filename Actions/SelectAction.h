@@ -22,8 +22,6 @@ public:
 private:
     CFigure* selected;
     Point p;
-    //color originalfill;
-    color originaldraw;
 	Output* out_p;
 	Input* in_p;
 };

@@ -1,15 +1,18 @@
 #include "PickByArea.h"
 
-PickByArea::PickByArea(ApplicationManager *app_p) :Action(app_p,false)
+PickByArea::PickByArea(ApplicationManager *app_p) 
+	: Action(app_p,false)
 {
 }
 
 void PickByArea::ReadActionParameters()
 {
 	Output *out_p = manager_p->GetOutput();
+
 	out_p->PrintMessage("Picking With Area ....");
-	Sleep(1000);
 	figures = manager_p->GetCopyOfFigures();
+
+	Sleep(SECOND);
 }
 
 void PickByArea::Execute()
@@ -31,22 +34,23 @@ void PickByArea::Execute()
 	while (numOfFigs > 0)
 	{
 		out_p->CreateRestartGame();
-		out_p->PrintMessage("Pick Figures From Bigger To Smaller            Correct Answers: " +to_string(correct)+"      Wrong Answers: "+ to_string(wrong));
-		in_p->GetClickPoint(p.x, p.y);
+		out_p->PrintMessage("Pick Figures From Bigger To Smaller            Correct Answers: " +to_string(correct)+"      Wrong Answers: "+ to_string(wrong), GREEN);
+		in_p->GetClick(p.x, p.y);
 		if (p.y > 0 && p.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 		{
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-			case 0:						// If Restart Begien From The Executing The Action Again
-				ReadActionParameters();
-				Execute();
-				break;
-			case 1:						// If Exit return To Play Mode
-				out_p->CreatePlayToolBar();
-				return;
-			default:
-				break;
+				case 0:						// If Restart Begien From The Executing The Action Again
+					ReadActionParameters();
+					Execute();
+					break;
+				case 1:						// If Exit return To Play Mode
+					out_p->CreatePlayToolBar();
+					return;
+
+				default:
+					break;
 			}
 		}
 		fig=manager_p->GetFigure(figures, p);
@@ -58,14 +62,14 @@ void PickByArea::Execute()
 					correct++;
 					DeleteCorrect(fig->GetId());
 					manager_p->UpdateInterface(figures);
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
 					numOfFigs--;
 					Sleep(1000);
 				}
 				else
 				{
 					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 					Sleep(1000);
 				}
 			
@@ -73,15 +77,15 @@ void PickByArea::Execute()
 		}
 		else
 		{
-			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong));
+			out_p->PrintMessage("No Figure In This Area, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
 			continue;
 		}
 	}
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint");
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
 	}
 	else {
-		out_p->PrintMessage("Your Grade Is: " + std::to_string((correct * 100) / (correct + wrong) ));
+		out_p->PrintMessage("Your Grade Is: " + std::to_string((correct * 100) / (correct + wrong) ), ORANGE);
 		Sleep(1000);
 	}
 }
@@ -97,12 +101,11 @@ PickByArea::~PickByArea()
 
 void PickByArea::DeleteCorrect(int id)
 {
-	for (auto itr = figures.begin(); itr != figures.end(); itr++) {
+	for (auto itr = figures.begin(); itr != figures.end(); itr++) 
 		if ((*itr)->GetId() == id)
 		{
 			delete *itr;
 			figures.erase(itr);
 			return;
 		}
-	}
 }

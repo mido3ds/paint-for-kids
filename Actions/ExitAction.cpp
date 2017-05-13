@@ -7,6 +7,8 @@ ExitAction::ExitAction(ApplicationManager* app_p)
 
 void ExitAction::ReadActionParameters()
 {
+	Output *out_p = manager_p->GetOutput();
+	out_p->ClearStatusBar();
 }
 
 //Execute the action
