@@ -347,7 +347,7 @@ void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 {
 	Point pf1 = TranslatePoint(p1);
 
-	radius *= pow(2, zoom);
+	radius *= pow(2, zoom_scale);
 
 	color DrawingClr;
 	if (selected)
@@ -528,8 +528,8 @@ int Output::AdjustBorder(const int& border) const
 
 int Output::AdjustBorder15(const int& border) const
 {
-	if (zoom < 0)
-		switch (zoom)
+	if (zoom_scale < 0)
+		switch (zoom_scale)
 		{
 		case -1:
 			return 12;
@@ -542,7 +542,7 @@ int Output::AdjustBorder15(const int& border) const
 		case -5:
 			return 1;
 		}
-	else if (zoom > 0)
+	else if (zoom_scale > 0)
 		return 15;
 
 	return border;
@@ -550,8 +550,8 @@ int Output::AdjustBorder15(const int& border) const
 
 int Output::AdjustBorder10(const int& border) const
 {
-	if (zoom <= 4 && zoom >= -3)
-		switch (zoom)
+	if (zoom_scale <= 4 && zoom_scale >= -3)
+		switch (zoom_scale)
 		{
 		case 0:
 			return 10;
@@ -570,9 +570,9 @@ int Output::AdjustBorder10(const int& border) const
 		case -3:
 			return 1;
 		}
-	else if (zoom > 4)
+	else if (zoom_scale > 4)
 		return 15;
-	else if (zoom < -3)
+	else if (zoom_scale < -3)
 		return 1;
 
 	return border;
@@ -580,8 +580,8 @@ int Output::AdjustBorder10(const int& border) const
 
 int Output::AdjustBorder3(const int& border) const
 {
-	if (zoom <= 6 && zoom >= -2)
-		switch (zoom)
+	if (zoom_scale <= 6 && zoom_scale >= -2)
+		switch (zoom_scale)
 		{
 		case 0:
 			return border;
@@ -602,9 +602,9 @@ int Output::AdjustBorder3(const int& border) const
 		case -2:
 			return 1;
 		}
-	else if (zoom > 6)
+	else if (zoom_scale > 6)
 		return 15;
-	else if (zoom < -2)
+	else if (zoom_scale < -2)
 		return 1;
 
 	return border;
@@ -612,8 +612,8 @@ int Output::AdjustBorder3(const int& border) const
 
 int Output::AdjustBorder1(const int& border) const
 {
-	if (zoom <= 8 && zoom >= 2)
-		switch (zoom)
+	if (zoom_scale <= 8 && zoom_scale >= 2)
+		switch (zoom_scale)
 		{
 		case 2:
 			return 3;
@@ -630,9 +630,9 @@ int Output::AdjustBorder1(const int& border) const
 		case 8:
 			return 15;
 		}
-	else if (zoom > 8)
+	else if (zoom_scale > 8)
 		return 15;
-	else if (zoom < 0)
+	else if (zoom_scale < 0)
 		return 1;
 
 	return border;
