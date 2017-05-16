@@ -28,8 +28,7 @@ void ExitAction::Execute()
             manager_p->ExecuteAction(SAVE);
     }
 
-    // it will exit automatically from the main function
-    // look at do-while at Main.cpp
+	manager_p->Exit();
 }
 
 void ExitAction::Undo()

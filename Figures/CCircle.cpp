@@ -23,6 +23,7 @@ void CCircle::Resize(double resize_factor)
 {
 	p2.x = (int(resize_factor * (p2.x - p1.x)))  +  p1.x;
 	p2.y = (int(resize_factor * (p2.y - p1.y)))  +  p1.y;
+	radius = sqrt(pow((p1.y - p2.y), 2) + pow((p1.x - p2.x), 2));
 }
 
 Point CCircle::CalculateCenter()
@@ -166,5 +167,44 @@ void CCircle::MoveToLeftSide()
 
 void CCircle::RandomizePosition()
 {
-	// TODO
+	Point left;
+	Point right;
+	Point up;
+	Point down;
+
+	do
+	{
+		p1.x = rand() % (((UI.width-5) - ((UI.width / 2)+5)) + 1) + ((UI.width / 2)+5);
+		p1.y = rand() % (((UI.StatusBarY-5) - 55) + 1) + 55;
+
+		left.x = p1.x - radius;
+		left.y = p1.y;
+
+		right.x = p1.x + radius;
+		right.y = p1.y;
+
+		down.x = p1.x;
+		down.y = p1.y + radius;
+
+		up.x = p1.x;
+		up.y = p1.y - radius;
+
+	} while (OutOfRightRange(p1) || OutOfRightRange(left) || OutOfRightRange(right) || OutOfRightRange(up) || OutOfRightRange(down));
 }
+
+//void CCircle::ChangeCenter(const Point& p)
+//{
+//	// TODO
+//}
+//
+//bool CCircle::IsPointCorner(const Point& p) const
+//{
+//	// TODO
+//	return true;
+//}
+//
+//Point& CCircle::GetCornerPoint(const Point& p)
+//{
+//	// TODO
+//	return p1;
+//}

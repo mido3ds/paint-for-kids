@@ -4,6 +4,7 @@
 #include "../DEFS.h"
 #include "../GUI/Output.h"
 #include <fstream>
+#include <ctime>
 
 enum class PointState 
 {
@@ -39,6 +40,7 @@ public:
     color GetFillColor() const;
     int GetBorderWidth() const;
     bool IsFilled() const;
+	bool OutOfRightRange(const Point& p) const;
 
     virtual void Rotate(int deg) = 0;
     virtual void SetRotated(bool r) = 0;

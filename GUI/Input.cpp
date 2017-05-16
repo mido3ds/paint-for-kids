@@ -1,6 +1,8 @@
 #include "Input.h"
 #include "Output.h"
 
+#include <chrono>
+
 Input::Input(window* pW)
 {
 	wind_p = pW; // point to the passed window

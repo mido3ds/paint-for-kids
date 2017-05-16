@@ -70,6 +70,8 @@ public:
     ActionType GetUserAction() const; // Reads the input command from the user and returns the corresponding action type
     Action* DetectAction(ActionType act_type); // return action object from action enum
     void ExecuteAction(ActionType); // execute given action 
+	bool IsRunning() const;
+	void Exit(); // TODO: rename to ExitSignal
 
     void Undo();
     void Redo();
@@ -138,6 +140,7 @@ private:
 	int num_selected = 0;
 
     bool figs_is_saved;  // whether figs has been saved or not
+	bool exit_signal = false;
 
 	bool multi_select = false;
 	

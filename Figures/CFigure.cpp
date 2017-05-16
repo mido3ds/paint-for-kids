@@ -22,6 +22,11 @@ bool CFigure::IsSelected() const
 	return selected;
 }
 
+bool CFigure::OutOfRightRange(const Point& p) const
+{
+	return !(((p.x > ((UI.width / 2)+3)) && (p.x < (UI.width - 10))) && ((p.y > 50) && (p.y < UI.StatusBarY)));
+}
+
 void CFigure::SetDrawColor(color draw_clr)
 {
 	this->draw_clr = draw_clr;

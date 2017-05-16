@@ -9,7 +9,7 @@ void RotateAction::ReadActionParameters()
 {
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
-    out_p->PrintMessage("Enter One Of These Angles To RotateAction [90 || 180 || 270] ");
+    //out_p->PrintMessage("Enter One Of These Angles To RotateAction [90 || 180 || 270] ");
     out_p->ClearStatusBar();
 }
 

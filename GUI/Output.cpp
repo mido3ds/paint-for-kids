@@ -86,7 +86,14 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::ClearStatusBar() const
+void Output::CreateStatusBar() const
+{
+	wind_p->SetPen(UI.StatusBarColor, 1);
+	wind_p->SetBrush(UI.StatusBarColor);
+	wind_p->DrawRectangle(UI.StatusBarX, UI.StatusBarY, UI.StatusBarX + UI.StatusBarWidth, UI.StatusBarY + UI.StatusBarHeight);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::ClearStatusBar(bool clear_msg)
 {
 	// Clear Status bar by drawing a filled white rectangle
 	wind_p->SetPen(UI.StatusBarColor, 1);
@@ -104,6 +111,9 @@ void Output::ClearStatusBar() const
 		info.fill_clr = UI.FillColor;
 		DrawCircle(p1, raduis, info, false);
 	}
+
+	if (!clear_msg)
+		PrintMessage(last_printed_msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -189,6 +199,23 @@ void Output::CreateBorderToolbar() const
 	for (int i = 0; i < 4; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
 }
+
+void Output::CreateResize() const
+{
+	ClearTempToolbar();
+	UI.TToolBarWidth = 200;
+	wind_p->isborderwidth = true;
+
+	string MenuItemImages[4];
+	MenuItemImages[0] = "images\\MenuItems\\resize_0.25.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\resize_0.5.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\resize_2.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\resize_4.jpg";
+
+	for (int i = 0; i < 4; i++)
+		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.TToolBarY, UI.MenuItemWidth, UI.TToolBarHeight);
+}
+
 void Output::CreatePickBar() const
 {
 	UI.TToolBarWidth = 200;
@@ -208,7 +235,6 @@ void Output::CreatePickBar() const
 void Output::CreateRestartGame() const
 {
 	ClearToolbar();
-	
 	string MenuItemImages[2];
 	MenuItemImages[0] = "images\\MenuItems\\restart.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\exitgame.jpg";
@@ -269,14 +295,15 @@ void Output::ClearTempToolbar() const
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
-void Output::PrintMessage(string msg, color msgc) const // Prints a message on status bar
+void Output::PrintMessage(string msg, color msgc, bool save_msg) // Prints a message on status bar
 {
 	ClearStatusBar(); // First clear the status bar
 
 	wind_p->SetPen(msgc, 50);
 	wind_p->SetFont(20, PLAIN, BY_NAME, "Arial");
 	wind_p->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.25), msg);
+
+	last_printed_msg = (save_msg) ? msg : "";
 }
 //======================================================================================//
 //								Figures Drawing Functions
@@ -295,8 +322,11 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 	else
 		DrawingClr = rect_gfx_info.draw_clr;
 
-	wind_p->SetPen(DrawingClr, rect_gfx_info.border_width); // Set Drawing color &
-															// width
+	int bord_size = rect_gfx_info.border_width;
+
+	bord_size = AdjustBorder(bord_size); //Adjusting border size for zooming if zoom_in increase border size. If zoom_out reduce border size
+
+	wind_p->SetPen(DrawingClr, bord_size); // Set Drawing color & Width
 
 	drawstyle style;
 	if (rect_gfx_info.is_filled) {
@@ -313,7 +343,8 @@ void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 	bool selected) const
 {
 	Point pf1 = TranslatePoint(p1);
-	radius = TranslateRadius(pf1, radius);
+
+	radius *= pow(2, zoom_scale);
 
 	color DrawingClr;
 	if (selected)
@@ -321,8 +352,11 @@ void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 	else
 		DrawingClr = circ_gfx_info.draw_clr;
 
-	wind_p->SetPen(DrawingClr, circ_gfx_info.border_width); // Set Drawing color &
-															// width
+	int bord_size = circ_gfx_info.border_width;
+
+	bord_size = AdjustBorder(bord_size); //Adjusting border size for zooming if zoom_in increase border size. If zoom_out reduce border size
+
+	wind_p->SetPen(DrawingClr, bord_size); // Set Drawing color & Width
 
 	drawstyle style;
 	if (circ_gfx_info.is_filled) {
@@ -347,8 +381,11 @@ void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
 	else
 		DrawingClr = line_gfx_info.draw_clr;
 
-	wind_p->SetPen(DrawingClr, line_gfx_info.border_width); // Set Drawing color &
-															// width
+	int bord_size = line_gfx_info.border_width;
+
+	bord_size = AdjustBorder(bord_size); //Adjusting border size for zooming if zoom_in increase border size. If zoom_out reduce border size
+
+	wind_p->SetPen(DrawingClr, bord_size); // Set Drawing color & Width
 
 	drawstyle style = FRAME;
 
@@ -368,8 +405,11 @@ void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
 	else
 		DrawingClr = trngl_gfx_info.draw_clr;
 
-	wind_p->SetPen(DrawingClr, trngl_gfx_info.border_width); // Set Drawing color &
-															 // width
+	int bord_size = trngl_gfx_info.border_width;
+
+	bord_size = AdjustBorder(bord_size); //Adjusting border size for zooming if zoom_in increase border size. If zoom_out reduce border size
+
+	wind_p->SetPen(DrawingClr, bord_size); // Set Drawing color & Width
 
 	drawstyle style;
 	if (trngl_gfx_info.is_filled) {
@@ -466,18 +506,133 @@ Point Output::TranslatePoint(const Point& g_point) const
 	};
 }
 
-int Output::TranslateRadius(const Point& f_point, int radius) const
+int Output::AdjustBorder(const int& border) const
 {
-	// calculates second point from given point, gets it translated
-	Point s_point = TranslatePoint({
-		f_point.x + radius,
-		f_point.y
-	});
+	switch (border)
+	{
+	case 1:
+		return AdjustBorder1(border);
+	case 3:
+		return AdjustBorder3(border);
+	case 10:
+		return AdjustBorder10(border);
+	case 15:
+		return AdjustBorder15(border);
+	default:
+		return border;
+	}
+}
 
-	// then returns the zoomed radius from those two points
-	return static_cast<int>(
-		sqrt(pow((s_point.y - f_point.y), 2) + pow((s_point.x - f_point.x), 2))
-	);
+int Output::AdjustBorder15(const int& border) const
+{
+	if (zoom_scale < 0)
+		switch (zoom_scale)
+		{
+		case -1:
+			return 12;
+		case -2:
+			return 10;
+		case -3:
+			return 6;
+		case -4:
+			return 3;
+		case -5:
+			return 1;
+		}
+	else if (zoom_scale > 0)
+		return 15;
+
+	return border;
+}
+
+int Output::AdjustBorder10(const int& border) const
+{
+	if (zoom_scale <= 4 && zoom_scale >= -3)
+		switch (zoom_scale)
+		{
+		case 0:
+			return 10;
+		case 1:
+			return 10;
+		case 2:
+			return 12;
+		case 3:
+			return 12;
+		case 4:
+			return 15;
+		case -1:
+			return 6;
+		case -2:
+			return 3;
+		case -3:
+			return 1;
+		}
+	else if (zoom_scale > 4)
+		return 15;
+	else if (zoom_scale < -3)
+		return 1;
+
+	return border;
+}
+
+int Output::AdjustBorder3(const int& border) const
+{
+	if (zoom_scale <= 6 && zoom_scale >= -2)
+		switch (zoom_scale)
+		{
+		case 0:
+			return border;
+		case 1:
+			return border;
+		case 2:
+			return 6;
+		case 3:
+			return 6;
+		case 4:
+			return 10;
+		case 5:
+			return 10;
+		case 6:
+			return 15;
+		case -1:
+			return 2;
+		case -2:
+			return 1;
+		}
+	else if (zoom_scale > 6)
+		return 15;
+	else if (zoom_scale < -2)
+		return 1;
+
+	return border;
+}
+
+int Output::AdjustBorder1(const int& border) const
+{
+	if (zoom_scale <= 8 && zoom_scale >= 2)
+		switch (zoom_scale)
+		{
+		case 2:
+			return 3;
+		case 3:
+			return 3;
+		case 4:
+			return 6;
+		case 5:
+			return 6;
+		case 6:
+			return 10;
+		case 7:
+			return 10;
+		case 8:
+			return 15;
+		}
+	else if (zoom_scale > 8)
+		return 15;
+	else if (zoom_scale < 0)
+		return 1;
+
+	return border;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }

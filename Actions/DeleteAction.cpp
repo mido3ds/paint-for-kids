@@ -10,7 +10,7 @@ void DeleteAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
 	out_p->ClearStatusBar();
     if (manager_p->GetNumSelected() == 0)
-        out_p->PrintMessage("No Selected Figures To Delete");
+        out_p->PrintMessage("No Selected Figures To Delete", WHITE, true);
 }
 
 void DeleteAction::Execute()

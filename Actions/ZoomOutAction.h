@@ -22,18 +22,14 @@ public:
 	virtual void ReadActionParameters();
 	virtual void Execute();
 
-	void SetZoomFactor(double z_factor);
 	void SetZoompoint(Point z_point);
-
-	double GetZoomFactor() const;
 	Point GetZoomPoint() const;
 
 	virtual void Undo();
 
 private:
-	double zoom_factor = 0;
 	Point zoom_point;
+	Point pre_zoom_point;
 };
-
 
 #endif  /* __ZoomOutAction_h__ */

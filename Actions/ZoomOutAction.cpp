@@ -4,19 +4,9 @@ ZoomOutAction::ZoomOutAction(ApplicationManager* app_p)
 	: Action(app_p)
 {}
 
-void ZoomOutAction::SetZoomFactor(double z_factor)
-{
-	zoom_factor = z_factor;
-}
-
 void ZoomOutAction::SetZoompoint(Point z_point)
 {
 	zoom_point = z_point;
-}
-
-double ZoomOutAction::GetZoomFactor() const
-{
-	return zoom_factor;
 }
 
 Point ZoomOutAction::GetZoomPoint() const
@@ -41,16 +31,9 @@ void ZoomOutAction::Execute()
 {
 	Output* out_p = manager_p->GetOutput();
 
+	pre_zoom_point = out_p->GetZoomPoint();
 	out_p->SetZoomScale(out_p->GetZoomScale() - 1);
-	zoom_factor = pow(2, out_p->GetZoomScale());
 	out_p->SetZoomPoint(zoom_point);
-
-	//clearing the drawing area to draw the shapes after zooming
-	out_p->ClearDrawArea();
-
-	//redrawing bars to avoid any shape be drawn on them
-	out_p->ClearStatusBar();
-	out_p->CreateDrawToolBar();
 }
 
 
@@ -58,5 +41,5 @@ void ZoomOutAction::Undo()
 {
 	Output* out_p = manager_p->GetOutput();
 	out_p->SetZoomScale(out_p->GetZoomScale() + 1);
-	out_p->SetZoomPoint(zoom_point);
+	out_p->SetZoomPoint(pre_zoom_point);
 }

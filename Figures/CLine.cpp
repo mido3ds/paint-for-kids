@@ -197,5 +197,36 @@ void CLine::MoveToLeftSide()
 
 void CLine::RandomizePosition()
 {
-	// TODO
+	Point center = CalculateCenter();
+
+	// get difference between center and points
+	Point def1(p1.x - center.x, p1.y - center.y);
+	Point def2(p2.x - center.x, p2.y - center.y);
+	int i = 0;
+	do
+	{
+		center.x = rand() % (((UI.width - 5) - ((UI.width / 2) + 5)) + 1) + ((UI.width / 2) + 5);
+		center.y = rand() % (((UI.StatusBarY - 5) - 55) + 1) + 55;
+
+		p1 = center + def1;
+		p2 = center + def2;
+		i++;
+	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
+
+//void CLine::ChangeCenter(const Point& p)
+//{
+//	// TODO
+//}
+//
+//bool CLine::IsPointCorner(const Point& p) const
+//{
+//	// TODO
+//	return true;
+//}
+//
+//Point& CLine::GetCornerPoint(const Point& p)
+//{
+//	// TODO
+//	return p1;
+//}

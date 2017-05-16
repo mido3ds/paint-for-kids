@@ -9,7 +9,8 @@ int main()
 		action = app.GetUserAction();
 		app.ExecuteAction(action);
 		app.UpdateInterface();
-	} while (action != EXIT);
+	} 
+	while (app.IsRunning());
 
 	return 0;
 }
