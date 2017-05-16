@@ -141,6 +141,8 @@ void PickByTypeAndColor::Undo()
 
 PickByTypeAndColor::~PickByTypeAndColor()
 {
+	for (auto& fig : figures)
+        delete fig;
 }
 
 int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string type)

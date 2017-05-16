@@ -23,7 +23,12 @@ void PasteAction::Execute()
 
 void PasteAction::Undo()
 {
-    for (auto& fig : clipboard) {
+    for (auto& fig : clipboard)
         manager_p->DeleteFigure(fig->GetId());
-    }
+}
+
+PasteAction::~PasteAction()
+{
+    for (auto& fig : clipboard)
+        delete fig;
 }

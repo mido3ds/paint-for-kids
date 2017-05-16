@@ -12,9 +12,7 @@ public:
     MoveAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
-
     virtual void Execute();
-
     virtual void Undo();
 
 private:

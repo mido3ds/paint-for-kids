@@ -35,8 +35,6 @@ void ScrambleFind::ReadActionParameters() // prepare game
         fig->MoveToLeftSide();
     }
 	
-	//manager_p->UpdateInterface(left_figs);
-	
     for (auto& fig : right_figs)
     {
         fig->Resize(0.5);
@@ -77,12 +75,7 @@ void ScrambleFind::Execute() // game mainloop
             // get action
             act = in_p->GetUserAction();
             clicked_point = in_p->GetLastClickedPoint();
-            if (act == SCRAMBLE)
-            {
-                finish = true;
-                break;
-            }
-			else if (act == EXIT || act == TO_DRAW)
+			if (act == EXIT || act == TO_DRAW || act == SCRAMBLE)
 			{
 				finish = true;
 				break;
@@ -139,19 +132,14 @@ void ScrambleFind::UpdateInterface()
     // draw right figures
     for (auto& fig : left_figs)
         fig->Draw(out_p);
-
-
 }
 
 CFigure* ScrambleFind::ChooseRandomFigure()
 {
-    // if (left_figs.size() != 0)
-    //     return left_figs[rand() % left_figs.size()];
-    // else 
-    //     return nullptr;
-
-    // for debugging
-    return left_figs[left_figs.size() - 1];
+    if (left_figs.size() != 0)
+        return left_figs[rand() % left_figs.size()];
+    else 
+        return nullptr;
 }
 
 void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)

@@ -4,18 +4,13 @@
 #include "../ApplicationManager.h"
 #include "Action.h"
 
-class MultiSelect :public Action {
-
+class MultiSelect : public Action {
 public:
 	MultiSelect(ApplicationManager *app_p);
 
 	virtual void ReadActionParameters();
-
 	virtual void Execute();
-
 	virtual void Undo();
-
-
 };
 
 #endif // !_MULTI_SELECT_

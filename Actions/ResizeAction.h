@@ -15,8 +15,7 @@
 #include <cmath>
 
 //Add Resize Action class
-class ResizeAction : public Action
-{
+class ResizeAction : public Action {
 public:
 	ResizeAction(ApplicationManager* app_p);
 
@@ -25,8 +24,6 @@ public:
 
 	virtual void ReadActionParameters();
 	virtual void Execute();
-
-	//To undo this action (code depends on action type)
 	virtual void Undo();
 
 private:

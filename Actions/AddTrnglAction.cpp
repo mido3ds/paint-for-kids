@@ -36,7 +36,6 @@ void AddTrnglAction::ReadActionParameters()
 	p3.y = (p3.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
 
     gfx.is_filled = UI.IsFilled; //default is not filled
-    //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetDrawColor();
     gfx.fill_clr = out_p->GetFillColor();
     gfx.border_width = out_p->GetPenWidth();
@@ -46,16 +45,15 @@ void AddTrnglAction::ReadActionParameters()
     id = manager_p->GenerateNextId();
 }
 
-//Execute the action
 void AddTrnglAction::Execute()
 {
     trngl = new CTrngl(p1, p2, p3, gfx);
     trngl->SetId(id);
-    if (!trngl->IsOutOfRange(p1, p2, p3)) {
+
+    if (!trngl->IsOutOfRange(p1, p2, p3))
         manager_p->AddFigure(trngl);
-    } else {
+    else
         manager_p->GetOutput()->PrintMessage("The Triangle Is Out Of Range");
-    }
 }
 
 void AddTrnglAction::Undo()

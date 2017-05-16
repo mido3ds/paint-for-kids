@@ -20,18 +20,22 @@ void PickByArea::Execute()
 	int correct = 0;
 	int wrong = 0;
 	Point p;
-	CFigure* fig=nullptr;
+	CFigure* fig = nullptr;
 	Input *in_p = manager_p->GetInput();
 	Output *out_p = manager_p->GetOutput();
-	int numOfFigs = manager_p->GetNumFigures();
+	int num_of_figs = manager_p->GetNumFigures();
+
 	manager_p->UpdateInterface(figures);
 	deque<double> areas; //list of figures' areas
+
 	for (auto& fig : figures)
 	{
 		areas.push_back(fig->GetArea());
 	}
+
 	sort(areas.begin(), areas.end());
-	while (numOfFigs > 0)
+
+	while (num_of_figs > 0)
 	{
 		out_p->CreateRestartGame();
 		out_p->PrintMessage("Pick Figures From Bigger To Smaller            Correct Answers: " +to_string(correct)+"      Wrong Answers: "+ to_string(wrong), GREEN);
@@ -53,27 +57,27 @@ void PickByArea::Execute()
 					break;
 			}
 		}
-		fig=manager_p->GetFigure(figures, p);
+
+		fig = manager_p->GetFigure(figures, p);
+
 		if (fig != nullptr)
 		{
 			
-				if (numOfFigs==1|| areas[numOfFigs - 1] == areas[numOfFigs - 2]||areas[numOfFigs - 1]- fig->GetArea() < areas[numOfFigs - 1] - areas[numOfFigs - 2])
-				{
-					correct++;
-					DeleteCorrect(fig->GetId());
-					manager_p->UpdateInterface(figures);
-					out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
-					numOfFigs--;
-					Sleep(1000);
-				}
-				else
-				{
-					wrong++;
-					out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
-					Sleep(1000);
-				}
-			
-			
+			if (num_of_figs==1|| areas[num_of_figs - 1] == areas[num_of_figs - 2]||areas[num_of_figs - 1]- fig->GetArea() < areas[num_of_figs - 1] - areas[num_of_figs - 2])
+			{
+				correct++;
+				DeleteCorrect(fig->GetId());
+				manager_p->UpdateInterface(figures);
+				out_p->PrintMessage("Correct, Very Good, Keep Going            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
+				num_of_figs--;
+				Sleep(1000);
+			}
+			else
+			{
+				wrong++;
+				out_p->PrintMessage("Wrong Answer, Try Agian            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), RED);
+				Sleep(1000);
+			}
 		}
 		else
 		{
@@ -81,21 +85,17 @@ void PickByArea::Execute()
 			continue;
 		}
 	}
-	if (correct == 0 && wrong == 0) {
+
+	if (correct == 0 && wrong == 0) 
 		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
-	}
-	else {
+	else 
+	{
 		out_p->PrintMessage("Your Grade Is: " + std::to_string((correct * 100) / (correct + wrong) ), ORANGE);
-		Sleep(1000);
+		Sleep(SECOND);
 	}
 }
-
 
 void PickByArea::Undo()
-{
-}
-
-PickByArea::~PickByArea()
 {
 }
 
@@ -108,4 +108,10 @@ void PickByArea::DeleteCorrect(int id)
 			figures.erase(itr);
 			return;
 		}
+}
+
+PickByArea::~PickByArea()
+{
+	for (auto& fig : figures)
+        delete fig;
 }

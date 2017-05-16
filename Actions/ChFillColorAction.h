@@ -20,8 +20,8 @@ public:
     virtual void Undo();
 
 private:
-    color C = UI.FillColor,
-          lastC = C;
+    color fill_clr = UI.FillColor,
+          last_fill_clr = fill_clr;
 };
 
 #endif // !_CH_FILL_COLOR_

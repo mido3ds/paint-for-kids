@@ -6,15 +6,12 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class PickAction :public Action {
-
+class PickAction : public Action {
 public:
 	PickAction(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
-
 	virtual void Execute();
-
 	virtual void Undo();
 
 private:

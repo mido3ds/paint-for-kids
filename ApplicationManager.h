@@ -122,7 +122,7 @@ public:
     deque<CFigure*> GetClipboard();
 
 	/*  ------------------------------- MultiSelect ------------------------------- */
-	bool GetMultiSelect();
+	bool IsInMultiSelect();
 	void ToggleMultiSelect();
 
 private:

@@ -215,3 +215,10 @@ bool PickByColor::correct(CFigure * fig)
 	}
 	return false;
 }
+
+
+PickByColor::~PickByColor()
+{
+	for (auto& fig : figures)
+        delete fig;
+}

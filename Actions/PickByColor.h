@@ -7,15 +7,14 @@
 #include "../GUI/Output.h"
 #include "../CMUgraphicsLib/colors.h"
 
-class PickByColor :public Action {
+class PickByColor : public Action {
 
 public:
 	PickByColor(ApplicationManager *app_p);
+    ~PickByColor();
 
-	virtual void ReadActionParameters();
-
+    virtual void ReadActionParameters();
 	virtual void Execute();
-
 	virtual void Undo();
 
 private:
@@ -30,7 +29,6 @@ private:
 	void DrawColorCircle(color c);
 
 	bool correct(CFigure *fig);
-
 };
 
 

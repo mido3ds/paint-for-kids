@@ -5,12 +5,12 @@ int main()
 	ActionType action;
 	ApplicationManager app;
 
-	do {
+	while (app.IsRunning())
+	{
 		action = app.GetUserAction();
 		app.ExecuteAction(action);
 		app.UpdateInterface();
 	} 
-	while (app.IsRunning());
 
 	return 0;
 }

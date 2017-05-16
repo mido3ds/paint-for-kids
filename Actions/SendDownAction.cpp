@@ -7,13 +7,10 @@ SendDownAction::SendDownAction(ApplicationManager* app_p)
 
 void SendDownAction::ReadActionParameters()
 {
-	Output *out_p = manager_p->GetOutput();
-	out_p->ClearStatusBar();
 }
 
 void SendDownAction::Execute()
 {
-    Output* out_p = manager_p->GetOutput();
     manager_p->SendSelecteDown();
 }
 

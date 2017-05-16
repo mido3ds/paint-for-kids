@@ -165,3 +165,9 @@ void PickByType::DeleteCorrect(int id)
 		}
 	}
 }
+
+PickByType::~PickByType()
+{
+	for (auto& fig : figures)
+        delete fig;
+}

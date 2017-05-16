@@ -11,11 +11,13 @@ void ChFillColorAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
     int x, y;
+
     out_p->PrintMessage("Choose Your Favourite Color");
     out_p->CreateColorBar();
     in_p->GetClick(x, y);
-    lastC = C;
-    C = in_p->GetColor(x, y);
+    last_fill_clr = fill_clr;
+    fill_clr = in_p->GetColor(x, y);
+
     out_p->ClearDrawArea();
     out_p->ClearStatusBar();
 	out_p->ClearTempToolbar();
@@ -23,17 +25,17 @@ void ChFillColorAction::ReadActionParameters()
 
 void ChFillColorAction::Execute()
 {
-    if (!manager_p->SetSelectedFillColor(C)) {
-        Output* out_p = manager_p->GetOutput();
-        out_p->SetFillColor(C);
+    Output* out_p = manager_p->GetOutput();
+
+    if (!manager_p->SetSelectedFillColor(fill_clr)) 
+    {
+        out_p->SetFillColor(fill_clr);
 		UI.IsFilled = true;
     }
 }
 
 void ChFillColorAction::Undo()
 {
-    if (!manager_p->SetSelectedFillColor(lastC)) {
-        Output* out_p = manager_p->GetOutput();
-        out_p->SetFillColor(lastC);
-    }
+    if (!manager_p->SetSelectedFillColor(last_fill_clr)) 
+        manager_p->GetOutput()->SetFillColor(last_fill_clr);
 }

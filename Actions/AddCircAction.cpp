@@ -43,7 +43,6 @@ void AddCircAction::ReadActionParameters()
     id = manager_p->GenerateNextId();
 }
 
-//Execute the action
 void AddCircAction::Execute()
 {
     circ = new CCircle(p1, radius, gfx);

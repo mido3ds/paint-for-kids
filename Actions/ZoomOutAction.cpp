@@ -16,7 +16,6 @@ Point ZoomOutAction::GetZoomPoint() const
 
 void ZoomOutAction::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
 	Output* out_p = manager_p->GetOutput();
 	Input* in_p = manager_p->GetInput();
 
@@ -26,7 +25,6 @@ void ZoomOutAction::ReadActionParameters()
 	out_p->ClearStatusBar();
 }
 
-//Execute the action
 void ZoomOutAction::Execute()
 {
 	Output* out_p = manager_p->GetOutput();
@@ -36,10 +34,10 @@ void ZoomOutAction::Execute()
 	out_p->SetZoomPoint(zoom_point);
 }
 
-
 void ZoomOutAction::Undo()
 {
 	Output* out_p = manager_p->GetOutput();
+	
 	out_p->SetZoomScale(out_p->GetZoomScale() + 1);
 	out_p->SetZoomPoint(pre_zoom_point);
 }

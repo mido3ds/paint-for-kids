@@ -7,10 +7,10 @@
 class DeleteAction : public Action {
 public:
     DeleteAction(ApplicationManager* app_p);
+    ~DeleteAction();
 
     virtual void ReadActionParameters();
     virtual void Execute();
-
     virtual void Undo();
 
 private:

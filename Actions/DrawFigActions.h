@@ -6,15 +6,12 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-class DrawFigActions :public Action {
-
+class DrawFigActions : public Action {
 public:
 	DrawFigActions(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
-
 	virtual void Execute();
-
 	virtual void Undo();
 
 private:

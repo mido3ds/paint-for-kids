@@ -28,6 +28,7 @@ void AddRectAction::ReadActionParameters()
 	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
 
     gfx.is_filled = UI.IsFilled; //default is not filled
+    
     //get drawing, filling colors and pen width from the interface
     gfx.draw_clr = out_p->GetDrawColor();
     gfx.fill_clr = out_p->GetFillColor();
@@ -38,17 +39,15 @@ void AddRectAction::ReadActionParameters()
     id = manager_p->GenerateNextId();
 }
 
-//Execute the action
 void AddRectAction::Execute()
 {
-    //Add the lineangle to the list of figures
     rect = new CRectangle(p1, p2, gfx);
     rect->SetId(id);
-    if (!rect->IsOutOfRange(p1, p2)) {
+
+    if (!rect->IsOutOfRange(p1, p2))
         manager_p->AddFigure(rect);
-    } else {
+    else
         manager_p->GetOutput()->PrintMessage("The Rectangle Is Out Of Range");
-    }
 }
 
 void AddRectAction::Undo()

@@ -147,7 +147,6 @@ void ApplicationManager::Exit()
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* fig_p)
 {
@@ -173,7 +172,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
     return ApplicationManager::GetFigure(figs, { x, y });
 }
 ////////////////////////////////////////////////////////////////////////////////////
-
 int ApplicationManager::GetNumFigures() const
 {
 	return figs.size();
@@ -209,7 +207,6 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
-
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface(bool tool_bar) const
 {
@@ -235,17 +232,15 @@ void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
 		fig->Draw(out_p); //Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Return a pointer to the input
 Input* ApplicationManager::GetInput() const
 {
 	return in_p;
 }
-//Return a pointer to the output
+
 Output* ApplicationManager::GetOutput() const
 {
     return out_p;
 }
-
 ////////////////////////////////////////////////////////////////////////////////////
 // iterate through all figures
 // call save for each one
@@ -355,20 +350,22 @@ bool ApplicationManager::ResizeSelected(double resize_factor)
 			flag = true;
 		}
 	}
+
 	return flag;
 }
 
 void ApplicationManager::RotateSelected(int deg)
 {
-	for (auto& fig : figs) {
-		if (fig->IsSelected()) {
+	for (auto& fig : figs) 
+	{
+		if (fig->IsSelected()) 
+		{
 			fig->Rotate(deg);
-			if (fig->IsRotated()) {
+
+			if (fig->IsRotated()) 
 				fig->SetRotated(false);
-			}
-			else {
+			else 
 				out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
-			}
 		}
 	}
 }
@@ -377,8 +374,10 @@ bool ApplicationManager::SetSelectedFillColor(color c)
 {
     bool flag = false;
 
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
+    for (auto& fig : figs) 
+	{
+        if (fig->IsSelected()) 
+		{
             fig->SetFillColor(c);
 
             flag = true;
@@ -392,8 +391,10 @@ bool ApplicationManager::SetSelectedBorder(int W, color C)
 {
     bool flag = false;
 
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
+    for (auto& fig : figs) 
+	{
+        if (fig->IsSelected()) 
+		{
             fig->SetDrawColor(C);
             fig->SetBorderWidth(W);
 
@@ -406,13 +407,15 @@ bool ApplicationManager::SetSelectedBorder(int W, color C)
 
 bool ApplicationManager::UnselectAll()
 {
+	num_selected = 0;
+
 	bool found_selected = false;
 	for (auto& fig : figs)
 	{
 		found_selected = true;
 		fig->SetSelected(false);
 	}
-	num_selected = 0;
+
 	return found_selected;
 }
 
@@ -470,15 +473,17 @@ void ApplicationManager::PrintSelectedSize()
 	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected), WHITE, true);
 }
 
-void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old)
+void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs, Point& old)
 {
-	
     int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
     int x = 0, y = 0;
 
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
-            if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) {
+    for (auto& fig : figs) 
+	{
+        if (fig->IsSelected()) 
+		{
+            if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) 
+			{
                 minx = (fig->CalculateCenter()).x;
                 miny = (fig->CalculateCenter()).y;
             }
@@ -487,65 +492,82 @@ void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
 	
-		bool out_range = false;
-		for (auto& fig : figs) {
-			if (fig->IsSelected()) {
-				if (!fig->Move(x, y))
-				{
-					out_p->PrintMessage("Error........Figures will be out of range if moved");
-					out_range = true;
-					break;
-				}
-				else  moved_figs.push_back(fig);
-			}
-		}
-		if (out_range)
+	bool out_range = false;
+	for (auto& fig : figs) 
+	{
+		if (fig->IsSelected()) 
 		{
-			for (int i = 0; i < moved_figs.size(); i++)
-				moved_figs[i]->Move(-x, -y);
-
-			moved_figs.clear();
+			if (!fig->Move(x, y))
+			{
+				out_p->PrintMessage("Error........ Figures will be out of range if moved");
+				out_range = true;
+				break;
+			}
+			else  
+				moved_figs.push_back(fig);
 		}
-		old = Point(minx, miny);
+	}
+
+	if (out_range)
+	{
+		for (int i = 0; i < moved_figs.size(); i++)
+			moved_figs[i]->Move(-x, -y);
+
+		moved_figs.clear();
+	}
+
+	old = Point(minx, miny);
 }
 
 bool ApplicationManager::PasteClipboard(Point p)
 {
 	deque<CFigure*> moved_figs;
-    int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
+    int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; // coordinates of the center of the first figure
     int x = 0, y = 0;
-    for (auto& fig : clipboard) {
+    for (auto& fig : clipboard) 
+	{
         Point c = fig->CalculateCenter();
-        if (c.x <= minx && c.y <= miny) {
+        if (c.x <= minx && c.y <= miny) 
+		{
             minx = c.x;
             miny = c.y;
         }
     }
+
     bool out_range = false;
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
-    for (auto& fig : clipboard) {
+
+    for (auto& fig : clipboard) 
+	{
 		if (!fig->Move(x, y))
 		{
 			out_range = true;
 			break;
 		}
+
 		CFigure*copy = fig->Copy();
+
 		copy->SetId(GenerateNextId());
         AddFigure(copy);
+
 		moved_figs.push_back(fig);
 		fig->SetId(copy->GetId());
     }
+
 	if (out_range)
 	{
-		out_p->PrintMessage("Error........Figures will be out of range if pasted");
+		out_p->PrintMessage("Error........ Figures will be out of range if pasted");
+
 		for (auto& fig : moved_figs)
 		{
 			fig->Move(-x, -y);
 			DeleteFigure(fig->GetId());
 		}
+
 		moved_figs.clear();
 	}
+
     return !out_range;
 }
 
@@ -558,8 +580,10 @@ void ApplicationManager::FillClipboardWithSelected()
 
 	// fill it with selected
     CFigure* copy;
-    for (auto& fig : figs) {
-        if (fig->IsSelected()) {
+    for (auto& fig : figs) 
+	{
+        if (fig->IsSelected()) 
+		{
             copy = fig->Copy();
 
             copy->SetId(GenerateNextId());
@@ -575,14 +599,14 @@ deque<CFigure*> ApplicationManager::GetClipboard()
     return clipboard;
 }
 
-bool ApplicationManager::GetMultiSelect()
+bool ApplicationManager::IsInMultiSelect()
 {
-	return this->multi_select;
+	return multi_select;
 }
 
 void ApplicationManager::ToggleMultiSelect()
 {
-	this->multi_select = !(this->multi_select);
+	multi_select = !(multi_select);
 }
 
 deque<CFigure*> ApplicationManager::EraseSelected()
@@ -606,11 +630,11 @@ deque<CFigure*> ApplicationManager::EraseSelected()
     return deleted;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-
 void ApplicationManager::DeleteAllFigures()
 {
 	for (auto& fig : figs)
 		delete fig;
+
 	figs.clear();
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -623,9 +647,7 @@ void ApplicationManager::Redo()
 {
     history.Redo();
 }
-
 ////////////////////////////////////////////////////////////////////////////////////
-
 deque<CFigure*> ApplicationManager::GetCopyOfFigures()
 {
     deque<CFigure*> result;
@@ -636,7 +658,6 @@ deque<CFigure*> ApplicationManager::GetCopyOfFigures()
     return result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Destructor
 ApplicationManager::~ApplicationManager()
 {
 	DeleteAllFigures();

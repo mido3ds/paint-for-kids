@@ -10,13 +10,11 @@
 class PasteAction : public Action {
 public:
     PasteAction(ApplicationManager* app_p);
+    ~PasteAction();
 
     virtual void ReadActionParameters();
-
     virtual void Execute();
-
     virtual void Undo();
-
 private:
     deque<CFigure*> clipboard;
     Point p;

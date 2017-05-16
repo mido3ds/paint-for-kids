@@ -6,17 +6,16 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 #include "../CMUgraphicsLib/colors.h"
-class PickByTypeAndColor :
-	public Action
-{
+
+class PickByTypeAndColor : public Action {
 public:
 	PickByTypeAndColor(ApplicationManager *app_p);
-	virtual void ReadActionParameters();
-
-	virtual void Execute();
-
-	virtual void Undo();
 	~PickByTypeAndColor();
+
+	virtual void ReadActionParameters();
+	virtual void Execute();
+	virtual void Undo();
+
 private:
 	deque<CFigure *> figures;
 	color c;
@@ -34,4 +33,5 @@ private:
 	void PrintPickInfo(string, color, int, int);
 	
 };
+
 #endif

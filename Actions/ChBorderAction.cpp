@@ -10,38 +10,36 @@ void ChBorderAction::ReadActionParameters()
     Output* out_p = manager_p->GetOutput();
     Input* in_p = manager_p->GetInput();
     int x, y;
-    w = out_p->GetPenWidth();
+
+    pen_width = out_p->GetPenWidth();
     out_p->PrintMessage("Please Enter the Border Width If You Don't Want To Change It Type 3");
-    lastW = w;
+    last_pen_width = pen_width;
 	out_p->CreateBorderToolbar();
-	do {
+
+	do 
+	{
 		out_p->PrintMessage("Choose The Prefered Border Width");
 		in_p->GetClick(x, y);
-	} while (x < UI.TToolBarX || x > 4 * UI.MenuItemWidth || y < UI.TToolBarY || y > UI.TToolBarY + UI.TToolBarHeight);
+	} 
+	while (x < UI.TToolBarX || x > 4 * UI.MenuItemWidth || y < UI.TToolBarY || y > UI.TToolBarY + UI.TToolBarHeight);
+
 	int ClickedItemOrder = (x / UI.MenuItemWidth);
 	switch (ClickedItemOrder)
 	{
-	case 0:
-		w = 1;
-		break;
-	case 1:
-		w = 3;
-		break;
-	case 2:
-		w = 10;
-		break;
-	case 3:
-		w = 15;
-		break;
-	default:
-		w = 3;
-		break;
+		case 0: pen_width = 1; break;
+		case 1: pen_width = 3; break;
+		case 2: pen_width = 10; break;
+		case 3: pen_width = 15; break;
+		default: pen_width = 3; break;
 	}
+
     out_p->PrintMessage("Please Choose Your Favorite Color To Change Border Color");
     out_p->CreateColorBar();
     in_p->GetClick(x, y);
-    lastC = C;
-    C = in_p->GetColor(x, y);
+    last_draw_clr = draw_clr;
+    draw_clr = in_p->GetColor(x, y);
+
+
     out_p->ClearStatusBar();
     out_p->ClearDrawArea();
 	out_p->ClearTempToolbar();
@@ -49,18 +47,22 @@ void ChBorderAction::ReadActionParameters()
 
 void ChBorderAction::Execute()
 {
-    if (!manager_p->SetSelectedBorder(w, C)) {
-        Output* out_p = manager_p->GetOutput();
-        out_p->SetPenWidth(w);
-        out_p->SetDrawColor(C);
+    Output* out_p = manager_p->GetOutput();
+
+    if (!manager_p->SetSelectedBorder(pen_width, draw_clr)) 
+	{
+        out_p->SetPenWidth(pen_width);
+        out_p->SetDrawColor(draw_clr);
     }
 }
 
 void ChBorderAction::Undo()
 {
-    if (!manager_p->SetSelectedBorder(lastW, lastC)) {
-        Output* out_p = manager_p->GetOutput();
-        out_p->SetPenWidth(lastW);
-        out_p->SetDrawColor(lastC);
+    Output* out_p = manager_p->GetOutput();
+
+    if (!manager_p->SetSelectedBorder(last_pen_width, last_draw_clr)) 
+	{
+        out_p->SetPenWidth(last_pen_width);
+        out_p->SetDrawColor(last_draw_clr);
     }
 }

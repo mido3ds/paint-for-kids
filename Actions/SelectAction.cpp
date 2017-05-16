@@ -16,7 +16,7 @@ void SelectAction::Execute()
 	p = in_p->GetLastClickedPoint();
 	p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
 	p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
-	if (manager_p->GetMultiSelect())
+	if (manager_p->IsInMultiSelect())
 	{
 		// in multi select mode
 		selected = manager_p->GetFigure(p.x, p.y);

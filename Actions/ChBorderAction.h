@@ -20,10 +20,10 @@ public:
     virtual void Undo();
 
 private:
-    color C = UI.DrawColor,
-          lastC = C;
-    int w = UI.PenWidth,
-        lastW = w;
+    color draw_clr = UI.DrawColor,
+          last_draw_clr = draw_clr;
+    int pen_width = UI.PenWidth,
+        last_pen_width = pen_width;
 };
 
 #endif // !_CH_BORDER_

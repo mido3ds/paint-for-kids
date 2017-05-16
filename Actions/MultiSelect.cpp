@@ -12,12 +12,11 @@ void MultiSelect::ReadActionParameters()
 void MultiSelect::Execute()
 {
 	manager_p->ToggleMultiSelect();
-	if (manager_p->GetMultiSelect()){
+
+	if (manager_p->IsInMultiSelect())
 		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is On", WHITE, true);
-	}
-	else {
+	else 
 		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is Off");
-	}
 }
 
 void MultiSelect::Undo()

@@ -1,5 +1,5 @@
 /*
-some global constants and definitions to be used in the project.
+	some global constants and definitions to be used in the project.
 */
 #ifndef DEFS_H
 #define DEFS_H
@@ -60,25 +60,29 @@ struct Point // To be used for figures points
 
     Point(int a, int b): x(a), y(b) {}
     Point(): x(0), y(0) {}
-	Point operator+(const Point& p)
+
+	Point operator+(const Point& p) const
 	{
 		return Point(this->x + p.x, this->y + p.y);
 	}
+
 	bool operator>(const Point& p) const
 	{
 		return ((this->x > p.x) && (this->y > p.y)) ? true : false;
 	}
+
 	bool operator<(const Point& p) const
 	{
 		return ((this->x > p.x) && (this->y > p.y)) ? false : true;
 	}
-	Point &operator- (const Point &p)
+
+	Point operator- (const Point &p) const
 	{
 		return Point((this->x - p.x), (this->y - p.y));
 	}
 };
 
-struct GfxInfo // Graphical info of each figure (you may add more members)
+struct GfxInfo // Graphical info of each figure 
 {
 	color draw_clr = BLACK; // Draw color of the figure
 	color fill_clr = WHITE; // Fill color of the figure

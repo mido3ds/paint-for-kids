@@ -1,5 +1,5 @@
 #ifndef _PICK_AREA_
-#define _PICK_AREA_\
+#define _PICK_AREA_
 
 #include "Action.h"
 #include "../ApplicationManager.h"
@@ -7,21 +7,19 @@
 #include "../GUI/Output.h"
 #include "../CMUgraphicsLib/colors.h"
 #include <algorithm>
-class PickByArea :
-	public Action
-{
+
+class PickByArea : public Action {
 public:
 	PickByArea(ApplicationManager *app_p);
-	virtual void ReadActionParameters();
+    ~PickByArea();
 
+    virtual void ReadActionParameters();
 	virtual void Execute();
-
 	virtual void Undo();
-	~PickByArea();
-private:
 	
-	deque<CFigure *> figures;
+private:
 	void DeleteCorrect(int id);
+	deque<CFigure*> figures;
 };
 
 #endif
