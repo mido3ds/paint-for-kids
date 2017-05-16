@@ -7,8 +7,6 @@ ApplicationManager::ApplicationManager()
     out_p = new Output;
     in_p = out_p->CreateInput();
 
-    num_selected = 0;
-
     // make the seed of the pseudo-random generator
 	time_t rawtime = time(0);
     srand(rawtime);
@@ -120,18 +118,17 @@ void ApplicationManager::ExecuteAction(ActionType act_type)
 {
     Action* act_p = DetectAction(act_type);
 
-    if (act_p != nullptr) {
+    if (act_p != nullptr) 
+	{
         act_p->ReadActionParameters();
         act_p->Execute();
 
         // try to add action, else delete it
-        if (!history.AddAction(act_p))
-        {
-            delete act_p;
-
-            // action must have changed figs
-            figs_is_saved = false; 
-        }
+        if (history.AddAction(act_p))
+			// action must have changed figs
+			figs_is_saved = false; 
+		else
+			delete act_p;
     }
 }
 
@@ -470,7 +467,8 @@ void ApplicationManager::PrintSelectedSize()
 		}
 		selected->PrintInfo(out_p);
 	}
-	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected), WHITE, true);
+	else if (num_selected > 0)  
+		out_p->PrintMessage("Number of selected figures are " + to_string(num_selected), WHITE, true);
 }
 
 void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs, Point& old)

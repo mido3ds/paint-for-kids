@@ -310,8 +310,7 @@ void Output::PrintMessage(string msg, color msgc, bool save_msg) // Prints a mes
 ////
 //======================================================================================//
 
-void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
-	bool selected) const
+void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info, bool selected) const
 {
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
@@ -339,8 +338,7 @@ void Output::DrawRect(Point p1, Point p2, GfxInfo rect_gfx_info,
 	wind_p->DrawRectangle(pf1.x, pf1.y, pf2.x, pf2.y, style);
 }
 
-void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
-	bool selected) const
+void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info, bool selected) const
 {
 	Point pf1 = TranslatePoint(p1);
 
@@ -369,8 +367,7 @@ void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info,
 	wind_p->DrawCircle(pf1.x, pf1.y, radius, style);
 }
 
-void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
-	bool selected) const
+void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info, bool selected) const
 {
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
@@ -392,8 +389,7 @@ void Output::DrawLine(Point p1, Point p2, GfxInfo line_gfx_info,
 	wind_p->DrawLine(pf1.x, pf1.y, pf2.x, pf2.y, style);
 }
 
-void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info,
-	bool selected) const
+void Output::DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info, bool selected) const
 {
 	Point pf1 = TranslatePoint(p1);
 	Point pf2 = TranslatePoint(p2);
