@@ -5,13 +5,15 @@ SEMESTER
 TEAM # 14
 
 
-Name		|	B.N	|	SEC
-===========================================
+SEMESTER, TEAM # 14
 
-Mahmoud Adas		    ,23		,2 
+Name            |       B.N     |       SEC	|	Email
+===============================================================================
 
-Hadi Maher		    ,28		,2 
+Mahmoud Adas                ,23         ,2 	 , mido3ds@gmail.com
 
-Abdelrahman Mohamed	    ,4		,2 
+Hadi Maher                  ,28         ,2 	 , hadymaher31@yahoo.com
 
-Aisha Mousa		    ,2		,2 
+Abdelrahman Mohamed         ,4          ,2 	 , abdomedono2014@gmail.com
+
+Aisha Mousa                 ,2          ,2	 , aishamousa632@yahoo.com

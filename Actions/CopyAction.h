@@ -12,10 +12,6 @@ public:
     virtual void Execute();
 
     virtual void Undo();
-
-private:
-    deque<CFigure*> clipboard;
-    bool copied = false;
 };
 
 #endif

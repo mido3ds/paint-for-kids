@@ -119,7 +119,6 @@ public:
 
     bool PasteClipboard(Point p);
     void FillClipboardWithSelected(); 
-    void SetClipboard(deque<CFigure*> clip);
     deque<CFigure*> GetClipboard();
 
 	/*  ------------------------------- MultiSelect ------------------------------- */

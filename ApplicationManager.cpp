@@ -551,21 +551,23 @@ bool ApplicationManager::PasteClipboard(Point p)
 
 void ApplicationManager::FillClipboardWithSelected()
 {
+	// delete and erase figs from clipboard
+	for (auto& fig : clipboard)
+        delete fig;
     clipboard.clear();
+
+	// fill it with selected
     CFigure* copy;
     for (auto& fig : figs) {
         if (fig->IsSelected()) {
             copy = fig->Copy();
+
             copy->SetId(GenerateNextId());
 			copy->SetSelected(false);
+
             clipboard.push_back(copy);
         }
     }
-}
-
-void ApplicationManager::SetClipboard(deque<CFigure*> clip)
-{
-    clipboard = clip;
 }
 
 deque<CFigure*> ApplicationManager::GetClipboard()

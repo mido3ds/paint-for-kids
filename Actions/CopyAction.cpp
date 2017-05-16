@@ -13,11 +13,7 @@ void CopyAction::ReadActionParameters()
 
 void CopyAction::Execute()
 {
-    if (manager_p->GetNumSelected() > 0) {
-        clipboard = manager_p->GetClipboard();
-        manager_p->FillClipboardWithSelected();
-        copied = true;
-    }
+    manager_p->FillClipboardWithSelected();
 }
 
 void CopyAction::Undo()
