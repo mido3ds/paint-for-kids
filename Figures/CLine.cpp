@@ -71,7 +71,9 @@ void CLine::Save(ofstream& out_file)
 		<< draw_clr.ucGreen << ' '
 		<< draw_clr.ucBlue << ' '
 
-		<< border_width
+		<< border_width << ' '
+		<< is_filled << ' '
+		<< is_rotated
 
 		<< '\n';
 }
@@ -90,7 +92,9 @@ void CLine::Load(ifstream& in_file)
         >> draw_clr.ucGreen
         >> draw_clr.ucBlue
 		
-		>> border_width;
+		>> border_width
+		>> is_filled
+		>> is_rotated;
 }
 
 bool CLine::IsPointInside(const Point& p) const
@@ -213,20 +217,3 @@ void CLine::RandomizePosition()
 		i++;
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
-
-//void CLine::ChangeCenter(const Point& p)
-//{
-//	// TODO
-//}
-//
-//bool CLine::IsPointCorner(const Point& p) const
-//{
-//	// TODO
-//	return true;
-//}
-//
-//Point& CLine::GetCornerPoint(const Point& p)
-//{
-//	// TODO
-//	return p1;
-//}

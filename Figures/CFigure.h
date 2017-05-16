@@ -30,15 +30,7 @@ public:
 	virtual string GetType() = 0;
 	virtual double GetArea() = 0;
 
-//<<<<<<< HEAD
-
-
     virtual bool IsPointInside(const Point& p) const = 0;
-//  virtual bool IsPointCorner(const Point& p) const = 0;
-//  virtual Point& GetCornerPoint(const Point& p) = 0; // get nearest corner point
-//  PointState GetPointState(const Point& p) const; // whether point corner, inside, outside
-
-
 
     void SetDrawColor(color draw_clr);
     void SetFillColor(color filling_clr); 

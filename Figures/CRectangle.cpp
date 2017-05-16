@@ -74,7 +74,9 @@ void CRectangle::Save(ofstream& out_file)
 		<< fill_clr.ucGreen << ' '
 		<< fill_clr.ucBlue << ' '
 
-		<< border_width
+		<< border_width << ' '
+		<< is_filled << ' '
+		<< is_rotated
 
 		<< '\n';
 }
@@ -97,16 +99,23 @@ void CRectangle::Load(ifstream& in_file)
 		>> fill_clr.ucGreen
 		>> fill_clr.ucBlue
 		
-		>>border_width;
+		>> border_width
+		>> is_filled
+		>> is_rotated;
 }
 
 void CRectangle::Resize(double resize_factor)
 {
 	Point c = CalculateCenter();
-	p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
-	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
-	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
-	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+	auto GetNewPoint = [c, resize_factor](Point p) -> Point {
+		return {
+			(int(resize_factor * (p.x - c.x))) + c.x,
+			(int(resize_factor * (p.y - c.y))) + c.y 
+		};
+	};
+
+	p1 = GetNewPoint(p1);
+	p2 = GetNewPoint(p2);
 }
 
 Point CRectangle::CalculateCenter()
@@ -219,20 +228,3 @@ void CRectangle::RandomizePosition()
 		p2 = center + def2;
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
-
-//void CRectangle::ChangeCenter(const Point& p)
-//{
-//	// TODO
-//}
-//
-//bool CRectangle::IsPointCorner(const Point& p) const
-//{
-//	// TODO
-//	return true;
-//}
-//
-//Point& CRectangle::GetCornerPoint(const Point& p)
-//{
-//	// TODO
-//	return p1;
-//}

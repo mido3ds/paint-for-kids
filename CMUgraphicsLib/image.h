@@ -58,8 +58,7 @@ public:
 	image(const char *cpFileName, imagetype itThisType = JPEG);
 	~image();
 
-	// Open an image file, currently the only value imagetype is 
-	// JPEG
+	// Open an image file, currently the only value imagetype is JPEG
 	void Open(string strFileName, imagetype itThisType = JPEG);
 	void Open(const char *cpFileName, imagetype itThisType = JPEG);
 

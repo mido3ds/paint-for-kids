@@ -89,7 +89,9 @@ void CCircle::Save(ofstream& out_file)
 		<< fill_clr.ucGreen << ' '
 		<< fill_clr.ucBlue << ' '
 
-		<< border_width
+		<< border_width << ' '
+		<< is_filled << ' '
+		<< is_rotated
 
 		<< '\n';
 }
@@ -112,7 +114,9 @@ void CCircle::Load(ifstream& in_file)
 		>> fill_clr.ucGreen
 		>> fill_clr.ucBlue
 		
-		>> border_width;
+		>> border_width
+		>> is_filled
+		>> is_rotated;
 
     p2 = GetSecondPointFromRadius(rad);
 }
@@ -191,20 +195,3 @@ void CCircle::RandomizePosition()
 
 	} while (OutOfRightRange(p1) || OutOfRightRange(left) || OutOfRightRange(right) || OutOfRightRange(up) || OutOfRightRange(down));
 }
-
-//void CCircle::ChangeCenter(const Point& p)
-//{
-//	// TODO
-//}
-//
-//bool CCircle::IsPointCorner(const Point& p) const
-//{
-//	// TODO
-//	return true;
-//}
-//
-//Point& CCircle::GetCornerPoint(const Point& p)
-//{
-//	// TODO
-//	return p1;
-//}

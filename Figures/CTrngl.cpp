@@ -109,7 +109,9 @@ void CTrngl::Save(ofstream& out_file)
 		<< fill_clr.ucGreen << ' '
 		<< fill_clr.ucBlue << ' '
 
-		<< border_width
+		<< border_width << ' '
+		<< is_filled << ' '
+		<< is_rotated
 
 		<< '\n';
 }
@@ -135,7 +137,9 @@ void CTrngl::Load(ifstream& in_file)
 		>> fill_clr.ucGreen
 		>> fill_clr.ucBlue
 		
-		>> border_width;
+		>> border_width
+		>> is_filled
+		>> is_rotated;
 }
 
 Point CTrngl::CalculateCenter()
@@ -258,20 +262,3 @@ void CTrngl::RandomizePosition()
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2) || OutOfRightRange(p3));
 
 }
-
-//void CTrngl::ChangeCenter(const Point& p)
-//{
-//	// TODO
-//}
-//
-//bool CTrngl::IsPointCorner(const Point& p) const
-//{
-//	// TODO
-//	return true;
-//}
-//
-//Point& CTrngl::GetCornerPoint(const Point& p)
-//{
-//	// TODO
-//	return p1;
-//}
