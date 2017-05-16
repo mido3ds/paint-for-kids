@@ -22,14 +22,12 @@ void ResizeAction::ReadActionParameters()
 	Output* out_p = manager_p->GetOutput();
 	Input* in_p = manager_p->GetInput();
 
-	out_p->ClearStatusBar();
-	out_p->PrintMessage("Enter resize factor");
 	int x, y;
 
 	out_p->CreateResize();
 	do {
 		out_p->PrintMessage("Choose The Prefered Resize");
-		in_p->GetClickPoint(x, y);
+		in_p->GetClick(x, y);
 	} while (x < UI.TToolBarX || x > 4 * UI.MenuItemWidth || y < UI.TToolBarY || y > UI.TToolBarY + UI.TToolBarHeight);
 	int ClickedItemOrder = (x / UI.MenuItemWidth);
 	switch (ClickedItemOrder)
@@ -50,15 +48,6 @@ void ResizeAction::ReadActionParameters()
 		resize_factor = 0;
 		break;
 	}
-
-	/*string data;
-	char* val = NULL;
-	do
-	{
-		data = in_p->GetString(out_p);
-		resize_factor = strtod(data.c_str(), &val);
-	} while (*val == data[0] || resize_factor <= 0);
-	out_p->ClearStatusBar();*/
 }
 
 //Execute the action

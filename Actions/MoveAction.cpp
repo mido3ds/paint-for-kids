@@ -16,7 +16,7 @@ void MoveAction::ReadActionParameters()
         in_p->GetClick(p.x, p.y);
         out_p->ClearStatusBar();
     } else
-        out_p->PrintMessage("No Selected Figures To Move");
+        out_p->PrintMessage("No Selected Figures To Move", WHITE, true);
 }
 
 void MoveAction::Execute()

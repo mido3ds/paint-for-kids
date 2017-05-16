@@ -202,7 +202,7 @@ void Output::CreateBorderToolbar() const
 
 void Output::CreateResize() const
 {
-	ClearTToolBar();
+	ClearTempToolbar();
 	UI.TToolBarWidth = 200;
 	wind_p->isborderwidth = true;
 
@@ -298,7 +298,7 @@ void Output::ClearTempToolbar() const
 	wind_p->DrawRectangle(UI.TToolBarX, UI.TToolBarY, UI.TToolBarX + UI.TToolBarWidth, UI.TToolBarY + UI.TToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::PrintMessage(string msg, color msgc, bool save_msg) const // Prints a message on status bar
+void Output::PrintMessage(string msg, color msgc, bool save_msg) // Prints a message on status bar
 {
 	ClearStatusBar(); // First clear the status bar
 

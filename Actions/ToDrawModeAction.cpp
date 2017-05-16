@@ -17,7 +17,7 @@ void ToDrawModeAction::Execute()
     Input* in_p = manager_p->GetInput();
 
     out_p->PrintMessage(
-        "Action: Switch to Draw Mode, creating simualtion tool bar");
+        "Action: Switch to Draw Mode, creating simualtion tool bar", WHITE, true);
     out_p->CreateDrawToolBar();
     out_p->CreateDrawArea();
 }

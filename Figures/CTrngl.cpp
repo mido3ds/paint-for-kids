@@ -259,19 +259,19 @@ void CTrngl::RandomizePosition()
 
 }
 
-void CTrngl::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CTrngl::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CTrngl::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
-}
+//void CTrngl::ChangeCenter(const Point& p)
+//{
+//	// TODO
+//}
+//
+//bool CTrngl::IsPointCorner(const Point& p) const
+//{
+//	// TODO
+//	return true;
+//}
+//
+//Point& CTrngl::GetCornerPoint(const Point& p)
+//{
+//	// TODO
+//	return p1;
+//}

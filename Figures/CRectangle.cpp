@@ -220,19 +220,19 @@ void CRectangle::RandomizePosition()
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
 
-void CRectangle::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CRectangle::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CRectangle::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
-}
+//void CRectangle::ChangeCenter(const Point& p)
+//{
+//	// TODO
+//}
+//
+//bool CRectangle::IsPointCorner(const Point& p) const
+//{
+//	// TODO
+//	return true;
+//}
+//
+//Point& CRectangle::GetCornerPoint(const Point& p)
+//{
+//	// TODO
+//	return p1;
+//}

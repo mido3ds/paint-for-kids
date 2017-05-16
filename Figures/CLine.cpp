@@ -211,22 +211,22 @@ void CLine::RandomizePosition()
 		p1 = center + def1;
 		p2 = center + def2;
 		i++;
-	} while (OutOfRightRange(p1) || OutOfRightRange(p2));\
+	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
 
-void CLine::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CLine::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CLine::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
-}
+//void CLine::ChangeCenter(const Point& p)
+//{
+//	// TODO
+//}
+//
+//bool CLine::IsPointCorner(const Point& p) const
+//{
+//	// TODO
+//	return true;
+//}
+//
+//Point& CLine::GetCornerPoint(const Point& p)
+//{
+//	// TODO
+//	return p1;
+//}

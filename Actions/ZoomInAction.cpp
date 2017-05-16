@@ -39,6 +39,6 @@ void ZoomInAction::Execute()
 void ZoomInAction::Undo()
 {
 	Output* out_p = manager_p->GetOutput();
-	out_p->SetZoomScale(out_p->GetZoom() - 1);
+	out_p->SetZoomScale(out_p->GetZoomScale() - 1);
 	out_p->SetZoomPoint(pre_zoom_point);
 }

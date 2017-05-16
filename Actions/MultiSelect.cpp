@@ -13,7 +13,7 @@ void MultiSelect::Execute()
 {
 	manager_p->ToggleMultiSelect();
 	if (manager_p->GetMultiSelect()){
-		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is On");
+		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is On", WHITE, true);
 	}
 	else {
 		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is Off");

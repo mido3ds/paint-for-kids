@@ -192,19 +192,19 @@ void CCircle::RandomizePosition()
 	} while (OutOfRightRange(p1) || OutOfRightRange(left) || OutOfRightRange(right) || OutOfRightRange(up) || OutOfRightRange(down));
 }
 
-void CCircle::ChangeCenter(const Point& p)
-{
-	// TODO
-}
-
-bool CCircle::IsPointCorner(const Point& p) const
-{
-	// TODO
-	return true;
-}
-
-Point& CCircle::GetCornerPoint(const Point& p)
-{
-	// TODO
-	return p1;
-}
+//void CCircle::ChangeCenter(const Point& p)
+//{
+//	// TODO
+//}
+//
+//bool CCircle::IsPointCorner(const Point& p) const
+//{
+//	// TODO
+//	return true;
+//}
+//
+//Point& CCircle::GetCornerPoint(const Point& p)
+//{
+//	// TODO
+//	return p1;
+//}

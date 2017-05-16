@@ -22,15 +22,17 @@ public:
     void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
     void CreatePlayToolBar() const; // creates Play mode toolbar & menu
 
+	void CreateStatusBar() const;
     void CreateFigItems() const;
     void CreateFigActions() const;
 	void CreateBorderToolbar() const;
 	void CreatePickBar() const;
 	void CreateRestartGame() const;
 	void CreateColorBar() const;
+	void CreateResize() const;
 
 	// -- Clear Toolbars
-    void ClearStatusBar(bool clear_msg = true) const;
+    void ClearStatusBar(bool clear_msg = true);
     void ClearToolbar() const;
     void ClearTempToolbar() const;
 
@@ -40,7 +42,7 @@ public:
 	void DrawLine(Point p1, Point p2, GfxInfo line_gfx_info, bool selected) const;
 	void DrawTriangle(Point p1, Point p2, Point p3, GfxInfo trngl_gfx_info, bool selected) const;
 
-	void PrintMessage(string msg, color msgc = WHITE, bool save_msg = false) const; // on Status bar
+	void PrintMessage(string msg, color msgc = WHITE, bool save_msg = false); // on Status bar
 
 	color GetDrawColor() const;
 	color GetFillColor() const;
