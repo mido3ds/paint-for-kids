@@ -211,18 +211,19 @@ CFigure* ApplicationManager::DetectFigure(string fig_name)
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() const
+void ApplicationManager::UpdateInterface(bool tool_bar) const
 {
 	out_p->ClearDrawArea();
 
 	for (auto& fig : figs)
 		fig->Draw(out_p);
 
-	if (UI.InterfaceMode == MODE_DRAW)
-		out_p->CreateDrawToolBar();
-	else
-		out_p->CreatePlayToolBar();
-
+	if (tool_bar) {
+		if (UI.InterfaceMode == MODE_DRAW)
+			out_p->CreateDrawToolBar();
+		else
+			out_p->CreatePlayToolBar();
+	}
 	out_p->ClearStatusBar(false);
 }
 
@@ -638,6 +639,6 @@ ApplicationManager::~ApplicationManager()
 {
 	DeleteAllFigures();
 
-    delete in_p;
-    delete out_p;
+	delete in_p;
+	delete out_p;
 }

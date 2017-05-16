@@ -26,10 +26,12 @@ string Input::GetString(Output* pO) const
 		if (Key == 27) // ESCAPE key is pressed
 			return ""; // returns nothing as user has cancelled label
 		if (Key == 13) // ENTER key is pressed
-			return Label;
+		return Label;
 		if (Key == 8) // BackSpace is pressed
+		{
 			if (Label.size() != 0) // only resize it if label is not empty
 				Label.resize(Label.size() - 1);
+		}
 		else
 			Label += Key;
 
@@ -214,11 +216,17 @@ ActionType Input::GetUserAction()
 
 }
 /////////////////////////////////
-bool Input::IsMouseDown(button btn_state) const
+bool Input::IsMouseDown(button btn_state,int &x,int &y) const
 {
-    int x, y;
+    
     return wind_p->GetButtonState(btn_state, x, y) == BUTTON_DOWN;
 }
+
+clicktype Input::WaitMouseClick(int & iX, int & iY)
+{
+	return wind_p->WaitMouseClick(iX, iY);
+}
+
 /////////////////////////////////
 Point Input::GetMouseCoord() const
 {
