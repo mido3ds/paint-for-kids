@@ -46,11 +46,8 @@ void PickByArea::Execute()
 			switch (IconClicked)
 			{
 				case 0:						// If Restart Begien From The Executing The Action Again
-					ReadActionParameters();
-					Execute();
-					break;
+					manager_p->ExecuteAction(ActionType::PICK_AREA);
 				case 1:						// If Exit return To Play Mode
-					out_p->CreatePlayToolBar();
 					return;
 
 				default:

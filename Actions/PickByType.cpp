@@ -35,16 +35,13 @@ void PickByType::Execute()
 			int IconClicked = p.x / UI.MenuItemWidth;
 			switch (IconClicked)
 			{
-				case 0:						// If Restart Begien From The Executing The Action Again
-					figures = manager_p->GetCopyOfFigures();
-					PickByType::Execute();
-					break;
-				case 1:						// If Exit return To Play Mode
-					out_p->CreatePlayToolBar();
-					return;
+			case 0:						// If Restart Begien From The Executing The Action Again
+				manager_p->ExecuteAction(ActionType::PICK_AREA);
+			case 1:						// If Exit return To Play Mode
+				return;
 
-				default:
-					break;
+			default:
+				break;
 			}
 		}
 		fig = manager_p->GetFigure(figures, p);

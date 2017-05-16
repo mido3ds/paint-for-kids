@@ -75,7 +75,7 @@ void ScrambleFind::Execute() // game mainloop
             // get action
             act = in_p->GetUserAction();
             clicked_point = in_p->GetLastClickedPoint();
-			if (act == EXIT || act == TO_DRAW || act == SCRAMBLE)
+			if (act != DRAWING_AREA)
 			{
 				finish = true;
 				break;
@@ -110,7 +110,7 @@ void ScrambleFind::Execute() // game mainloop
     // final message
     UpdateMessage(invalid_count, valid_count, true);
 
-	if (act == TO_DRAW || act == EXIT)
+	if (act != DRAWING_AREA)
 		manager_p->ExecuteAction(act);
 }
 
