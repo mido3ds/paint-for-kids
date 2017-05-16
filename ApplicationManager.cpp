@@ -475,23 +475,29 @@ void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point
     y = p.y - miny; // difference between the new & old center of the first figure
 	
 		bool out_range = false;
-		for (auto& fig : figs) {
-			if (fig->IsSelected()) {
-				if (!fig->Move(x, y))
+		for (auto& fig : figs) 
+		{
+			if (fig->IsSelected()) 
+			{
+				if (fig->OutOfRange(x,y))
 				{
 					out_p->PrintMessage("Error........Figures will be out of range if moved");
 					out_range = true;
 					break;
 				}
-				else  moved_figs.push_back(fig);
 			}
 		}
-		if (out_range)
+		if (!out_range)
 		{
-			for (int i = 0; i < moved_figs.size(); i++)
-				moved_figs[i]->Move(-x, -y);
-
-			moved_figs.clear();
+			out_p->ClearStatusBar();
+			for (auto& fig : figs)
+			{
+				if (fig->IsSelected())
+				{
+					fig->Move(x, y);
+					moved_figs.push_back(fig);
+				}
+			}
 		}
 		old = Point(minx, miny);
 }
@@ -512,11 +518,12 @@ bool ApplicationManager::PasteClipboard(Point p)
     x = p.x - minx;
     y = p.y - miny; // difference between the new & old center of the first figure
     for (auto& fig : clipboard) {
-		if (!fig->Move(x, y))
+		if (fig->OutOfRange(x,y))
 		{
 			out_range = true;
 			break;
 		}
+		fig->Move(x, y);
 		CFigure*copy = fig->Copy();
 		copy->SetId(GenerateNextId());
         AddFigure(copy);

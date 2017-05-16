@@ -17,12 +17,13 @@ void PasteAction::ReadActionParameters()
 
 void PasteAction::Execute()
 {
-	manager_p->PasteClipboard(p);
+	pasted=manager_p->PasteClipboard(p);
 	clipboard = manager_p->GetClipboard();
 }
 
 void PasteAction::Undo()
 {
+	if (pasted)
     for (auto& fig : clipboard) {
         manager_p->DeleteFigure(fig->GetId());
     }

@@ -13,10 +13,6 @@ public:
 
     virtual void Undo();
 
-private:
-    deque<CFigure*> clipboard; //to store old clipboard
-    deque<CFigure*> cut;
-    bool cuted = false;
 };
 
 #endif

@@ -29,13 +29,10 @@ public:
 	virtual string GetType() = 0;
 	virtual double GetArea() = 0;
 
-//<<<<<<< HEAD
+
 
 
     virtual bool IsPointInside(const Point& p) const = 0;
-//  virtual bool IsPointCorner(const Point& p) const = 0;
-//  virtual Point& GetCornerPoint(const Point& p) = 0; // get nearest corner point
-//  PointState GetPointState(const Point& p) const; // whether point corner, inside, outside
 
 
 
@@ -60,9 +57,9 @@ public:
     virtual void RandomizePosition() = 0; // put object in random valid postion, no change to size
 	virtual void Resize(double resize_factor) = 0;
 
-    virtual bool Move(int x, int y) = 0;
+    virtual void Move(int x, int y) = 0;
     virtual void MoveToLeftSide() = 0;
-
+	virtual bool OutOfRange(int x, int y) = 0; //a function to check if the figure will be out of range if moved to the passed point
     virtual Point CalculateCenter() = 0;
 
     virtual void PrintInfo(Output* out_p) = 0; // on the status bar

@@ -14,10 +14,8 @@ void CutAction::ReadActionParameters()
 void CutAction::Execute()
 {
     if (manager_p->GetNumSelected() > 0) {
-        clipboard = manager_p->GetClipboard();
         manager_p->FillClipboardWithSelected();
-        cut = manager_p->EraseSelected();
-        cuted = true;
+        manager_p->EraseSelected();
     }
 }
 
