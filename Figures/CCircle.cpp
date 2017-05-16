@@ -98,13 +98,12 @@ void CCircle::Save(ofstream& out_file)
 
 void CCircle::Load(ifstream& in_file)
 {
-	double rad;
 	in_file >> id
 
 		>> p1.x
 		>> p1.y
 
-		>> rad
+		>> radius
 
 		>> draw_clr.ucRed
 		>> draw_clr.ucGreen
@@ -118,7 +117,7 @@ void CCircle::Load(ifstream& in_file)
 		>> is_filled
 		>> is_rotated;
 
-    p2 = GetSecondPointFromRadius(rad);
+    p2 = GetSecondPointFromRadius(radius);
 }
 
 bool CCircle::IsPointInside(const Point& p) const
