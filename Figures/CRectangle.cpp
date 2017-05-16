@@ -186,7 +186,7 @@ void CRectangle::PrintInfo(Output* out_p)
 {
 	int width = abs(p1.x-p2.x);
 	int height = abs(p1.y - p2.y);
-	out_p->PrintMessage("Rectangle... ID:" + to_string(this->GetId()) + " Height: "+to_string(height)+" Width: "+to_string(width));
+	out_p->PrintMessage("Rectangle... ID:" + to_string(this->GetId()) + " Height: "+to_string(height)+" Width: "+to_string(width), WHITE, true);
 }
 
 void CRectangle::MoveToLeftSide()

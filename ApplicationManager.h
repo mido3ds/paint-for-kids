@@ -110,7 +110,7 @@ public:
 
     /*  ------------------------------- Interface ------------------------------- */ 
 
-    void UpdateInterface() const; //Redraws all the drawing window
+    void UpdateInterface(bool tool_bar = true) const; //Redraws all the drawing window
 	void UpdateInterface(deque <CFigure *> figures);
     Input* GetInput() const; //Return pointer to the input
     Output* GetOutput() const; //Return pointer to the output

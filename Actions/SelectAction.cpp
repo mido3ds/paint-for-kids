@@ -11,7 +11,6 @@ void SelectAction::ReadActionParameters()
 {
 	out_p = manager_p->GetOutput();
 	in_p = manager_p->GetInput();
-	//out_p->PrintMessage("Please Click On The Figure/s You Want To Select When Finished Click on Select Icon..");
 }
 
 void SelectAction::Execute()

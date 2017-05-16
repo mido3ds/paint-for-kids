@@ -131,7 +131,7 @@ bool CCircle::Move(int x, int y)
     tp1.y = p1.y  +  y;
     tp2.x = p2.x  +  x;
     tp2.y = p2.y  +  y;
-    if (!IsOutOfRange(p1)) {
+    if (!IsOutOfRange(tp1)) {
         p1 = tp1;
         p2 = tp2;
         return true;
@@ -157,7 +157,7 @@ CFigure* CCircle::Copy()
 
 void CCircle::PrintInfo(Output* out_p)
 {
-	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(radius));
+	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(radius), WHITE, true);
 }
 
 void CCircle::MoveToLeftSide()

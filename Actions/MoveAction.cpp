@@ -13,16 +13,28 @@ void MoveAction::ReadActionParameters()
 
     if (manager_p->GetNumSelected() > 0) {
         out_p->PrintMessage("Please Click The Point You Want To Move Selected Figure/s To");
-        in_p->GetClick(p.x, p.y);
-        out_p->ClearStatusBar();
+        /*in_p->GetClick(p.x, p.y);
+        out_p->ClearStatusBar();*/
     } else
         out_p->PrintMessage("No Selected Figures To Move", WHITE, true);
 }
 
 void MoveAction::Execute()
 {
+	Output* out_p = manager_p->GetOutput();
+	Input* in_p = manager_p->GetInput();
     if (manager_p->GetNumSelected() > 0) {
-        manager_p->MoveSelected(p, moved_figs,old);
+		in_p->GetClick(p.x, p.y);
+		manager_p->MoveSelected(p, moved_figs, old);
+		while ( !  in_p->IsMouseDown(LEFT_BUTTON,p.x,p.y))
+		{
+			p=in_p->GetMouseCoord();
+			Point waste; //to pass it to the function instead of old ; to keep old point unchanged
+			manager_p->MoveSelected(p, moved_figs, waste);
+			manager_p->UpdateInterface(false);		// Because Of The ToolBar Framming
+			
+		}
+		in_p->GetClick(p.x,p.y);
         moved = true;
     }
 }

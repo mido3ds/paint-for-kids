@@ -23,8 +23,8 @@ public:
 	clicktype GetClick(int& x, int& y) const; // Get coordinate where user clicks
 
 	Point GetMouseCoord() const; // current coordinates, regardless of clicking or not
-	bool IsMouseDown(button btn_state=LEFT_BUTTON) const;  // button maybe LEFT_BUTTON or RIGHT_BUTTON
-
+	bool IsMouseDown(button btn_state,int &x,int &y) const;  // button maybe LEFT_BUTTON or RIGHT_BUTTON
+	clicktype WaitMouseClick(int &iX, int &iY);
 private:
 	window* wind_p; // Pointer to the Graphics Window
 	Point last_click;

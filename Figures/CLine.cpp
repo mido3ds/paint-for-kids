@@ -171,7 +171,7 @@ bool CLine::IsOutOfRange(Point p1, Point p2)
 
 void CLine::PrintInfo(Output* out_p)
 {
-	out_p->PrintMessage("Line... ID:" + to_string(this->GetId()) + " Start:(" + to_string(p1.x) + "," + to_string(p1.y) + ") End:(" + to_string(p2.x) + "," + to_string(p2.y) + ")");
+	out_p->PrintMessage("Line... ID:" + to_string(this->GetId()) + " Start:(" + to_string(p1.x) + "," + to_string(p1.y) + ") End:(" + to_string(p2.x) + "," + to_string(p2.y) + ")", WHITE, true);
 }
 
 void CLine::SetPoints(Point p1, Point p2)
