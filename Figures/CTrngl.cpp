@@ -204,7 +204,7 @@ CFigure* CTrngl::Copy()
 
 void CTrngl::PrintInfo(Output* out_p)
 {
-	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")");
+	out_p->PrintMessage("Triangle... ID: " + to_string(this->GetId()) + " Corners : (" + to_string(p1.x) + "," + to_string(p1.y) + ") , (" + to_string(p2.x) + "," + to_string(p2.y) + ") , (" + to_string(p3.x) + "," + to_string(p3.y) + ")", WHITE, true);
 }
 
 double CTrngl::CrossProduct(Point p1, Point p2) const

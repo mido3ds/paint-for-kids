@@ -466,7 +466,7 @@ void ApplicationManager::PrintSelectedSize()
 		}
 		selected->PrintInfo(out_p);
 	}
-	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected));
+	else if (num_selected > 0)  out_p->PrintMessage("Number of selected figures are " + to_string(num_selected), WHITE, true);
 }
 
 void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old)

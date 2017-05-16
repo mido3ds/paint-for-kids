@@ -157,7 +157,7 @@ CFigure* CCircle::Copy()
 
 void CCircle::PrintInfo(Output* out_p)
 {
-	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(radius));
+	out_p->PrintMessage("Circle...ID:" + to_string(this->GetId()) + "Center:(" + to_string(p1.x) + "," + to_string(p1.y) + ") Radius:" + to_string(radius), WHITE, true);
 }
 
 void CCircle::MoveToLeftSide()
