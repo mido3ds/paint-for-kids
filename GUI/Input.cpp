@@ -214,11 +214,17 @@ ActionType Input::GetUserAction()
 
 }
 /////////////////////////////////
-bool Input::IsMouseDown(button btn_state) const
+bool Input::IsMouseDown(button btn_state,int &x,int &y) const
 {
-    int x, y;
+    
     return wind_p->GetButtonState(btn_state, x, y) == BUTTON_DOWN;
 }
+
+clicktype Input::WaitMouseClick(int & iX, int & iY)
+{
+	return wind_p->WaitMouseClick(iX, iY);
+}
+
 /////////////////////////////////
 Point Input::GetMouseCoord() const
 {

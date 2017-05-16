@@ -208,10 +208,10 @@ void ApplicationManager::UpdateInterface() const
 	for (auto& fig : figs)
 		fig->Draw(out_p);
 
-	if (UI.InterfaceMode == MODE_DRAW)
+	/*if (UI.InterfaceMode == MODE_DRAW)
 		out_p->CreateDrawToolBar();
 	else
-		out_p->CreatePlayToolBar();
+		out_p->CreatePlayToolBar();*/
 }
 
 void ApplicationManager::UpdateInterface(deque<CFigure*> figures)
