@@ -11,6 +11,7 @@ public:
     virtual void ReadActionParameters();
     virtual void Execute();
     virtual void Undo();
+
 };
 
 #endif

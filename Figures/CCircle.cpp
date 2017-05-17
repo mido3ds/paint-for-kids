@@ -36,11 +36,6 @@ int CCircle::GetRadius() const
 	return radius;
 }
 
-string CCircle::GetType()
-{
-	return type;
-}
-
 double CCircle::GetArea()
 {
 	return 3.14*GetRadius()*GetRadius();
@@ -49,6 +44,19 @@ double CCircle::GetArea()
 bool CCircle::IsOutOfRange(Point p1)
 {
 	return (p1.x - radius < UI.DrawAreaX || p1.x  +  radius > UI.DrawAreaX  +  UI.DrawAreaWidth || p1.y - radius < UI.DrawAreaY || p1.y  +  radius > UI.DrawAreaY  +  UI.DrawAreaHeight);
+}
+
+bool CCircle::OutOfRange(int x, int y)
+{
+	Point tp1, tp2;
+	tp1.x = p1.x + x;
+	tp1.y = p1.y + y;
+	tp2.x = p2.x + x;
+	tp2.y = p2.y + y;
+	if (IsOutOfRange(tp1)) {
+		return true;
+	}
+	return false;
 }
 
 Point CCircle::GetSecondPointFromRadius(double rad)
@@ -127,19 +135,18 @@ bool CCircle::IsPointInside(const Point& p) const
     return (NewDistance <= RadiusSquare);
 }
 
-bool CCircle::Move(int x, int y)
+void CCircle::Move(int x, int y)
 {
     Point tp1, tp2;
     tp1.x = p1.x  +  x;
     tp1.y = p1.y  +  y;
     tp2.x = p2.x  +  x;
     tp2.y = p2.y  +  y;
-    if (!IsOutOfRange(tp1)) {
-        p1 = tp1;
-        p2 = tp2;
-        return true;
-    }
-    return false;
+	if (!IsOutOfRange(tp1)) {
+		p1 = tp1;
+		p2 = tp2;
+	}
+    
 }
 
 CFigure* CCircle::Copy()
@@ -191,6 +198,8 @@ void CCircle::RandomizePosition()
 
 		up.x = p1.x;
 		up.y = p1.y - radius;
+
+		p2 = left;
 
 	} while (OutOfRightRange(p1) || OutOfRightRange(left) || OutOfRightRange(right) || OutOfRightRange(up) || OutOfRightRange(down));
 }

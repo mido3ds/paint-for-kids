@@ -50,7 +50,7 @@ void AddCircAction::Execute()
     if (!circ->IsOutOfRange(p1)) {
         manager_p->AddFigure(circ);
     } else {
-        manager_p->GetOutput()->PrintMessage("The Circle Is Out Of Range");
+        manager_p->GetOutput()->PrintMessage("The Circle Is Out Of Range", RED, true);
     }
 }
 

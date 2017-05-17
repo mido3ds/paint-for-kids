@@ -27,7 +27,6 @@ public:
 	void SetId(unsigned int id);
 	unsigned int GetId() const;
 
-	virtual string GetType() = 0;
 	virtual double GetArea() = 0;
 
     virtual bool IsPointInside(const Point& p) const = 0;
@@ -54,9 +53,9 @@ public:
     virtual void RandomizePosition() = 0; // put object in random valid postion, no change to size
 	virtual void Resize(double resize_factor) = 0;
 
-    virtual bool Move(int x, int y) = 0;
+    virtual void Move(int x, int y) = 0;
     virtual void MoveToLeftSide() = 0;
-
+	virtual bool OutOfRange(int x, int y) = 0; //a function to check if the figure will be out of range if moved to the passed point
     virtual Point CalculateCenter() = 0;
 
     virtual void PrintInfo(Output* out_p) = 0; // on the status bar

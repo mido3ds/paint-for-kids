@@ -21,7 +21,7 @@ void PickByType::Execute()
 	Point p;
 	float correct = 0;
 	float wrong = 0;
-	string type;
+	int type;
 	manager_p->UpdateInterface(figures);
 	int numOfSameType = 0;
 	int numOfFigs = manager_p->GetNumFigures();		// Number Of All Figures
@@ -51,22 +51,21 @@ void PickByType::Execute()
 			correct++;
 			if (dynamic_cast<CCircle *> (fig)) {
 				out_p->PrintMessage("Pick All Circles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
-				type = "Circle";
 			} 
 			else if (dynamic_cast<CTrngl *> (fig)) {
 				out_p->PrintMessage("Pick All Triangles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
-				type = "Triangle";
 			}
 			else if(dynamic_cast<CLine *> (fig)) {
 				out_p->PrintMessage("Pick All Lines            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
-				type = "Line";
 			}
 			else if(dynamic_cast<CRectangle *> (fig)) {
 				out_p->PrintMessage("Pick All Rectangles            Correct Answers: " + std::to_string(correct) + "      Wrong Answers: " + std::to_string(wrong), GREEN);
-				type = "Rectangle";
 			}
+
+			type = typeid(fig).hash_code();
+
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
-			numOfSameType = GetNumFigsSameType(type);					// Reducing The Number Of Same Type Figs If Correct
+			numOfSameType = GetNumFigsSameType(fig);					// Reducing The Number Of Same Type Figs If Correct
 			numOfFigs--;												// Reducing the Total Number Of Figure Because Of Deleted Figure
 			manager_p->UpdateInterface(figures);			// Re Draw The Interface With The New Figure List
 		}
@@ -86,7 +85,7 @@ void PickByType::Execute()
 					case 0:
 						figures = manager_p->GetCopyOfFigures();
 						PickByType::Execute();
-						break;
+						return;
 					case 1:
 						out_p->CreatePlayToolBar();
 						return;
@@ -99,7 +98,7 @@ void PickByType::Execute()
 
 			if (fig) {
 
-				if (fig->GetType() == type) {
+				if (typeid(fig).hash_code() == type) {
 					// Correct Figure
 					correct++;
 					DeleteCorrect(fig->GetId());
@@ -129,7 +128,7 @@ void PickByType::Execute()
 
 	}
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW, true);
 	}
 	else {
 		out_p->PrintMessage("Your Grade Is: " + std::to_string((int)((correct / (correct + wrong)) * 100)), ORANGE);
@@ -141,11 +140,11 @@ void PickByType::Undo()
 {
 }
 
-int PickByType::GetNumFigsSameType(string type)
+int PickByType::GetNumFigsSameType(CFigure *figure)
 {
 	int num = 0;
 	for (auto &fig : figures) {
-		if (fig->GetType() == type)
+		if (typeid(fig) == typeid(figure))
 			num++;
 	}
 	return num;

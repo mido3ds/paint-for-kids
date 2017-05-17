@@ -19,18 +19,18 @@ public:
 private:
 	deque<CFigure *> figures;
 	color c;
-	string type;
+	int type;
 	bool isfilled;
 	int correct = 0;
 	int wrong = 0;
-	int GetNumFigsSameTypeAndColor(color C, bool isfilled,string type);
+	int GetNumFigsSameTypeAndColor(color C, bool isfilled,int type);
 
 	void DeleteCorrect(int id);
 
 	void DrawColorCircle(color c);
 
 	bool Correct(CFigure *fig);
-	void PrintPickInfo(string, color, int, int);
+	void PrintPickInfo(CFigure *, color, int, int);
 	
 };
 

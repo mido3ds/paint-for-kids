@@ -17,23 +17,21 @@ public:
     virtual bool IsRotated();
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
-    virtual bool Move(int x, int y);
+    virtual void Move(int x, int y);
     virtual void MoveToLeftSide();
     virtual void RandomizePosition();
     virtual CFigure* Copy();
 
-	virtual string GetType();
 	virtual double GetArea();
 	virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
 
 	bool IsOutOfRange(Point p1, Point p2);
-
+	virtual bool OutOfRange(int x, int y);
 	virtual void PrintInfo(Output* out_p);
 
 private:
 	Point p1, p2;
-	const string type = "Rectangle";
 };
 
 #endif

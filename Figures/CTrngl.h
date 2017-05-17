@@ -17,24 +17,22 @@ public:
     virtual bool IsRotated();
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
-    virtual bool Move(int x, int y);
+    virtual void Move(int x, int y);
     virtual void MoveToLeftSide();
     virtual void RandomizePosition();
     virtual CFigure* Copy();
     virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
 
-	virtual string GetType();
 	virtual double GetArea();
 	bool IsOutOfRange(Point p1, Point p2, Point p3);
-
+	virtual bool OutOfRange(int x, int y);
 	virtual void PrintInfo(Output* out_p);
 
 	double CrossProduct(Point p1, Point p2) const;
 	bool SameSide(Point p1, Point p2, Point a, Point b) const;
 private:
 	Point p1, p2, p3;
-	const string type = "Triangle";
 };
 
 #endif /* __CTrngl_h__ */

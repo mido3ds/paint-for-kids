@@ -53,7 +53,7 @@ void AddTrnglAction::Execute()
     if (!trngl->IsOutOfRange(p1, p2, p3))
         manager_p->AddFigure(trngl);
     else
-        manager_p->GetOutput()->PrintMessage("The Triangle Is Out Of Range");
+        manager_p->GetOutput()->PrintMessage("The Triangle Is Out Of Range", RED, true);
 }
 
 void AddTrnglAction::Undo()

@@ -61,9 +61,9 @@ void PickByTypeAndColor::Execute()
 				c = fig->GetFillColor();
 				isfilled = fig->IsFilled();
 			}
-			type = fig->GetType();
+			type = typeid(fig).hash_code();
 			correct++;
-			PrintPickInfo(type,c,correct,wrong);
+			PrintPickInfo(fig,c,correct,wrong);
 			DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
 			numOfSameTypeAndColor = GetNumFigsSameTypeAndColor(c, isfilled, type);					// Reducing The Number Of Same Color Figs If Correct
 			numOfFigs--;												// Reducing the Total Number Of Figure Because Of Deleted Figure
@@ -97,7 +97,7 @@ void PickByTypeAndColor::Execute()
 			fig = manager_p->GetFigure(figures, p);
 			if (fig)
 			{
-				PrintPickInfo(type, c, correct, wrong);
+				PrintPickInfo(fig, c, correct, wrong);
 				if (Correct(fig))
 				{
 					DeleteCorrect(fig->GetId());		// Deleting The Correct Figure Clicked
@@ -124,7 +124,7 @@ void PickByTypeAndColor::Execute()
 	}
 
 	if (correct == 0 && wrong == 0) {
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW, true);
 	}
 	else {
 		out_p->PrintMessage("Your Grade Is: " + std::to_string(((correct*100) / (correct + wrong))), ORANGE);
@@ -142,11 +142,11 @@ PickByTypeAndColor::~PickByTypeAndColor()
         delete fig;
 }
 
-int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,string type)
+int PickByTypeAndColor::GetNumFigsSameTypeAndColor(color C, bool isfilled,int type)
 {
 	int num = 0;
 	for (auto &figure : figures) {
-		if (figure->GetType() == type) {
+		if (typeid(figure).hash_code() == type) {
 			if (dynamic_cast<CLine *> (figure)) {
 				if (figure->GetDrawColor() == C) {
 					num++;
@@ -198,17 +198,17 @@ bool PickByTypeAndColor::Correct(CFigure * fig)
 			return true;
 		}
 	}
-	else if (fig->IsFilled() == isfilled && fig->GetType() == type)
+	else if (fig->IsFilled() == isfilled && typeid(fig).hash_code() == type)
 		if (fig->GetFillColor() == c)
 			return true;
 
 	return false;
 }
 
-void PickByTypeAndColor::PrintPickInfo(string type, color c, int correct, int wrong)
+void PickByTypeAndColor::PrintPickInfo(CFigure * fig, color c, int correct, int wrong)
 {
 	Output* out_p = manager_p->GetOutput();
-	if (type == "Circle") {
+	if (dynamic_cast<CCircle *> (fig)) {
 		if (isfilled)
 		{
 			out_p->PrintMessage("Pick All Circles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
@@ -219,7 +219,7 @@ void PickByTypeAndColor::PrintPickInfo(string type, color c, int correct, int wr
 			out_p->PrintMessage("Pick All None Filled Circles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
-	else if (type == "Triangle") {
+	else if (dynamic_cast<CTrngl *> (fig)) {
 		if (isfilled)
 		{
 			out_p->PrintMessage("Pick All Triangles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
@@ -230,7 +230,7 @@ void PickByTypeAndColor::PrintPickInfo(string type, color c, int correct, int wr
 			out_p->PrintMessage("Pick All None Filled Triangles            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
-	else if (type == "Line") {
+	else if (dynamic_cast<CLine *> (fig)) {
 		if (isfilled)
 		{
 			out_p->PrintMessage("Pick All Lines Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
@@ -241,7 +241,7 @@ void PickByTypeAndColor::PrintPickInfo(string type, color c, int correct, int wr
 			out_p->PrintMessage("Pick All Lines           Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);
 		}
 	}
-	else if (type == "Rectangle") {
+	else if (dynamic_cast<CRectangle *> (fig)) {
 		if (isfilled)
 		{
 			out_p->PrintMessage("Pick All Rectangles Of This Color            Correct Answers: " + to_string(correct) + "      Wrong Answers: " + to_string(wrong), GREEN);

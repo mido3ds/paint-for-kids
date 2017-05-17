@@ -362,7 +362,7 @@ void ApplicationManager::RotateSelected(int deg)
 			if (fig->IsRotated()) 
 				fig->SetRotated(false);
 			else 
-				out_p->PrintMessage("This Figure Is Out Of Range If Rotated");
+				out_p->PrintMessage("This Figure Is Out Of Range If Rotated", RED, true);
 		}
 	}
 }
@@ -473,100 +473,88 @@ void ApplicationManager::PrintSelectedSize()
 
 void ApplicationManager::MoveSelected(Point p, deque<CFigure*> &moved_figs, Point& old)
 {
-    int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
-    int x = 0, y = 0;
 
-    for (auto& fig : figs) 
-	{
-        if (fig->IsSelected()) 
-		{
-            if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) 
-			{
-                minx = (fig->CalculateCenter()).x;
-                miny = (fig->CalculateCenter()).y;
-            }
-        }
-    }
-    x = p.x - minx;
-    y = p.y - miny; // difference between the new & old center of the first figure
-	
+	int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
+	int x = 0, y = 0;
+
+	for (auto& fig : figs) {
+		if (fig->IsSelected()) {
+			if ((fig->CalculateCenter()).x <= minx && (fig->CalculateCenter()).y <= miny) {
+				minx = (fig->CalculateCenter()).x;
+				miny = (fig->CalculateCenter()).y;
+			}
+		}
+	}
+	x = p.x - minx;
+	y = p.y - miny; // difference between the new & old center of the first figure
+
 	bool out_range = false;
-	for (auto& fig : figs) 
+	for (auto& fig : figs)
 	{
-		if (fig->IsSelected()) 
+		if (fig->IsSelected())
 		{
-			if (!fig->Move(x, y))
+			if (fig->OutOfRange(x, y))
 			{
-				out_p->PrintMessage("Error........ Figures will be out of range if moved");
+				out_p->PrintMessage("Error........Figures will be out of range if moved", RED, true);
 				out_range = true;
 				break;
 			}
-			else  
-				moved_figs.push_back(fig);
 		}
 	}
-
-	if (out_range)
+	if (!out_range)
 	{
-		for (int i = 0; i < moved_figs.size(); i++)
-			moved_figs[i]->Move(-x, -y);
-
-		moved_figs.clear();
+		out_p->ClearStatusBar();
+		for (auto& fig : figs)
+		{
+			if (fig->IsSelected())
+			{
+				fig->Move(x, y);
+				moved_figs.push_back(fig);
+			}
+		}
 	}
-
 	old = Point(minx, miny);
 }
 
 bool ApplicationManager::PasteClipboard(Point p)
 {
 	deque<CFigure*> moved_figs;
-    int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; // coordinates of the center of the first figure
-    int x = 0, y = 0;
-    for (auto& fig : clipboard) 
-	{
-        Point c = fig->CalculateCenter();
-        if (c.x <= minx && c.y <= miny) 
-		{
-            minx = c.x;
-            miny = c.y;
-        }
-    }
-
-    bool out_range = false;
-    x = p.x - minx;
-    y = p.y - miny; // difference between the new & old center of the first figure
-
-    for (auto& fig : clipboard) 
-	{
-		if (!fig->Move(x, y))
+	int minx = UI.DrawAreaWidth, miny = UI.DrawAreaHeight; //coordinates of the center of the first figure
+	int x = 0, y = 0;
+	for (auto& fig : clipboard) {
+		Point c = fig->CalculateCenter();
+		if (c.x <= minx && c.y <= miny) {
+			minx = c.x;
+			miny = c.y;
+		}
+	}
+	bool out_range = false;
+	x = p.x - minx;
+	y = p.y - miny; // difference between the new & old center of the first figure
+	for (auto& fig : clipboard) {
+		if (fig->OutOfRange(x, y))
 		{
 			out_range = true;
 			break;
 		}
-
+		fig->Move(x, y);
 		CFigure*copy = fig->Copy();
-
 		copy->SetId(GenerateNextId());
-        AddFigure(copy);
-
+		AddFigure(copy);
 		moved_figs.push_back(fig);
 		fig->SetId(copy->GetId());
-    }
-
+	}
 	if (out_range)
 	{
-		out_p->PrintMessage("Error........ Figures will be out of range if pasted");
-
+		out_p->PrintMessage("Error........Figures will be out of range if pasted", RED, true);
 		for (auto& fig : moved_figs)
 		{
 			fig->Move(-x, -y);
 			DeleteFigure(fig->GetId());
 		}
-
 		moved_figs.clear();
 	}
-
-    return !out_range;
+	return !out_range;
 }
 
 void ApplicationManager::FillClipboardWithSelected()

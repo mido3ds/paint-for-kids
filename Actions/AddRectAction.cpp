@@ -47,7 +47,7 @@ void AddRectAction::Execute()
     if (!rect->IsOutOfRange(p1, p2))
         manager_p->AddFigure(rect);
     else
-        manager_p->GetOutput()->PrintMessage("The Rectangle Is Out Of Range");
+        manager_p->GetOutput()->PrintMessage("The Rectangle Is Out Of Range", RED, true);
 }
 
 void AddRectAction::Undo()

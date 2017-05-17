@@ -48,7 +48,7 @@ void AddLineAction::Execute()
     if (!line->IsOutOfRange(p1, p2))
         manager_p->AddFigure(line);
     else
-        manager_p->GetOutput()->PrintMessage("The Line Is Out Of Range");
+        manager_p->GetOutput()->PrintMessage("The Line Is Out Of Range", RED, true);
 }
 
 void AddLineAction::Undo()

@@ -11,8 +11,10 @@ void CutAction::ReadActionParameters()
 
 void CutAction::Execute()
 {
-    manager_p->FillClipboardWithSelected();
-    manager_p->EraseSelected();
+    if (manager_p->GetNumSelected() > 0) {
+        manager_p->FillClipboardWithSelected();
+        manager_p->EraseSelected();
+    }
 }
 
 void CutAction::Undo()

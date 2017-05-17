@@ -210,6 +210,10 @@ ActionType Input::GetUserAction()
 			}
 		}
 
+		//[2] User clicks on the drawing area
+		if (last_click.y >= UI.DrawAreaY && last_click.y < UI.DrawAreaY + UI.DrawAreaHeight)
+			return PLAYING_AREA;
+
         //[3] User clicks on the status bar
         return STATUS;
     }

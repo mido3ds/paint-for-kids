@@ -19,7 +19,7 @@ public:
 private:
 	deque<CFigure *> figures;
 
-	int GetNumFigsSameType(string type);
+	int GetNumFigsSameType(CFigure *figure);
 
 	void DeleteCorrect(int id);
 };

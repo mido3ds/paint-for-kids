@@ -40,6 +40,7 @@ void ScrambleFind::ReadActionParameters() // prepare game
         fig->Resize(0.5);
 		fig->RandomizePosition();
     }
+	
 
     // some action :D
     out_p->PrintMessage(
@@ -59,6 +60,13 @@ void ScrambleFind::Execute() // game mainloop
     CFigure *fig1 = nullptr, *fig2 = nullptr;
     Point clicked_point;
 
+	// exit if no figs 
+	if (right_figs.size() == 0)
+	{
+		out_p->PrintMessage("No figures to play with", WHITE, true);
+		return;
+	}
+	
     // gameloop
     while (right_figs.size() > 0 && !finish) 
     {
@@ -73,12 +81,21 @@ void ScrambleFind::Execute() // game mainloop
 			UpdateMessage(invalid_count, valid_count);
 
             // get action
-            act = in_p->GetUserAction();
-            clicked_point = in_p->GetLastClickedPoint();
-			if (act != DRAWING_AREA)
+			out_p->CreateRestartGame();
+			in_p->GetClick(clicked_point.x, clicked_point.y);
+			if (clicked_point.y > 0 && clicked_point.y < UI.ToolBarHeight)		// Chack If the User Want To Restart The Game Or Exit It
 			{
-				finish = true;
-				break;
+				int IconClicked = clicked_point.x / UI.MenuItemWidth;
+				switch (IconClicked)
+				{
+				case 0:						// If Restart Begien From The Executing The Action Again
+					manager_p->ExecuteAction(ActionType::SCRAMBLE);
+				case 1:						// If Exit return To Play Mode
+					return;
+
+				default:
+					break;
+				}
 			}
 
             // get clicked figure
@@ -109,9 +126,6 @@ void ScrambleFind::Execute() // game mainloop
 
     // final message
     UpdateMessage(invalid_count, valid_count, true);
-
-	if (act != DRAWING_AREA)
-		manager_p->ExecuteAction(act);
 }
 
 void ScrambleFind::Undo()
@@ -154,7 +168,7 @@ void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
 		else
 			final_grade = 0;
 
-        out_p->PrintMessage("Final grade = " + to_string(final_grade) + "%");
+        out_p->PrintMessage("Final grade = " + to_string(final_grade) + "%", ORANGE);
 		out_p->ClearDrawArea();
 
 		Sleep(2 * SECOND);
@@ -166,6 +180,6 @@ void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
             "Valid trials: " + to_string(valid) + " Invalid trials: " 
             + to_string(invalid) 
             + "                   Click on highlighted figure"
-        );
+        , WHITE, true);
     }
 }

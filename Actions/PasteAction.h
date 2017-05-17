@@ -8,6 +8,7 @@
 #include "MoveAction.h"
 
 class PasteAction : public Action {
+	bool pasted;
 public:
     PasteAction(ApplicationManager* app_p);
     ~PasteAction();

@@ -143,7 +143,7 @@ bool CRectangle::IsPointInside(const Point& p) const
 	return (t1 && t2);
 }
 
-bool CRectangle::Move(int x, int y)
+void CRectangle::Move(int x, int y)
 {
     Point tp1, tp2;
     tp1.x = p1.x + x;
@@ -153,9 +153,8 @@ bool CRectangle::Move(int x, int y)
     if (!IsOutOfRange(tp1, tp2)) {
         p1 = tp1;
         p2 = tp2;
-        return true;
     }
-    return false;
+    
 }
 
 CFigure* CRectangle::Copy()
@@ -174,11 +173,6 @@ CFigure* CRectangle::Copy()
     return copy;
 }
 
-string CRectangle::GetType()
-{
-	return type;
-}
-
 double CRectangle::GetArea()
 {
 	double length = abs(p1.x - p2.x);
@@ -189,6 +183,19 @@ double CRectangle::GetArea()
 bool CRectangle::IsOutOfRange(Point p1, Point p2)
 {
 	return (p1.y < UI.DrawAreaY || p1.y > UI.DrawAreaY + UI.DrawAreaHeight || p1.x < UI.DrawAreaX || p1.x > UI.DrawAreaX + UI.DrawAreaWidth || p2.y < UI.DrawAreaY || p2.y > UI.DrawAreaY + UI.DrawAreaHeight || p2.x < UI.DrawAreaX || p2.x > UI.DrawAreaX + UI.DrawAreaWidth);
+}
+
+bool CRectangle::OutOfRange(int x, int y)
+{
+	Point tp1, tp2;
+	tp1.x = p1.x + x;
+	tp1.y = p1.y + y;
+	tp2.x = p2.x + x;
+	tp2.y = p2.y + y;
+	if (IsOutOfRange(tp1, tp2)) {
+		return true;
+	}
+	return false;
 }
 
 void CRectangle::PrintInfo(Output* out_p)

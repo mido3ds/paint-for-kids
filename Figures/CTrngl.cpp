@@ -77,11 +77,6 @@ void CTrngl::Resize(double resize_factor)
 	p3.y = (int(resize_factor * (p3.y - c.y))) + c.y;
 }
 
-string CTrngl::GetType()
-{
-	return type;
-}
-
 double CTrngl::GetArea()
 {
 	return Trigonometry::Area(p1, p2, p3);
@@ -165,6 +160,21 @@ bool CTrngl::IsOutOfRange(Point p1, Point p2, Point p3)
     return (p1.y < UI.DrawAreaY || p1.y > UI.DrawAreaY + UI.DrawAreaHeight || p1.x < UI.DrawAreaX || p1.x > UI.DrawAreaX + UI.DrawAreaWidth || p2.y < UI.DrawAreaY || p2.y > UI.DrawAreaY + UI.DrawAreaHeight || p2.x < UI.DrawAreaX || p2.x > UI.DrawAreaX + UI.DrawAreaWidth || p3.y < UI.DrawAreaY || p3.y > UI.DrawAreaY + UI.DrawAreaHeight || p3.x < UI.DrawAreaX || p3.x > UI.DrawAreaX + UI.DrawAreaWidth);
 }
 
+bool CTrngl::OutOfRange(int x, int y)
+{
+	Point tp1, tp2, tp3;
+	tp1.x = p1.x + x;
+	tp1.y = p1.y + y;
+	tp2.x = p2.x + x;
+	tp2.y = p2.y + y;
+	tp3.x = p3.x + x;
+	tp3.y = p3.y + y;
+	if (IsOutOfRange(tp1, tp2, tp3)) {
+		return true;
+	}
+	return false;
+}
+
 bool CTrngl::IsPointInside(const Point& p) const
 {
 	if ((SameSide(p, p1, p2, p3) && SameSide(p, p2, p1, p3) && SameSide(p, p3, p1, p2)))
@@ -173,22 +183,20 @@ bool CTrngl::IsPointInside(const Point& p) const
 		return false;
 }
 
-bool CTrngl::Move(int x, int y)
+void CTrngl::Move(int x, int y)
 {
-    Point tp1, tp2, tp3;
-    tp1.x = p1.x + x;
-    tp1.y = p1.y + y;
-    tp2.x = p2.x + x;
-    tp2.y = p2.y + y;
-    tp3.x = p3.x + x;
-    tp3.y = p3.y + y;
-    if (!IsOutOfRange(tp1, tp2, tp3)) {
-        p1 = tp1;
-        p2 = tp2;
-        p3 = tp3;
-        return true;
-    }
-    return false;
+	Point tp1, tp2, tp3;
+	tp1.x = p1.x + x;
+	tp1.y = p1.y + y;
+	tp2.x = p2.x + x;
+	tp2.y = p2.y + y;
+	tp3.x = p3.x + x;
+	tp3.y = p3.y + y;
+	if (!IsOutOfRange(tp1, tp2, tp3)) {
+		p1 = tp1;
+		p2 = tp2;
+		p3 = tp3;
+	}
 }
 
 CFigure* CTrngl::Copy()
@@ -260,5 +268,4 @@ void CTrngl::RandomizePosition()
 		p2 = center + def2;
 		p3 = center + def3;
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2) || OutOfRightRange(p3));
-
 }

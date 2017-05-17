@@ -15,27 +15,25 @@ public:
     virtual void SetRotated(bool r);
     virtual void Save(ofstream& out_file);
     virtual void Load(ifstream& in_file);
-    virtual bool Move(int x, int y);
+    virtual void Move(int x, int y);
     virtual void MoveToLeftSide();
     virtual void RandomizePosition();
     virtual CFigure* Copy();
     virtual bool IsRotated();
     int GetRadius() const;
 
-	virtual string GetType();
 	virtual double GetArea();
     virtual Point CalculateCenter();
 
 	virtual void Resize(double resize_factor);
 
 	bool IsOutOfRange(Point p1);
-
+	virtual bool OutOfRange(int x, int y);
 	virtual void PrintInfo(Output* out_p) ;
 
 private:
 	Point p1, p2;
     int radius;
-	const string type = "Circle";
 
 	// given radius and this point, return another point
 	// another point is (p.x, p.y + rad)

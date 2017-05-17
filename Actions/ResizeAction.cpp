@@ -47,7 +47,7 @@ void ResizeAction::Execute()
 	out_p->ClearDrawArea();
 	if (!manager_p->ResizeSelected(resize_factor))
 	{
-		out_p->PrintMessage("Error no figures selected");
+		out_p->PrintMessage("Error no figures selected", RED, true);
 		resize_factor = 1;
 	}
 }

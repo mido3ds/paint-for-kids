@@ -16,7 +16,7 @@ void MultiSelect::Execute()
 	if (manager_p->IsInMultiSelect())
 		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is On", WHITE, true);
 	else 
-		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is Off");
+		manager_p->GetOutput()->PrintMessage("Multi Select Mode Is Off", WHITE, true);
 }
 
 void MultiSelect::Undo()

@@ -84,7 +84,7 @@ void PickByArea::Execute()
 	}
 
 	if (correct == 0 && wrong == 0) 
-		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW);
+		out_p->PrintMessage("No Figures To Play Please Back And Draw Some Figures Or Load Old Paint", YELLOW, true);
 	else 
 	{
 		out_p->PrintMessage("Your Grade Is: " + std::to_string((correct * 100) / (correct + wrong) ), ORANGE);

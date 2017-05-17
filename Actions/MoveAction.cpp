@@ -13,7 +13,7 @@ void MoveAction::ReadActionParameters()
     if (manager_p->GetNumSelected() > 0) 
         out_p->PrintMessage("Please Click The Point You Want To Move Selected Figure/s To");
     else
-        out_p->PrintMessage("No Selected Figures To Move", WHITE, true);
+        out_p->PrintMessage("No Selected Figures To Move", RED, true);
 }
 
 void MoveAction::Execute()
