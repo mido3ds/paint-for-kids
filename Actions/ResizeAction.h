@@ -29,9 +29,15 @@ public:
 	//To undo this action (code depends on action type)
 	virtual void Undo();
 
+	~ResizeAction();
+
 private:
 	double resize_factor;
 	Point center;
+	CFigure* fig = nullptr;
+	CFigure* pre_fig = nullptr;
+	CFigure* final_fig = nullptr;
+	bool drag = false;
 };
 
 #endif  /* __ResizeAction_h__ */

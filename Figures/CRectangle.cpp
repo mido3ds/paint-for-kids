@@ -5,6 +5,8 @@ CRectangle::CRectangle(Point p1, Point p2, GfxInfo figure_gfx_info)
 {
 	this->p1 = p1;
 	this->p2 = p2;
+	this->p3 = { p1.x, p2.y };
+	this->p4 = { p2.x, p1.y };
 }
 
 CRectangle::CRectangle()
@@ -100,6 +102,22 @@ void CRectangle::Load(ifstream& in_file)
 		>>border_width;
 }
 
+bool CRectangle::CheckResize(double resize_factor)
+{
+	Point new_p1;
+	Point new_p2;
+	Point c = CalculateCenter();
+	new_p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
+	new_p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
+	new_p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
+	new_p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+
+	if (IsOutOfRange(new_p1, new_p2))
+		return false;
+
+	return true;
+}
+
 void CRectangle::Resize(double resize_factor)
 {
 	Point c = CalculateCenter();
@@ -107,6 +125,53 @@ void CRectangle::Resize(double resize_factor)
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
 	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+	p3 = { p1.x, p2.y };
+	p4 = { p2.x, p1.y };
+}
+
+void CRectangle::Drag(const Point& p, Corners corner)
+{
+	Point pre_p1 = p1;
+	Point pre_p2 = p2;
+	if (corner == RECT_1)
+	{
+		p1 = p;
+		p3.x = p.x;
+		p4.y = p.y;
+	}
+	else if (corner == RECT_2)
+	{
+		p2 = p;
+		p4.x = p.x;
+		p3.y = p.y;
+	}
+	else if (corner == RECT_3)
+	{
+		p3 = p;
+		p1.x = p.x;
+		p2.y = p.y;
+	}
+	else if (corner == RECT_4)
+	{
+		p4 = p;
+		p1.y = p.y;
+		p2.x = p.x;
+	}
+	if (IsOutOfRange(p1, p2))
+	{
+		p1 = pre_p1;
+		p2 = pre_p2;
+		p3 = { p1.x, p2.y };
+		p4 = { p2.x, p1.y };
+	}
+}
+
+void CRectangle::DragPoints(Output* out_p, const GfxInfo& info) const
+{
+	out_p->DrawCircle(p1, 4, info, false);
+	out_p->DrawCircle(p2, 4, info, false);
+	out_p->DrawCircle(p3, 4, info, false);
+	out_p->DrawCircle(p4, 4, info, false);
 }
 
 Point CRectangle::CalculateCenter()
@@ -220,19 +285,37 @@ void CRectangle::RandomizePosition()
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
 
-//void CRectangle::ChangeCenter(const Point& p)
-//{
-//	// TODO
-//}
-//
-//bool CRectangle::IsPointCorner(const Point& p) const
-//{
-//	// TODO
-//	return true;
-//}
-//
-//Point& CRectangle::GetCornerPoint(const Point& p)
-//{
-//	// TODO
-//	return p1;
-//}
+Corners CRectangle::GetCornerPoint(const Point& p) const
+{
+	if (((p.x - p1.x) >= -4 && (p.x - p1.x) <= 4) && ((p.y - p1.y) >= -4 && (p.y - p1.y) <= 4))
+		return RECT_1;
+	else if (((p.x - p2.x) >= -4 && (p.x - p2.x) <= 4) && ((p.y - p2.y) >= -4 && (p.y - p2.y) <= 4))
+		return RECT_2;
+	else if (((p.x - p3.x) >= -4 && (p.x - p3.x) <= 4) && ((p.y - p3.y) >= -4 && (p.y - p3.y) <= 4))
+		return RECT_3;
+	else if (((p.x - p4.x) >= -4 && (p.x - p4.x) <= 4) && ((p.y - p4.y) >= -4 && (p.y - p4.y) <= 4))
+		return RECT_4;
+	else
+		return INVALID;
+}
+
+void CRectangle::SetAll(CFigure* fig)
+{
+	CRectangle* rect;
+	if ((rect = dynamic_cast<CRectangle*>(fig)) == nullptr)
+		return;
+
+	this->border_width = rect->border_width;
+	this->draw_clr = rect->draw_clr;
+	this->fill_clr = rect->fill_clr;
+	this->is_filled = rect->is_filled;
+
+	SetSelected(rect->IsSelected());
+	SetId(rect->GetId());
+
+	this->p1 = rect->p1;
+	this->p2 = rect->p2;
+	this->p3 = rect->p3;
+	this->p4 = rect->p4;
+
+}

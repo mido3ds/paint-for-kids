@@ -237,7 +237,7 @@ void Output::CreateRestartGame() const
 	ClearToolbar();
 	string MenuItemImages[2];
 	MenuItemImages[0] = "images\\MenuItems\\restart.jpg";
-	MenuItemImages[1] = "images\\MenuItems\\exitgame.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\exit.jpg";
 
 	for (int i = 0; i < 2; i++)
 		wind_p->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, UI.ToolBarY, UI.MenuItemWidth, UI.ToolBarHeight);
@@ -633,6 +633,11 @@ int Output::AdjustBorder1(const int& border) const
 		return 1;
 
 	return border;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+buttonstate Output::ButtonState(button btn, Point& draging_point)
+{
+	return wind_p->GetButtonState(btn, draging_point.x, draging_point.y);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output() { delete wind_p; }

@@ -23,6 +23,10 @@ public:
     virtual CFigure* Copy();
     virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
+	virtual bool CheckResize(double resize_factor);
+	virtual void Drag(const Point& p, Corners corner);
+	virtual void DragPoints(Output* out_p, const GfxInfo& info) const;
+	virtual Corners GetCornerPoint(const Point& p) const; // get nearest corner point
 
 	virtual string GetType();
 	virtual double GetArea();
@@ -32,6 +36,7 @@ public:
 
 	double CrossProduct(Point p1, Point p2) const;
 	bool SameSide(Point p1, Point p2, Point a, Point b) const;
+	virtual void SetAll(CFigure*);
 private:
 	Point p1, p2, p3;
 	const string type = "Triangle";

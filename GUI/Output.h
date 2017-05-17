@@ -57,6 +57,8 @@ public:
 	void SetBkGrndColor(color given_clr);
 	void SetPenWidth(int new_width);
 
+	buttonstate ButtonState(button btn, Point& draging_point);
+
 private:
 	window* wind_p; // Pointer to the Graphics Window
 

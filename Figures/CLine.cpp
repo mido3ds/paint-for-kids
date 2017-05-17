@@ -147,6 +147,22 @@ double CLine::GetArea()
 	return length;
 }
 
+bool CLine::CheckResize(double resize_factor)
+{
+	Point new_p1;
+	Point new_p2;
+	Point c = CalculateCenter();
+	new_p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
+	new_p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
+	new_p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
+	new_p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+
+	if (IsOutOfRange(new_p1, new_p2))
+		return false;
+
+	return true;
+}
+
 void CLine::Resize(double resize_factor)
 {
 	Point c = CalculateCenter();
@@ -154,6 +170,20 @@ void CLine::Resize(double resize_factor)
 	p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
 	p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
 	p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+}
+
+void CLine::Drag(const Point& p, Corners corner)
+{
+	if (corner == LINE_1)
+		p1 = p;
+	else if (corner == LINE_2)
+		p2 = p;
+}
+
+void CLine::DragPoints(Output* out_p, const GfxInfo& info) const
+{
+	out_p->DrawCircle(p1, 4, info, false);
+	out_p->DrawCircle(p2, 4, info, false);
 }
 
 Point CLine::CalculateCenter()
@@ -214,19 +244,31 @@ void CLine::RandomizePosition()
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2));
 }
 
-//void CLine::ChangeCenter(const Point& p)
-//{
-//	// TODO
-//}
-//
-//bool CLine::IsPointCorner(const Point& p) const
-//{
-//	// TODO
-//	return true;
-//}
-//
-//Point& CLine::GetCornerPoint(const Point& p)
-//{
-//	// TODO
-//	return p1;
-//}
+Corners CLine::GetCornerPoint(const Point& p) const
+{
+	if (((p.x - p1.x) >= -4 && (p.x - p1.x) <= 4) && ((p.y - p1.y) >= -4 && (p.y - p1.y) <= 4))
+		return LINE_1;
+	else if (((p.x - p2.x) >= -4 && (p.x - p2.x) <= 4) && ((p.y - p2.y) >= -4 && (p.y - p2.y) <= 4))
+		return LINE_2;
+	else
+		return INVALID;
+}
+
+void CLine::SetAll(CFigure* fig)
+{
+	CLine* line;
+	if ((line = dynamic_cast<CLine*>(fig)) == nullptr)
+		return;
+
+	this->border_width = line->border_width;
+	this->draw_clr = line->draw_clr;
+	this->fill_clr = line ->fill_clr;
+	this->is_filled = line->is_filled;
+
+	SetSelected(fig->IsSelected());
+	SetId(fig->GetId());
+
+	this->p1 = line->p1;
+	this->p2 = line->p2;
+
+}

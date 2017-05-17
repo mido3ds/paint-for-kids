@@ -26,13 +26,19 @@ public:
 	virtual double GetArea();
 	virtual Point CalculateCenter();
 	virtual void Resize(double resize_factor);
+	virtual bool CheckResize(double resize_factor);
+	virtual void Drag(const Point& p, Corners corner);
+	virtual void DragPoints(Output* out_p, const GfxInfo& info) const;
+	virtual Corners GetCornerPoint(const Point& p) const; // get nearest corner point
 
 	bool IsOutOfRange(Point p1, Point p2);
 
 	virtual void PrintInfo(Output* out_p);
+	virtual void SetAll(CFigure*);
 
 private:
-	Point p1, p2;
+	Point p1, p2, p3, p4;
+	
 	const string type = "Rectangle";
 };
 
