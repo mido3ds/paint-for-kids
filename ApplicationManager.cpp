@@ -373,12 +373,19 @@ bool ApplicationManager::SetSelectedFillColor(color c)
 
     for (auto& fig : figs) 
 	{
-        if (fig->IsSelected()) 
-		{
-            fig->SetFillColor(c);
+		if (undo) {
+			fig->SetFillColor(c);
 
-            flag = true;
-        }
+			flag = true;
+		}
+		else {
+			if (fig->IsSelected())
+			{
+				fig->SetFillColor(c);
+
+				flag = true;
+			}
+		}
     }
 
     return flag;
@@ -390,13 +397,21 @@ bool ApplicationManager::SetSelectedBorder(int W, color C)
 
     for (auto& fig : figs) 
 	{
-        if (fig->IsSelected()) 
-		{
-            fig->SetDrawColor(C);
-            fig->SetBorderWidth(W);
+		if (undo) {
+			fig->SetDrawColor(C);
+			fig->SetBorderWidth(W);
 
-            flag = true;
-        }
+			flag = true;
+		}
+		else {
+			if (fig->IsSelected())
+			{
+				fig->SetDrawColor(C);
+				fig->SetBorderWidth(W);
+
+				flag = true;
+			}
+		}
     }
 
     return flag;

@@ -36,6 +36,6 @@ void ChFillColorAction::Execute()
 
 void ChFillColorAction::Undo()
 {
-    if (!manager_p->SetSelectedFillColor(last_fill_clr)) 
+    if (!manager_p->SetSelectedFillColor(last_fill_clr))
         manager_p->GetOutput()->SetFillColor(last_fill_clr);
 }
