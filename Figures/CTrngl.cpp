@@ -66,6 +66,25 @@ bool CTrngl::IsRotated()
 	return is_rotated;
 }
 
+bool CTrngl::CheckResize(double resize_factor)
+{
+	Point new_p1;
+	Point new_p2;
+	Point new_p3;
+	Point c = CalculateCenter();
+	new_p1.x = (int(resize_factor * (p1.x - c.x))) + c.x;
+	new_p1.y = (int(resize_factor * (p1.y - c.y))) + c.y;
+	new_p2.x = (int(resize_factor * (p2.x - c.x))) + c.x;
+	new_p2.y = (int(resize_factor * (p2.y - c.y))) + c.y;
+	new_p3.x = (int(resize_factor * (p3.x - c.x))) + c.x;
+	new_p3.y = (int(resize_factor * (p3.y - c.y))) + c.y;
+
+	if (IsOutOfRange(new_p1, new_p2, new_p3))
+		return false;
+
+	return true;
+}
+
 void CTrngl::Resize(double resize_factor)
 {
 	Point c = CalculateCenter();
@@ -77,6 +96,22 @@ void CTrngl::Resize(double resize_factor)
 	p3.y = (int(resize_factor * (p3.y - c.y))) + c.y;
 }
 
+void CTrngl::Drag(const Point& p, Corners corner)
+{
+	if (corner == TRNGL_1)
+		p1 = p;
+	else if (corner == TRNGL_2)
+		p2 = p;
+	else if (corner == TRNGL_3)
+		p3 = p;
+}
+
+void CTrngl::DragPoints(Output* out_p, const GfxInfo& info) const
+{
+	out_p->DrawCircle(p1, 4, info, false);
+	out_p->DrawCircle(p2, 4, info, false);
+	out_p->DrawCircle(p3, 4, info, false);
+}
 double CTrngl::GetArea()
 {
 	return Trigonometry::Area(p1, p2, p3);
@@ -268,4 +303,36 @@ void CTrngl::RandomizePosition()
 		p2 = center + def2;
 		p3 = center + def3;
 	} while (OutOfRightRange(p1) || OutOfRightRange(p2) || OutOfRightRange(p3));
+
+}
+
+Corners CTrngl::GetCornerPoint(const Point& p) const
+{
+	if (((p.x - p1.x) >= -4 && (p.x - p1.x) <= 4) && ((p.y - p1.y) >= -4 && (p.y - p1.y) <= 4))
+		return TRNGL_1;
+	else if (((p.x - p2.x) >= -4 && (p.x - p2.x) <= 4) && ((p.y - p2.y) >= -4 && (p.y - p2.y) <= 4))
+		return TRNGL_2;
+	else if (((p.x - p3.x) >= -4 && (p.x - p3.x) <= 4) && ((p.y - p3.y) >= -4 && (p.y - p3.y) <= 4))
+		return TRNGL_3;
+	else
+		return INVALID;
+}
+
+void CTrngl::SetAll(CFigure* fig)
+{
+	CTrngl* trngl;
+	if ((trngl = dynamic_cast<CTrngl*>(fig)) == nullptr)
+		return;
+
+	this->border_width = trngl->border_width;
+	this->draw_clr = trngl->draw_clr;
+	this->fill_clr = trngl->fill_clr;
+	this->is_filled = trngl->is_filled;
+
+	SetSelected(trngl->IsSelected());
+	SetId(trngl->GetId());
+
+	this->p1 = trngl->p1;
+	this->p2 = trngl->p2;
+	this->p3 = trngl->p3;
 }

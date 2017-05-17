@@ -22,6 +22,11 @@ bool CFigure::IsSelected() const
 	return selected;
 }
 
+bool CFigure::OutOfDrawingArea(const Point& p) const
+{
+	return !(((p.x > 3) && (p.x < UI.width - 18)) && ((p.y > 53) && (p.y < UI.StatusBarY - 3)));
+}
+
 bool CFigure::OutOfRightRange(const Point& p) const
 {
 	return !(((p.x > ((UI.width / 2)+3)) && (p.x < (UI.width - 10))) && ((p.y > 50) && (p.y < UI.StatusBarY)));

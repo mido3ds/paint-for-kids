@@ -107,7 +107,6 @@ Action* ApplicationManager::DetectAction(ActionType act_type)
 			return new PickByTypeAndColor(this);
 		case DRAWING_AREA:
 			return new SelectAction(this);
-        
 		default:
 			return nullptr;
     }
@@ -168,7 +167,33 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
     return ApplicationManager::GetFigure(figs, { x, y });
 }
+
+CFigure* ApplicationManager::GetSelectedFigure() const
+{
+	if (num_selected > 1)
+		return nullptr;
+	// reverse iterator, to iterate in figs from end to beginning 
+	for (deque<CFigure*>::const_reverse_iterator r_itr = figs.rbegin(); r_itr != figs.rend(); r_itr++)
+	{
+		// if a figure is found return a pointer to it.
+		if ((*r_itr)->IsSelected())
+			return *r_itr;
+	}
+
+	// (x,y) does not belong to any figure
+	return nullptr;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
+CFigure*& ApplicationManager::GetFigureById(int id)
+{
+	for (auto& fig : figs)
+		if (fig->GetId() == id)
+			return fig;
+
+	throw runtime_error("id not found");
+}
+
 int ApplicationManager::GetNumFigures() const
 {
 	return figs.size();
@@ -335,6 +360,22 @@ deque<CFigure*>::iterator ApplicationManager::GetFigureIter(unsigned int id)
 	return figs.end();
 }
 
+bool ApplicationManager::CheckResize(double resize_factor)
+{
+	bool flag = false;
+
+	for (auto& fig : figs)
+	{
+		if (fig->IsSelected())
+		{
+			if (!fig->CheckResize(resize_factor))
+				return false;
+			flag = true;
+		}
+	}
+	return true;
+}
+
 bool ApplicationManager::ResizeSelected(double resize_factor)
 {
 	bool flag = false;
@@ -343,6 +384,7 @@ bool ApplicationManager::ResizeSelected(double resize_factor)
 	{
 		if (fig->IsSelected())
 		{
+
 			fig->Resize(resize_factor);
 			flag = true;
 		}
@@ -373,18 +415,11 @@ bool ApplicationManager::SetSelectedFillColor(color c)
 
     for (auto& fig : figs) 
 	{
-		if (undo) {
+		if (fig->IsSelected())
+		{
 			fig->SetFillColor(c);
 
 			flag = true;
-		}
-		else {
-			if (fig->IsSelected())
-			{
-				fig->SetFillColor(c);
-
-				flag = true;
-			}
 		}
     }
 
@@ -397,20 +432,12 @@ bool ApplicationManager::SetSelectedBorder(int W, color C)
 
     for (auto& fig : figs) 
 	{
-		if (undo) {
+		if (fig->IsSelected())
+		{
 			fig->SetDrawColor(C);
 			fig->SetBorderWidth(W);
 
 			flag = true;
-		}
-		else {
-			if (fig->IsSelected())
-			{
-				fig->SetDrawColor(C);
-				fig->SetBorderWidth(W);
-
-				flag = true;
-			}
 		}
     }
 

@@ -31,8 +31,8 @@ void ScrambleFind::ReadActionParameters() // prepare game
     
     for (auto& fig : left_figs)
     {
-		fig->Resize(0.5);
         fig->MoveToLeftSide();
+		fig->Resize(0.5);
     }
 	
     for (auto& fig : right_figs)

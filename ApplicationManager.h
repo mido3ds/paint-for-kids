@@ -82,6 +82,8 @@ public:
     CFigure* DetectFigure(string fig_name); // make new figure from its name
     CFigure* GetFigure(int x, int y) const; // return figure at that point, for this->figs
     static CFigure* GetFigure(const deque<CFigure*>& figs, Point p); // Search for a figure given a point inside the figure and the list
+	CFigure*& GetFigureById(int id);
+	CFigure* GetSelectedFigure() const; // return selected figure if only one figure selected
     int GetNumFigures() const;
     int GetNumSelected() const;
     void SetNumSelected(int n_selected); //Change number of selected figures
@@ -95,6 +97,7 @@ public:
     void SendSelecteDown();
     void SendSelectedUp();
     void RotateSelected(int deg);
+	bool CheckResize(double resize_factor);
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();
     void MoveSelected(Point p, deque<CFigure*> &moved_figs,Point& old);

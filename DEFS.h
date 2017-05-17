@@ -51,22 +51,33 @@ enum ActionType //The actions supported (you can add more if needed)
 	STATUS, //A click on the status bar
 	EMPTY, //A click on empty place in the toolbar
 
+
 	TO_DRAW, //Switch interface to Draw mode
-	TO_PLAY //Switch interface to Play mode
+	TO_PLAY, //Switch interface to Play mode
+	DRAG
 };
 
 struct Point // To be used for figures points
 {
 	int x, y;
-
-    Point(int a, int b): x(a), y(b) {}
-    Point(): x(0), y(0) {}
-
-	Point operator+(const Point& p) const
+	Point(int a, int b) : x(a), y(b) {}
+	Point() : x(0), y(0) {}
+	Point operator+(const Point& p)
 	{
 		return Point(this->x + p.x, this->y + p.y);
 	}
-
+	Point operator-(const Point& p)
+	{
+		return Point(this->x - p.x, this->y - p.y);
+	}
+	Point operator+(const int& num)
+	{
+		return Point(this->x + num, this->y + num);
+	}
+	Point operator-(const int& num)
+	{
+		return Point(this->x - num, this->y - num);
+	}
 	bool operator>(const Point& p) const
 	{
 		return ((this->x > p.x) && (this->y > p.y)) ? true : false;
@@ -76,14 +87,19 @@ struct Point // To be used for figures points
 	{
 		return ((this->x > p.x) && (this->y > p.y)) ? false : true;
 	}
-
-	Point operator- (const Point &p) const
+	bool operator==(const Point& p)
 	{
-		return Point((this->x - p.x), (this->y - p.y));
+		return (this->x == p.x) && (this->y == p.y);
+	}
+	bool operator!=(const Point& p)
+	{
+		return !((this->x == p.x) && (this->y == p.y));
 	}
 };
 
-struct GfxInfo // Graphical info of each figure 
+#define null_point Point(0, 0)
+
+struct GfxInfo // Graphical info of each figure (you may add more members)
 {
 	color draw_clr = BLACK; // Draw color of the figure
 	color fill_clr = WHITE; // Fill color of the figure
