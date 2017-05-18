@@ -15,7 +15,7 @@ void PickByTypeAndColor::ReadActionParameters()
 	figures = manager_p->GetCopyOfFigures();
 }
 
-void PickByTypeAndColor::Execute()
+void PickByTypeAndColor::Execute(bool redo)
 {
 	Input *in_p = manager_p->GetInput();
 	Output *out_p = manager_p->GetOutput();

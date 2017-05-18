@@ -15,15 +15,17 @@ public:
 
     virtual void ReadActionParameters();
 
-    virtual void Execute();
+    virtual void Execute(bool redo = false);
 
     virtual void Undo();
 
 private:
-    color draw_clr = UI.DrawColor,
+    color draw_clr = UI.LastDrawColor,
           last_draw_clr = draw_clr;
-    int pen_width = UI.PenWidth,
+    int pen_width = UI.LastPenWidth,
         last_pen_width = pen_width;
+
+	deque<int> IDs;
 };
 
 #endif // !_CH_BORDER_

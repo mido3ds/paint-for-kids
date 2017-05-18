@@ -9,7 +9,7 @@ void ExitAction::ReadActionParameters()
 {
 }
 
-void ExitAction::Execute()
+void ExitAction::Execute(bool redo)
 {
     // if not saved, ask user to save it
     if (!manager_p->IsSaved())

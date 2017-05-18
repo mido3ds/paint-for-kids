@@ -9,7 +9,7 @@ void RedoAction::ReadActionParameters()
 {
 }
 
-void RedoAction::Execute()
+void RedoAction::Execute(bool redo)
 {
     manager_p->Redo();
 }

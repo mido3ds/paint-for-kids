@@ -23,7 +23,7 @@ public:
 	void SetCenter(Point r_center);
 
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual void Execute(bool redo = false);
 	virtual void Undo();
 
 	~ResizeAction();

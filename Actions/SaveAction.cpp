@@ -25,7 +25,7 @@ void SaveAction::ReadActionParameters()
     out_p->ClearStatusBar();
 }
 
-void SaveAction::Execute()
+void SaveAction::Execute(bool redo)
 {
     if (successfull) {
         manager_p->SaveAll(out_file);

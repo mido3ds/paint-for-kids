@@ -18,7 +18,7 @@ void DrawFigItems::ReadActionParameters()
 	out_p->ClearTempToolbar();
 }
 
-void DrawFigItems::Execute()
+void DrawFigItems::Execute(bool redo)
 {
 	manager_p->ExecuteAction(act);
 }

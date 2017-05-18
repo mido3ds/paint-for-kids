@@ -14,7 +14,7 @@ void DeleteAction::ReadActionParameters()
         out_p->PrintMessage("No Selected Figures To Delete", WHITE, true);
 }
 
-void DeleteAction::Execute()
+void DeleteAction::Execute(bool redo)
 {
     if (manager_p->GetNumSelected() > 0) 
         clipboard = manager_p->EraseSelected();

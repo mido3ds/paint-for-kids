@@ -13,7 +13,7 @@ void PickByColor::ReadActionParameters()
 	figures = manager_p->GetCopyOfFigures();				// Coping All Figues
 }
 
-void PickByColor::Execute()
+void PickByColor::Execute(bool redo)
 {
 	Input *in_p = manager_p->GetInput();
 	Output *out_p = manager_p->GetOutput();

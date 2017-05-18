@@ -11,11 +11,11 @@ void SelectAction::ReadActionParameters()
 	in_p = manager_p->GetInput();
 }
 
-void SelectAction::Execute()
+void SelectAction::Execute(bool redo)
 {
 	p = in_p->GetLastClickedPoint();
-	p.x = (p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
-	p.y = (p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	p.x = (int)((p.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x);
+	p.y = (int)((p.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y);
 	if (manager_p->IsInMultiSelect())
 	{
 		// in multi select mode

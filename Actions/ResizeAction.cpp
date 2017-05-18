@@ -54,7 +54,7 @@ void ResizeAction::ReadActionParameters()
 	}
 }
 
-void ResizeAction::Execute()
+void ResizeAction::Execute(bool redo)
 {
 
 	Output* out_p = manager_p->GetOutput();

@@ -25,15 +25,15 @@ bool CCircle::IsRotated()
 
 bool CCircle::CheckResize(double resize_factor)
 {
-	int new_radius = radius * resize_factor;
+	int new_radius = (int)(radius * resize_factor);
 	return (p1.x - new_radius < UI.DrawAreaX || p1.x + new_radius > UI.DrawAreaX + UI.DrawAreaWidth || p1.y - new_radius < UI.DrawAreaY || p1.y + new_radius > UI.DrawAreaY + UI.DrawAreaHeight);
 }
 
 void CCircle::Resize(double resize_factor)
 {
-	radius *= resize_factor;
-	p2.x = (int(resize_factor * (p2.x - p1.x)))  +  p1.x;
-	p2.y = (int(resize_factor * (p2.y - p1.y)))  +  p1.y;
+	radius = (int)(radius * resize_factor);
+	p2.x = (int)(((resize_factor * (p2.x - p1.x)))  +  p1.x);
+	p2.y = (int)(((resize_factor * (p2.y - p1.y)))  +  p1.y);
 	left.x = p1.x - radius;
 	right.x = p1.x + radius;
 	up.y = p1.y - radius;
@@ -141,7 +141,7 @@ bool CCircle::OutOfRange(int x, int y)
 
 Point CCircle::GetSecondPointFromRadius(double rad)
 {
-	return Point(p1.x, p1.y  +  rad);
+	return Point(p1.x, p1.y  +  (int)rad);
 }
 
 void CCircle::Draw(Output* out_p) const
@@ -210,8 +210,8 @@ void CCircle::Load(ifstream& in_file)
 
 bool CCircle::IsPointInside(const Point& p) const
 {
-    float RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
-    float NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
+    double RadiusSquare = pow(p1.x - p2.x, 2)  +  pow(p1.y - p2.y, 2);
+    double NewDistance = pow(p.x - p1.x, 2)  +  pow(p.y - p1.y, 2);
     return (NewDistance <= RadiusSquare);
 }
 

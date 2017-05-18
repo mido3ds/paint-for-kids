@@ -35,7 +35,7 @@ void LoadAction::ReadActionParameters()
     out_p->ClearStatusBar();
 }
 
-void LoadAction::Execute()
+void LoadAction::Execute(bool redo)
 {
     if (successfull) {
 		manager_p->DeleteAllFigures();

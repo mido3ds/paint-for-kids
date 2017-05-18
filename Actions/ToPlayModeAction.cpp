@@ -8,7 +8,7 @@ void ToPlayModeAction::ReadActionParameters()
 {
 }
 
-void ToPlayModeAction::Execute()
+void ToPlayModeAction::Execute(bool redo)
 {
     Output* out_p = manager_p->GetOutput();
 

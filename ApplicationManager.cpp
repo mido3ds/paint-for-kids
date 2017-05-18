@@ -184,6 +184,16 @@ CFigure* ApplicationManager::GetSelectedFigure() const
 	return nullptr;
 }
 
+deque<int> ApplicationManager::GetSelectedIDs() const
+{
+	deque<int> IDs;
+	for (auto &fig : figs) {
+		if (fig->IsSelected())
+			IDs.push_back(fig->GetId());
+	}
+	return IDs;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure*& ApplicationManager::GetFigureById(int id)
 {
@@ -409,26 +419,59 @@ void ApplicationManager::RotateSelected(int deg)
 	}
 }
 
-bool ApplicationManager::SetSelectedFillColor(color c)
+void ApplicationManager::RotateUndo(int deg, deque<int> IDs)
 {
-    bool flag = false;
+	for (auto& id : IDs) {
+		for (auto& fig : figs)
+		{
+			if (fig->GetId() == id)
+			{
+				fig->Rotate(deg);
+
+				if (fig->IsRotated())
+					fig->SetRotated(false);
+				else
+					out_p->PrintMessage("This Figure Is Out Of Range If Rotated", RED, true);
+			}
+		}
+	}
+}
+
+deque<int> ApplicationManager::SetSelectedFillColor(color c)
+{
+
+	deque<int> IDs;
 
     for (auto& fig : figs) 
 	{
 		if (fig->IsSelected())
 		{
 			fig->SetFillColor(c);
-
-			flag = true;
+			IDs.push_back(fig->GetId());
 		}
     }
 
-    return flag;
+    return IDs;
 }
 
-bool ApplicationManager::SetSelectedBorder(int W, color C)
+void ApplicationManager::SetUndoFillColor(color c, deque<int> IDs)
 {
-    bool flag = false;
+	for (auto &id : IDs)
+	{
+		for (auto& fig : figs)
+		{
+			if (fig->GetId() == id)
+			{
+				fig->SetFillColor(c);
+			}
+		}
+	}
+}
+
+deque<int> ApplicationManager::SetSelectedBorder(int W, color C)
+{
+
+	deque<int> IDs;
 
     for (auto& fig : figs) 
 	{
@@ -436,12 +479,25 @@ bool ApplicationManager::SetSelectedBorder(int W, color C)
 		{
 			fig->SetDrawColor(C);
 			fig->SetBorderWidth(W);
-
-			flag = true;
+			IDs.push_back(fig->GetId());
 		}
     }
 
-    return flag;
+    return IDs;
+}
+
+void ApplicationManager::SetUndoBorder(int W, color C, deque<int> IDs)
+{
+	for (auto &id : IDs) {
+		for (auto& fig : figs)
+		{
+			if (fig->GetId() == id)
+			{
+				fig->SetDrawColor(C);
+				fig->SetBorderWidth(W);
+			}
+		}
+	}
 }
 
 bool ApplicationManager::UnselectAll()
@@ -476,6 +532,26 @@ void ApplicationManager::SendSelecteDown()
 		figs.push_front(fig);
 }
 
+void ApplicationManager::SendUndoDown(deque<int> IDs)
+{
+	vector<CFigure*> temp;
+	for (auto &id : IDs) {
+		for (auto itr = figs.begin(); itr != figs.end();)
+		{
+			if ((*itr)->GetId() == id)
+			{
+				temp.push_back(*itr);
+				itr = figs.erase(itr);
+				continue;
+			}
+			++itr;
+		}
+	}
+
+	for (auto& fig : temp)
+		figs.push_front(fig);
+}
+
 void ApplicationManager::SendSelectedUp()
 {
 	vector<CFigure*> temp;
@@ -488,6 +564,26 @@ void ApplicationManager::SendSelectedUp()
 			continue;
 		}
 		++itr;
+	}
+
+	for (auto& fig : temp)
+		figs.push_back(fig);
+}
+
+void ApplicationManager::SendUndoUp(deque<int> IDs)
+{
+	vector<CFigure*> temp;
+	for (auto &id : IDs) {
+		for (auto itr = figs.begin(); itr != figs.end();)
+		{
+			if ((*itr)->GetId() == id)
+			{
+				temp.push_back(*itr);
+				itr = figs.erase(itr);
+				continue;
+			}
+			++itr;
+		}
 	}
 
 	for (auto& fig : temp)
@@ -649,7 +745,7 @@ deque<CFigure*> ApplicationManager::EraseSelected()
             deleted.push_back(copy);
         }
 
-    for (int i = 0; i < vec.size(); i++) 
+    for (unsigned int i = 0; i < vec.size(); i++) 
 	{
         DeleteFigure(vec[i]);
 		num_selected--;

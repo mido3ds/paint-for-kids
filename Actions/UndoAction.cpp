@@ -8,7 +8,7 @@ void UndoAction::ReadActionParameters()
 {
 }
 
-void UndoAction::Execute()
+void UndoAction::Execute(bool redo)
 {
     manager_p->Undo();
 }

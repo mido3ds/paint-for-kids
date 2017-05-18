@@ -15,7 +15,7 @@ void PickByArea::ReadActionParameters()
 	Sleep(SECOND);
 }
 
-void PickByArea::Execute()
+void PickByArea::Execute(bool redo)
 {
 	int correct = 0;
 	int wrong = 0;

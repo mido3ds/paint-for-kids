@@ -7,14 +7,18 @@ RotateAction::RotateAction(ApplicationManager* app_p)
 
 void RotateAction::ReadActionParameters()
 {
+	IDs = manager_p->GetSelectedIDs();
 }
 
-void RotateAction::Execute()
+void RotateAction::Execute(bool redo)
 {
-    manager_p->RotateSelected(deg);
+	if (!redo)
+		manager_p->RotateSelected(deg);
+	else
+		manager_p->RotateUndo(deg, IDs);
 }
 
 void RotateAction::Undo()
 {
-    manager_p->RotateSelected(360 - deg);
+    manager_p->RotateUndo(360 - deg, IDs);
 }

@@ -25,7 +25,7 @@ void ZoomInAction::ReadActionParameters()
 	out_p->ClearStatusBar();
 }
 
-void ZoomInAction::Execute()
+void ZoomInAction::Execute(bool redo)
 {
 	Output* out_p = manager_p->GetOutput();
 

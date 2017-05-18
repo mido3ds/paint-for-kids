@@ -15,7 +15,7 @@ public:
 	{}
 
     virtual void ReadActionParameters() = 0;
-    virtual void Execute() = 0;
+    virtual void Execute(bool redo = false) = 0;
     virtual void Undo() = 0;
 
     bool CanUndo() { return can_undo; }

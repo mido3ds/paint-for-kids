@@ -23,7 +23,7 @@ public:
 	Point GetZoomPoint() const;
 
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual void Execute(bool redo = false);
 	virtual void Undo();
 	
 private:

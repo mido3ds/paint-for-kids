@@ -11,7 +11,6 @@ void ChBorderAction::ReadActionParameters()
     Input* in_p = manager_p->GetInput();
     int x, y;
 
-    pen_width = out_p->GetPenWidth();
     out_p->PrintMessage("Please Enter the Border Width If You Don't Want To Change It Type 3");
     last_pen_width = pen_width;
 	out_p->CreateBorderToolbar();
@@ -32,6 +31,7 @@ void ChBorderAction::ReadActionParameters()
 		case 3: pen_width = 15; break;
 		default: pen_width = 3; break;
 	}
+	UI.LastPenWidth = pen_width;
 
     out_p->PrintMessage("Please Choose Your Favorite Color To Change Border Color");
     out_p->CreateColorBar();
@@ -39,17 +39,24 @@ void ChBorderAction::ReadActionParameters()
     last_draw_clr = draw_clr;
     draw_clr = in_p->GetColor(x, y);
 
+	UI.LastDrawColor = draw_clr;
 
     out_p->ClearStatusBar();
     out_p->ClearDrawArea();
 	out_p->ClearTempToolbar();
 }
 
-void ChBorderAction::Execute()
+void ChBorderAction::Execute(bool redo)
 {
     Output* out_p = manager_p->GetOutput();
 
-    if (!manager_p->SetSelectedBorder(pen_width, draw_clr)) 
+	if (!redo)
+		IDs = manager_p->SetSelectedBorder(pen_width, draw_clr);
+	else {
+		manager_p->SetUndoBorder(pen_width, draw_clr, IDs);
+	}
+
+	if (IDs.empty())
 	{
         out_p->SetPenWidth(pen_width);
         out_p->SetDrawColor(draw_clr);
@@ -60,9 +67,11 @@ void ChBorderAction::Undo()
 {
     Output* out_p = manager_p->GetOutput();
 
-    if (!manager_p->SetSelectedBorder(last_pen_width, last_draw_clr)) 
+	if (IDs.empty())
 	{
-        out_p->SetPenWidth(last_pen_width);
-        out_p->SetDrawColor(last_draw_clr);
-    }
+		out_p->SetPenWidth(last_pen_width);
+		out_p->SetDrawColor(last_draw_clr);
+	}
+	else
+		manager_p->SetUndoBorder(last_pen_width, last_draw_clr, IDs);
 }

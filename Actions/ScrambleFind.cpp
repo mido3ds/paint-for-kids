@@ -52,7 +52,7 @@ void ScrambleFind::ReadActionParameters() // prepare game
 	Sleep(SECOND);
 }
 
-void ScrambleFind::Execute() // game mainloop
+void ScrambleFind::Execute(bool redo) // game mainloop
 {
 	ActionType act = ActionType::EMPTY;
 	int invalid_count = 0, valid_count = 0;
@@ -164,7 +164,7 @@ void ScrambleFind::UpdateMessage(int invalid, int valid, bool is_final)
     {
         // diplay a final grade 
 		if ((valid + invalid) != 0)
-			final_grade = (valid) / static_cast<double>(invalid + valid) * 100;
+			final_grade = (int)((valid) / static_cast<double>(invalid + valid) * 100);
 		else
 			final_grade = 0;
 

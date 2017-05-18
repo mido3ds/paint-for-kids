@@ -20,7 +20,7 @@ void ChBGColorAction::ReadActionParameters()
 	out_p->ClearTempToolbar();
 }
 
-void ChBGColorAction::Execute()
+void ChBGColorAction::Execute(bool redo)
 {
     Output* out_p = manager_p->GetOutput();
     out_p->SetBkGrndColor(C);

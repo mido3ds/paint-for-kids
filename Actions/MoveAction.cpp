@@ -16,7 +16,7 @@ void MoveAction::ReadActionParameters()
         out_p->PrintMessage("No Selected Figures To Move", RED, true);
 }
 
-void MoveAction::Execute()
+void MoveAction::Execute(bool redo)
 {
 	Output* out_p = manager_p->GetOutput();
 	Input* in_p = manager_p->GetInput();
@@ -46,7 +46,7 @@ void MoveAction::Undo()
 		int x = old.x - p.x;
 		int y = old.y - p.y;
 
-		for (int i = 0;i < moved_figs.size();i++)
+		for (unsigned int i = 0;i < moved_figs.size();i++)
 			moved_figs[i]->Move(x, y);
 		moved_figs.clear();
 

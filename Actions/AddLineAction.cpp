@@ -21,11 +21,11 @@ void AddLineAction::ReadActionParameters()
     //Read 2nd corner and store in point p2
 	in_p->GetClick(p2.x, p2.y);
 
-	p1.x = (p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
-	p1.y = (p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	p1.x = (int)((p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x);
+	p1.y = (int)((p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y);
 
-	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
-	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	p2.x = (int)((p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x);
+	p2.y = (int)((p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y);
 
     gfx.is_filled = UI.IsFilled; //default is not filled
 
@@ -39,7 +39,7 @@ void AddLineAction::ReadActionParameters()
     id = manager_p->GenerateNextId();
 }
 
-void AddLineAction::Execute()
+void AddLineAction::Execute(bool redo)
 {
     //Add the lineangle to the list of figures
     line = new CLine(p1, p2, gfx);

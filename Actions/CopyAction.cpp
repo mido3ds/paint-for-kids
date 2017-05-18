@@ -9,7 +9,7 @@ void CopyAction::ReadActionParameters()
 {
 }
 
-void CopyAction::Execute()
+void CopyAction::Execute(bool redo)
 {
     manager_p->FillClipboardWithSelected();
 }

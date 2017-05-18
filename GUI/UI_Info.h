@@ -123,13 +123,16 @@ struct UI_Info // User Interface Info.
         playAreaHeight;
 
     color DrawColor; // Drawing color
+	color LastDrawColor;
     color FillColor; // Filling color
+	color LastFillColor;
     color HighlightColor; // Highlighting color
     color MsgColor; // Messages color
     color BkGrndColor; // Background color
     color StatusBarColor; // Status bar color
     
     int PenWidth; // width of the pen that draws shapes
+	int LastPenWidth;
 	bool IsFilled = false;
 
 } UI; // create a global object UI

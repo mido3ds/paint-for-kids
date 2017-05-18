@@ -15,7 +15,7 @@ void PasteAction::ReadActionParameters()
     out_p->ClearStatusBar();
 }
 
-void PasteAction::Execute()
+void PasteAction::Execute(bool redo)
 {
 	pasted=manager_p->PasteClipboard(p);
 	clipboard = manager_p->GetClipboard();

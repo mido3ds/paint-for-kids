@@ -7,14 +7,18 @@ SendUpAction::SendUpAction(ApplicationManager* app_p)
 
 void SendUpAction::ReadActionParameters()
 {
+	IDs = manager_p->GetSelectedIDs();
 }
 
-void SendUpAction::Execute()
+void SendUpAction::Execute(bool redo)
 {
-    manager_p->SendSelectedUp();
+	if (!redo)
+		manager_p->SendSelectedUp();
+	else
+		manager_p->SendUndoUp(IDs);
 }
 
 void SendUpAction::Undo()
 {
-    manager_p->SendSelecteDown();
+    manager_p->SendUndoDown(IDs);
 }

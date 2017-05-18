@@ -15,7 +15,7 @@ void PickAction::ReadActionParameters()
 	out_p->ClearTempToolbar();
 }
 
-void PickAction::Execute()
+void PickAction::Execute(bool redo)
 {
 	manager_p->ExecuteAction(act);
 }

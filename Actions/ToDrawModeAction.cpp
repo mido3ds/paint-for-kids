@@ -9,7 +9,7 @@ void ToDrawModeAction::ReadActionParameters()
 {
 }
 
-void ToDrawModeAction::Execute()
+void ToDrawModeAction::Execute(bool redo)
 {
     Output* out_p = manager_p->GetOutput();
 

@@ -9,7 +9,7 @@ void CutAction::ReadActionParameters()
 {
 }
 
-void CutAction::Execute()
+void CutAction::Execute(bool redo)
 {
     if (manager_p->GetNumSelected() > 0) {
         manager_p->FillClipboardWithSelected();

@@ -9,7 +9,7 @@ void MultiSelect::ReadActionParameters()
 {
 }
 
-void MultiSelect::Execute()
+void MultiSelect::Execute(bool redo)
 {
 	manager_p->ToggleMultiSelect();
 

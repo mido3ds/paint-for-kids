@@ -54,7 +54,7 @@ bool HistoryManager::Redo()
 
     Action* to_redo = redo_stack.top();
 
-    to_redo->Execute();
+    to_redo->Execute(true);
     undo_stack.push(to_redo);
     redo_stack.pop();
 

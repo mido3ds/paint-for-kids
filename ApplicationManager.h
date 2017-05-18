@@ -84,6 +84,7 @@ public:
     static CFigure* GetFigure(const deque<CFigure*>& figs, Point p); // Search for a figure given a point inside the figure and the list
 	CFigure*& GetFigureById(int id);
 	CFigure* GetSelectedFigure() const; // return selected figure if only one figure selected
+	deque<int> GetSelectedIDs() const;
     int GetNumFigures() const;
     int GetNumSelected() const;
     void SetNumSelected(int n_selected); //Change number of selected figures
@@ -92,11 +93,16 @@ public:
     deque<CFigure*> GetCopyOfFigures(); // return a complete copy of all figures, for play mode
 
 	bool UnselectAll();
-    bool SetSelectedFillColor(color c);
-    bool SetSelectedBorder(int W, color C);
-    void SendSelecteDown();
-    void SendSelectedUp();
-    void RotateSelected(int deg);
+	deque<int> SetSelectedFillColor(color c);
+	void SetUndoFillColor(color c, deque<int> IDs);
+	deque<int> SetSelectedBorder(int W, color C);
+	void SetUndoBorder(int W, color C, deque<int> IDs);
+	void SendSelecteDown();
+	void SendUndoDown(deque<int> IDs);
+	void SendSelectedUp();
+	void SendUndoUp(deque<int> IDs);
+	void RotateSelected(int deg);
+	void RotateUndo(int deg, deque<int> IDs);
 	bool CheckResize(double resize_factor);
     bool ResizeSelected(double resize_factor);
     void PrintSelectedSize();

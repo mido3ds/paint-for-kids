@@ -15,13 +15,17 @@ public:
 
     virtual void ReadActionParameters();
 
-    virtual void Execute();
+    virtual void Execute(bool redo = false);
 
     virtual void Undo();
 
 private:
-    color fill_clr = UI.FillColor,
+    color fill_clr = UI.LastFillColor,
           last_fill_clr = fill_clr;
+
+	bool is_filled = UI.IsFilled;
+
+	deque<int> IDs;
 };
 
 #endif // !_CH_FILL_COLOR_

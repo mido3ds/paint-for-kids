@@ -12,7 +12,7 @@ public:
     ExitAction(ApplicationManager* app_p);
 
     virtual void ReadActionParameters();
-    virtual void Execute();
+    virtual void Execute(bool redo = false);
 
     virtual void Undo();
 };

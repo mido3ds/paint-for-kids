@@ -17,7 +17,7 @@ public:
 	ZoomOutAction(ApplicationManager* app_p);
 
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual void Execute(bool redo = false);
 	virtual void Undo();
 
 	void SetZoompoint(Point z_point);

@@ -26,14 +26,14 @@ void AddTrnglAction::ReadActionParameters()
     //Read 2nd corner and store in point p2
 	in_p->GetClick(p3.x, p3.y);
     
-	p1.x = (p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
-	p1.y = (p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	p1.x = (int)((p1.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x);
+	p1.y = (int)((p1.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y);
 
-	p2.x = (p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
-	p2.y = (p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	p2.x = (int)((p2.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x);
+	p2.y = (int)((p2.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y);
 
-	p3.x = (p3.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x;
-	p3.y = (p3.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y;
+	p3.x = (int)((p3.x - out_p->GetZoomPoint().x) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().x);
+	p3.y = (int)((p3.y - out_p->GetZoomPoint().y) / pow(2, out_p->GetZoomScale()) + out_p->GetZoomPoint().y);
 
     gfx.is_filled = UI.IsFilled; //default is not filled
     gfx.draw_clr = out_p->GetDrawColor();
@@ -45,7 +45,7 @@ void AddTrnglAction::ReadActionParameters()
     id = manager_p->GenerateNextId();
 }
 
-void AddTrnglAction::Execute()
+void AddTrnglAction::Execute(bool redo)
 {
     trngl = new CTrngl(p1, p2, p3, gfx);
     trngl->SetId(id);

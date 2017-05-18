@@ -43,9 +43,11 @@ Output::Output()
 	UI.playAreaWidthtwo = UI.playAreaWidthone;
 	UI.playAreaHeight = UI.height - UI.StatusBarHeight - UI.ToolBarHeight;
 
-	UI.DrawColor = BLACK; // Drawing color						///
-						  // this Is Not Used
+	UI.DrawColor = BLACK; // Drawing color
+	UI.LastDrawColor = UI.DrawColor;
+
 	UI.FillColor = GREEN; // Filling color
+	UI.LastFillColor = UI.FillColor;
 	UI.MsgColor = WHITE; // Messages color
 	UI.BkGrndColor = WHITE; // Background color					/// I
 							// Changed This [Back To Here To Customize The Tool Bar Background
@@ -53,8 +55,8 @@ Output::Output()
 	UI.HighlightColor = MAGENTA; // This color should NOT be used to draw figures.
 								 // use if for highlight only
 	UI.StatusBarColor = ABLUE;
-	UI.PenWidth = 3; // width of the figures frames			/// This Is Not Used
-					 // Also
+	UI.PenWidth = 3; // width of the figures frames	
+	UI.LastPenWidth = UI.PenWidth;
 
 					 // Create the output window
 	wind_p = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -342,7 +344,7 @@ void Output::DrawCircle(Point p1, int radius, GfxInfo circ_gfx_info, bool select
 {
 	Point pf1 = TranslatePoint(p1);
 
-	radius *= pow(2, zoom_scale);
+	radius *= (int)pow(2, zoom_scale);
 
 	color DrawingClr;
 	if (selected)
